@@ -1,0 +1,10 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+
+RewriteRule . index.php
+
+
+#RewriteCond $1 !^(index.php)
+#RewriteRule ^(.+)$ index.php/$1 [PT,L,QSA]

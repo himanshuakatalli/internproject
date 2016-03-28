@@ -1,0 +1,13 @@
+protected/config/*
+protected/runtime/*
+protected/extensions/*
+protected/views/*
+assets/*
+/deploy.php
+/deploy.log
+/robots.txt
+/Sitemap.xml
+web.conf
+push
+/index.php
+.DS_Store

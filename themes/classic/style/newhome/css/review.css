@@ -1,0 +1,75 @@
+.review-content {
+  margin-top: 5em;
+  margin-bottom: 1em;
+}
+.reviews{
+  background: #FFF;
+  border: 0.1em solid #607d8b;
+  padding: 1em 2em;
+}
+
+.reviews .row:first-of-type {
+}
+
+.reviews .row:first-of-type > div:first-of-type {
+  width: 50%;
+  float: left;
+  padding: 0 2em;
+}
+
+.reviews .row:first-of-type > div:first-of-type h2 {
+  width: 100%;
+  font-size: 1.4em;
+  font-weight: 400;
+  display: block;
+  line-height: 0.2em; 
+}
+
+.reviews .row:first-of-type > div:first-of-type h3 {
+  width: 100%;
+  font-size: 1em;
+  display: block;
+  line-height: 0.2em;
+}
+
+.reviews .row:first-of-type > div:last-of-type {
+  width: 50%;
+  float: right;
+  padding: 0 2em;
+}
+.reviews .row:first-of-type > div:last-of-type h3 {
+  width: 100%;
+  text-align: right;
+  font-size: 1.2em; 
+}
+
+.reviews .row:nth-of-type(2) {
+  padding: 0 2em;
+  margin-bottom: 1em;
+}
+
+.reviews .row:nth-of-type(2) > h2 {
+  width: 100%;
+  color: #f07762;
+  font-size: 1.8em;
+}
+
+.reviews .row:nth-of-type(3) div {
+  display: flex;
+  padding: 2em;
+  align-items: center;
+  justify-content: center;
+}
+
+.reviews .row:last-of-type {
+  margin-top: 4.5em;
+  padding: .5em 2em;
+}
+.reviews .row:last-of-type h3 {
+  width: 100%;
+  font-size: 1.4em;
+}
+.reviews .row:last-of-type h4 {
+  width: 100%;
+  font-size: 1.2em; 
+  font-weight: 100;}

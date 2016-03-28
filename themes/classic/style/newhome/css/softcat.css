@@ -1,0 +1,293 @@
+.cat-row {
+  width: 100%;
+}
+
+.cat-row:hover h2 {
+  color: #f07762;
+}
+
+.cat-row:before,
+.cat-row:after {
+  clear: both;
+  display: table;
+  content: " ";
+}
+
+
+.banner {
+  width: 100%;
+  background: #2b394b;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.banner h1 {
+  width: 100%;
+  font-size: 2.5em;
+  color: #268cb8;
+  text-align: center;
+}
+
+.banner h3 {
+  width: 60%;
+  font-size: 1.5em;
+  color: #989ca6;
+  margin: 1.6em auto;
+  text-align: center;
+}
+
+.categories {
+  width: 60%;
+  overflow: auto;
+  margin: 2em auto;
+}
+
+.categories hgroup {
+  width: 100%;
+  color: rgba(0,0,0,0.8);
+}
+
+.categories h2 {
+  width: 100%;
+  line-height: 2.2em;
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 200;
+}
+
+.categories h4 {
+  width: 100%;
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: 100;
+}
+
+.content {
+  width: 100%;
+  padding: 2em 0;
+}
+
+.content:before,
+.content:after {
+  clear: both;
+  display: table;
+  content: " ";
+}
+
+.cat-list {
+  width: 65%;
+  padding: 1em;
+  float: left;
+}
+
+.cat-list:before,
+.cat-list:after {
+  clear: both;
+  display: table;
+  content: " ";
+}
+
+.cat-list form {
+  width: 100%;
+  display: block;
+}
+
+.cat-list form > input {
+  width: 100%;
+  border: none;
+  line-height: 1.5em;
+  padding: 1.5em;
+  padding-left: .5em;
+  margin-top: -1.2em;
+  background: transparent;
+  border-bottom: .1em solid #f07762;
+
+  transition: all 0.3s ease-in;
+}
+
+.cat-list form > input::-moz-placeholder {
+  font-size: 1em;
+  font-weight: 400;
+  color: rgba(0,0,0,0.6);
+  transition: all 0.3s ease-in;
+}
+
+.cat-list form > input::-webkit-input-placeholder {
+  font-size: 0.9em;
+  font-weight: 400;
+  color: rgba(0,0,0,0.6);
+  transition: all 0.3s ease-in;
+}
+
+.cat-list form > input:-ms-input-placeholder {
+  font-size: 0.9em;
+  font-weight: 400;
+  color: rgba(0,0,0,0.6);
+  transition: all 0.3s ease-in;
+}
+
+.cat-list form > input:focus {
+  border-bottom: .15em solid #f07762;
+}
+
+.cat-list form > input:focus::-moz-placeholder {
+  color: #f07762;
+}
+
+.cat-list form > input:focus::-webkit-input-placeholder {
+  color: #f07762;
+}
+
+.cat-list form > input:focus:-ms-input-placeholder {
+  color: #f07762;
+}
+
+
+.popular-cat {
+  padding: 0;
+  float: right;
+  width: 35%;
+  cursor: pointer;
+  background: #FFF;
+  border: 1px solid #d5d6d3;
+  transition: all 0.3s ease-in;
+}
+
+.popular-cat:hover {
+  box-shadow: 0 0 8px rgba(0,0,0,0.2), 0 0 10px rgba(0,0,0,0.1);
+}
+
+.popular-cat > h3 {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.5em;
+  padding: 1em 0.5em;
+  outline: none;
+  font-weight: 200;
+  cursor: pointer;
+  text-align: center;
+  color: #37474f;
+  letter-spacing: 0.02em;
+  background: transparent;
+  border-bottom: .15em solid #37474f;
+
+  transition: all 0.3s ease-in;
+}
+
+.popular-cat:hover h3 {
+  color: #268cb8;
+  border-bottom: .15em solid #268cb8;
+}
+
+.popular-cat form {
+  width: 100%;
+  padding: 0;
+}
+
+.popular-cat ul {
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+}
+
+.popular-cat ul li {
+  width: 100%;
+  padding: 1.4em 1em;
+  text-align: center;
+  border-bottom: 1px solid #607d8b;
+
+  transition: all 0.3s ease-in;
+}
+
+.popular-cat ul li a {
+  margin: 0;
+  padding: 0;
+  color: #607d8b;
+  text-align: center;
+  text-decoration: none;
+
+  transition: all 0.3s ease-in;
+}
+
+.popular-cat ul li:hover {
+  border-bottom: 1px solid #268cb8;
+}
+
+.popular-cat ul li:hover a {
+  color: #268cb8
+}
+
+.popular-cat ul li:last-child {
+  border-bottom: 0;
+}
+
+.popular-cat ul li:last-child:hover {
+  border-bottom: 0;
+}
+
+.cat-view {
+  margin-top: .5em;
+  width: 100%;
+  height: auto;
+}
+
+.cat-view:after,
+.cat-view:before {
+  display: table;
+  clear: both;
+  content: " ";
+}
+
+.cat-view h2{
+  margin: 0;
+  width: 20%;
+  float: left;
+  color: #607d8b;
+  background: #FFF;
+  border-bottom: 1px solid #607d8b;
+
+  transition: all 0.3s ease-in;
+}
+
+.cat-view ul {
+  width: 80%;
+  float: right;
+  list-style-type: none;
+}
+
+.cat-view a {
+  width: 100%;
+  background: #FFF;
+  color: #607d8b;
+
+  transition: all 0.3s ease-in;
+}
+
+.cat-view a:hover {
+  color: #f07762;
+}
+
+.cat-view a:hover li {
+  border-bottom: 1px solid #f07762;
+  transition: all 0.3s ease-in;
+}
+
+.cat-view li {
+  width: 100%;
+  padding: 2.135em 0;
+  background: #FFF;
+  text-align: center;
+  border-bottom: 1px solid #607d8b;
+}
+
+.products {
+  width: 60%;
+  overflow: auto;
+  margin: 2em auto;
+}
+
+ul {
+  margin: 0;
+}
