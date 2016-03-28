@@ -5,7 +5,7 @@ class ProductProfileController extends Controller
 	public function actionIndex($id)
 	{
 
-		$this->layout	=	"pagehead";
+		$this->layout	= "pagehead";
 
 		$product = Product::model()->findByPk($id);
 
@@ -32,8 +32,6 @@ class ProductProfileController extends Controller
 
 		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
 			'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
-
-			echo "dnvldfvnfvnflvfvfvgbgb";
 	}
 
 	// Uncomment the following methods and override them if needed
