@@ -4,8 +4,7 @@ class ProductProfileController extends Controller
 {
 	public function actionIndex($id)
 	{
-
-		$this->layout	= "pagehead";
+		$this->layout = "pagehead";
 
 		$product = Product::model()->findByPk($id);
 
