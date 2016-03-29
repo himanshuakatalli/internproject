@@ -42,7 +42,7 @@ class ReviewInputController extends Controller
 							$rating->save();
 						}
 						$response['userSaved'] = 1;
-						$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id),'#review');
+						$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id));
 					}
 				}
 				else{
@@ -55,7 +55,7 @@ class ReviewInputController extends Controller
 							$rating->update();
 						}
 						$response['userUpdate']=2;
-						$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id),'#review');
+						$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id));
 					}
 				}
 				echo json_encode($response);
