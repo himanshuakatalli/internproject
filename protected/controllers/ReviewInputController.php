@@ -41,7 +41,8 @@ class ReviewInputController extends Controller
 							$rating->add_date = new CDbExpression('NOW()');
 							$rating->save();
 						}
-						$response['userSaved']=1;
+						$response['userSaved'] = 1;
+						$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id),'#review');
 					}
 				}
 				else{
@@ -54,6 +55,7 @@ class ReviewInputController extends Controller
 							$rating->update();
 						}
 						$response['userUpdate']=2;
+						$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id),'#review');
 					}
 				}
 				echo json_encode($response);
@@ -64,7 +66,7 @@ class ReviewInputController extends Controller
   				$m=Yii::app()->getSecurityManager()->generateRandomString(6);
 				$user = new Users;
 				$user->attributes = $_POST['Users'];
-				$user->password = $m;
+				$user->password = base64_encode($m);
 				$user->role_id = 3;
 				$user->is_verified = 0;
 				$user->add_date = new CDbExpression('NOW()');

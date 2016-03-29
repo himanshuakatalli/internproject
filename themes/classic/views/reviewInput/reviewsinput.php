@@ -132,10 +132,12 @@
                    if(response.userSaved == 1)
                    {
                         alert("Your Data is Sucessfully Submitted");
+                        window.location.href=response.url;
                    }
                    if(response.userUpdate == 2)
                    {
                     alert("Your previous comment is updated");
+                    window.location.href=response.url;
                    }
                 /*var response = $.parseJSON(data);
                 if(response.success==1)
