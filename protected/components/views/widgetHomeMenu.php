@@ -106,13 +106,13 @@
 					<label for="inlineRadio1" class="login-radio col-md-4 col-sm-4 col-xs-4 pl0 pr0">
 						<input type="radio" checked="true" name="Users[role_id]" value="1" id="inlineRadio1">
 						<div class="radio radio-inline">
-							Vendor
+							Admin
 						</div>
 					</label>
 					<label for="inlineRadio2" class="login-radio col-md-4 col-sm-4 col-xs-4 pl0 pr0">
 						<input type="radio" name="Users[role_id]" value="2" id="inlineRadio2">
 						<div class="radio radio-inline">
-							Admin
+							User
 						</div>
 					</label>
 					<label for="inlineRadio3" class="login-radio col-md-4 col-sm-4 col-xs-4 pl0 pr0">
@@ -185,19 +185,32 @@ function signUp(element){
 			success:function(data){
 				var response = $.parseJSON(data);
 				if(response.success=='1'){
-					element.parent().parent().parent().parent().find("div.alert_message").removeClass('alert-danger1');
-					element.parent().parent().parent().parent().find("div.alert_message").addClass('alert-success');
-					element.parent().parent().parent().parent().find("p.messageResponse").html("<strong>Welcome! </strong> "+ response.message );
-					element.parent().parent().parent().parent().find("div.alert_message").fadeIn("slow");
-					element.attr('value','Create Account').removeAttr("disabled");
+					 $(".create-acc").hide();
+	                 $(".signin").show();
+	                 $('.messageResponse').html(response.message);
+	                 $(".alert_message").show();
+	                 $('#repsoneRest').removeClass('hide');
+	                 var ErrID   =   elem.attr('data-parsley-id')
+	                 $('#parsley-id-satn-'+ErrID).html('');
+				}else if(response.success=='3')
+				{
+
+					 $(".create-acc").hide();
+	                 $(".signin").show();
+	                 $('.messageResponse').html(response.message);
+	                 $(".alert_message").show();
+	                 $('#repsoneRest').removeClass('hide');
+	                 var ErrID   =   elem.attr('data-parsley-id')
+	                 $('#parsley-id-satn-'+ErrID).html('');
+
 				}
-				else{
-					element.parent().parent().parent().parent().find("div.alert_message").removeClass('alert-success');
-					element.parent().parent().parent().parent().find("div.alert_message").addClass('alert-danger1');
-					element.parent().parent().parent().parent().find("p.messageResponse").html("<strong>Failed!</strong> "+ response.message );
-					element.parent().parent().parent().parent().find("div.alert_message").fadeIn("slow");
-					element.attr('value','Create Account').removeAttr("disabled");
-				}
+				 else{
+						element.parent().parent().parent().parent().find("div.alert_message").removeClass('alert-success');
+						element.parent().parent().parent().parent().find("div.alert_message").addClass('alert-danger1');
+						element.parent().parent().parent().parent().find("p.messageResponse").html("<strong>Failed!</strong> "+ response.message );
+						element.parent().parent().parent().parent().find("div.alert_message").fadeIn("slow");
+						element.attr('value','Create Account').removeAttr("disabled");
+					}
 			}
 		});
 	}

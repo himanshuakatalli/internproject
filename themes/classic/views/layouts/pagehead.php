@@ -426,84 +426,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
 <script type="text/javascript">
 $(document).ready(function() {
 
-    $('#searchFormTop').trigger("reset");
-    $('#topsearch').selectize({
-        theme: 'links',
-        //maxItems: null,
-        valueField: 'cat_id',
-        searchField: 'title',
-        sortField: 'title',
-        maxItems: 2,
-        openOnFocus:false,
-        closeAfterSelect: true,
-        maxOptions:5,
-        options: [
-            <?php $skills=Categories::model()->findAllByAttributes(array('status'=>1));
-                foreach($skills as $skill){?>
-                    {id: "skill_<?php echo $skill->name;?>", title: '<?php echo $skill->name;?>', category: 'Skill', cat_id:"<?php echo $skill->id; ?>"},
-            <?php } ?>
-        ],
-        render: {
-            option: function(data, escape) {
-                return  '<div class="option">'+
-                            '<span class="title">' + escape(data.title) + '</span>' +
-                            '<span class="tag">' + escape(data.category) + '</span>' +
-                        '</div>';
-            },
-            item: function(data, escape) {
-                return '<div class="item"><a href="' + escape(data.category) + '">' + escape(data.title) + '</a></div>';
-            }
-        },
-        onChange: function() { $('#searchFormTop').submit();},
-    });
-    $('.selectize-input').find('input').css('width','412');
-    $('#searchFormTop').submit(function(){
-        localStorage.clear();
-        return true;
-    });
-    $('#search-icon-mob a').click(function(){
-        $('#navbar').animo({
-            animation: "fadeOutRight",
-            duration: 0.3,
-            keep: true
-        }, function(){
-            $('#navbar').hide();
-            $('.navbarsearch').show().animo({
-                animation: "fadeInLeft",
-                duration: 0.3,
-                keep: true
-            });
-        });
-    });
-    $('#search-icon a').click(function(){
-        $('#navbar').animo({
-            animation: "fadeOutRight",
-            duration: 0.3,
-            keep: true
-        }, function(){
-            $('#navbar').hide();
-            $('.navbarsearch').show().animo({
-                animation: "fadeInLeft",
-                duration: 0.3,
-                keep: true
-            });
-        });
-    });
-    $('.search-close').click(function(){
-        $('.navbarsearch').animo({
-            animation: "fadeOutLeft",
-            duration: 0.3,
-            keep: true
-        }, function(){
-            $('.navbarsearch').hide();
-            $('#navbar').show().animo({
-                animation: "fadeInRight",
-                duration: 0.3,
-                keep: true
-            });
-        });
-    });
-
     $(":input").focusout(function(){
         $(this).parsley().validate();
     });
@@ -515,29 +437,32 @@ $(document).ready(function() {
                 $('#passButSat').val('Please Wait');
                 $.ajax({
                     type: 'POST',
-                    url :"<?php echo CController::createUrl('/site/ajaxUniqe');?>"+'/email/'+elem.val(),
+                    url :"<?php echo Yii::app()->createUrl('site/forgot');?>",
+
+                    data:$("#forget-form").serialize(),
                     success :function(data){
                         var response = JSON.parse(data);
                         console.log('Element is :'+elem);
-                        if(response.exist){
-                            elem.addClass('parsley-error');
-                            var ErrID   =   elem.attr('data-parsley-id')
-                            $('#parsley-id-'+ErrID).html('<li id="parsley-id-satn-'+ErrID+'">'+response.message+'</li>');
-                            $('#parsley-id-'+ErrID).addClass('parsley-errors-list filled');
-                            $('#signupButSat').attr('type','button');
-                            $('#passButSat').val('Reset Password');
-                        }
-                        else{
+                        if(response.success=='1'){
                             elem.val('');
                             $('.messageResponse').html(response.message);
                             $(".alert_message").show();
-                            //$('#resetpass').addClass('hide');
+                            $('#resetpass').addClass('hide');
                             $('#repsoneRest').removeClass('hide');
                             var ErrID   =   elem.attr('data-parsley-id')
                             $('#parsley-id-satn-'+ErrID).html('');
                             $('#passButSat').val('Reset Password');
                             $(".signin").show();
                             $(".forgot-password").hide();
+
+                        }
+                        else{
+                            elem.addClass('parsley-error');
+                            var ErrID   =   elem.attr('data-parsley-id')
+                            $('#parsley-id-'+ErrID).html('<li id="parsley-id-satn-'+ErrID+'">'+response.message+'</li>');
+                            $('#parsley-id-'+ErrID).addClass('parsley-errors-list filled');
+                            $('#signupButSat').attr('type','button');
+                            $('#passButSat').val('Reset Password');
                         }
                     }
                 });
@@ -556,13 +481,11 @@ $(document).ready(function() {
             $('#parsley-id-'+ErrID).addClass('parsley-errors-list filled');
         }
     });
-
     $(".menu-icon").click(function(){
         $(".menu-login-section").fadeIn(400);
         if(!$(".menu-close > button").hasClass('is-active'))
             $(".menu-close > button").addClass('is-active');
     });
-
     $(".menu-close").click(function(){
         $(".menu-login-section").fadeOut(400);
         if($(".menu-close > button").hasClass('is-active'))
@@ -573,52 +496,22 @@ $(document).ready(function() {
         $(".signin").hide();
         $(".forgot-password").show();
     });
-
     $(".create-accDiv").click(function(){
         $(".signin").hide();
         $(".create-acc").show();
     });
-
     $(".create-accDiv").click(function(){
         $(".forgot-password").hide();
         $(".create-acc").show();
     });
-
     $(".signin-div").click(function(){
         $(".create-acc").hide();
         $(".signin").show();
     });
-
     <?php if(isset($_REQUEST['login']) && $_REQUEST['login']==1){?>
     $(".menu-icon").trigger('click');
     <?php } ?>
 
-    //$(".c-hamburger").hover(function(){
-        //if($(this).hasClass('is-active'))
-        //{
-            //$(this).removeClass('is-active');
-        //}
-        //else
-        //{
-            //$(this).addClass('is-active');
-        //}
-    //});
-
-    // "use strict";
-
-    // var toggles = document.querySelectorAll(".c-hamburger");
-
-    // for (var i = toggles.length - 1; i >= 0; i--) {
-        // var toggle = toggles[i];
-        // toggleHandler(toggle);
-    // };
-
-    // function toggleHandler(toggle) {
-        // toggle.addEventListener( "click", function(e) {
-            // e.preventDefault();
-            // (this.classList.contains("is-active") === true) ? this.classList.remove("is-active") : this.classList.add("is-active");
-        // });
-    // }
 
 });
 </script>
