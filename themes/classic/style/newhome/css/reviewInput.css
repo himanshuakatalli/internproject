@@ -35,7 +35,10 @@ body {
 
 .form-container {
 	width: 70%;
-	margin: 0 auto;
+	margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;	
 	padding: 1.5em;
 	background: #FFF;
 	border: 1px solid #989ca6;
@@ -84,7 +87,7 @@ body {
 .form-header h3 {
 	font-size: 1.2em;
 	padding-bottom: 1em;
-	font-weight: 600;
+	font-weight: 400;
 }
 
 .main-form {
@@ -109,13 +112,6 @@ body {
 	display: table;
 	content: " ";
 }
-
-footer {
-	width: 100%;
-	height: 300px;
-	background: #2b394b;
-}
-
 .star-rating{
 	max-width: 33.33%;
 	width: 33.33%;
@@ -131,6 +127,7 @@ footer {
 }
 .inputs h3 {
 	font-weight: 400;
+	font-size: 20px;
 	
 }
 

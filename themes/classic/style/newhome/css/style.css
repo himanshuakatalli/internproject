@@ -17682,37 +17682,37 @@ label.login-radio input:hover:not([disabled])+.radio {
 
 .spr1 {
   width: 102px;
-  height: 48px;
+  height: 48px !important;!important;
   background-position: 0px 0px;
 }
 
 .spr2 {
   width: 102px;
-  height: 48px;
+  height: 48px !important;
   background-position: -104px 0px;
 }
 
 .spr3 {
   width: 102px;
-  height: 48px;
+  height: 48px !important;
   background-position: -206px 0px;
 }
 
 .spr4 {
   width: 102px;
-  height: 48px;
+  height: 48px !important;
   background-position: -310px 0px;
 }
 
 .spr5 {
   width: 102px;
-  height: 48px;
+  height: 48px !important;
   background-position: -412px 0px;
 }
 
 .spr6 {
   width: 102px;
-  height: 48px;
+  height: 48px !important;
   background-position: -516px 0px;
 }
 
