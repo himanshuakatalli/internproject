@@ -23,7 +23,7 @@ class ReviewInputController extends Controller
 			{
 				//echo "user";
 
-				$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id));
+				$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id,'product_id'=>$id));
 				if(empty($review)){
 					$review = new Reviews;
 					$review->attributes = $_POST['Reviews'];
