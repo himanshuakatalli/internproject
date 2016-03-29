@@ -334,7 +334,7 @@ else
   
   $user = $review->user;
   
-  //$ratings = $review->ratings;
+  $ratings = $review->ratings;
 
   $splitTimeStamp = explode(" ",$review->add_date);
   $date = $splitTimeStamp[0];
