@@ -1,26 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "ratings".
+ * This is the model class for table "rating_categories".
  *
- * The followings are the available columns in table 'ratings':
+ * The followings are the available columns in table 'rating_categories':
  * @property integer $id
- * @property integer $review_id
- * @property integer $rating_category_id
- * @property double $rating
+ * @property string $name
  * @property string $admin_notes
  * @property integer $status
  * @property string $add_date
  * @property string $modify_date
+ * @property string $description
+ *
+ * The followings are the available model relations:
+ * @property Reviews[] $reviews
  */
-class Ratings extends CActiveRecord
+class RatingCategories extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ratings';
+		return 'rating_categories';
 	}
 
 	/**
@@ -31,13 +33,13 @@ class Ratings extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('review_id, rating_category_id, rating, add_date', 'required'),
-			array('review_id, rating_category_id, status', 'numerical', 'integerOnly'=>true),
-			array('rating', 'numerical'),
-			array('admin_notes, modify_date', 'safe'),
+			array('name, add_date', 'required'),
+			array('status', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>100),
+			array('admin_notes, modify_date, description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, review_id, rating_category_id, rating, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			array('id, name, admin_notes, status, add_date, modify_date, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,8 +51,7 @@ class Ratings extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'review' => array(self::BELONGS_TO, 'Reviews', 'review_id'),
-			'ratingCategory' => array(self::BELONGS_TO, 'RatingCategories', 'rating_category_id'),
+			'reviews' => array(self::MANY_MANY, 'Reviews', 'ratings(rating_category_id, review_id)'),
 		);
 	}
 
@@ -61,13 +62,12 @@ class Ratings extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'review_id' => 'Review',
-			'rating_category_id' => 'Rating Category',
-			'rating' => 'Rating',
+			'name' => 'Name',
 			'admin_notes' => 'Admin Notes',
 			'status' => 'Status',
 			'add_date' => 'Add Date',
 			'modify_date' => 'Modify Date',
+			'description' => 'Description',
 		);
 	}
 
@@ -90,13 +90,12 @@ class Ratings extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('review_id',$this->review_id);
-		$criteria->compare('rating_category_id',$this->rating_category_id);
-		$criteria->compare('rating',$this->rating);
+		$criteria->compare('name',$this->name,true);
 		$criteria->compare('admin_notes',$this->admin_notes,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('add_date',$this->add_date,true);
 		$criteria->compare('modify_date',$this->modify_date,true);
+		$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -107,7 +106,7 @@ class Ratings extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Ratings the static model class
+	 * @return RatingCategories the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
