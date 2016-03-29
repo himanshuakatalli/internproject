@@ -9,37 +9,42 @@
         <form>
           <input type="text" id="cat-search" placeholder="Search in categories"></input>
           <div class="cat-view">
-            <div class="cat-row">
-              <h2>#</h2>
-              <ul>
-                <a href="#"><li>360 Degree Software</li></a>
-              </ul>
-            </div>
-            <div class="cat-row">
-              <h2>A</h2>
-              <ul>
-                <a href="#"><li>Accouting</li></a>
-                <a href="#"><li>Accouts Payable</li></a>
-                <a href="#"><li>Accouts Recievable</li></a>
-                <a href="#"><li>Advertising Agency</li></a>
-              </ul>
-            </div>
-            <div class="cat-row">
-              <h2>B</h2>
-              <ul>
-                <a href="#"><li>Bakery</li></a>
-                <a href="#"><li>Banking</li></a>
-                <a href="#"><li>Barcoding</li></a>
-                <a href="#"><li>Big Data</li></a>
-              </ul>
-            </div>
-            <div class="cat-row">
-              <h2>C</h2>
-              <ul>
-                <a href="#"><li>Callibration Management</li></a>
-                <a href="#"><li>Call Accouting</li></a>
-              </ul>
-            </div>
+              <?php $cats=Categories::model()->findAllByAttributes(array('status'=>1));
+                $cnt = 0;
+                $ascii = 65;
+                foreach($cats as $cat){
+                    $url = $this->createAbsoluteUrl('product/index',array('id'=>$cat->id));
+                    if(ctype_digit($cat->name[0])){
+                        if($cnt==0){
+                            echo '<div class="cat-row">
+                                      <h2>#</h2>
+                                          <ul>
+                                            <a href="'.$url.'"><li>'.$cat->name.'</li></a>';
+                            $cnt=1;
+                        }
+                        else if(ctype_digit($cat->name[0])){
+                            echo '<a href="'.$url.'"><li>'.$cat->name.'</li></a>';
+                        }
+                    }
+                    else{
+                        if(ord($cat->name)==$ascii){
+                            if($cnt!=0){
+                              echo '</ul></div>';
+                              $cnt=1;
+                            }
+                            echo '<div class="cat-row">
+                                  <h2>'.$cat->name[0].'</h2>
+                                  <ul>
+                                  <a href="'.$url.'"><li>'.$cat->name.'</li></a>';
+                            $ascii++;
+                        }
+                        else if(ord($cat->name)==$ascii-1){
+                            echo '<a href="'.$url.'"><li>'.$cat->name.'</li></a>';
+                        }
+                    }
+                }
+                echo '</ul></div>';
+                ?>
           </div>
         </form>
       </div>

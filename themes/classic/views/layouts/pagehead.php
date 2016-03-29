@@ -108,8 +108,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                     <div class="navsearch-outr placeholder1">
                         <span aria-hidden="true" class="icon-magnifier search-searchicon"></span>
                         <div class="searcheader placeholder1">
-                            <form action="<?php echo Yii::app()->createUrl('/site/search2');?>" method="post" id="searchFormTop">
-                                <select id="topsearch" name="value" multiple class="demo-default"  placeholder="What type of software are you looking for?"></select>
+                            <form action="<?php echo Yii::app()->createUrl('/product/index');?>" method="get" id="searchFormTop">
+                                <select id="topsearch" name="id" multiple class="demo-default"  placeholder="What type of software are you looking for?"></select>
                             </form>
                         </div>
                         <a href="javascript:void(0);" class="search-close">X</a>
@@ -425,6 +425,84 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
 <!-- <script src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/js/parsley.min.js" async></script> -->
 <script type="text/javascript">
 $(document).ready(function() {
+
+    $('#searchFormTop').trigger("reset");
+    $('#topsearch').selectize({
+        theme: 'links',
+        //maxItems: null,
+        valueField: 'cat_id',
+        searchField: 'title',
+        sortField: 'title',
+        maxItems: 2,
+        openOnFocus:false,
+        closeAfterSelect: true,
+        maxOptions:5,
+        options: [
+            <?php $skills=Categories::model()->findAllByAttributes(array('status'=>1));
+                foreach($skills as $skill){?>
+                    {id: "skill_<?php echo $skill->name;?>", title: '<?php echo $skill->name;?>', category: 'Skill', cat_id:"<?php echo $skill->id; ?>"},
+            <?php } ?>
+        ],
+        render: {
+            option: function(data, escape) {
+                return  '<div class="option">'+
+                            '<span class="title">' + escape(data.title) + '</span>' +
+                            '<span class="tag">' + escape(data.category) + '</span>' +
+                        '</div>';
+            },
+            item: function(data, escape) {
+                return '<div class="item"><a href="' + escape(data.category) + '">' + escape(data.title) + '</a></div>';
+            }
+        },
+        onChange: function() { $('#searchFormTop').submit();},
+    });
+    $('.selectize-input').find('input').css('width','412');
+    $('#searchFormTop').submit(function(){
+        localStorage.clear();
+        return true;
+    });
+    $('#search-icon-mob a').click(function(){
+        $('#navbar').animo({
+            animation: "fadeOutRight",
+            duration: 0.3,
+            keep: true
+        }, function(){
+            $('#navbar').hide();
+            $('.navbarsearch').show().animo({
+                animation: "fadeInLeft",
+                duration: 0.3,
+                keep: true
+            });
+        });
+    });
+    $('#search-icon a').click(function(){
+        $('#navbar').animo({
+            animation: "fadeOutRight",
+            duration: 0.3,
+            keep: true
+        }, function(){
+            $('#navbar').hide();
+            $('.navbarsearch').show().animo({
+                animation: "fadeInLeft",
+                duration: 0.3,
+                keep: true
+            });
+        });
+    });
+    $('.search-close').click(function(){
+        $('.navbarsearch').animo({
+            animation: "fadeOutLeft",
+            duration: 0.3,
+            keep: true
+        }, function(){
+            $('.navbarsearch').hide();
+            $('#navbar').show().animo({
+                animation: "fadeInRight",
+                duration: 0.3,
+                keep: true
+            });
+        });
+    });
 
     $(":input").focusout(function(){
         $(this).parsley().validate();

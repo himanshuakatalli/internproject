@@ -178,114 +178,98 @@
 </section>
 <section class="section5">
 	<div class="container ">
-		<h3 class="features-heading">Trending Searches..</h3>
+		<h3 class="features-heading">Trending Software Searches..</h3>
 		<div class="flexslider">
 			<ul class="slides">
 				<li>
 					<div class="col-md-12 col-sm-12 col-xs-12 mb15 np">
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>"iOS"));?>" class="highlight-inner"><span class="icon-energy" aria-hidden="true"></span> iOS Developers</a>
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"1"));?>" class="highlight-inner">360 Degree feedback</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Ruby on Rails'));?>" class="highlight-inner"><span class="icon-energy" aria-hidden="true"></span>  Ruby on Rails Developers</a>
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"2"));?>" class="highlight-inner">Accounting</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'PHP'));?>" class="highlight-inner"><span class="icon-energy" aria-hidden="true"></span> PHP Developers</a>
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"10"));?>" class="highlight-inner">Applicant Tracking</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Cocos2d-x'));?>" class="highlight-inner"><span class="icon-energy" aria-hidden="true"></span> Cocos Developers</a>
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"72"));?>" class="highlight-inner">Computer Security</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Android'));?>" class="highlight-inner"><span class="icon-energy" aria-hidden="true"></span> Android Developers</a>
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"77"));?>" class="highlight-inner">Construction management</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Python'));?>" class="highlight-inner"><span class="icon-energy" aria-hidden="true"></span> Python Developers</a>
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"100"));?>" class="highlight-inner">Data Governance</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Wordpress'));?>" class="highlight-inner"><span class="icon-energy" aria-hidden="true"></span> Wordpress Developers</a>
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"105"));?>" class="highlight-inner">Dental</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Mobile application'));?>" class="highlight-inner"><span class="icon-energy" aria-hidden="true"></span> Mobile App Developers</a>
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"124"));?>" class="highlight-inner">Employee Scheduling</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"119"));?>" class="highlight-inner">Electronic Medical Records</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"126"));?>" class="highlight-inner">Energy Management</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"133"));?>" class="highlight-inner">Expense Report</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"147"));?>" class="highlight-inner">Food delivery</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"156"));?>" class="highlight-inner">Fund Accounting</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"168"));?>" class="highlight-inner">Home health care</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"173"));?>" class="highlight-inner">Human Resource</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"197"));?>" class="highlight-inner">Job Costing</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"204"));?>" class="highlight-inner">law Enforcement</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"213"));?>" class="highlight-inner">library Automation</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"231"));?>" class="highlight-inner">Medical Inventory</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"241"));?>" class="highlight-inner">Mining</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"248"));?>" class="highlight-inner">Network Monitoring</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"252"));?>" class="highlight-inner">Online CRM</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"262"));?>" class="highlight-inner">Patient Management</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"265"));?>" class="highlight-inner">Payroll</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"297"));?>" class="highlight-inner">Public transportation</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"305"));?>" class="highlight-inner">Real Estate Agency</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"316"));?>" class="highlight-inner">resource Management</a>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
+						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"325"));?>" class="highlight-inner">Scolarship Management</a>
 						</div>
 					</div>
-					<ul class="teams-ul col-md-3 col-sm-6 col-xs-12">
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'JavaScript'));?>">Javascript Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'.NET'));?>">.NET Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Java'));?>">Java Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'iPhone'));?>">iPhone Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'iPad'));?>">iPad Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'ASP.NET'));?>">ASP.NET Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Windows Phone'));?>">Windows Phone Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Desktop Application'));?>">Desktop Application Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Business Application'));?>">Business Application Developers</a></li>
-					</ul>
-					<ul class="teams-ul col-md-3 col-sm-6 col-xs-12">
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Node.js'));?>">Node.js Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Angular.js'));?>">Angular.js Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Backbone.js'));?>">Backbone.js Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Design'));?>">UI/UX Designers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Magento'));?>">Magento Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'CRM'));?>">CRM Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'CMS'));?>">CMS Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'ERP'));?>">ERP Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Ecommerce'));?>">Ecommerce Developers</a></li>
-					</ul>
-					<ul class="teams-ul col-md-3 col-sm-6 col-xs-12">
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Drupal'));?>">Drupal Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Joomla'));?>">Joomla Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Phonegap'));?>">Phonegap Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Game Development'));?>">Game Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Oracle'));?>">Oracle Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'SQL'));?>">SQL Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Postgres SQL'));?>">Postgres SQL Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Data Science'));?>">Data Science Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Wearable Technology'));?>">Wearable Technology Developers</a></li>
-					</ul>
-					<ul class="teams-ul col-md-3 col-sm-6 col-xs-12">
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'MongoDB'));?>">MongoDB Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'HTML'));?>">HTML Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'CSS'));?>">CSS Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/teams',array('location'=>'New York'));?>">Developers in New York</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/teams',array('location'=>'United States'));?>">Developers in USA</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/teams',array('location'=>'Central & South America'));?>">Developers in South & Central America</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/teams',array('location'=>'Eastern Europe'));?>">Developers in Eastern Europe</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/teams',array('location'=>'Asia'));?>">Developers in Asia</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/teams',array('location'=>'India'));?>">Developers in India</a></li>
-					</ul>
-					<ul class="teams-ul col-md-3 col-sm-6 col-xs-12 team-hide">
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Express.js'));?>">Express.js Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Ajax'));?>">Ajax Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Yii'));?>">Yii Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'IT Infrastructure'));?>">IT Infrastructure Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'C'));?>">C Developers</a></li>
-					</ul>
-					<ul class="teams-ul col-md-3 col-sm-6 col-xs-12 team-hide">
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Scala'));?>">Scala Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Ember.js'));?>">Ember.js Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Zend'));?>">Zend Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'3D Max'));?>">3D Max Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Perl'));?>">Perl Developers</a></li>
-					</ul>
-					<ul class="teams-ul col-md-3 col-sm-6 col-xs-12 team-hide">
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Bootstrap'));?>">Bootstrap Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'LAMP'));?>">LAMP Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Laravel'));?>">Laravel Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Photoshop'));?>">Photoshop Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Coffeescript'));?>">Coffeescript Developers</a></li>
-					</ul>
-					<ul class="teams-ul col-md-3 col-sm-6 col-xs-12 team-hide">
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Grails'));?>">Grails Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Matlab'));?>">Matlab Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'Cake'));?>">Cake Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'django'));?>">django Developers</a></li>
-						<li><a href="<?php echo CController::createUrl('/site/top_developers',array('keyword'=>'objective C'));?>">objective C Developers</a></li>
-					</ul>
 				</li>
 			</ul>
-			<div class="col-md-12 col-xs-12 text-center mt30 readwhat-hide">
-				<a href="javascript:void(0);" class="readwhat-small" id="readwhat">Read On</a>
-				<!-- <a href="javascript:void(0);" class="readwhat-small" id="lesswhat">Less</a> -->
-			</div>
 		</div>
 	</div>
 </section>
