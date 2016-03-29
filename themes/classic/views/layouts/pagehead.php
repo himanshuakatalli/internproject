@@ -92,7 +92,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                             <a href="javascript:void(0);"><i class="fa fa-search"></i> &nbsp;Search</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-list"></i> &nbsp; Software Catagories</a>
+                            <a href="<?php echo Yii::app()->createUrl('/site/Categories');?>"><i class="fa fa-list"></i> &nbsp; Software Catagories</a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-icon"><i class="fa fa-reorder mr5"></i></a>

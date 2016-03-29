@@ -2,6 +2,13 @@ body {
 	font-family: sans-serif;
 	background: #F2F2F2;
 }
+h3 {
+	font-size: 18px;
+	font-weight: 100px;
+}
+.col-md-4.col-sm-6.col-xs-12.pl0.mb20.our-r {
+    min-height: 60px;
+}
 .clear-fix:before,
 .clear-fix:after {
 	clear: both;
@@ -125,11 +132,11 @@ body {
 .inputs {
 	width: 100%;
 }
-.inputs h3 {
-	font-weight: 400;
+/* .inputs h3 {
+	font-weight: 200;
 	font-size: 20px;
 	
-}
+} */
 
 .inputs h4 {
 	color: #989ca6;
