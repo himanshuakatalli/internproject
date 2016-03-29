@@ -9,42 +9,48 @@
         <form>
           <input type="text" id="cat-search" placeholder="Search in categories"></input>
           <div class="cat-view">
-              <?php $cats=Categories::model()->findAllByAttributes(array('status'=>1));
-                $cnt = 0;
-                $ascii = 65;
-                foreach($cats as $cat){
-                    $url = $this->createAbsoluteUrl('product/index',array('id'=>$cat->id));
-                    if(ctype_digit($cat->name[0])){
-                        if($cnt==0){
-                            echo '<div class="cat-row">
-                                      <h2>#</h2>
-                                          <ul>
-                                            <a href="'.$url.'"><li>'.$cat->name.'</li></a>';
-                            $cnt=1;
-                        }
-                        else if(ctype_digit($cat->name[0])){
-                            echo '<a href="'.$url.'"><li>'.$cat->name.'</li></a>';
-                        }
-                    }
-                    else{
-                        if(ord($cat->name)==$ascii){
-                            if($cnt!=0){
-                              echo '</ul></div>';
-                              $cnt=1;
-                            }
-                            echo '<div class="cat-row">
-                                  <h2>'.$cat->name[0].'</h2>
-                                  <ul>
-                                  <a href="'.$url.'"><li>'.$cat->name.'</li></a>';
-                            $ascii++;
-                        }
-                        else if(ord($cat->name)==$ascii-1){
-                            echo '<a href="'.$url.'"><li>'.$cat->name.'</li></a>';
-                        }
-                    }
-                }
-                echo '</ul></div>';
-                ?>
+            <?php $categories=Categories::model()->findAllByAttributes(array('status'=>1)); 
+            $flag = true;
+            $prev = $categories[0]->name[0];
+            foreach($categories as $category)
+            {
+              $curr = $category->name[0]; 
+              if(ctype_digit($curr))
+              {
+              ?>
+                <div class='cat-view'>
+                <div class='cat-row'><h2>#</h2><ul><a href='#'><li><?php echo $category->name?></li></a>
+                </ul></div>
+              <?php 
+              }
+              else
+              {
+                x:if($flag)
+                  {
+                    ?>
+                    <div class='cat-view'><div class='cat-row'><h2><?php echo $curr?></h2><ul>
+                    <a href='#'><li><?php echo $category->name?></li></a>
+                    <?php
+                    $prev = $curr;
+                    $flag = false;
+                  }
+                  elseif($prev == $curr)
+                  {
+                    ?>
+                    <a href='#'><li><?php echo $category->name?></li></a>
+                    <?php
+                  }
+                  else
+                  {
+                    ?>
+                    </ul></div>
+                    <?php
+                    $prev = $curr;
+                    $flag = true;
+                    goto x;
+                  }
+              }
+          } ?>
           </div>
         </form>
       </div>
