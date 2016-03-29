@@ -2,16 +2,17 @@
 
 class ReviewInputController extends Controller
 {
-	public function actionIndex()
+	public function actionIndex($id)
 	{
 		$this->layout = "pagehead";
-		$review=new Reviews;
-		$user=new Users;
-		$this->render('reviewsinput',array('review'=>$review,'user'=>$user));
+		$review = new Reviews;
+		$user = new Users;
+		$product = Product::model()->findByAttributes(array('id'=>$id));
+		$this->render('reviewsinput',array('review'=>$review,'user'=>$user,'product'=>$product));
 	}
 
 
-	public function actionAjax()
+	public function actionAjax($id)
 	{
 			$response="";
 			/*CVarDumper::dump($_POST,10,1);
@@ -27,7 +28,7 @@ class ReviewInputController extends Controller
 					$review = new Reviews;
 					$review->attributes = $_POST['Reviews'];
 					$review->user_id = $user->id;
-					$review->product_id = 1;
+					$review->product_id = $id;
 					$review->add_date = new CDbExpression('NOW()');
 					if($review->save()){
 						$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id));

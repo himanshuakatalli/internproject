@@ -18,8 +18,8 @@
         <div class="form-header">
            <div><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/Product/Rubik_solved.png"></div>
             <hgroup>
-                <h2>Salesforce</h2>
-                <h3>By Salesforce.com</h3>
+                <h2><?php echo $product->name?></h2>
+                <h3><?php echo $product->product_website?></h3>
             </hgroup>
         </div>
 
@@ -124,7 +124,7 @@
             console.log(data);
             $.ajax({
             type:'POST',
-            url:'<?php echo Yii::app()->createUrl("reviewInput/Ajax"); ?>',
+            url:'<?php echo Yii::app()->createUrl("reviewInput/Ajax",array('id'=>$product->id)); ?>',
             data:data,
             success:function(data){
                     var response = $.parseJSON(data);
