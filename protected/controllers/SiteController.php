@@ -97,20 +97,13 @@ class SiteController extends Controller
                                     $from_name="admin";
                                     $subject="Forgot Password";
                                     $url = Yii::app()->createUrl('site/newpassword',array('email'=>$username,'hash'=>$user->hash));
-                                $url ="localhost".$url;
-
-                            //$message="click to verify account.<br><br><a href=".$url.">Click Here</a>";
-                            $message="click to reset password.<br><br><a href=".$url.">Click Here</a>";
-                                    // $message="We are sorry that you forgot your password.<br><br>Here it is your-<br>";
-                                    // $message .="Username:- ".$user->username."<br>";
-                                    // $message .="Password:-".$user->password."<br>";
-                                    // $message .="Make sure to change after login.";
-
+                                    $url ="localhost".$url;
+                                    $message="click to reset password.<br><br><a href=".$url.">Click Here</a>";
                                     $this->mailsend($to,$from,$from_name,$subject,$message);
 
-        	                $response['success']='1';
-        	                $response['message']="Email is send to your email id.";
-        	                echo json_encode($response);
+                	                $response['success']='1';
+                	                $response['message']="Email is send to your email id.";
+                	                echo json_encode($response);
         	            }
 
 
