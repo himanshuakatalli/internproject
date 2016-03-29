@@ -8,29 +8,29 @@ class ProductProfileController extends Controller
 
 		$product = Product::model()->findByPk($id);
 
-		$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));		
+		$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
 
-		$productCategoryFeatures = array();
-
-		foreach ($product->categories as $productCategory)
+		if($product)
 		{
-			foreach ($productCategory->features as $productCategoryFeature)
+			$productCategoryFeatures = array();
+			foreach ($product->categories as $productCategory)
 			{
-				array_push($productCategoryFeatures, $productCategoryFeature->name);
+				foreach ($productCategory->features as $productCategoryFeature)
+				{
+					array_push($productCategoryFeatures, $productCategoryFeature->name);
+				}
 			}
-		}
 
-		//print_r($productCategoryFeatures);
+			$productFeatures = array();
 
-		$productFeatures = array();
+			foreach ($product->features as $productFeature)
+			{
+				array_push($productFeatures,$productFeature->name);
+			}
 
-		foreach ($product->features as $productFeature)
-		{
-			array_push($productFeatures,$productFeature->name);
-		}
-
-		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
+			$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
 			'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
+		}
 	}
 
 	// Uncomment the following methods and override them if needed
