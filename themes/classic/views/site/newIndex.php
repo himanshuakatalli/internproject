@@ -49,7 +49,7 @@
 					<div class="navsearch-outr placeholder1">
 						<span aria-hidden="true" class="icon-magnifier search-searchicon"></span>
 						<div class="searcheader placeholder1">
-							<form action="<?php echo Yii::app()->createUrl('/site/search2');?>" method="post" id="searchFormTop">
+							<form action="<?php echo Yii::app()->createUrl('/product/index');?>" method="get" id="searchFormTop">
 								<select id="topsearch" name="value" multiple class="demo-default"  placeholder="What type of software are you looking for?"></select>
 							</form>
 						</div>
@@ -66,7 +66,7 @@
 				Every month, VenturePact helps thousands of businesses & nonprofits find the software that will allow them to improve, grow and succeed.
 			</h4>
 		</div>
-		<form action="<?php echo Yii::app()->createUrl('/site/search2');?>" method="post" id="searchFormSite">
+		<form action="<?php echo Yii::app()->createUrl('/product/index');?>" method="get" id="searchFormSite">
 			<div class="main-container">
 				<div class="search-cont">
 					<div class="selectize-outr looking-outr">
@@ -91,13 +91,6 @@
 							<li>,</li>
 							<li><a href="javascript:void(0);" class="callTag" data-name="skill_Medical Practice">Medical Practice</a></li>
 						</ul>
-					</div>
-				</div>
-				<div class="email-cont">
-					<div class="email-outr placeholder1">
-						<a href="javascript:void(0);" class="teal back-looking"><i class="fa fa-long-arrow-left"></i></a>
-						<input type="email" name="email" class="email-inner" placeholder="Your Email ID" />
-						<input type="submit" value="Find" class="find-outr2">
 					</div>
 				</div>
 			</div>
