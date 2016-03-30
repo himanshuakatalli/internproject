@@ -1,0 +1,273 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+}
+.padd{
+  padding: 1em 1em;
+}
+.dash-row {
+  width: 100%;
+}
+.dash-row:after,
+.dash-row:before {
+  clear: both;
+  display: table;
+  content: " ";
+}
+/*CSS for dashboard container i.e. whole body*/
+.dash-container {
+  width: 100%;
+  padding: 0;
+}
+/*Styling for left sticky navbar goes here*/
+.nav-left {
+  left: 0;
+  z-index: 999;
+  width: 100px;
+  float: left;
+  height: 100vh;
+  position: fixed;
+  overflow: hidden;
+  background: #252A31;
+  box-shadow: 0 0 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4);
+
+  transition: all 0.7s ease-in;
+  -webkit-transition: all 0.7s ease-in;
+  -moz-transition: all 0.7s ease-in;
+  -o-transition: all 0.7s ease-in;
+  -ms-transition: all 0.7s ease-in;
+}
+.dash-logo,
+.nav-option,
+.logger-options {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.dash-logo {
+  margin-bottom: 1em;
+}
+.dash-logo li{
+  height: 5em;
+  cursor: pointer;
+  padding: 1.6em 0 1em 2.3em;
+
+  transition: all 0.4s ease-in;
+}
+.dash-logo li a{
+  height: 1.5em;
+}
+.dash-logo li a span {
+  font-size: 1.6em;
+  font-weight: 200;
+  color: #d4d9de;
+  padding-left: 1.1em;
+  position: absolute;
+  opacity: 0;
+
+  transition: all 0.4s ease-in;
+}
+.dash-logo li:hover {
+  background: rgba(0,0,0,0.3);
+}
+
+.nav-option li,
+.logger-options li {
+  height: 4em;
+  cursor: pointer;
+  padding: 1.3em 0 0 3.2em;
+
+  transition: all 0.4s ease-in;
+}
+.nav-option li a {
+  color: #d4d9de;
+}
+.logger-options li a {
+  color: #f07762;
+}
+.nav-option li:hover,
+.logger-options li:hover {
+  background: rgba(0,0,0,0.3);
+}
+.nav-option li:hover i,
+.logger-options li:hover i {
+  color: #7ececa;
+}
+.nav-option li:hover a span,
+.logger-options li:hover a span {
+  padding-left: 3em;
+}
+.nav-option li a span,
+.logger-options li a span {
+  opacity: 0;
+  font-size: 0.9em;
+  font-weight: 200;
+  color: #d4d9de;
+  padding-top: 0.1em;
+  padding-left: 3.5em;
+  position: absolute;
+  transition: all 0.4s ease-in;
+}
+.nav-left:hover {
+  width: 240px;
+}
+.nav-left:hover .nav-option li a span,
+.nav-left:hover .dash-logo li a span,
+.nav-left:hover .logger-options li a span{
+  opacity: 1;
+}
+.logger-options {
+  bottom: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+/*CSS for left sticky navbar ends here*/
+
+/*CSS for main content to be provided while render call goes here*/
+.main-content {
+  float: left;
+  width: 100%;
+  height: 100vh;
+  padding-left: 100px;
+  background: #f2f2f2;
+}
+/*CSS for main content sticky header goes here*/
+.main-content > header {
+  width: 100%;
+  height: 150px;
+  display: block;
+  z-index: 1;
+  background: #7ececa;
+  border-bottom: 2px solid #8dc0bd;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3), 0 0 6px rgba(0,0,0,0.15);
+}
+.main-content > header figure {
+  float: left;
+  width: 150px;
+  height: 100%;
+  /*background: teal;*/
+}
+.main-content > header hgroup {
+  width: 80%;
+  float: right;
+}
+/*.main-content > header h1,
+.main-content > header h3 {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.main-content > header h1 {
+  font-size: 1.8em;
+  font-weight: 500;
+  line-height: 1.5em;
+  padding: 0.5em 0 0.2em 1em;
+}
+
+.main-content > header h3 {
+  font-size: 1em;
+  color: rgba(0,0,0,0.5);
+  font-weight: 200;
+  line-height: 1.5em;
+  padding: 0 0 0.5em 2em;
+}*/
+/*CSS fot main sticky header ends here*/
+
+/*CSS for product listed on dashboard home goes here*/
+.dash-product-home {
+  width: 75%;
+  margin: 4em auto;
+  z-index: 0;
+}
+.dash-product-home:after,
+.dash-product-home:before {
+  clear: both;
+  content: " ";
+  display: table;
+}
+
+.np {
+    padding: 0 !important;
+}
+.dash-product-home div.dash-row div.col-lg-6 {
+  padding: 2em 3em;
+}
+
+.dash-trending {
+  width: 100%;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.2);
+  transition: all 0.3s ease-in;
+}
+
+.dash-trending:hover {
+  border: 1px solid #7ececa;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2), 0 0 10px rgba(0,0,0,0.15);
+}
+
+.dash-product {
+  width: 100%;
+  height: 250px;
+  cursor: pointer;
+  margin-bottom: 2em;
+  padding: 1.2em 1.2em;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.2);
+
+  transition: all 0.3s ease-in;
+}
+
+.dash-product:after,
+.dash-product:before {
+  clear: both;
+  display: table;
+  content: " ";
+}
+
+.dash-product:hover {
+  border: 1px solid #7ececa;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2), 0 0 10px rgba(0,0,0,0.15);
+}
+.dash-trending small{
+  color: #999;
+  font-size: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.cdn-pipbox-ul li {
+    float: left;
+    width: 100%;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 5px;
+}
+ul, li {
+    list-style: none;
+    padding: 0px;
+}
+.cdn-pipbox-footer {
+    background: #f6f6f6 none repeat scroll 0 0;
+    border: 1px solid #dbdcd6;
+    border-radius: 0px;
+    float: left;
+    width: 100%;
+}
+.cdn-3boxfotter {
+    float: left;
+    width: 100%;
+    margin: 0px;
+}
+.cdn-3boxfotter li {
+    border-right: 1px solid #dbdcd6;
+    color: #888;
+    padding: 10px 5px;
+    text-align: center;
+}.nbr{
+  border-right: none !important;
+}

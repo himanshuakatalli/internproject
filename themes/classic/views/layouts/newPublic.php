@@ -365,6 +365,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
 <script type="text/javascript">
 $(document).ready(function() {
 
+
+
 	$(":input").focusout(function(){
 		$(this).parsley().validate();
 	});
