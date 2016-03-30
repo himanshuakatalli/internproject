@@ -426,6 +426,90 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
 <script type="text/javascript">
 $(document).ready(function() {
 
+    $('#searchFormTop').trigger("reset");
+    $('#topsearch').selectize({
+        theme: 'links',
+        //maxItems: null,
+        valueField: 'id',
+        searchField: 'title',
+        sortField: 'title',
+        maxItems: 2,
+        openOnFocus:false,
+        closeAfterSelect: true,
+        maxOptions:5,
+        options: [
+            <?php $skills=Categories::model()->findAllByAttributes(array('status'=>1));
+                foreach($skills as $skill){?>
+                    {id: "skill_<?php echo $skill->name;?>", title: '<?php echo $skill->name;?>', category: 'Skill'},
+            <?php } ?>
+        ],
+        render: {
+            option: function(data, escape) {
+                return  '<div class="option">'+
+                            '<span class="title">' + escape(data.title) + '</span>' +
+                            '<span class="tag">' + escape(data.category) + '</span>' +
+                        '</div>';
+            },
+            item: function(data, escape) {
+                return '<div class="item"><a href="' + escape(data.category) + '">' + escape(data.title) + '</a></div>';
+            }
+        },
+        onChange: function() { $('#searchFormTop').submit();},
+    });
+    $('.callTag').click(function(){
+        var data = $(this).attr('data-name');
+        select12 = searchSel[0].selectize;
+        select12.setValue(data);
+    });
+    $('.selectize-input').find('input').css('width','412');
+    $('#searchFormTop').submit(function(){
+        localStorage.clear();
+        return true;
+    });
+
+    $('#search-icon-mob a').click(function(){
+        $('#navbar').animo({
+            animation: "fadeOutRight",
+            duration: 0.3,
+            keep: true
+        }, function(){
+            $('#navbar').hide();
+            $('.navbarsearch').show().animo({
+                animation: "fadeInLeft",
+                duration: 0.3,
+                keep: true
+            });
+        });
+    });
+    $('#search-icon a').click(function(){
+        $('#navbar').animo({
+            animation: "fadeOutRight",
+            duration: 0.3,
+            keep: true
+        }, function(){
+            $('#navbar').hide();
+            $('.navbarsearch').show().animo({
+                animation: "fadeInLeft",
+                duration: 0.3,
+                keep: true
+            });
+        });
+    });
+    $('.search-close').click(function(){
+        $('.navbarsearch').animo({
+            animation: "fadeOutLeft",
+            duration: 0.3,
+            keep: true
+        }, function(){
+            $('.navbarsearch').hide();
+            $('#navbar').show().animo({
+                animation: "fadeInRight",
+                duration: 0.3,
+                keep: true
+            });
+        });
+    });
+
     $(":input").focusout(function(){
         $(this).parsley().validate();
     });
@@ -511,8 +595,6 @@ $(document).ready(function() {
     <?php if(isset($_REQUEST['login']) && $_REQUEST['login']==1){?>
     $(".menu-icon").trigger('click');
     <?php } ?>
-
-
 });
 </script>
 <script type="application/ld+json">
