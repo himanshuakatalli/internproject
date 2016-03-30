@@ -1,33 +1,26 @@
 <?php
 
 /**
- * This is the model class for table "users".
+ * This is the model class for table "roles".
  *
- * The followings are the available columns in table 'users':
+ * The followings are the available columns in table 'roles':
  * @property integer $id
- * @property string $first_name
- * @property string $last_name
- * @property string $username
- * @property string $password
- * @property string $hash
- * @property string $phone_number
- * @property integer $is_verified
- * @property integer $role_id
- * @property string $image
+ * @property string $name
+ * @property string $description
  * @property string $admin_notes
  * @property integer $status
  * @property string $add_date
  * @property string $modify_date
  *
  * The followings are the available model relations:
- * @property Roles $role
+ * @property Users[] $users
  */
-class Users extends CActiveRecord
+class Roles extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Users the static model class
+	 * @return Roles the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -39,7 +32,7 @@ class Users extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'users';
+		return 'roles';
 	}
 
 	/**
@@ -50,17 +43,13 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('first_name, username, password, role_id', 'required'),
-			array('is_verified, role_id, status', 'numerical', 'integerOnly'=>true),
-			array('first_name, last_name', 'length', 'max'=>50),
-			array('username, password', 'length', 'max'=>100),
-			array('hash', 'length', 'max'=>200),
-			array('phone_number', 'length', 'max'=>25),
-			array('image', 'length', 'max'=>255),
-			array('admin_notes, add_date, modify_date', 'safe'),
+			array('name, add_date', 'required'),
+			array('status', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>50),
+			array('description, admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, first_name, last_name, username, password, hash, phone_number, is_verified, role_id, image, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			array('id, name, description, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,7 +61,7 @@ class Users extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'role' => array(self::BELONGS_TO, 'Roles', 'role_id'),
+			'users' => array(self::HAS_MANY, 'Users', 'role_id'),
 		);
 	}
 
@@ -83,15 +72,8 @@ class Users extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'first_name' => 'First Name',
-			'last_name' => 'Last Name',
-			'username' => 'Username',
-			'password' => 'Password',
-			'hash' => 'Hash',
-			'phone_number' => 'Phone Number',
-			'is_verified' => 'Is Verified',
-			'role_id' => 'Role',
-			'image' => 'Image',
+			'name' => 'Name',
+			'description' => 'Description',
 			'admin_notes' => 'Admin Notes',
 			'status' => 'Status',
 			'add_date' => 'Add Date',
@@ -111,15 +93,8 @@ class Users extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('first_name',$this->first_name,true);
-		$criteria->compare('last_name',$this->last_name,true);
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('hash',$this->hash,true);
-		$criteria->compare('phone_number',$this->phone_number,true);
-		$criteria->compare('is_verified',$this->is_verified);
-		$criteria->compare('role_id',$this->role_id);
-		$criteria->compare('image',$this->image,true);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('description',$this->description,true);
 		$criteria->compare('admin_notes',$this->admin_notes,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('add_date',$this->add_date,true);

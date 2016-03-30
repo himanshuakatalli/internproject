@@ -28,22 +28,37 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		$this->layout="newPublic";
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('newIndex');
 	}
 	public function actionCategories()
 	{
-		$this->layout="pagehead";
-		$this->render('categories');
+		$this->layout = "pagehead";
+
+        $categories = Categories::model()->findAllByAttributes(array('status'=>1));
+
+		$this->render('categories',array('categories'=>$categories));
 	}
+    public function actionFilter()
+    {
+        $partialText = $_POST['partialText'];
+
+        $sql = "select name from categories where name like '%$partialText%' and status = 1";
+
+        $categories = Categories::model()->findAllBySql($sql);
+
+        if($categories)
+        {
+            $this->renderPartial('render_categories',array('categories'=>$categories));
+        }
+    }
+
+
+
 	/**
 	 * This is the action to handle external exceptions.
 	 */
 	public function actionError()
 	{
-        $this->layout="pagehead";
-
 		if($error=Yii::app()->errorHandler->error)
 		{
 			if(Yii::app()->request->isAjaxRequest)
@@ -53,35 +68,7 @@ class SiteController extends Controller
 		}
 	}
 
-	/**
-	 * Displays the contact page
-	 */
-	public function actionContact()
-	{
-		$model=new ContactForm;
-		if(isset($_POST['ContactForm']))
-		{
-			$model->attributes=$_POST['ContactForm'];
-			if($model->validate())
-			{
-				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
-				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
-				$headers="From: $name <{$model->email}>\r\n".
-					"Reply-To: {$model->email}\r\n".
-					"MIME-Version: 1.0\r\n".
-					"Content-type: text/plain; charset=UTF-8";
 
-				mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
-				$this->refresh();
-			}
-		}
-		$this->render('contact',array('model'=>$model));
-	}
-
-	/**
-	 * Displays the login page
-	 */
 	 public function actionLogin()
     {
         $model=new LoginForm;
@@ -113,28 +100,32 @@ class SiteController extends Controller
 
 	         if($user)
 	         {
-	            if($forgot->validate())
-	            {
+                        if($user->hash)
+                        {
+                            //do nothing
+                        }else{
+                           $user->hash=md5(uniqid(rand(1,1000)));
+                           $user->update();
+                        }
+        	            if($forgot->validate())
+        	            {
+                                   // $to="abhishek.singh@venturepact.com";
+                                    $to=$username;
+                                    //CVarDumper::dump($mail,10,1);
+                                    $from="abhishek.singh@venturepact.com";
+                                    $from_name="admin";
+                                    $subject="Forgot Password";
+                                    $url = Yii::app()->createUrl('site/newpassword',array('email'=>$username,'hash'=>$user->hash));
+                                    $url ="localhost".$url;
+                                    $message="click to reset password.<br><br><a href=".$url.">Click Here</a>";
+                                    $this->mailsend($to,$from,$from_name,$subject,$message);
 
-                            $to="abhishek.singh@venturepact.com";
-                           // $to=$username;
-                            $from="abhishek.singh@venturepact.com";
-                            $from_name="bla-bla";
-                            $subject="Forgot Password";
+                	                $response['success']='1';
+                	                $response['message']="Email is send to your email id.";
+                	                echo json_encode($response);
+        	            }
 
 
-                            //$message="click to verify account.<br><br><a href=".$url.">Click Here</a>";
-                            $message="Your password is:- <br>".$user->password;
-                            $this->mailsend($to,$from,$from_name,$subject,$message);
-
-
-
-
-
-	                $response['success']='1';
-	                $response['message']="Email is send to your email id.";
-	                echo json_encode($response);
-	            }
 	        }else{
                     $response['success']='2';
 	                $response['message']="Email dosen't exist.";
@@ -145,8 +136,8 @@ class SiteController extends Controller
     }
 
 
- public function actionSignup()
- {
+public function actionSignup()
+{
     $users=new Users;
 
     if(isset($_POST['Users']))
@@ -158,32 +149,43 @@ class SiteController extends Controller
 				$users->role_id=$_POST['Users']['role_id'];
 				$users->add_date=date("Y-m-d h:i:sa");
 				$users->hash=md5(uniqid(rand(1,1000)));
-                if($users->save())
+                $user_exist=Users::model()->find(array('condition'=>"username='$username'"));
+                if(!$user_exist)
                 {
-                		    //$to="abhishek.singh@venturepact.com";
-                            $to=$username;
-                            $from="abhishek.singh@venturepact.com";
-                            $from_name="bla-bla";
-                            $subject="verify your Email";
+                    if($users->save())
+                    {
+                    		    //$to="abhishek.singh@venturepact.com";
+                                $to=$username;
+                                $from="abhishek.singh@venturepact.com";
+                                $from_name="admin";
+                                $subject="verify your Email";
 
-                               $url = Yii::app()->createUrl('site/verify',array('email'=>$username,'hash'=>$users->hash));
+                                $url = Yii::app()->createUrl('site/verify',array('email'=>$username,'hash'=>$users->hash));
                                 $url ="localhost".$url;
 
-                            //$message="click to verify account.<br><br><a href=".$url.">Click Here</a>";
-                            $message="click to verify account.<br><br><a href=".$url.">Click Here</a>";
-                            $this->mailsend($to,$from,$from_name,$subject,$message);
 
-                            $response['success']='1';
-                            $response['message']='Successfully Registered.Verify your Email and login.';
-                            echo json_encode($response);
+                                $message="click to verify account.<br><br><a href=".$url.">Click Here</a>";
+                                $this->mailsend($to,$from,$from_name,$subject,$message);
 
-                }else{
+                                $response['success']='1';
+                                $response['message']='Successfully Registered.Verify your Email and login.';
+                                echo json_encode($response);
+
+                    }else{
 
 
-                            $response['success']='2';
-                            $response['message']='Something went wrong.';
-                            echo json_encode($response);
+                                $response['success']='2';
+                                $response['message']='Something went wrong.';
+                                echo json_encode($response);
+                    }
+                }else
+                {
+                                $response['success']='3';
+                                $response['message']='You are already Registered with this email id.Login to continue.';
+                                echo json_encode($response);
+
                 }
+
     }
  }
 
@@ -200,30 +202,85 @@ public function actionVerify()
 	     if($user)
 	     {
 	       $user->is_verified=1;
-	       if($user->save())
+	       if($user->update())
 	        {
-	           $url=Yii::app()->createUrl('site');
 	            $user->hash=null;
 	            $user->save();
-	           header('location:'.$url);
+	            $this->redirect('index');
 	        }
 
 	     }else
 	     {
-	     	echo "sorry! Couldn't Verify you.";
+	     	   $this->redirect('verifyerror');
 	     }
 
 	}
 
 }
 
+public function actionNewpassword()
+{
+    $this->layout="pagehead";
+    $reset=new Reset;
+
+   if(isset($_GET['email'])&&isset($_GET['hash']))
+     {
+        $username=$_GET['email'];
+        $hash=$_GET['hash'];
+        $user=Users::model()->find(array('condition'=>"username='$username' AND hash='$hash'"));
+         if($user)
+         {
+             $this->render('reset',array('reset'=>$reset,'user'=>$user));
+         }else
+         {
+             $this->redirect('expire');
+         }
+    }
+}
+public function actionReset()
+{
+    $this->layout="pagehead";
+    $reset=new Reset;
+    $username=$_GET['username'];
+    if(isset($_POST['Reset']))
+    {
+
+            $user=Users::model()->find(array('condition'=>"username='$username'"));
+            if($user)
+            {
+                $user->password=$_POST['Reset']['Password'];
+                $user->hash=null;
+                if(!$user->is_verified)
+                {
+                   $user->is_verified=1;
+                }
+                if($user->update())
+                {
+                    $response['success']=1;
+                    $response['message']="Password successfully saved.";
+                    echo json_encode($response);
+                }
+            }
+
+    }
+}
+public function actionExpire()
+{
+    $this->layout="pagehead";
+    $this->render('linkerror');
+}
+public function actionVerifyerror()
+{
+    $this->layout="pagehead";
+    $this->render('verifyerror');
+}
 
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */
-	public function actionLogout()
-	{
+public function actionLogout()
+{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
-	}
+}
 }

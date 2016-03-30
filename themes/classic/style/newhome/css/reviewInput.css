@@ -2,6 +2,13 @@ body {
 	font-family: sans-serif;
 	background: #F2F2F2;
 }
+h3 {
+	font-size: 18px;
+	font-weight: 100px;
+}
+.col-md-4.col-sm-6.col-xs-12.pl0.mb20.our-r {
+    min-height: 60px;
+}
 .clear-fix:before,
 .clear-fix:after {
 	clear: both;
@@ -35,7 +42,10 @@ body {
 
 .form-container {
 	width: 70%;
-	margin: 0 auto;
+	margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;	
 	padding: 1.5em;
 	background: #FFF;
 	border: 1px solid #989ca6;
@@ -84,7 +94,7 @@ body {
 .form-header h3 {
 	font-size: 1.2em;
 	padding-bottom: 1em;
-	font-weight: 600;
+	font-weight: 400;
 }
 
 .main-form {
@@ -109,13 +119,6 @@ body {
 	display: table;
 	content: " ";
 }
-
-footer {
-	width: 100%;
-	height: 300px;
-	background: #2b394b;
-}
-
 .star-rating{
 	max-width: 33.33%;
 	width: 33.33%;
@@ -129,10 +132,11 @@ footer {
 .inputs {
 	width: 100%;
 }
-.inputs h3 {
-	font-weight: 400;
+/* .inputs h3 {
+	font-weight: 200;
+	font-size: 20px;
 	
-}
+} */
 
 .inputs h4 {
 	color: #989ca6;

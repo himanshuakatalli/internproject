@@ -27,10 +27,10 @@ class UserIdentity extends CUserIdentity
 		{
 		   if($password==$user->password)
 		     {
+
 		        $this->errorCode=self::ERROR_NONE;
 	            Yii::app()->user->setState('id',$username);
 	            Yii::app()->user->setState('fname',$user->first_name);
-	          //  $rolename=Roles::model()->find(array('condition'=>"id='$user->role_id'"));
 	            Yii::app()->user->setState('role',$user->role->name);
 
 
