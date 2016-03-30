@@ -43,15 +43,13 @@
     var data = "&partialText=" + partialText;
     $.ajax({
       type: 'POST',
-      url: '<?php echo Yii::app()->createUrl('site/filter')?>',
+      url: '<?php echo Yii::app()->createUrl('site/categoryfilter')?>',
       data: data,
       success: function(data){
-      //var response = $.parseJSON(data);
       $('#category-list').html(data);
-      console.log(data);
       },
       error: function(data){
-        alert("Failed");
+      	console.log(data);
       }
     })
   }

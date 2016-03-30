@@ -4,7 +4,6 @@ class ReviewInputController extends Controller
 {
 	public function actionIndex($id)
 	{
-		$this->layout = "pagehead";
 		$review = new Reviews;
 		$user = new Users;
 		$product = Product::model()->findByAttributes(array('id'=>$id));
