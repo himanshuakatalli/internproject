@@ -21,34 +21,21 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 
-public function mailsend($to,$from,$from_name,$subject,$message)
-{
-$mail	= Yii::app()->Smtpmail;
-$mail->SetFrom($from,$from_name);
-$mail->Subject	= $subject;
-$mail->MsgHTML($message);
-$mail->AddAddress($to, "");
+	public function mailsend($to,$from,$from_name,$subject,$message)
+	{
+		$mail	= Yii::app()->Smtpmail;
+		$mail->SetFrom($from,$from_name);
+		$mail->Subject	= $subject;
+		$mail->MsgHTML($message);
+		$mail->AddAddress($to, "");
 
-
-// Add CC
-// if(!empty($cc)){
-// foreach($cc as $email){
-// $mail->AddCC($email);
-// }
-// }
-
-// // Add Attchments
-// if(!empty($attachment)){
-// foreach($attachment as $attach){
-// $mail->AddAttachment($attach);
-// }
-// }
-
-if(!$mail->Send()) {
-return false; // Fail echo "Mailer Error: " . $mail->ErrorInfo;
-}else {
-return true;	// Success
-}
-}
+		if(!$mail->Send())
+		{
+			return false; // Fail echo "Mailer Error: " . $mail->ErrorInfo;
+		}else
+		{
+			return true;	// Success
+		 }
+	}
 
 }

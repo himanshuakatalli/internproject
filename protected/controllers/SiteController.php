@@ -314,20 +314,29 @@ public function actionLinkedin()
 
         $user = Users::model()->findByAttributes(array("username"=>$username, "oauth_uid"=>$oauth_uid));
         if(empty($user))
-           $user = new Users;
-
+        {
+            $user = new Users;
+            $user->add_date=date("Y-m-d h:i:sa");
+        }
         $user->first_name=$userdata->firstName;
         $user->last_name=$userdata->lastName;
         $user->username=$userdata->emailAddress;
         $user->oauth_uid=$userdata->id;
-        $user->password="0000000";
+        $user->password=$userdata->id;
         $user->role_id="2";
         $user->is_verified="1";
+        $user->modify_date=date("Y-m-d h:i:sa");
         $user->in_profile_url=$userdata->publicProfileUrl;
         $user->save();
-        Yii::app()->user->setState('id',$userdata->emailAddress);
-        Yii::app()->user->setState('fname',$userdata->formattedName);
-        Yii::app()->user->setState('role','user');
+
+        $model = new LoginForm;
+        $model->username=$userdata->emailAddress;
+        $model->password=$userdata->id;
+        if($model->validate() && $model->login()){
+            $this->redirect(Yii::app()->createUrl(Yii::app()->user->role));
+        } else {
+            $this->redirect(Yii::app()->createUrl('site/index'));
+        }
   }
 	/**
 	 * Logs out the current user and redirect to homepage.
