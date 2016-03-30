@@ -9,9 +9,10 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
   <style>
-      body{
-             background-color: #e9eaed;
-          }
+      body
+      {
+        background-color: #e9eaed;
+      }
      .well{
              background-color: #ffffff;
               opacity: 0.85;
@@ -100,9 +101,9 @@
                               
 
                        </div>
-                       <button id="filterButton" type="button" onclick="send();" class="btn btn-success">Submit</button>
+                       <button id="filterButton" type="button" onclick="send();" class="btn btn-primary">Reset</button>
                </form>
-    </div>
+      </div>
 
 
     </div>
@@ -113,38 +114,54 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+  var xhr;
+     
 
-   $('[data-toggle="tooltip"]').tooltip({ html: true, placement: "top"}); 
+
+
+
+  function send()
+  {
+     
+    $('#filter_form input').removeAttr('checked').removeAttr('selected');
+   
+  }
+
+
+  $('#filter_form input').change(function(){
+
+    var data=$("#filter_form").serialize();
+    window.scrollTo(0,0);
+    
+    
+    if(xhr && xhr.readyState != 4){
+            xhr.abort();
+        }
+      xhr = $.ajax({
+                   type: 'POST',
+                   url: '<?php echo Yii::app()->createAbsoluteUrl("product/filter/$categoryInfo->id"); ?>',
+                   data:data,
+                   success:function(response){
+                                
+                              var data = $.parseJSON(response);
+                               if(data.success==1){
+                                  $('#productList').html(data.content);
+                               }
+                   },
+                   error: function(data) { // if error occured
+                         alert("Error occured.please try again");
+                         alert(data);
+                   },
+                 
+                  dataType:'html'
+      });
+
+   
+
+  });
+
 
 });
-
-
-function send()
- {
- 
-   var data=$("#filter_form").serialize();
-   window.scrollTo(0,0);
- 
-   $.ajax({
-               type: 'POST',
-               url: '<?php echo Yii::app()->createAbsoluteUrl("product/filter/$categoryInfo->id"); ?>',
-               data:data,
-               success:function(response){
-                            
-                          var data = $.parseJSON(response);
-                           if(data.success==1){
-                              $('#productList').html(data.content);
-                           }
-               },
-               error: function(data) { // if error occured
-                     alert("Error occured.please try again");
-                     alert(data);
-               },
-             
-              dataType:'html'
-  });
- 
-}
 
 
 
