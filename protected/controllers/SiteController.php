@@ -51,7 +51,7 @@ class SiteController extends Controller
 
 
 	 public function actionLogin()
-    {
+     {
         $model=new LoginForm;
         if(isset($_POST['LoginForm']))
         {
@@ -68,9 +68,9 @@ class SiteController extends Controller
             echo json_encode($response);
             }
         }
-    }
+     }
     public function actionForgot()
-    {
+     {
         $forgot=new ForgotpasswordForm;
 
 		if(isset($_POST['ForgotpasswordForm']))
@@ -254,6 +254,12 @@ public function actionVerifyerror()
 {
     $this->layout="pagehead";
     $this->render('verifyerror');
+}
+public function actionLinkedin()
+{
+    $this->layout="pagehead";
+    //echo "Under Construction.";
+     $this->render('linkedin');
 }
 
 	/**
