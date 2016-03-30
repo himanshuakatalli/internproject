@@ -32,9 +32,28 @@ class SiteController extends Controller
 	}
 	public function actionCategories()
 	{
-		$this->layout="pagehead";
-		$this->render('categories');
+		$this->layout = "pagehead";
+
+        $categories = Categories::model()->findAllByAttributes(array('status'=>1));
+
+		$this->render('categories',array('categories'=>$categories));
 	}
+    public function actionFilter()
+    {
+        $partialText = $_POST['partialText'];
+
+        $sql = "select name from categories where name like '%$partialText%' and status = 1";
+
+        $categories = Categories::model()->findAllBySql($sql);
+
+        if($categories)
+        {
+            $this->renderPartial('render_categories',array('categories'=>$categories));
+        }
+    }
+
+
+
 	/**
 	 * This is the action to handle external exceptions.
 	 */
