@@ -127,26 +127,28 @@ $(document).ready(function(){
   
      
  //setting up loader     
-$body = $("#productList");
+  $body = $("#productList");
 
-$(document).on({
-    ajaxStart: function() { $body.addClass("loader");    },
-     ajaxStop: function() { $body.removeClass("loader"); }    
-});
+  $(document).on({
+      ajaxStart: function() { $body.addClass("loader");   },
+      ajaxStop: function() { $body.removeClass("loader"); }    
+  });
 
 
   //reseting form values
   function Reseting()
   {    
-    $('#filter_form input').removeAttr('checked').removeAttr('selected');   
+    $('#filter_form input').removeAttr('checked').removeAttr('selected');  
+    $("#productList").empty();
+    callingAjax(); 
   }
 
   var xhr;   //xmlhttpRequest object
-  $('#filter_form input').change(function(){
+   $('#filter_form input').change(function(){
     $("#productList").empty();
     callingAjax();
 
-  });
+   });
 
 
   function callingAjax()
