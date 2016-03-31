@@ -1,10 +1,10 @@
 
-      <?php 
-        foreach ($products as $product) {    
+      <?php
+        foreach ($products as $product) {
       ?>
-        
-    
-      
+
+
+
       <div class="well w3-card-12 ">
           <div class="media">
               <div class="media-left media-middle">
@@ -23,29 +23,28 @@
                           </small>
                       </h4>
                       <div class="rating" data-rating-max="5">
-                        
+
                       </div>
                   </div>
                   <div class="col-sm-12 col-md-4">
                       <a href= <?php echo '"'.$product->company_website.'"' ?> type="button" class="btn btn-lg btn-primary">        Visit Website
-                      </a> 
+                      </a>
                   </div>
                   <div class="col-sm-12">
-                          
+
                       <p class="small">
                                 <?php echo $product->description ?>
                                 <!-- <a href="<?php echo Yii::app()->createUrl('/productProfile/index/'.$product->id.'')?>">View Profile</a> -->
-                                <a href="<?php echo Yii::app()->createUrl('/productProfile/index/',array('id'=>$product->id))?>">View Profile</a>
+                                <a class="lnk" href="<?php echo Yii::app()->createUrl('/productProfile/index/',array('id'=>$product->id))?>">View Profile</a>
                       </p>
                   </div>
               </div>
-              
+
           </div>
-          
+
       </div>
       <?php  } ?>
 
 
-     
 
-    
+
