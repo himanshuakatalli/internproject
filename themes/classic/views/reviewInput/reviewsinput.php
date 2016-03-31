@@ -16,7 +16,7 @@
 <body>
 	<section class="form-container clear-fix">
 		<div class="form-header">
-			<div><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/Product/Rubik_solved.png"></div>
+			<div><img src="<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/'.$product->logo.'.png'; ?>"></div>
 			<hgroup>
 				<h2><?php echo $product->name?></h2>
 				<h3><?php echo $product->product_website?></h3>

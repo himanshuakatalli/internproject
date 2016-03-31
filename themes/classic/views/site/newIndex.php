@@ -83,13 +83,14 @@
 						<span aria-hidden="true" class="icon-energy light-color trending-iconshow"></span>
 						<label class="light-color">Trending:</label>
 						<ul class="hint-ul">
-							<li><a href="javascript:void(0);" class="callTag" data-name="Applicant Tracking">Applicant Tracking</a></li>
+							<li><a href='<?php echo CController::createUrl("/Product/index?value=Applicant Tracking");?>'>Applicant Tracking</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="Construction">Construction</a></li>
+							<li><a href='<?php echo CController::createUrl("/Product/index?value=Construction Management");?>'>
+							Construction</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="Maintainance">Maintainance</a></li>
+							<li><a href='<?php echo CController::createUrl("/Product/index?value=Maintainance Management");?>'>Maintainance</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="Medical Practice">Medical Practice</a></li>
+							<li><a href='<?php echo CController::createUrl("/Product/index?value=Medical Billing");?>'>Medical Billing</a></li>
 						</ul>
 					</div>
 				</div>
@@ -176,88 +177,88 @@
 				<li>
 					<div class="col-md-12 col-sm-12 col-xs-12 mb15 np">
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"1"));?>" class="highlight-inner">360 Degree feedback</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=360 Degree feedback');?>" class="highlight-inner">360 Degree feedback</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"2"));?>" class="highlight-inner">Accounting</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Accounting');?>" class="highlight-inner">Accounting</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"10"));?>" class="highlight-inner">Applicant Tracking</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Applicant Tracking');?>" class="highlight-inner">Applicant Tracking</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"72"));?>" class="highlight-inner">Computer Security</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Computer Security');?>" class="highlight-inner">Computer Security</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"77"));?>" class="highlight-inner">Construction management</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Construction management');?>" class="highlight-inner">Construction management</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"100"));?>" class="highlight-inner">Data Governance</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Data Governance');?>" class="highlight-inner">Data Governance</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"105"));?>" class="highlight-inner">Dental</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Dental');?>" class="highlight-inner">Dental</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"124"));?>" class="highlight-inner">Employee Scheduling</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Employee Scheduling');?>" class="highlight-inner">Employee Scheduling</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"119"));?>" class="highlight-inner">Electronic Medical Records</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Electronic Medical Records');?>" class="highlight-inner">Electronic Medical Records</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"126"));?>" class="highlight-inner">Energy Management</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Energy Management');?>" class="highlight-inner">Energy Management</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"133"));?>" class="highlight-inner">Expense Report</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Expense Report');?>" class="highlight-inner">Expense Report</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"147"));?>" class="highlight-inner">Food delivery</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Food delivery');?>" class="highlight-inner">Food delivery</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"156"));?>" class="highlight-inner">Fund Accounting</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Fund Accounting');?>" class="highlight-inner">Fund Accounting</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"168"));?>" class="highlight-inner">Home health care</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Home health care');?>" class="highlight-inner">Home health care</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"173"));?>" class="highlight-inner">Human Resource</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Human Resource');?>" class="highlight-inner">Human Resource</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"197"));?>" class="highlight-inner">Job Costing</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Job Costing');?>" class="highlight-inner">Job Costing</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"204"));?>" class="highlight-inner">law Enforcement</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=law Enforcement');?>" class="highlight-inner">law Enforcement</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"213"));?>" class="highlight-inner">library Automation</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=library Automation');?>" class="highlight-inner">library Automation</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"231"));?>" class="highlight-inner">Medical Inventory</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Medical Inventory');?>" class="highlight-inner">Medical Inventory</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"241"));?>" class="highlight-inner">Mining</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Mining');?>" class="highlight-inner">Mining</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"248"));?>" class="highlight-inner">Network Monitoring</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Network Monitoring');?>" class="highlight-inner">Network Monitoring</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"252"));?>" class="highlight-inner">Online CRM</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Online CRM');?>" class="highlight-inner">Online CRM</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"262"));?>" class="highlight-inner">Patient Management</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Patient Management');?>" class="highlight-inner">Patient Management</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"265"));?>" class="highlight-inner">Payroll</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Payroll');?>" class="highlight-inner">Payroll</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"297"));?>" class="highlight-inner">Public transportation</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Public transportation');?>" class="highlight-inner">Public transportation</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"305"));?>" class="highlight-inner">Real Estate Agency</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Real Estate Agency');?>" class="highlight-inner">Real Estate Agency</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"316"));?>" class="highlight-inner">resource Management</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Resource Management');?>" class="highlight-inner">Resource Management</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"325"));?>" class="highlight-inner">Scolarship Management</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Scolarship Management');?>" class="highlight-inner">Scolarship Management</a>
 						</div>
 					</div>
 				</li>
