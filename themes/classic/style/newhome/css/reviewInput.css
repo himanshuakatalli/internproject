@@ -6,6 +6,13 @@ h3 {
 	font-size: 18px;
 	font-weight: 100px;
 }
+.btn{
+	background: rgba(58,65,109,1);
+}
+.btn:hover{
+	background: rgba(63,99,131,1);
+	color: #FFFFFF;
+}
 .col-md-4.col-sm-6.col-xs-12.pl0.mb20.our-r {
     min-height: 60px;
 }
@@ -57,7 +64,7 @@ h3 {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-bottom: .1em solid #f07762;
+	border-bottom: 0.14em solid #A5A5A5;
 }
 
 .form-header div{
@@ -111,7 +118,7 @@ h3 {
 .form-row{
 	width: 100%; 
 	margin: 0; 
-	border-bottom: 0.1em solid #f07762;
+	border-bottom: 0.14em solid #A5A5A5;
 }
 .form-row:after,
 .form-row:before {

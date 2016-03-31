@@ -31,9 +31,7 @@ class UserIdentity extends CUserIdentity
 				Yii::app()->user->setState('id',$username);
 				Yii::app()->user->setState('fname',$user->first_name);
 				Yii::app()->user->setState('role',$user->role->name);
-				Yii::app()->user->setState('image',$user->profile_img);
-
-
+				Yii::app()->user->setState('image',$user
 		     }
 		     else {
 		     	$this->errorCode=self::ERROR_PASSWORD_INVALID;
