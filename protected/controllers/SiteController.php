@@ -305,7 +305,7 @@ public function actionLinkedin()
               $success = false;
             } elseif (strlen($client->access_token)) {
               $success = $client->CallAPI(
-                            'http://api.linkedin.com/v1/people/~:(id,email-address,first-name,last-name,location,picture-url,public-profile-url,formatted-name)',
+                            'http://api.linkedin.com/v1/people/~:(id,email-address,first-name,headline,last-name,location,picture-url,public-profile-url,positions,formatted-name)',
                             'GET', array(
                                 'format'=>'json'
                             ), array('FailOnAccessError'=>true), $user);
@@ -315,6 +315,7 @@ public function actionLinkedin()
         }
         if ($client->exit) exit;
         if ($success) {
+//CVarDumper::dump($user,10,1); die;
                $this->linked_in_user($user);
         } else {
              Yii::app()->user->setState('err_msg',$client->error);
@@ -340,6 +341,8 @@ public function linked_in_user($userdata)
 	$user->oauth_uid=$userdata->id;
 	$user->password=$userdata->id;
 	$user->role_id="2";
+	$user->job_profile=$userdata->positions->values[0]->title;
+	$user->organization=$userdata->positions->values[0]->company->name;
 	$user->profile_img=$userdata->pictureUrl;
 	$user->is_verified="1";
 	$user->modify_date=date("Y-m-d h:i:sa");
