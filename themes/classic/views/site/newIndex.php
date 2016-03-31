@@ -173,7 +173,7 @@
 </section>-->
 <section class="section5">
 	<div class="container ">
-		<h3 class="features-heading">Trending Software Searches..</h3>
+		<h3 class="features-heading">Trending Software Searches</h3>
 		<div class="flexslider">
 			<ul class="slides">
 				<li>
