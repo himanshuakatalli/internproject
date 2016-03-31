@@ -22,15 +22,15 @@
 				<h3>Popular Categories</h3>
 				<form><ul></ul>
 					<ul>
-						<li><a href="#">Applicant Tracking</a></li>
-						<li><a href="#">Church</a></li>
-						<li><a href="#">Contact Management</a></li>
-						<li><a href="#">Accounting</a></li>
-						<li><a href="#">Construction</a></li>
-						<li><a href="#">Field Service</a></li>
-						<li><a href="#">Learning Management System</a></li>
-						<li><a href="#">Maintenance</a></li>
-						<li><a href="#">Project Management</a></li>
+						<li><a href="<?php echo CController::createUrl('/product/index/?value=Applicant Tracking');?>">Applicant Tracking</a></li>
+						<li><a href="<?php echo CController::createUrl('/product/index/?value=Church Management');?>">Church Management</a></li>
+						<li><a href="<?php echo CController::createUrl('/product/index/?value=Contact Management');?>">Contact Management</a></li>
+						<li><a href="<?php echo CController::createUrl('/product/index/?value=Accounting');?>">Accounting</a></li>
+						<li><a href="<?php echo CController::createUrl('/product/index/?value=Construction CRM');?>">Construction CRM</a></li>
+						<li><a href="<?php echo CController::createUrl('/product/index/?value=Field Service Management');?>">Field Service Management</a></li>
+						<li><a href="<?php echo CController::createUrl('/product/index/?value=Learning Management System');?>">Learning Management System</a></li>
+						<li><a href="<?php echo CController::createUrl('/product/index/?value=Maintenance Management');?>">Maintenance Management</a></li>
+						<li><a href="<?php echo CController::createUrl('/product/index/?value=Project Management');?>">Project Management</a></li>
 					</ul>
 				</form>
 			</div>
