@@ -5,7 +5,7 @@
         
     
       
-      <div class="well">
+      <div class="well w3-card-12 ">
           <div class="media">
               <div class="media-left media-middle">
                   <a href=<?php echo '"'.$product->product_website.'"' ?>>
