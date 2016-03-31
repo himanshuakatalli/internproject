@@ -41,7 +41,7 @@ public function actionFilter($id)
 	  sleep(2);
 		//CVarDumper::dump( $id,10,1);die;
 		$criteria=new CDbCriteria;                             //for finding products related to that category
-		$criteria->with = array('categories','features');
+		$criteria->with = array('categories','features','deploymentFeatures');
 		$criteria->addCondition('category_id= '.$id);     
 		//adding conditions according to post request
 		if(isset($_POST['deploy']))
@@ -76,7 +76,7 @@ public function actionFilter($id)
 			$criteria->addCondition("name like '%".$_GET["key"]."%' or "."company_name like '%".$_GET["key"]."%' or "."description like '%".$_GET["key"]."%'" );    
 
 			$products = Product::model()->findAll($criteria);  
-	//CVarDumper::dump($products,10,1);die;
+	    //CVarDumper::dump($products,10,1);die;
 			$this->render('search',array('products'=>$products));
 
 		}
