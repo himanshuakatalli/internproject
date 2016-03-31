@@ -13,7 +13,7 @@
     text-decoration: none;
 }
 
-.main{margin:0; padding:0;}
+.main{margin:0; padding:0; background:#f2f2f2;}
 body{padding:0;margin:0;}
 
 .pd10 {
@@ -64,6 +64,9 @@ iframe{
 }
 .gly-ok-style{
 	color:#00d6cb;
+}
+.font_newregular {
+    font-family: montserratregular;
 }
 
 
