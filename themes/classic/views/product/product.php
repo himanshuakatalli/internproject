@@ -9,13 +9,24 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
   <style>
-      body{
-             background-color: #e9eaed;
-          }
-     .well{
-             background-color: #ffffff;
-              opacity: 0.85;
-          }
+      body
+      {
+        background-color: #e9eaed;
+      }
+     .well
+      {
+        background-color: #ffffff;
+        opacity: 0.85;
+      }
+      .loader
+      {
+        min-height: 100px;
+        background:
+                url(<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/loader.gif'?>)               
+                no-repeat center;
+                z-index:99;
+
+      }
   </style>
 
 </head>
@@ -33,7 +44,7 @@
             <hr>              
     </div>
     
-    <div class = "col-sm-8 col-md-8" id="productList">
+    <div class = "col-sm-8 col-md-8 " id="productList">
     <?php $this->renderPartial('_products',array('products'=>$products)); ?>
     </div>
     <div class="col-sm-4  col-md-3 col-md-offset-1">
@@ -64,7 +75,7 @@
                                     <label><input type="radio" name="nuser" value="500-999">500-999</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="nuser" value="1000-100000000">1000+</label> 
+                                    <label><input type="radio" name="nuser" value="1000-1000000000">1000+</label> 
                                 </div>
                                <br>
                                <br>
@@ -100,9 +111,9 @@
                               
 
                        </div>
-                       <button id="filterButton" type="button" onclick="send();" class="btn btn-success">Submit</button>
+                       <button id="filterButton" type="button" onclick="Reseting();" class="btn btn-primary">Reset</button>
                </form>
-    </div>
+      </div>
 
 
     </div>
@@ -113,38 +124,65 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+  
+     
+ //setting up loader     
+  $body = $("#productList");
 
-   $('[data-toggle="tooltip"]').tooltip({ html: true, placement: "top"}); 
+  $(document).on({
+      ajaxStart: function() { $body.addClass("loader");   },
+      ajaxStop: function() { $body.removeClass("loader"); }    
+  });
+
+
+  //reseting form values
+  function Reseting()
+  {    
+    $('#filter_form input').removeAttr('checked').removeAttr('selected');  
+    $("#productList").empty();
+    callingAjax(); 
+  }
+
+  var xhr;   //xmlhttpRequest object
+   $('#filter_form input').change(function(){
+    $("#productList").empty();
+    callingAjax();
+
+   });
+
+
+  function callingAjax()
+  {
+    var data=$("#filter_form").serialize();
+    window.scrollTo(0,0);
+    
+    
+    if(xhr && xhr.readyState != 4){
+            xhr.abort();
+        }
+      xhr = $.ajax({
+                   type: 'POST',
+                   url: '<?php echo Yii::app()->createAbsoluteUrl("product/filter/$categoryInfo->id"); ?>',
+                   data:data,
+                   success:function(response){
+                              
+                              var data = $.parseJSON(response);
+                              if(data.success==1){
+                                  $('#productList').html(data.content);
+                               }
+                   },
+                   error: function(data) { // if error occured
+                        /* alert("Error occured.please try again");
+                         alert(data);*/
+                   },
+                 
+                  dataType:'html'
+      });
+
+  }
+
 
 });
-
-
-function send()
- {
- 
-   var data=$("#filter_form").serialize();
-   window.scrollTo(0,0);
- 
-   $.ajax({
-               type: 'POST',
-               url: '<?php echo Yii::app()->createAbsoluteUrl("product/filter/$categoryInfo->id"); ?>',
-               data:data,
-               success:function(response){
-                            
-                          var data = $.parseJSON(response);
-                           if(data.success==1){
-                              $('#productList').html(data.content);
-                           }
-               },
-               error: function(data) { // if error occured
-                     alert("Error occured.please try again");
-                     alert(data);
-               },
-             
-              dataType:'html'
-  });
- 
-}
 
 
 

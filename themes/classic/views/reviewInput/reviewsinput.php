@@ -11,7 +11,7 @@
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/star-rating.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/reviewInput.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<!--  <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/parsley.min.js"></script> -->
+<!-- <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/parsley.min.js"></script> -->
 
 <body>
 	<section class="form-container clear-fix">
@@ -103,7 +103,7 @@
 </div>
 <div class="form-row inputs">
 	<div class="input-field">
-		<?php echo CHtml::htmlButton('Submit <i class="material-icons right">send</i>',array('onclick'=>'send();','class'=>'btn waves-effect waves-light')); ?>
+		<?php echo CHtml::htmlButton('Submit',array('onclick'=>'send();','class'=>'btn waves-effect waves-light')); ?>
 		<!-- <i class="material-icons right">send</i> -->
 	</div>
 </div>
