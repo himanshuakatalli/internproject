@@ -125,7 +125,7 @@ $(document).ready(function(){
      $("#productList").empty();
      callingAjax();
   });
-  
+
 
   var xhr;   //xmlhttpRequest object
    $('#filter_form input').change(function(){
