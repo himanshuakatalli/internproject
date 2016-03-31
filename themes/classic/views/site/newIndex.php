@@ -83,15 +83,15 @@
 						<span aria-hidden="true" class="icon-energy light-color trending-iconshow"></span>
 						<label class="light-color">Trending:</label>
 						<ul class="hint-ul">
-							<li><a href="javascript:void(0);" class="callTag" data-name="Applicant Tracking">Applicant Tracking</a></li>
+							<li><a href="<?php echo CController::createUrl('/product/index/?value=Applicant Tracking');?>">Applicant Tracking</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="Construction Management">
-							Construction</a></li>
+							<li><a href="<?php echo CController::createUrl('/product/index/?value=Construction CRM');?>">
+							Construction CRM</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="Medical Billing">
+							<li><a href="<?php echo CController::createUrl('/product/index/?value=Medical Billing');?>">
 							Medical Billing</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="Maintenance Management">
+							<li><a href="<?php echo CController::createUrl('/product/index/?value=Maintenance Management');?>">
 							Maintenance</a></li>
 						</ul>
 					</div>
