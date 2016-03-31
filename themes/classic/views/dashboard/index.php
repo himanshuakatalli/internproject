@@ -6,13 +6,13 @@
             <small>Your trending Product</small>
           </div>
           <div class="col-xs-12">
-            <h4>Project name</h4>
+            <h4><i class="fa fa-fire"></i>&nbsp;&nbsp;36 Dollor</h4>
           </div>
           <div class="cdn-pipbox-footer">
             <ul class="cdn-3boxfotter col-xs-12 np">
               <li class="col-xs-4">
                 <i class="fa fa-star"></i>
-                <small>Reviews</small>
+                <small>Reviews : 18</small>
               </li>
               <li class="col-xs-4">
                 <i class="fa fa-star"></i>

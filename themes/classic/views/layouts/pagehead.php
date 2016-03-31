@@ -75,13 +75,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                     <div id="search-icon-mob" class="sr-web"><a href="javascript:void(0);"><i class="fa fa-search fs14 light-grey"></i></a></div>
                     <?php
                     if(Yii::app()->user->isGuest)
-                        echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/site'),array('class'=>'navbar-brand rs-hide'));
+                        echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/'),array('class'=>'navbar-brand rs-hide'));
                     else
                         echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand rs-hide'));
                     ?>
                     <?php
                     if(Yii::app()->user->isGuest)
-                        echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/site'),array('class'=>'navbar-brand'));
+                        echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/'),array('class'=>'navbar-brand'));
                     else
                         echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand'));
                     ?>
@@ -109,7 +109,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                         <span aria-hidden="true" class="icon-magnifier search-searchicon"></span>
                         <div class="searcheader placeholder1">
                             <form action="<?php echo Yii::app()->createUrl('/product/index');?>" method="get" id="searchFormTop">
-                                <select id="topsearch" name="id" multiple class="demo-default"  placeholder="What type of software are you looking for?"></select>
+                                <select id="topsearch" name="value" multiple class="demo-default"  placeholder="What type of software are you looking for?"></select>
                             </form>
                         </div>
                         <a href="javascript:void(0);" class="search-close">X</a>
@@ -207,7 +207,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                 <li>.</li>
                 <li><a href="<?php echo Yii::app()->createUrl('/site/faq');?>">FAQs</a></li>
                 <li>.</li>
-                <li><a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>">Reviews</a></li>
+                <li><a href="<?php echo Yii::app()->createUrl('/site/categories');?>">Reviews</a></li>
                 <li>.</li>
                 <li><a href="<?php echo Yii::app()->createUrl('/site/partner');?>">For Developers</a></li>
                 <li>.</li>
@@ -290,7 +290,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                                 <li><a href="<?php echo Yii::app()->createUrl('/site/referral');?>" class="blue-new">Referral</a></li>
                                 <li><a href="http://blog.venturepact.com/" target="_blank" class="blue-new">Blog</a></li>
                                 <li><a href="<?php echo Yii::app()->createUrl('/site/press');?>" class="blue-new">Press</a></li>
-                                <li><a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="blue-new">Reviews</a></li>
+                                <li><a href="<?php echo Yii::app()->createUrl('/site/categories');?>" class="blue-new">Reviews</a></li>
                                 <li><a href="<?php echo Yii::app()->createUrl('/site/partner');?>" class="blue-new">For Developers</a></li>
                                 <li><a href="<?php echo Yii::app()->createUrl('/site/affiliate');?>" class="blue-new">For Affiliates</a></li>
                             </ul>
@@ -438,9 +438,9 @@ $(document).ready(function() {
         closeAfterSelect: true,
         maxOptions:5,
         options: [
-            <?php $skills=Categories::model()->findAllByAttributes(array('status'=>1));
-                foreach($skills as $skill){?>
-                    {id: "skill_<?php echo $skill->name;?>", title: '<?php echo $skill->name;?>', category: 'Skill'},
+            <?php $categories=Categories::model()->findAllByAttributes(array('status'=>1));
+                foreach($categories as $category){?>
+                    {id: "<?php echo $category->name;?>", title: '<?php echo $category->name;?>', category: 'Skill'},
             <?php } ?>
         ],
         render: {

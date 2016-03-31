@@ -17,13 +17,13 @@
 					<div id="postproject-mob" class="sr-web"><a href="<?php echo CController::createUrl('/site/project');?>" class="top-postproject">Post Your Project </a></div>
 					<?php
 					if(Yii::app()->user->isGuest)
-						echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/site'),array('class'=>'navbar-brand rs-hide'));
+						echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/'),array('class'=>'navbar-brand rs-hide'));
 					else
 						echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand rs-hide'));
 					?>
 					<?php
 					if(Yii::app()->user->isGuest)
-						echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/site'),array('class'=>'navbar-brand'));
+						echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/'),array('class'=>'navbar-brand'));
 					else
 						echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand'));
 					?>
@@ -76,20 +76,23 @@
 						</div>
 					</div>
 					<!--<div class="looking-outr-border">
-						<a href="<?php echo CController::createUrl('/site/project');?>" id="sfocus" class="find-outr">Meet the Teams <i class="fa fa-spinner fa-spin hide"></i></a>
-						<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/shadow.png" class="shadow-home rs-hide" alt="shadow" />
+						<a href="<?php //echo CController::createUrl('/site/project');?>" id="sfocus" class="find-outr">Meet the Teams <i class="fa fa-spinner fa-spin hide"></i></a>
+						<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/shadow.png" class="shadow-home rs-hide" alt="shadow" />
 					</div>-->
 					<div class="hint-outr">
 						<span aria-hidden="true" class="icon-energy light-color trending-iconshow"></span>
 						<label class="light-color">Trending:</label>
 						<ul class="hint-ul">
-							<li><a href="javascript:void(0);" class="callTag" data-name="skill_Applicant Tracking">Applicant Tracking</a></li>
+							<li><a href="<?php echo CController::createUrl('/product/index/?value=Applicant Tracking');?>">Applicant Tracking</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="skill_Construction">Construction</a></li>
+							<li><a href="<?php echo CController::createUrl('/product/index/?value=Construction CRM');?>">
+							Construction CRM</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="skill_Maintainance">Maintainance</a></li>
+							<li><a href="<?php echo CController::createUrl('/product/index/?value=Medical Billing');?>">
+							Medical Billing</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="skill_Medical Practice">Medical Practice</a></li>
+							<li><a href="<?php echo CController::createUrl('/product/index/?value=Maintenance Management');?>">
+							Maintenance</a></li>
 						</ul>
 					</div>
 				</div>
@@ -158,107 +161,106 @@
 		</div>
 	</div>
 </section>
+<!--
 <section class="section4">
 	<div class="container text-center">
 		<div class="col-md-2 mt35 mb35 rs-mb10 rs-mb0 ">
 			<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/homeReferal.png"/>
-			<!--<span aria-hidden="true" class="icon-user posr"></span>052e7cf84bd98e7af4f5ed6fcf3f5820b1d4bdd9
-			<span class="icon-dollar"><i class="fa fa-usd fa-lg pt8"></i></span> -->
 		</div>
 		<div class="col-md-7 earn-heading">Know anyone who can use our help?<span class="gift-rating">Gift them $500 Today!</span> </div>
 		<a href="<?php echo CController::createUrl('/site/referral');?>" class="referral-link">Refer Now</a>
 	</div>
-</section>
+</section>-->
 <section class="section5">
 	<div class="container ">
-		<h3 class="features-heading">Trending Software Searches..</h3>
+		<h3 class="features-heading">Trending Software Searches</h3>
 		<div class="flexslider">
 			<ul class="slides">
 				<li>
 					<div class="col-md-12 col-sm-12 col-xs-12 mb15 np">
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"1"));?>" class="highlight-inner">360 Degree feedback</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=360 Degree feedback');?>" class="highlight-inner">360 Degree feedback</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"2"));?>" class="highlight-inner">Accounting</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Accounting');?>" class="highlight-inner">Accounting</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"10"));?>" class="highlight-inner">Applicant Tracking</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Applicant Tracking');?>" class="highlight-inner">Applicant Tracking</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"72"));?>" class="highlight-inner">Computer Security</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Computer Security');?>" class="highlight-inner">Computer Security</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"77"));?>" class="highlight-inner">Construction management</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Construction management');?>" class="highlight-inner">Construction management</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"100"));?>" class="highlight-inner">Data Governance</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Data Governance');?>" class="highlight-inner">Data Governance</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"105"));?>" class="highlight-inner">Dental</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Dental');?>" class="highlight-inner">Dental</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"124"));?>" class="highlight-inner">Employee Scheduling</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Employee Scheduling');?>" class="highlight-inner">Employee Scheduling</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"119"));?>" class="highlight-inner">Electronic Medical Records</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Electronic Medical Records');?>" class="highlight-inner">Electronic Medical Records</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"126"));?>" class="highlight-inner">Energy Management</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Energy Management');?>" class="highlight-inner">Energy Management</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"133"));?>" class="highlight-inner">Expense Report</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Expense Report');?>" class="highlight-inner">Expense Report</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"147"));?>" class="highlight-inner">Food delivery</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Food delivery');?>" class="highlight-inner">Food delivery</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"156"));?>" class="highlight-inner">Fund Accounting</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Fund Accounting');?>" class="highlight-inner">Fund Accounting</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"168"));?>" class="highlight-inner">Home health care</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Home health care');?>" class="highlight-inner">Home health care</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-							<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"173"));?>" class="highlight-inner">Human Resource</a>
+							<a href="<?php echo CController::createUrl('/product/index/?value=Human Resource');?>" class="highlight-inner">Human Resource</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"197"));?>" class="highlight-inner">Job Costing</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Job Costing');?>" class="highlight-inner">Job Costing</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"204"));?>" class="highlight-inner">law Enforcement</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=law Enforcement');?>" class="highlight-inner">law Enforcement</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"213"));?>" class="highlight-inner">library Automation</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=library Automation');?>" class="highlight-inner">library Automation</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"231"));?>" class="highlight-inner">Medical Inventory</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Medical Inventory');?>" class="highlight-inner">Medical Inventory</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"241"));?>" class="highlight-inner">Mining</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Mining');?>" class="highlight-inner">Mining</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"248"));?>" class="highlight-inner">Network Monitoring</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Network Monitoring');?>" class="highlight-inner">Network Monitoring</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"252"));?>" class="highlight-inner">Online CRM</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Online CRM');?>" class="highlight-inner">Online CRM</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"262"));?>" class="highlight-inner">Patient Management</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Patient Management');?>" class="highlight-inner">Patient Management</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"265"));?>" class="highlight-inner">Payroll</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Payroll');?>" class="highlight-inner">Payroll</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"297"));?>" class="highlight-inner">Public transportation</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Public transportation');?>" class="highlight-inner">Public transportation</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"305"));?>" class="highlight-inner">Real Estate Agency</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Real Estate Agency');?>" class="highlight-inner">Real Estate Agency</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"316"));?>" class="highlight-inner">resource Management</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Resource Management');?>" class="highlight-inner">Resource Management</a>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12 highlight-outr np">
-						<a href="<?php echo CController::createUrl('/product/index/',array('id'=>"325"));?>" class="highlight-inner">Scolarship Management</a>
+						<a href="<?php echo CController::createUrl('/product/index/?value=Scolarship Management');?>" class="highlight-inner">Scolarship Management</a>
 						</div>
 					</div>
 				</li>
@@ -266,13 +268,14 @@
 		</div>
 	</div>
 </section>
+<!--
 <section class="section7">
 	<div class="container ">
 		<h3 class="features-heading">Love Your Team!</h3>
 		<h4 class="features-subheading">Over 75% Of Companies Rehire Their Teams</h4>
 
 		<div class="text-center">
-			<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/stars.png" alt="Ratings" class="rating-img" width="112" height="21"/>
+			<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/stars.png" alt="Ratings" class="rating-img" width="112" height="21"/>
 			<p class="rating-value">Avg. Rating: 4.8 on 5 (212 Reviews)</p>
 		</div>
 		<div class="col-md-12 col-sm-12 col-xs-12 np mt30">
@@ -280,34 +283,34 @@
 				<div class="test-box-outr ml30 mr30">
 					<div class="test-box">
 						<span class="test-text">Nick Bowers, <br>CTO @ Klink Technologies</span>
-						<a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">VenturePact provided a great way to find top quality teams that fit our budget and timeline needs</a>
-						<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow" width="24" height="12"/>
+						<a href="<?php //echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">VenturePact provided a great way to find top quality teams that fit our budget and timeline needs</a>
+						<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow" width="24" height="12"/>
 					</div>
 					<span  class="img-responsive klink-pic nb sprite-team spt1" alt="Klink Technologies"></span>
 				</div>
 				<div class="test-box-outr ml30 mr30">
 					<div class="test-box-mid">
 						<span class="test-text">Matt Carey <br>CEO @ Abaris</span>
-						<a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">Overall, much better than freelance marketplaces.</a>
-						<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow-mid" width="24" height="12" />
+						<a href="<?php //echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">Overall, much better than freelance marketplaces.</a>
+						<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow-mid" width="24" height="12" />
 					</div>
 					<span  class="img-responsive klink-pic sprite-team spt2" alt="Abaris"></span>
 				</div>
 				<div class="test-box-outr ml30">
 					<div class="test-box">
 						<span class="test-text">Dan Shipper <br>Founder @ FireFly</span>
-						<a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">Our team was highly available, very engaged, and and responded to feedback swiftly.</a>
-						<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow" width="24" height="12"/>
+						<a href="<?php //echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">Our team was highly available, very engaged, and and responded to feedback swiftly.</a>
+						<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow" width="24" height="12"/>
 					</div>
 					<span  class="img-responsive klink-pic sprite-team spt3" alt="FireFly"></span>
 				</div>
 				<div class="col-md-12 col-xs-12 text-center mt50 mb30">
-					<a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="readwhat-small">Read More Reviews</a>
+					<a href="<?php //echo Yii::app()->createUrl('/site/testimonials');?>" class="readwhat-small">Read More Reviews</a>
 				</div>
 			</div>
 		</div>
 	</div>
-</section>
+</section>-->
 <!-- Modal Thank You -->
 <div class="modal fade" id="thankyou" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -361,9 +364,9 @@ $(document).ready(function(){
 		closeAfterSelect: true,
 		maxOptions:5,
 		options: [
-			<?php $skills=Categories::model()->findAllByAttributes(array('status'=>1));
-				foreach($skills as $skill){?>
-					{id: "skill_<?php echo $skill->name;?>", title: '<?php echo $skill->name;?>', category: 'Skill'},
+			<?php $categories=Categories::model()->findAllByAttributes(array('status'=>1));
+				foreach($categories as $category){?>
+					{id: "<?php echo $category->name;?>", title: '<?php echo $category->name;?>', category: 'Skill'},
 			<?php } ?>
 		],
 		render: {
@@ -390,9 +393,9 @@ $(document).ready(function(){
 		closeAfterSelect: true,
 		maxOptions:5,
 		options: [
-			<?php $skills=Categories::model()->findAllByAttributes(array('status'=>1));
-			foreach($skills as $skill){?>
-				{id: "skill_<?php echo $skill->name;?>", title: '<?php echo $skill->name;?>', category: 'Skill'},
+			<?php $categories=Categories::model()->findAllByAttributes(array('status'=>1));
+			foreach($categories as $category){?>
+				{id: "<?php echo $category->name;?>", title: '<?php echo $category->name;?>', category: 'Skill'},
 			<?php } ?>
 		],
 		render: {
@@ -416,7 +419,7 @@ $(document).ready(function(){
 		select12 = searchSel[0].selectize;
 		select12.setValue(data);
 	});
-	$('.selectize-input').find('input').css('width','412');
+	$('.selectize-input').find('input').css('width','420');
 	/*$('.find-outr').click(function(){
 		$('.search-cont').animo({
 			animation: "fadeOutLeft",
@@ -432,20 +435,6 @@ $(document).ready(function(){
 			});
 		});
 	});*/
-	$('.back-looking').click(function(){
-		$('.email-cont').animo({
-			animation: "fadeOutRight",
-			duration: 0.3,
-			keep: true
-		}, function(){
-			$('.email-cont').hide();
-			$('.search-cont').show().animo({
-				animation: "fadeInLeft",
-				duration: 0.3,
-				keep: true
-			});
-		});
-	});
 	$('#searchFormSite').submit(function(){
 		localStorage.clear();
 		return true;

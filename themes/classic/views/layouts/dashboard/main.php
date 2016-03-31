@@ -52,7 +52,7 @@
       <ul class="dash-logo">
         <li>
           <a href="#">
-            <img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/vp-logo.png" alt="vp_logo">
+            <img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/vp_icon.png" alt="vp_logo">
             <span>VenturePact</span>
           </a>
         </li>

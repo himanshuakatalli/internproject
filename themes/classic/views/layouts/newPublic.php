@@ -200,7 +200,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
 							}else{ ?>
 						<div class="col-md-7 col-md-offset-4 col-xs-12">
 							<div class="col-md-12 col-xs-12 np text-center">
-								<img width="90" height="90" src="<?php echo (!empty(Yii::app()->user->image))?Yii::app()->user->image:Yii::app()->theme->baseUrl."/style/images/userAvatarBig.png";?>" class="img-circle" alt="Team Member">
+								<img width="90" height="90" src="<?php echo (!empty(Yii::app()->user->image))?Yii::app()->user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" alt="Team Member">
 								<h2 class="fs16  font_newregular ">Hey! <?php echo Yii::app()->user->fname;?></h2>
 								<p class="fs14 font_newregular pt5">Welcome to VenturePact</p>
 							</div>

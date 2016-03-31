@@ -3,6 +3,8 @@ $flag = true;
 $prev = strtolower($categories[0]->name[0]);
 foreach($categories as $category)
 {
+	$categoryName = $category->name;
+
 	$curr = strtolower($category->name[0]);
 	x:if(ctype_digit($curr))
 	{
@@ -10,7 +12,7 @@ foreach($categories as $category)
 		<div class='cat-row'>
 			<h2>#</h2>
 			<ul>
-				<a href='#'>
+				<a href='<?php echo Yii::app()->createUrl("/Product/index?value=".$categoryName);?>'>
 					<li><?php echo $category->name?></li>
 				</a>
 			</ul>
@@ -25,7 +27,7 @@ foreach($categories as $category)
 			<div class='cat-row'>
 				<h2><?php echo strtoupper($curr)?></h2>
 				<ul>
-					<a href='#'>
+					<a href='<?php echo Yii::app()->createUrl("/Product/index?value=".$categoryName);?>'>
 						<li><?php echo $category->name?></li>
 					</a>
 					<?php
@@ -35,7 +37,7 @@ foreach($categories as $category)
 				elseif($prev == $curr)
 				{
 					?>
-					<a href='#'>
+					<a href='<?php echo Yii::app()->createUrl("/Product/index?value=".$categoryName);?>'>
 						<li><?php echo $category->name?></li>
 					</a>
 					<?php

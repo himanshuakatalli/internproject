@@ -79,10 +79,10 @@ else
 			<div class="col-sm-10 ">
 				<div class="media" > 
 					<div class="media-left media-middle ">
-						<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/pic.png" class="img-thumbnail" alt="Product Icon" width="100px" height="130px" >
+						<img src="<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/'.$product->logo.'.png'; ?>" class="img-thumbnail" alt="Product Icon" width="100px" height="130px" >
 					</div>
 					<div class="media-body">
-						<h2 class="media-header font_newregular"><?php echo $product->name?></h2>
+						<h2 class="media-header"><?php echo $product->name?></h2>
 						<small>by <?php echo $product->company_name?></small>
 						<input id="input-21b" value="<?php echo $average?>" type="number" class="rating" min="0" max="5" step="0.5" data-size="xs">
 					</div>

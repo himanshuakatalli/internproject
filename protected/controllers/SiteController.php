@@ -1,7 +1,12 @@
 <?php
 
+Yii::import('application.vendors.*');
+require_once('LinkedIn/http.php');
+require_once('LinkedIn/oauth_client.php');
+
 class SiteController extends Controller
 {
+
 /**
 * Declares class-based actions.
 */
@@ -71,14 +76,13 @@ public function actionLogin()
 	$model=new LoginForm;
 	if(isset($_POST['LoginForm']))
 	{
-
 		$model->username=$_POST['LoginForm']['username'];
 		$model->password=$_POST['LoginForm']['password'];
 
 		if($model->validate() && $model->login())
 		{
 			$response['success']='1';
-			$response['url']	=Yii::app()->createUrl(Yii::app()->user->role);
+			$response['url']	=Yii::app()->createUrl('dashboard');
 			echo json_encode($response);
 		}else{
 			$response['success']='User Name Is Not Valid.';
@@ -86,7 +90,6 @@ public function actionLogin()
 		}
 	}
 }
-
 public function actionForgot()
 {
 	$forgot=new ForgotpasswordForm;
@@ -273,7 +276,89 @@ public function actionVerifyerror()
 	$this->layout="pagehead";
 	$this->render('verifyerror');
 }
+public function actionLinkedin()
+{
+        $baseURL = 'http://localhost/internproject/';
+        $callbackURL = 'http://localhost/internproject/index.php/site/linkedin';
+        $linkedinApiKey = '75q7rn79icn4j7';
+        $linkedinApiSecret = 'rDMR36xMUMznAWV0';
+        $linkedinScope = 'r_basicprofile r_emailaddress';
 
+        if (isset($_GET["oauth_problem"]) && $_GET["oauth_problem"] <> "") {
+          // in case if user cancel the login. redirect back to home page.
+          Yii::app()->user->setState('err_msg',$_GET["oauth_problem"]);
+          $this->redirect('index');
+          exit;
+        }
+
+        $client = new oauth_client_class;
+        $client->debug = false;
+        $client->debug_http = true;
+        $client->redirect_uri = $callbackURL;
+        $client->client_id = $linkedinApiKey;
+        $client->client_secret = $linkedinApiSecret;
+        $client->scope = $linkedinScope;
+        if (($success = $client->Initialize())) {
+          if (($success = $client->Process())) {
+            if (strlen($client->authorization_error)) {
+              $client->error = $client->authorization_error;
+              $success = false;
+            } elseif (strlen($client->access_token)) {
+              $success = $client->CallAPI(
+                            'http://api.linkedin.com/v1/people/~:(id,email-address,first-name,headline,last-name,location,picture-url,public-profile-url,positions,formatted-name)',
+                            'GET', array(
+                                'format'=>'json'
+                            ), array('FailOnAccessError'=>true), $user);
+            }
+          }
+          $success = $client->Finalize($success);
+        }
+        if ($client->exit) exit;
+        if ($success) {
+//CVarDumper::dump($user,10,1); die;
+               $this->linked_in_user($user);
+        } else {
+             Yii::app()->user->setState('err_msg',$client->error);
+        }
+        $this->redirect('index');
+        exit;
+}
+
+public function linked_in_user($userdata)
+{
+	$oauth_uid = $userdata->id;
+	$username = $userdata->emailAddress;
+
+	$user = Users::model()->findByAttributes(array("username"=>$username, "oauth_uid"=>$oauth_uid));
+	if(empty($user))
+	{
+		$user = new Users;
+		$user->add_date=date("Y-m-d h:i:sa");
+	}
+	$user->first_name=$userdata->firstName;
+	$user->last_name=$userdata->lastName;
+	$user->username=$userdata->emailAddress;
+	$user->oauth_uid=$userdata->id;
+	$user->password=$userdata->id;
+	$user->role_id="2";
+	$user->job_profile=$userdata->positions->values[0]->title;
+	$user->organization=$userdata->positions->values[0]->company->name;
+	$user->profile_img=$userdata->pictureUrl;
+	$user->is_verified="1";
+	$user->modify_date=date("Y-m-d h:i:sa");
+	$user->in_profile_url=$userdata->publicProfileUrl;
+	$user->save();
+
+	$model = new LoginForm;
+	$model->username=$userdata->emailAddress;
+	$model->password=$userdata->id;
+	if($model->validate() && $model->login()){
+
+		$this->redirect(Yii::app()->createUrl('dashboard'));
+	} else {
+		$this->redirect(Yii::app()->createUrl('site/index'));
+	}
+}
 /**
 * Logs out the current user and redirect to homepage.
 */
