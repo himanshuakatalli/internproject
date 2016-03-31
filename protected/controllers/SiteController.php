@@ -278,8 +278,8 @@ public function actionVerifyerror()
 }
 public function actionLinkedin()
 {
-        $baseURL = 'http://localhost/internproject/';
-        $callbackURL = 'http://localhost/internproject/index.php/site/linkedin';
+        $baseURL = 'http://localhost/internproject333/';
+        $callbackURL = 'http://localhost/internproject333/site/linkedin';
         $linkedinApiKey = '75q7rn79icn4j7';
         $linkedinApiSecret = 'rDMR36xMUMznAWV0';
         $linkedinScope = 'r_basicprofile r_emailaddress';
@@ -340,6 +340,7 @@ public function linked_in_user($userdata)
 	$user->oauth_uid=$userdata->id;
 	$user->password=$userdata->id;
 	$user->role_id="2";
+    $user->profile_img=$userdata->pictureUrl;
 	$user->is_verified="1";
 	$user->modify_date=date("Y-m-d h:i:sa");
 	$user->in_profile_url=$userdata->publicProfileUrl;
@@ -349,6 +350,7 @@ public function linked_in_user($userdata)
 	$model->username=$userdata->emailAddress;
 	$model->password=$userdata->id;
 	if($model->validate() && $model->login()){
+
 		$this->redirect(Yii::app()->createUrl(Yii::app()->user->role));
 	} else {
 		$this->redirect(Yii::app()->createUrl('site/index'));
