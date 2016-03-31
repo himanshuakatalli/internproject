@@ -5,7 +5,7 @@
         
     
       
-      <div class="well w3-card-12 ">
+      <div class="well w3-card-12 w3-animate-opacity">
           <div class="media">
               <div class="media-left media-middle">
                   <a href=<?php echo '"'.$product->product_website.'"' ?>>
@@ -27,8 +27,8 @@
                       </div>
                   </div>
                   <div class="col-sm-12 col-md-4">
-                      <a href= <?php echo '"'.$product->company_website.'"' ?> type="button" class="btn btn-lg btn-primary">        Visit Website
-                      </a> 
+                      <a href= <?php echo '"'.$product->company_website.'"' ?> type="button" class="btn  btn-lg btn-primary">        Visit Website
+                      </a>
                   </div>
                   <div class="col-sm-12">
                           

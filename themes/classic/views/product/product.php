@@ -7,7 +7,7 @@
      .well
       {
         background-color: #ffffff;
-        opacity: 0.85;
+        
       }
       .loader
       {
