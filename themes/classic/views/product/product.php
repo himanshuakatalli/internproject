@@ -99,11 +99,9 @@
 
 
                        </div>
-                       <button id="filterButton" type="button" onclick="Reseting();" class="btn btn-primary">Reset</button>
+                       <button id="filterButton" type="button" onclick="Reset()" class="btn btn-primary">Reset</button>
                </form>
       </div>
-
-
     </div>
 
 </div>
@@ -121,8 +119,6 @@ $(document).ready(function(){
       ajaxStart: function() { $body.addClass("loader");   },
       ajaxStop: function() { $body.removeClass("loader"); }
   });
-
-
   //reseting form values
   function Reseting()
   {
@@ -153,7 +149,6 @@ $(document).ready(function(){
                    url: '<?php echo Yii::app()->createAbsoluteUrl("product/filter/$categoryInfo->id"); ?>',
                    data:data,
                    success:function(response){
-
                               var data = $.parseJSON(response);
                               if(data.success==1){
                                   $('#productList').html(data.content);

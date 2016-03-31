@@ -82,7 +82,7 @@ public function actionLogin()
 		if($model->validate() && $model->login())
 		{
 			$response['success']='1';
-			$response['url']	=Yii::app()->createUrl(Yii::app()->user->role);
+			$response['url']	=Yii::app()->createUrl('dashboard');
 			echo json_encode($response);
 		}else{
 			$response['success']='User Name Is Not Valid.';
@@ -351,7 +351,7 @@ public function linked_in_user($userdata)
 	$model->password=$userdata->id;
 	if($model->validate() && $model->login()){
 
-		$this->redirect(Yii::app()->createUrl(Yii::app()->user->role));
+		$this->redirect(Yii::app()->createUrl('dashboard'));
 	} else {
 		$this->redirect(Yii::app()->createUrl('site/index'));
 	}

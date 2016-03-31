@@ -38,7 +38,7 @@ class ProductController extends Controller
 
 public function actionFilter($id)
 {
-	  sleep(2);
+	  //sleep(3);
 		//CVarDumper::dump( $id,10,1);die;
 		$criteria=new CDbCriteria;                             //for finding products related to that category
 		$criteria->with = array('categories','features','deploymentFeatures');
@@ -58,10 +58,8 @@ public function actionFilter($id)
 			$criteria->addCondition('customer_count >= '.$parts[0] . ' and customer_count <= '.$parts[1]);
 		}
     
-
 		$products = Product::model()->findAll($criteria);  
 		$content = $this->renderPartial('_products',array('products'=>$products),true);
-
 		die(json_encode(array('content'=>$content,'success'=>1)));
 
 }
