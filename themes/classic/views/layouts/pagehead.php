@@ -109,7 +109,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                         <span aria-hidden="true" class="icon-magnifier search-searchicon"></span>
                         <div class="searcheader placeholder1">
                             <form action="<?php echo Yii::app()->createUrl('/product/index');?>" method="get" id="searchFormTop">
-                                <select id="topsearch" name="id" multiple class="demo-default"  placeholder="What type of software are you looking for?"></select>
+                                <select id="topsearch" name="value" multiple class="demo-default"  placeholder="What type of software are you looking for?"></select>
                             </form>
                         </div>
                         <a href="javascript:void(0);" class="search-close">X</a>
