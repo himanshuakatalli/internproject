@@ -76,21 +76,23 @@
 						</div>
 					</div>
 					<!--<div class="looking-outr-border">
-						<a href="<?php echo CController::createUrl('/site/project');?>" id="sfocus" class="find-outr">Meet the Teams <i class="fa fa-spinner fa-spin hide"></i></a>
-						<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/shadow.png" class="shadow-home rs-hide" alt="shadow" />
+						<a href="<?php //echo CController::createUrl('/site/project');?>" id="sfocus" class="find-outr">Meet the Teams <i class="fa fa-spinner fa-spin hide"></i></a>
+						<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/shadow.png" class="shadow-home rs-hide" alt="shadow" />
 					</div>-->
 					<div class="hint-outr">
 						<span aria-hidden="true" class="icon-energy light-color trending-iconshow"></span>
 						<label class="light-color">Trending:</label>
 						<ul class="hint-ul">
-							<li><a href='<?php echo CController::createUrl("/Product/index?value=Applicant Tracking");?>'>Applicant Tracking</a></li>
+							<li><a href="javascript:void(0);" class="callTag" data-name="Applicant Tracking">Applicant Tracking</a></li>
 							<li>,</li>
-							<li><a href='<?php echo CController::createUrl("/Product/index?value=Construction Management");?>'>
+							<li><a href="javascript:void(0);" class="callTag" data-name="Construction Management">
 							Construction</a></li>
 							<li>,</li>
-							<li><a href='<?php echo CController::createUrl("/Product/index?value=Maintainance Management");?>'>Maintainance</a></li>
+							<li><a href="javascript:void(0);" class="callTag" data-name="Maintainance Management">
+							Maintainance</a></li>
 							<li>,</li>
-							<li><a href='<?php echo CController::createUrl("/Product/index?value=Medical Billing");?>'>Medical Billing</a></li>
+							<li><a href="javascript:void(0);" class="callTag" data-name="Medical Billing">
+							Medical Billing</a></li>
 						</ul>
 					</div>
 				</div>
