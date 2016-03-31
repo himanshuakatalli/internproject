@@ -340,6 +340,7 @@ public function linked_in_user($userdata)
 	$user->oauth_uid=$userdata->id;
 	$user->password=$userdata->id;
 	$user->role_id="2";
+	$user->profile_img=$userdata->pictureUrl;
 	$user->is_verified="1";
 	$user->modify_date=date("Y-m-d h:i:sa");
 	$user->in_profile_url=$userdata->publicProfileUrl;

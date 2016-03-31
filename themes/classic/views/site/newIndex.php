@@ -158,17 +158,16 @@
 		</div>
 	</div>
 </section>
+<!--
 <section class="section4">
 	<div class="container text-center">
 		<div class="col-md-2 mt35 mb35 rs-mb10 rs-mb0 ">
 			<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/homeReferal.png"/>
-			<!--<span aria-hidden="true" class="icon-user posr"></span>052e7cf84bd98e7af4f5ed6fcf3f5820b1d4bdd9
-			<span class="icon-dollar"><i class="fa fa-usd fa-lg pt8"></i></span> -->
 		</div>
 		<div class="col-md-7 earn-heading">Know anyone who can use our help?<span class="gift-rating">Gift them $500 Today!</span> </div>
 		<a href="<?php echo CController::createUrl('/site/referral');?>" class="referral-link">Refer Now</a>
 	</div>
-</section>
+</section>-->
 <section class="section5">
 	<div class="container ">
 		<h3 class="features-heading">Trending Software Searches..</h3>
@@ -266,13 +265,14 @@
 		</div>
 	</div>
 </section>
+<!--
 <section class="section7">
 	<div class="container ">
 		<h3 class="features-heading">Love Your Team!</h3>
 		<h4 class="features-subheading">Over 75% Of Companies Rehire Their Teams</h4>
 
 		<div class="text-center">
-			<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/stars.png" alt="Ratings" class="rating-img" width="112" height="21"/>
+			<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/stars.png" alt="Ratings" class="rating-img" width="112" height="21"/>
 			<p class="rating-value">Avg. Rating: 4.8 on 5 (212 Reviews)</p>
 		</div>
 		<div class="col-md-12 col-sm-12 col-xs-12 np mt30">
@@ -280,34 +280,34 @@
 				<div class="test-box-outr ml30 mr30">
 					<div class="test-box">
 						<span class="test-text">Nick Bowers, <br>CTO @ Klink Technologies</span>
-						<a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">VenturePact provided a great way to find top quality teams that fit our budget and timeline needs</a>
-						<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow" width="24" height="12"/>
+						<a href="<?php //echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">VenturePact provided a great way to find top quality teams that fit our budget and timeline needs</a>
+						<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow" width="24" height="12"/>
 					</div>
 					<span  class="img-responsive klink-pic nb sprite-team spt1" alt="Klink Technologies"></span>
 				</div>
 				<div class="test-box-outr ml30 mr30">
 					<div class="test-box-mid">
 						<span class="test-text">Matt Carey <br>CEO @ Abaris</span>
-						<a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">Overall, much better than freelance marketplaces.</a>
-						<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow-mid" width="24" height="12" />
+						<a href="<?php //echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">Overall, much better than freelance marketplaces.</a>
+						<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow-mid" width="24" height="12" />
 					</div>
 					<span  class="img-responsive klink-pic sprite-team spt2" alt="Abaris"></span>
 				</div>
 				<div class="test-box-outr ml30">
 					<div class="test-box">
 						<span class="test-text">Dan Shipper <br>Founder @ FireFly</span>
-						<a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">Our team was highly available, very engaged, and and responded to feedback swiftly.</a>
-						<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow" width="24" height="12"/>
+						<a href="<?php //echo Yii::app()->createUrl('/site/testimonials');?>" class="test-link">Our team was highly available, very engaged, and and responded to feedback swiftly.</a>
+						<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/test-arrow.png" class="test-arrow" width="24" height="12"/>
 					</div>
 					<span  class="img-responsive klink-pic sprite-team spt3" alt="FireFly"></span>
 				</div>
 				<div class="col-md-12 col-xs-12 text-center mt50 mb30">
-					<a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="readwhat-small">Read More Reviews</a>
+					<a href="<?php //echo Yii::app()->createUrl('/site/testimonials');?>" class="readwhat-small">Read More Reviews</a>
 				</div>
 			</div>
 		</div>
 	</div>
-</section>
+</section>-->
 <!-- Modal Thank You -->
 <div class="modal fade" id="thankyou" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -432,20 +432,6 @@ $(document).ready(function(){
 			});
 		});
 	});*/
-	$('.back-looking').click(function(){
-		$('.email-cont').animo({
-			animation: "fadeOutRight",
-			duration: 0.3,
-			keep: true
-		}, function(){
-			$('.email-cont').hide();
-			$('.search-cont').show().animo({
-				animation: "fadeInLeft",
-				duration: 0.3,
-				keep: true
-			});
-		});
-	});
 	$('#searchFormSite').submit(function(){
 		localStorage.clear();
 		return true;
