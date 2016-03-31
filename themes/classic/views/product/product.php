@@ -22,7 +22,7 @@
       {
         min-height: 100px;
         background:
-                url(<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/loader.gif'?>)               
+                url(<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/Loader.gif'?>)               
                 no-repeat center;
                 z-index:99;
 
@@ -111,11 +111,9 @@
                               
 
                        </div>
-                       <button id="filterButton" type="button" onclick="Reseting();" class="btn btn-primary">Reset</button>
+                       <button id="filterButton" type="button" onclick="Reset()" class="btn btn-primary">Reset</button>
                </form>
       </div>
-
-
     </div>
 
 </div>
@@ -123,35 +121,18 @@
 
 
 <script type="text/javascript">
-$(document).ready(function(){
-  
-     
- //setting up loader     
-  $body = $("#productList");
-
-  $(document).on({
-      ajaxStart: function() { $body.addClass("loader");   },
-      ajaxStop: function() { $body.removeClass("loader"); }    
-  });
+var xhr;   //xmlhttpRequest object
+//reseting form values
 
 
-  //reseting form values
-  function Reseting()
-  {    
-    $('#filter_form input').removeAttr('checked').removeAttr('selected');  
-    $("#productList").empty();
-    callingAjax(); 
-  }
+function Reset()
+{    
+  $('#filter_form input').removeAttr('checked').removeAttr('selected');  
+  $("#productList").empty();
+  callingAjax(); 
+}
 
-  var xhr;   //xmlhttpRequest object
-   $('#filter_form input').change(function(){
-    $("#productList").empty();
-    callingAjax();
-
-   });
-
-
-  function callingAjax()
+function callingAjax()
   {
     var data=$("#filter_form").serialize();
     window.scrollTo(0,0);
@@ -180,6 +161,30 @@ $(document).ready(function(){
       });
 
   }
+
+$(document).ready(function(){
+  
+     
+ //setting up loader     
+  $body = $("#productList");
+
+  $(document).on({
+      ajaxStart: function() { $body.addClass("loader");   },
+      ajaxStop: function() { $body.removeClass("loader"); }    
+  });
+
+
+  
+
+  
+   $('#filter_form input').change(function(){
+    $("#productList").empty();
+    callingAjax();
+
+   });
+
+
+  
 
 
 });
