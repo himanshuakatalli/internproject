@@ -83,13 +83,13 @@
 						<span aria-hidden="true" class="icon-energy light-color trending-iconshow"></span>
 						<label class="light-color">Trending:</label>
 						<ul class="hint-ul">
-							<li><a href="javascript:void(0);" class="callTag" data-name="skill_Applicant Tracking">Applicant Tracking</a></li>
+							<li><a href="javascript:void(0);" class="callTag" data-name="Applicant Tracking">Applicant Tracking</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="skill_Construction">Construction</a></li>
+							<li><a href="javascript:void(0);" class="callTag" data-name="Construction">Construction</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="skill_Maintainance">Maintainance</a></li>
+							<li><a href="javascript:void(0);" class="callTag" data-name="Maintainance">Maintainance</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="skill_Medical Practice">Medical Practice</a></li>
+							<li><a href="javascript:void(0);" class="callTag" data-name="Medical Practice">Medical Practice</a></li>
 						</ul>
 					</div>
 				</div>
@@ -361,9 +361,9 @@ $(document).ready(function(){
 		closeAfterSelect: true,
 		maxOptions:5,
 		options: [
-			<?php $skills=Categories::model()->findAllByAttributes(array('status'=>1));
-				foreach($skills as $skill){?>
-					{id: "skill_<?php echo $skill->name;?>", title: '<?php echo $skill->name;?>', category: 'Skill'},
+			<?php $categories=Categories::model()->findAllByAttributes(array('status'=>1));
+				foreach($categories as $category){?>
+					{id: "<?php echo $category->name;?>", title: '<?php echo $category->name;?>', category: 'Skill'},
 			<?php } ?>
 		],
 		render: {
@@ -390,9 +390,9 @@ $(document).ready(function(){
 		closeAfterSelect: true,
 		maxOptions:5,
 		options: [
-			<?php $skills=Categories::model()->findAllByAttributes(array('status'=>1));
-			foreach($skills as $skill){?>
-				{id: "skill_<?php echo $skill->name;?>", title: '<?php echo $skill->name;?>', category: 'Skill'},
+			<?php $categories=Categories::model()->findAllByAttributes(array('status'=>1));
+			foreach($categories as $category){?>
+				{id: "<?php echo $category->name;?>", title: '<?php echo $category->name;?>', category: 'Skill'},
 			<?php } ?>
 		],
 		render: {

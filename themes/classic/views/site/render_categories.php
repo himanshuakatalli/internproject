@@ -10,7 +10,7 @@ foreach($categories as $category)
 		<div class='cat-row'>
 			<h2>#</h2>
 			<ul>
-				<a href='#'>
+				<a href='<?php echo Yii::app()->createUrl('/Product/index/',array('value'=>$product->id));?>'>
 					<li><?php echo $category->name?></li>
 				</a>
 			</ul>

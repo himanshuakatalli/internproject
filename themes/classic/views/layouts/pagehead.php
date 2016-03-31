@@ -438,9 +438,9 @@ $(document).ready(function() {
         closeAfterSelect: true,
         maxOptions:5,
         options: [
-            <?php $skills=Categories::model()->findAllByAttributes(array('status'=>1));
-                foreach($skills as $skill){?>
-                    {id: "skill_<?php echo $skill->name;?>", title: '<?php echo $skill->name;?>', category: 'Skill'},
+            <?php $categories=Categories::model()->findAllByAttributes(array('status'=>1));
+                foreach($categories as $category){?>
+                    {id: "<?php echo $category->name;?>", title: '<?php echo $category->name;?>', category: 'Skill'},
             <?php } ?>
         ],
         render: {
