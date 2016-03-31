@@ -278,49 +278,49 @@ public function actionVerifyerror()
 }
 public function actionLinkedin()
 {
-	$baseURL = 'http://localhost/internproject333/';
-	$callbackURL = 'http://localhost/internproject333/site/linkedin';
-	$linkedinApiKey = '75q7rn79icn4j7';
-	$linkedinApiSecret = 'rDMR36xMUMznAWV0';
-	$linkedinScope = 'r_basicprofile r_emailaddress';
+        $baseURL = 'http://localhost/internproject333/';
+        $callbackURL = 'http://localhost/internproject333/site/linkedin';
+        $linkedinApiKey = '75q7rn79icn4j7';
+        $linkedinApiSecret = 'rDMR36xMUMznAWV0';
+        $linkedinScope = 'r_basicprofile r_emailaddress';
 
-	if (isset($_GET["oauth_problem"]) && $_GET["oauth_problem"] <> "") {
-// in case if user cancel the login. redirect back to home page.
-		Yii::app()->user->setState('err_msg',$_GET["oauth_problem"]);
-		$this->redirect('index');
-		exit;
-	}
+        if (isset($_GET["oauth_problem"]) && $_GET["oauth_problem"] <> "") {
+          // in case if user cancel the login. redirect back to home page.
+          Yii::app()->user->setState('err_msg',$_GET["oauth_problem"]);
+          $this->redirect('index');
+          exit;
+        }
 
-	$client = new oauth_client_class;
-	$client->debug = false;
-	$client->debug_http = true;
-	$client->redirect_uri = $callbackURL;
-	$client->client_id = $linkedinApiKey;
-	$client->client_secret = $linkedinApiSecret;
-	$client->scope = $linkedinScope;
-	if (($success = $client->Initialize())) {
-		if (($success = $client->Process())) {
-			if (strlen($client->authorization_error)) {
-				$client->error = $client->authorization_error;
-				$success = false;
-			} elseif (strlen($client->access_token)) {
-				$success = $client->CallAPI(
-					'http://api.linkedin.com/v1/people/~:(id,email-address,first-name,last-name,location,picture-url,public-profile-url,formatted-name)',
-					'GET', array(
-						'format'=>'json'
-						), array('FailOnAccessError'=>true), $user);
-			}
-		}
-		$success = $client->Finalize($success);
-	}
-	if ($client->exit) exit;
-	if ($success) {
-		$this->linked_in_user($user);
-	} else {
-		Yii::app()->user->setState('err_msg',$client->error);
-	}
-	$this->redirect('index');
-	exit;
+        $client = new oauth_client_class;
+        $client->debug = false;
+        $client->debug_http = true;
+        $client->redirect_uri = $callbackURL;
+        $client->client_id = $linkedinApiKey;
+        $client->client_secret = $linkedinApiSecret;
+        $client->scope = $linkedinScope;
+        if (($success = $client->Initialize())) {
+          if (($success = $client->Process())) {
+            if (strlen($client->authorization_error)) {
+              $client->error = $client->authorization_error;
+              $success = false;
+            } elseif (strlen($client->access_token)) {
+              $success = $client->CallAPI(
+                            'http://api.linkedin.com/v1/people/~:(id,email-address,first-name,last-name,location,picture-url,public-profile-url,formatted-name)',
+                            'GET', array(
+                                'format'=>'json'
+                            ), array('FailOnAccessError'=>true), $user);
+            }
+          }
+          $success = $client->Finalize($success);
+        }
+        if ($client->exit) exit;
+        if ($success) {
+               $this->linked_in_user($user);
+        } else {
+             Yii::app()->user->setState('err_msg',$client->error);
+        }
+        $this->redirect('index');
+        exit;
 }
 
 public function linked_in_user($userdata)
@@ -340,6 +340,7 @@ public function linked_in_user($userdata)
 	$user->oauth_uid=$userdata->id;
 	$user->password=$userdata->id;
 	$user->role_id="2";
+    $user->profile_img=$userdata->pictureUrl;
 	$user->is_verified="1";
 	$user->modify_date=date("Y-m-d h:i:sa");
 	$user->in_profile_url=$userdata->publicProfileUrl;
@@ -349,6 +350,7 @@ public function linked_in_user($userdata)
 	$model->username=$userdata->emailAddress;
 	$model->password=$userdata->id;
 	if($model->validate() && $model->login()){
+
 		$this->redirect(Yii::app()->createUrl(Yii::app()->user->role));
 	} else {
 		$this->redirect(Yii::app()->createUrl('site/index'));
