@@ -416,7 +416,7 @@ $(document).ready(function(){
 		select12 = searchSel[0].selectize;
 		select12.setValue(data);
 	});
-	$('.selectize-input').find('input').css('width','412');
+	$('.selectize-input').find('input').css('width','420');
 	/*$('.find-outr').click(function(){
 		$('.search-cont').animo({
 			animation: "fadeOutLeft",
