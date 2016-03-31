@@ -1,4 +1,4 @@
-
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
   <style>
       body
       {
@@ -36,7 +36,7 @@
     <?php $this->renderPartial('_products',array('products'=>$products)); ?>
     </div>
     <div class="col-sm-4  col-md-3 col-md-offset-1">
-          <div class="well">
+          <div class="well w3-card-12 ">
               <h3  style="margin-top:0px" class="text-center"><b>Filter Result </b></h3>
               <br>
               <br>
