@@ -34,7 +34,7 @@
                           
                       <p class="small">
                                 <?php echo $product->description ?>
-                                <a href="#">View Profile</a>
+                                <a href="<?php echo Yii::app()->createUrl('/productProfile/index/'.$product->id.'')?>">View Profile</a>
                       </p>
                   </div>
               </div>
