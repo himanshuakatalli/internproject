@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
   <style>
       body
@@ -22,14 +13,11 @@
       {
         min-height: 100px;
         background:
-                url(<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/Loader.gif'?>)               
+                url(<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/Loader.gif'?>)
                 no-repeat center;
                 z-index:99;
-
       }
   </style>
-
-</head>
 <body>
 <div class="container">
     <div class="text-center">
@@ -41,9 +29,9 @@
                     Use VenturePact to find the best <b><?php echo $categoryInfo->name ?></b> software for your business.
                 </small>
             </h2>
-            <hr>              
+            <hr>
     </div>
-    
+
     <div class = "col-sm-8 col-md-8 " id="productList">
     <?php $this->renderPartial('_products',array('products'=>$products)); ?>
     </div>
@@ -75,7 +63,7 @@
                                     <label><input type="radio" name="nuser" value="500-999">500-999</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="nuser" value="1000-1000000000">1000+</label> 
+                                    <label><input type="radio" name="nuser" value="1000-1000000000">1000+</label>
                                 </div>
                                <br>
                                <br>
@@ -83,7 +71,7 @@
                                <b>Deployment</b>
                                <?php foreach ($deployment as $deploy) {    ?>
                                <div class="checkbox">
-                                     <label><input type="checkbox" name = "deploy[]" 
+                                     <label><input type="checkbox" name = "deploy[]"
                                         value= <?php echo '"'.$deploy->id.'"' ?>>
                                         <?php echo $deploy->name ?>
                                      </label>
@@ -99,7 +87,7 @@
                                <b>Features</b>
                                <?php foreach ($features as $feature) {    ?>
                                  <div class="checkbox">
-                                       <label><input type="checkbox" name="features[]" 
+                                       <label><input type="checkbox" name="features[]"
                                           value=<?php echo '"'.$feature->id.'"' ?> >
                                            <?php echo $feature->name ?>
                                        </label>
@@ -108,7 +96,7 @@
 
                                <br>
                                <br>
-                              
+
 
                        </div>
                        <button id="filterButton" type="button" onclick="Reset()" class="btn btn-primary">Reset</button>
@@ -121,23 +109,38 @@
 
 
 <script type="text/javascript">
-var xhr;   //xmlhttpRequest object
-//reseting form values
+$(document).ready(function(){
 
 
-function Reset()
-{    
-  $('#filter_form input').removeAttr('checked').removeAttr('selected');  
-  $("#productList").empty();
-  callingAjax(); 
-}
+ //setting up loader
+  $body = $("#productList");
 
-function callingAjax()
+  $(document).on({
+      ajaxStart: function() { $body.addClass("loader");   },
+      ajaxStop: function() { $body.removeClass("loader"); }
+  });
+  //reseting form values
+  function Reseting()
+  {
+    $('#filter_form input').removeAttr('checked').removeAttr('selected');
+    $("#productList").empty();
+    callingAjax();
+  }
+
+  var xhr;   //xmlhttpRequest object
+   $('#filter_form input').change(function(){
+    $("#productList").empty();
+    callingAjax();
+
+   });
+
+
+  function callingAjax()
   {
     var data=$("#filter_form").serialize();
     window.scrollTo(0,0);
-    
-    
+
+
     if(xhr && xhr.readyState != 4){
             xhr.abort();
         }
@@ -146,7 +149,6 @@ function callingAjax()
                    url: '<?php echo Yii::app()->createAbsoluteUrl("product/filter/$categoryInfo->id"); ?>',
                    data:data,
                    success:function(response){
-                              
                               var data = $.parseJSON(response);
                               if(data.success==1){
                                   $('#productList').html(data.content);
@@ -156,42 +158,10 @@ function callingAjax()
                         /* alert("Error occured.please try again");
                          alert(data);*/
                    },
-                 
+
                   dataType:'html'
       });
 
   }
-
-$(document).ready(function(){
-  
-     
- //setting up loader     
-  $body = $("#productList");
-
-  $(document).on({
-      ajaxStart: function() { $body.addClass("loader");   },
-      ajaxStop: function() { $body.removeClass("loader"); }    
-  });
-
-
-  
-
-  
-   $('#filter_form input').change(function(){
-    $("#productList").empty();
-    callingAjax();
-
-   });
-
-
-  
-
-
 });
-
-
-
 </script>
-
-</body>
-</html>
