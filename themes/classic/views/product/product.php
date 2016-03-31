@@ -99,7 +99,7 @@
 
 
                        </div>
-                       <button id="filterButton" type="button" onclick="Reset()" class="btn btn-primary">Reset</button>
+                       <button id="filterButton" type="button" class="btn btn-primary">Reset</button>
                </form>
       </div>
     </div>
@@ -120,12 +120,12 @@ $(document).ready(function(){
       ajaxStop: function() { $body.removeClass("loader"); }
   });
   //reseting form values
-  function Reseting()
-  {
-    $('#filter_form input').removeAttr('checked').removeAttr('selected');
-    $("#productList").empty();
-    callingAjax();
-  }
+  $("#filterButton").click(function(){
+     $('#filter_form input').removeAttr('checked').removeAttr('selected');
+     $("#productList").empty();
+     callingAjax();
+  });
+  
 
   var xhr;   //xmlhttpRequest object
    $('#filter_form input').change(function(){
