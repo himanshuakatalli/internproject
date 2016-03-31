@@ -88,11 +88,11 @@
 							<li><a href="javascript:void(0);" class="callTag" data-name="Construction Management">
 							Construction</a></li>
 							<li>,</li>
-							<li><a href="javascript:void(0);" class="callTag" data-name="Maintainance Management">
-							Maintainance</a></li>
-							<li>,</li>
 							<li><a href="javascript:void(0);" class="callTag" data-name="Medical Billing">
 							Medical Billing</a></li>
+							<li>,</li>
+							<li><a href="javascript:void(0);" class="callTag" data-name="Maintenance Management">
+							Maintenance</a></li>
 						</ul>
 					</div>
 				</div>
