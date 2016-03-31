@@ -20,10 +20,12 @@
       }
       .loader
       {
+        min-height: 100px;
         background:
-                url(<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/loader.gif'?>) 
-                
-                no-repeat;
+                url(<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/loader.gif'?>)               
+                no-repeat center;
+                z-index:99;
+
       }
   </style>
 
@@ -73,7 +75,7 @@
                                     <label><input type="radio" name="nuser" value="500-999">500-999</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="nuser" value="1000-100000000">1000+</label> 
+                                    <label><input type="radio" name="nuser" value="1000-1000000000">1000+</label> 
                                 </div>
                                <br>
                                <br>
@@ -125,11 +127,11 @@ $(document).ready(function(){
   
      
  //setting up loader     
-$body = $("productList");
+$body = $("#productList");
 
 $(document).on({
-    ajaxStart: function() { $body.addClass("loading");    },
-     ajaxStop: function() { $body.removeClass("loading"); }    
+    ajaxStart: function() { $body.addClass("loader");    },
+     ajaxStop: function() { $body.removeClass("loader"); }    
 });
 
 
@@ -141,8 +143,7 @@ $(document).on({
 
   var xhr;   //xmlhttpRequest object
   $('#filter_form input').change(function(){
-
-    
+    $("#productList").empty();
     callingAjax();
 
   });
