@@ -207,7 +207,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                 <li>.</li>
                 <li><a href="<?php echo Yii::app()->createUrl('/site/faq');?>">FAQs</a></li>
                 <li>.</li>
-                <li><a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>">Reviews</a></li>
+                <li><a href="<?php echo Yii::app()->createUrl('/site/categories');?>">Reviews</a></li>
                 <li>.</li>
                 <li><a href="<?php echo Yii::app()->createUrl('/site/partner');?>">For Developers</a></li>
                 <li>.</li>
@@ -290,7 +290,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                                 <li><a href="<?php echo Yii::app()->createUrl('/site/referral');?>" class="blue-new">Referral</a></li>
                                 <li><a href="http://blog.venturepact.com/" target="_blank" class="blue-new">Blog</a></li>
                                 <li><a href="<?php echo Yii::app()->createUrl('/site/press');?>" class="blue-new">Press</a></li>
-                                <li><a href="<?php echo Yii::app()->createUrl('/site/testimonials');?>" class="blue-new">Reviews</a></li>
+                                <li><a href="<?php echo Yii::app()->createUrl('/site/categories');?>" class="blue-new">Reviews</a></li>
                                 <li><a href="<?php echo Yii::app()->createUrl('/site/partner');?>" class="blue-new">For Developers</a></li>
                                 <li><a href="<?php echo Yii::app()->createUrl('/site/affiliate');?>" class="blue-new">For Affiliates</a></li>
                             </ul>
