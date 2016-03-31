@@ -17,13 +17,13 @@
 					<div id="postproject-mob" class="sr-web"><a href="<?php echo CController::createUrl('/site/project');?>" class="top-postproject">Post Your Project </a></div>
 					<?php
 					if(Yii::app()->user->isGuest)
-						echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/site'),array('class'=>'navbar-brand rs-hide'));
+						echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/'),array('class'=>'navbar-brand rs-hide'));
 					else
 						echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand rs-hide'));
 					?>
 					<?php
 					if(Yii::app()->user->isGuest)
-						echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/site'),array('class'=>'navbar-brand'));
+						echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/'),array('class'=>'navbar-brand'));
 					else
 						echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand'));
 					?>
