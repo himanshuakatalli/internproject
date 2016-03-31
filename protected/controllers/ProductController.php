@@ -8,7 +8,7 @@ class ProductController extends Controller
 	   {
 
 
-      $catName = explode('_',$_GET["value"])[1];  // taking category name from querystring
+      $catName = $_GET["value"];  // taking category name from querystring
       $categoryInfo = Categories::model()->findByAttributes(array('name'=>$catName));    //for getting category Info
 
       $deployment = DeploymentFeatures::model()->findAll();  // for finding all deployment features 
