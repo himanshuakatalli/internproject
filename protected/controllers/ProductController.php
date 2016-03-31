@@ -4,45 +4,46 @@ class ProductController extends Controller
 {
 	public function actionIndex()
 	{
-		   if(isset($_GET["value"]))
-		   {
+	   if(isset($_GET["value"]))
+	   {
 
 
-        $catName = explode('_',$_GET["value"])[1];  // taking category name from querystring
-        $categoryInfo = Categories::model()->findByAttributes(array('name'=>$catName));    //for getting category Info
+      $catName = explode('_',$_GET["value"])[1];  // taking category name from querystring
+      $categoryInfo = Categories::model()->findByAttributes(array('name'=>$catName));    //for getting category Info
 
-        $deployment = DeploymentFeatures::model()->findAll();  // for finding all deployment features 
+      $deployment = DeploymentFeatures::model()->findAll();  // for finding all deployment features 
 
-        $criteria=new CDbCriteria;                             //for finding products related to that category
-				$criteria->with = array('categories');
-				$criteria->addCondition('category_id= '.$categoryInfo->id);
-				$products = Product::model()->findAll($criteria);  
+      $criteria=new CDbCriteria;                             //for finding products related to that category
+			$criteria->with = array('categories');
+			$criteria->addCondition('category_id= '.$categoryInfo->id);
+			$products = Product::model()->findAll($criteria);  
 
-				$criteria2=new CDbCriteria;                          // for finding features related to that category
-				$criteria2->with = array('categories');
-				$criteria2->addCondition('category_id= '.$categoryInfo->id);
-				$features = Features::model()->findALL($criteria2);
+			$criteria2=new CDbCriteria;                          // for finding features related to that category
+			$criteria2->with = array('categories');
+			$criteria2->addCondition('category_id= '.$categoryInfo->id);
+			$features = Features::model()->findALL($criteria2);
 
-		   	//CVarDumper::dump($features,10,1);die;
-		   	$this->render('product',array('products'=>$products,
-				'features'=>$features,'categoryInfo'=>$categoryInfo,
-				'deployment'=>$deployment));
-          
+	   	//CVarDumper::dump($features,10,1);die;
+	   	$this->render('product',array('products'=>$products,
+			'features'=>$features,'categoryInfo'=>$categoryInfo,
+			'deployment'=>$deployment));
+        
 
-       
+     
 
-		   }
+	   }
       
 	}
 
 
 public function actionFilter($id)
 {
+	  sleep(2);
 		//CVarDumper::dump( $id,10,1);die;
 		$criteria=new CDbCriteria;                             //for finding products related to that category
-		$criteria->with = array('categories');
+		$criteria->with = array('categories','features');
 		$criteria->addCondition('category_id= '.$id);     
-		                           //adding conditions according to post request
+		//adding conditions according to post request
 		if(isset($_POST['deploy']))
 		{
 			$criteria->addInCondition('deployment_feature_id',$_POST['deploy']);
@@ -55,11 +56,10 @@ public function actionFilter($id)
 		{
 			$parts = explode('-', $_POST['nuser']);
 			$criteria->addCondition('customer_count >= '.$parts[0] . ' and customer_count <= '.$parts[1]);
-
 		}
+    
 
 		$products = Product::model()->findAll($criteria);  
-
 		$content = $this->renderPartial('_products',array('products'=>$products),true);
 
 		die(json_encode(array('content'=>$content,'success'=>1)));

@@ -13,10 +13,18 @@
       {
         background-color: #e9eaed;
       }
-     .well{
-             background-color: #ffffff;
-              opacity: 0.85;
-          }
+     .well
+      {
+        background-color: #ffffff;
+        opacity: 0.85;
+      }
+      .loader
+      {
+        background:
+                url(<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/loader.gif'?>) 
+                
+                no-repeat;
+      }
   </style>
 
 </head>
@@ -34,7 +42,7 @@
             <hr>              
     </div>
     
-    <div class = "col-sm-8 col-md-8" id="productList">
+    <div class = "col-sm-8 col-md-8 " id="productList">
     <?php $this->renderPartial('_products',array('products'=>$products)); ?>
     </div>
     <div class="col-sm-4  col-md-3 col-md-offset-1">
@@ -101,7 +109,7 @@
                               
 
                        </div>
-                       <button id="filterButton" type="button" onclick="send();" class="btn btn-primary">Reset</button>
+                       <button id="filterButton" type="button" onclick="Reseting();" class="btn btn-primary">Reset</button>
                </form>
       </div>
 
@@ -114,22 +122,34 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-  var xhr;
+  
      
+ //setting up loader     
+$body = $("productList");
+
+$(document).on({
+    ajaxStart: function() { $body.addClass("loading");    },
+     ajaxStop: function() { $body.removeClass("loading"); }    
+});
 
 
-
-
-  function send()
-  {
-     
-    $('#filter_form input').removeAttr('checked').removeAttr('selected');
-   
+  //reseting form values
+  function Reseting()
+  {    
+    $('#filter_form input').removeAttr('checked').removeAttr('selected');   
   }
 
-
+  var xhr;   //xmlhttpRequest object
   $('#filter_form input').change(function(){
 
+    
+    callingAjax();
+
+  });
+
+
+  function callingAjax()
+  {
     var data=$("#filter_form").serialize();
     window.scrollTo(0,0);
     
@@ -142,23 +162,21 @@ $(document).ready(function(){
                    url: '<?php echo Yii::app()->createAbsoluteUrl("product/filter/$categoryInfo->id"); ?>',
                    data:data,
                    success:function(response){
-                                
+                              
                               var data = $.parseJSON(response);
-                               if(data.success==1){
+                              if(data.success==1){
                                   $('#productList').html(data.content);
                                }
                    },
                    error: function(data) { // if error occured
-                         alert("Error occured.please try again");
-                         alert(data);
+                        /* alert("Error occured.please try again");
+                         alert(data);*/
                    },
                  
                   dataType:'html'
       });
 
-   
-
-  });
+  }
 
 
 });
