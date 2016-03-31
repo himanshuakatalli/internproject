@@ -348,10 +348,6 @@
 	}
 </style>
 <script>
-$(function(){
-
-	alert("Welcome");
-})
 $(document).ready(function(){
 	$('#searchFormSite').trigger("reset");
 	$('#searchFormTop').trigger("reset");
