@@ -13,19 +13,9 @@
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-reorder light-grey"></i>
 					</button>
-					<div id="search-icon-mob" class="sr-web"><a href="javascript:void(0);"><i class="fa fa-search fs14 light-grey"></i></a></div>
-					<div id="postproject-mob" class="sr-web"><a href="<?php echo CController::createUrl('/site/project');?>" class="top-postproject">Post Your Project </a></div>
 					<?php
-					if(Yii::app()->user->isGuest)
 						echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/'),array('class'=>'navbar-brand rs-hide'));
-					else
-						echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand rs-hide'));
-					?>
-					<?php
-					if(Yii::app()->user->isGuest)
 						echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/'),array('class'=>'navbar-brand'));
-					else
-						echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand'));
 					?>
 				</div>
 				<div id="navbarCollapse" class="collapse navbar-collapse">
@@ -35,6 +25,9 @@
 						</li>
 						<li>
 							<a href="<?php echo Yii::app()->createUrl('/site/Categories');?>"><i class="fa fa-list"></i> &nbsp; Software Catagories</a>
+						</li>
+						<li>
+							<a class="boxlink" href="<?php echo Yii::app()->createUrl('/Product/Productreg');?>"><i class="fa fa-plus"></i> &nbsp; Add Product</a>
 						</li>
 						<li>
 							<a href="javascript:void(0);" class="menu-icon"><i class="fa fa-reorder mr5"></i></a>
@@ -53,7 +46,9 @@
 								<select id="topsearch" name="value" multiple class="demo-default"  placeholder="What type of software are you looking for?"></select>
 							</form>
 						</div>
-						<a href="javascript:void(0);" class="search-close">X</a>
+						<a href="javascript:void(0);" class="search-close">
+							<i class="fa fa-close"></i>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -162,10 +157,10 @@
 <section class="section4">
 	<div class="container text-center">
 		<div class="col-md-2 mt35 mb35 rs-mb10 rs-mb0 ">
-			<img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/homeReferal.png"/>
+			<img src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/homeReferal.png"/>
 		</div>
 		<div class="col-md-7 earn-heading">Know anyone who can use our help?<span class="gift-rating">Gift them $500 Today!</span> </div>
-		<a href="<?php echo CController::createUrl('/site/referral');?>" class="referral-link">Refer Now</a>
+		<a href="<?php //echo CController::createUrl('/site/referral');?>" class="referral-link">Refer Now</a>
 	</div>
 </section>-->
 <section class="section5">
@@ -448,30 +443,6 @@ $(document).ready(function(){
 			$('#navbar').removeClass('navbar-custom');
 		}
 	});
-
-	$(window).scroll(function(){
-		if($(this).width() < 768) {
-			if ($(this).scrollTop() > 100) {
-				$('#navbar').addClass('navbar-custom');
-			} else  {
-				$('#navbar').removeClass('navbar-custom');
-			}
-		}
-	});
-	$('#search-icon-mob a').click(function(){
-		$('#navbar').animo({
-			animation: "fadeOutRight",
-			duration: 0.3,
-			keep: true
-		}, function(){
-			$('#navbar').hide();
-			$('.navbarsearch').show().animo({
-				animation: "fadeInLeft",
-				duration: 0.3,
-				keep: true
-			});
-		});
-	});
 	$('#search-icon a').click(function(){
 		$('#navbar').animo({
 			animation: "fadeOutRight",
@@ -495,46 +466,6 @@ $(document).ready(function(){
 			$('.navbarsearch').hide();
 			$('#navbar').show().animo({
 				animation: "fadeInRight",
-				duration: 0.3,
-				keep: true
-			});
-		});
-	});
-	//show more
-	$('#readwhat').click(function(){
-		$(this).animo({
-			animation: "fadeOutUp",
-			duration: 0.3,
-			keep: true
-		}, function(){
-			$('#readwhat').hide();
-			$('.team-hide').show().animo({
-				animation: "fadeInDown",
-				duration: 0.3,
-				keep: true
-			});
-			$('#lesswhat').show().animo({
-				animation: "fadeInDown",
-				duration: 0.3,
-				keep: true
-			});
-		});
-	});
-	$('#lesswhat').click(function(){
-		$(this).animo({
-			animation: "fadeOutUp",
-			duration: 0.3,
-			keep: true
-		}, function(){
-			$('#lesswhat').hide();
-			$('.team-hide').show().animo({
-				animation: "fadeOutUp",
-				duration: 0.3,
-				keep: true
-			});
-			$('.team-hide').hide();
-			$('#readwhat').show().animo({
-				animation: "fadeInUp",
 				duration: 0.3,
 				keep: true
 			});
