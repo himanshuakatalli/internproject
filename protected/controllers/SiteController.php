@@ -241,7 +241,7 @@ public function actionNewpassword()
 }
 public function actionReset()
 {
-	$this->layout="pagehead";
+	//$this->layout="pagehead";
 	$reset=new Reset;
 	$username=$_GET['username'];
 	if(isset($_POST['Reset']))
