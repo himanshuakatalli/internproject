@@ -33,6 +33,14 @@ public function actions()
 public function actionIndex()
 {
 	$this->layout="newPublic";
+		if(!(Yii::app()->request->cookies['cookie']))
+		{
+			$value = Yii::app()->request->userHostAddress;
+			$cookie = new CHttpCookie('cookie', $value);
+			$cookie->expire = time()+60*60*24*365; 
+			Yii::app()->request->cookies['cookie'] = $cookie;
+			Yii::app()->user->setState('cookie',$cookie);
+		}
 	$this->render('newIndex');
 }
 
