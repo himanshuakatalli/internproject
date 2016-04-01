@@ -7,7 +7,7 @@
      .well
       {
         background-color: #ffffff;
-        opacity: 0.85;
+        
       }
       .loader
       {
@@ -16,6 +16,11 @@
                 url(<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/Loader.gif'?>)
                 no-repeat center;
                 z-index:99;
+      }
+      .lnk{
+        text-decoration: underline;
+        color: #00f;
+        font-size: 11px;
       }
   </style>
 <body>

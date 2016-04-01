@@ -75,13 +75,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                     <div id="search-icon-mob" class="sr-web"><a href="javascript:void(0);"><i class="fa fa-search fs14 light-grey"></i></a></div>
                     <?php
                     if(Yii::app()->user->isGuest)
-                        echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/site'),array('class'=>'navbar-brand rs-hide'));
+                        echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/'),array('class'=>'navbar-brand rs-hide'));
                     else
                         echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand rs-hide'));
                     ?>
                     <?php
                     if(Yii::app()->user->isGuest)
-                        echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/site'),array('class'=>'navbar-brand'));
+                        echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/'),array('class'=>'navbar-brand'));
                     else
                         echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand'));
                     ?>
@@ -597,41 +597,6 @@ $(document).ready(function() {
     <?php } ?>
 });
 </script>
-<script type="application/ld+json">
-{ "@context" : "http://schema.org",
-  "@type" : "Organization",
-  "name" : "VenturePact",
-  "url" : "http://venturepact.com",
-  "sameAs" : [ "https://twitter.com/VenturePact","https://www.facebook.com/VenturePact","https://www.linkedin.com/company/venturepact","https://plus.google.com/+Venturepact/about"]
-}
-</script>
-<?php Yii::app()->clientScript->registerScript('myHideEffect','$(".alertMessage").animate({opacity: 1.0}, 10000).fadeOut("slow");$(".tt-hint").remove();',CClientScript::POS_READY);?>
-<div class="hide">
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5QGDHR"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5QGDHR');</script>
-<!-- End Google Tag Manager -->
-</div>
-<script>
-  window.intercomSettings = {
-    app_id: "<?php echo Yii::app()->params['intercom_id']; ?>"
-  };
-</script>
-<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/<?php echo Yii::app()->params['intercom_id']; ?>';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
-<!-- Begin Inspectlet Embed Code -->
-<script type="text/javascript" id="inspectletjs">
-window.__insp = window.__insp || [];
-__insp.push(['wid', 1742104303]);
-(function() {
-function ldinsp(){if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
-setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
-})();
-</script>
-<!-- End Inspectlet Embed Code -->
+
 </body>
 </html>
