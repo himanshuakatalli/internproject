@@ -22,7 +22,11 @@ class ProductController extends Controller
 			$this->render('product',array('products'=>$products,
 			'features'=>$features,'categoryInfo'=>$categoryInfo,
 			'deployment'=>$deployment));
-		}
+
+
+	   	$entry_time = new CDbExpression('NOW()');
+	   	Yii::app()->user->setState('entry_date',$entry_time);
+	  }
 	}
 
 
@@ -70,7 +74,10 @@ class ProductController extends Controller
 
 	public function actionProductRegister()
 	{
-		$this->render('productreg');
+		$user=new Users;
+		$product= new Product;
+		$category=new Categories;
+		$this->render('productreg',array('users'=>$user,'product'=>$product,'category'=>$category));
 	}
 
 	public function actionProductProfile($id)
@@ -161,8 +168,8 @@ class ProductController extends Controller
 			echo json_encode($response);
 			die;
 		}
-		else 
-		{	
+		else
+		{
 			$m=Yii::app()->getSecurityManager()->generateRandomString(6);
 			$user = new Users;
 			$user->attributes = $_POST['Users'];

@@ -214,9 +214,10 @@ hr {
 }
 
 ul.top-menu > li > .logout {
-	color: #f2f2f2;
+	color: #fff;
 	font-size: 12px;
 	border-radius: 4px;
+    font-weight: 600;
 	-webkit-border-radius: 4px;
 	border: 1px solid #64c3c2 !important;
 	padding: 5px 15px;
@@ -234,7 +235,7 @@ ul.top-menu > li > .logout {
     position: fixed;
     background: #424a5d;
 
-    transition: all 0.2s ease-in;
+    transition: all 0.3s ease-in;
 }
 
 #sidebar h5 {
@@ -325,9 +326,7 @@ ul.sidebar-menu li ul.sub li a:hover {
 	color: white;
 	background: transparent;
 }
-
 ul.sidebar-menu li ul.sub li.active a {
-    color: #68dff0;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -366,6 +365,10 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
+    color: #fff;
+}
+
+ul.sidebar-menu > li > a.active, ul.sidebar-menu > li > a:hover, ul.sidebar-menu > li > a:focus {
     background: #68dff0;
     color: #fff;
     display: block;
@@ -378,16 +381,16 @@ ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:fo
 }
 
 
-ul.sidebar-menu li a i {
+ul.sidebar-menu > li a i {
     font-size: 15px;
     padding-right: 6px;
 }
 
-ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i {
+ul.sidebar-menu > li a:hover i, ul.sidebar-menu li a:focus i {
     color: #fff;
 }
 
-ul.sidebar-menu li a.active i {
+ul.sidebar-menu  > li a.active i {
     color: #fff;
 }
 
@@ -400,6 +403,7 @@ ul.sidebar-menu li a.active i {
 /* MAIN CONTENT CONFIGURATION */
 #main-content {
     margin-left: 210px;
+    transition: all 0.3s ease-in;
 }
 
 .header, .footer {
@@ -427,6 +431,7 @@ ul.sidebar-menu li a.active i {
     padding-bottom: 15px;
     padding-top: 0px;
     width: 100%;
+    transition: all 0.4s ease-in;
 }
 
 a.logo {
@@ -845,6 +850,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     text-align: center;
     transition: all 0.3s ease-in;
 	border-bottom: 1px solid #989898;
+    transition: all 0.3s ease-in;
 }
 
 .box1 span {
@@ -863,7 +869,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .box0:hover .box1 {
-	/*border-bottom: 1px solid #ffffff;*/
+	border-bottom: 1px solid #ffffff;
 }
 
 .box0 p {
@@ -879,11 +885,13 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
 .box0:hover {
 	background: #ffffff;
-	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* MAIN CHART CONFIGURATION */
 .main-chart {
+    width: 90%;
+    margin: 0 auto;
 	padding-top: 20px;
 }
 
@@ -997,13 +1005,15 @@ PANELS CONFIGURATIONS
 /*Panel Size*/
 
 .pn {
+    cursor: pointer;
 	height: 250px;
-	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 .pn:hover {
-	box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);
-
+    border: 1px solid #7ececa;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2), 0 0 10px rgba(0,0,0,0.15);
 }
 
 /*Grey Panel*/
@@ -1100,10 +1110,17 @@ PANELS CONFIGURATIONS
 	margin-left: 15px;
 }
 .white-panel .white-header {
-	background: #f4f4f4;
 	padding: 3px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    background: #f4f4f4;
 	margin-bottom: 15px;
-	color: #c6c6c6;
+	color: rgba(0,0,0,0.4);
+}
+.dark {
+    color: rgba(0,0,0,0.4);
+}
+.vpOrange {
+    color: #f07762 !important;
 }
 .white-panel .small {
 	font-size: 10px;
@@ -1111,7 +1128,7 @@ PANELS CONFIGURATIONS
 }
 
 .white-panel i {
-	color: #68dff0;
+	color: #f07762;
 	padding-right: 4px;
 	font-size: 14px;
 }
