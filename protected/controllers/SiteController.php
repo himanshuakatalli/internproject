@@ -323,7 +323,7 @@ public function actionLinkedin()
         }
         if ($client->exit) exit;
         if ($success) {
-//CVarDumper::dump($user,10,1); die;
+CVarDumper::dump($user,10,1); die;
                $this->linked_in_user($user);
         } else {
              Yii::app()->user->setState('err_msg',$client->error);
