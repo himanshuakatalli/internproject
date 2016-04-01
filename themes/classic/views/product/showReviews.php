@@ -139,7 +139,7 @@ else
 									<?php echo $numberOfReviews, " ", $reviewNumber?></a>
 								</div>
 								<div class="col-md-6 pd12">
-									<a href="<?php echo Yii::app()->createUrl('/reviewInput/index/',array('id'=>$product->id));?>">
+									<a href="<?php echo Yii::app()->createUrl('/product/ProductReview/',array('id'=>$product->id));?>">
 										Review This Product 
 									</a>
 								</div>
