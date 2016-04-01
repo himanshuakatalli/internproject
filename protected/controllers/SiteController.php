@@ -33,6 +33,14 @@ public function actions()
 public function actionIndex()
 {
 	$this->layout="newPublic";
+		if(!(Yii::app()->request->cookies['cookie']))
+		{
+			$value = Yii::app()->request->userHostAddress;
+			$cookie = new CHttpCookie('cookie', $value);
+			$cookie->expire = time()+60*60*24*365; 
+			Yii::app()->request->cookies['cookie'] = $cookie;
+			Yii::app()->user->setState('cookie',$cookie);
+		}
 	$this->render('newIndex');
 }
 
@@ -315,7 +323,7 @@ public function actionLinkedin()
         }
         if ($client->exit) exit;
         if ($success) {
-//CVarDumper::dump($user,10,1); die;
+CVarDumper::dump($user,10,1); die;
                $this->linked_in_user($user);
         } else {
              Yii::app()->user->setState('err_msg',$client->error);
