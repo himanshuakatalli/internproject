@@ -27,7 +27,7 @@
 							<a href="<?php echo Yii::app()->createUrl('/site/Categories');?>"><i class="fa fa-list"></i> &nbsp; Software Catagories</a>
 						</li>
 						<li>
-							<a class="boxlink" href="<?php echo Yii::app()->createUrl('/Product/Productreg');?>"><i class="fa fa-plus"></i> &nbsp; Add Product</a>
+							<a class="boxlink" href="<?php echo Yii::app()->createUrl('/Product/Productregister');?>"><i class="fa fa-plus"></i> &nbsp; Add Product</a>
 						</li>
 						<li>
 							<a href="javascript:void(0);" class="menu-icon"><i class="fa fa-reorder mr5"></i></a>
