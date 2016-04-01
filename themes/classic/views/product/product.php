@@ -17,6 +17,11 @@
                 no-repeat center;
                 z-index:99;
       }
+      .lnk{
+        text-decoration: underline;
+        color: #00f;
+        font-size: 11px;
+      }
   </style>
 <body>
 <div class="container">
