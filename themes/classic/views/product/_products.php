@@ -27,7 +27,7 @@
 
                       <p class="small">
                                 <?php echo $product->description ?>
-                                <a class="lnk" href="<?php echo Yii::app()->createUrl('/productProfile/index/',array('id'=>$product->id))?>">View Profile</a>
+                                <a class="lnk" href="<?php echo Yii::app()->createUrl('/product/productprofile/',array('id'=>$product->id))?>">View Profile</a>
                       </p>
                   </div>
               </div>
