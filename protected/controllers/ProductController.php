@@ -74,10 +74,46 @@ class ProductController extends Controller
 
 	public function actionProductRegister()
 	{
-		$user=new Users;
-		$product= new Product;
-		$category=new Categories;
+		$user = new Users;
+		$product = new Product;
+		$category = new Categories;
 		$this->render('productreg',array('users'=>$user,'product'=>$product,'category'=>$category));
+	}
+
+	public function actionProductRegisterSave()
+	{
+		//print_r($_POST['Product']);
+		/*$email = $_POST['Users']['username'];
+		$user = Users::model()->findByAttributes(array('username'=>$email));
+
+		if($user)
+		{
+			$product = new Product;
+			$product->attributes = $_POST['Product'];
+			$product->status = 1;
+			$product->add_date = new CDbExpression('NOW()');
+			$product->user_id = $user->id;
+			$product->customer_count = 0;
+			$product->under_ppc = 0;
+			//$product->website = $_POST['Product']['']
+
+
+		}
+		else
+		{
+			$m=Yii::app()->getSecurityManager()->generateRandomString(6);
+			$user = new Users;
+			$user->attributes = $_POST['Users'];
+			$user->password = base64_encode($m);
+			$user->role_id = 2;
+			$user->is_verified = 0;
+			$user->add_date = new CDbExpression('NOW()');
+			if($user->save())
+			{
+				
+			}
+		}*/
+
 	}
 
 	public function actionProductProfile($id)
@@ -98,7 +134,6 @@ class ProductController extends Controller
 			}
 
 			$productFeatures = array();
-
 			foreach ($product->features as $productFeature)
 			{
 				array_push($productFeatures,$productFeature->name);
