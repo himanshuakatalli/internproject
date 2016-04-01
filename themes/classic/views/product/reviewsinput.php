@@ -124,7 +124,7 @@ if(validated)
 	console.log(data);
 	$.ajax({
 		type:'POST',
-		url:'<?php echo Yii::app()->createUrl("reviewInput/Ajax",array('id'=>$product->id)); ?>',
+		url:'<?php echo Yii::app()->createUrl("product/ProductReviewSave",array('id'=>$product->id)); ?>',
 		data:data,
 		success:function(data){
 			var response = $.parseJSON(data);
