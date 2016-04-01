@@ -22,7 +22,11 @@ class ProductController extends Controller
 			$this->render('product',array('products'=>$products,
 			'features'=>$features,'categoryInfo'=>$categoryInfo,
 			'deployment'=>$deployment));
-		}
+
+
+	   	$entry_time = new CDbExpression('NOW()');
+	   	Yii::app()->user->setState('entry_date',$entry_time);
+	  }
 	}
 
 
