@@ -76,7 +76,7 @@
       </ul>
       <ul class="logger-options">
         <li>
-          <a href="#">
+          <a href="<?php echo Yii::app()->createUrl('site/logout');?>">
             <i class="fa fa-sign-out"></i><span>Sign&nbspOut</span>
           </a>
         </li>
