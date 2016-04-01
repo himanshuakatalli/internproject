@@ -12,7 +12,7 @@
 <div class="container pro">
     <h1>Create a free listing on VenturePact</h1>
     <hr class="center-half">
-<?php $form=$this->beginWidget('CActiveForm', array('action'=>Yii::app()->createUrl('/site/login'),'id'=>"formProdReg",'enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"panel-default",'data-parsley-validate'=>'data-parsley-validate')));?>
+<?php $form=$this->beginWidget('CActiveForm', array('action'=>Yii::app()->createUrl('/product/ProductRegister'),'id'=>"formProdReg",'enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"panel-default",'data-parsley-validate'=>'data-parsley-validate')));?>
         <div class="col-md-12 col-xs-12">
     <!-- <form method="post" action="" id="formProdReg" data-parsley-validate="data-parsley-validate"> -->
 
@@ -125,7 +125,8 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <button class="waves-effect waves-light mybtn btn-large" type="submit">Create My Listing</button>
+                <!-- <button class="waves-effect waves-light mybtn btn-large" type="submit">Create My Listing</button> -->
+                <input type="submit" value="Create My Listing" id="add_product" class="waves-effect waves-light mybtn btn-large" data-id="add_product" onClick="product($(this));">
             </div>
         </div>
         </div>
@@ -134,3 +135,29 @@
     </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+function add_product(element){
+    var form="#"+element.attr('data-id');
+    if($(form).parsley().validate()){
+        element.attr('value','Please Wait ... ');
+        $.ajax({
+            type:'POST',
+            url:$(form).attr('action'),
+            data:$(form).serialize(),
+            success:function(data){
+                console.log(data);
+                var response = $.parseJSON(data);
+                if(response.success=='1'){
+                   // product successfully added and user is registerd
+
+                }
+                else{
+                    //something went wrong
+                }
+            }
+        });
+    }
+}
+</script>
