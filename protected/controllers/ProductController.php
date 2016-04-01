@@ -11,12 +11,12 @@ class ProductController extends Controller
       $catName = $_GET["value"];  // taking category name from querystring
       $categoryInfo = Categories::model()->findByAttributes(array('name'=>$catName));    //for getting category Info
 
-      $deployment = DeploymentFeatures::model()->findAll();  // for finding all deployment features 
+      $deployment = DeploymentFeatures::model()->findAll();  // for finding all deployment features
 
       $criteria=new CDbCriteria;                             //for finding products related to that category
 			$criteria->with = array('categories');
 			$criteria->addCondition('category_id= '.$categoryInfo->id);
-			$products = Product::model()->findAll($criteria);  
+			$products = Product::model()->findAll($criteria);
 
 			$criteria2=new CDbCriteria;                          // for finding features related to that category
 			$criteria2->with = array('categories');
@@ -27,12 +27,12 @@ class ProductController extends Controller
 	   	$this->render('product',array('products'=>$products,
 			'features'=>$features,'categoryInfo'=>$categoryInfo,
 			'deployment'=>$deployment));
-        
 
-     
+
+
 
 	   }
-      
+
 	}
 
 
@@ -42,7 +42,7 @@ public function actionFilter($id)
 		//CVarDumper::dump( $id,10,1);die;
 		$criteria=new CDbCriteria;                             //for finding products related to that category
 		$criteria->with = array('categories','features','deploymentFeatures');
-		$criteria->addCondition('category_id= '.$id);     
+		$criteria->addCondition('category_id= '.$id);
 		//adding conditions according to post request
 		if(isset($_POST['deploy']))
 		{
@@ -57,8 +57,8 @@ public function actionFilter($id)
 			$parts = explode('-', $_POST['nuser']);
 			$criteria->addCondition('customer_count >= '.$parts[0] . ' and customer_count <= '.$parts[1]);
 		}
-    
-		$products = Product::model()->findAll($criteria);  
+
+		$products = Product::model()->findAll($criteria);
 		$content = $this->renderPartial('_products',array('products'=>$products),true);
 		die(json_encode(array('content'=>$content,'success'=>1)));
 
@@ -69,18 +69,21 @@ public function actionFilter($id)
 	{
 		if(isset($_GET["key"]))
 		{
-			$criteria=new CDbCriteria;                            
+			$criteria=new CDbCriteria;
 			$criteria->with = array('productHasCategories');
-			$criteria->addCondition("name like '%".$_GET["key"]."%' or "."company_name like '%".$_GET["key"]."%' or "."description like '%".$_GET["key"]."%'" );    
+			$criteria->addCondition("name like '%".$_GET["key"]."%' or "."company_name like '%".$_GET["key"]."%' or "."description like '%".$_GET["key"]."%'" );
 
-			$products = Product::model()->findAll($criteria);  
+			$products = Product::model()->findAll($criteria);
 	    //CVarDumper::dump($products,10,1);die;
 			$this->render('search',array('products'=>$products));
 
 		}
-
-
 	}
+
+	public function actionProductreg()
+    {
+        $this->render('productreg');
+    }
 }
 
 // Uncomment the following methods and override them if needed
