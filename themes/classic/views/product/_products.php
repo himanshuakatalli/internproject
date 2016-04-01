@@ -15,7 +15,7 @@
                         <?php 
                             if($product->under_ppc==0)
                             {
-                              echo CHtml::link($product->name,array('controller/action'),array('class' => ''));
+                              echo CHtml::link($product->name,array('product/productprofile/','id'=>$product->id),array('class' => ''));
                             }
                             else
                             {
@@ -34,11 +34,12 @@
                       <?php 
                           if($product->under_ppc==0)
                           {
-                            echo CHtml::link('Vist Profile',array('controller/action'),array('class' => 'btn btn-primary','type'=>'button'));
+                            echo CHtml::link('Visit Profile',array('product/productprofile/',
+                              'id'=>$product->id),array('class' => 'btn btn-primary','type'=>'button'));
                           }
                           else
                           {
-                            echo CHtml::link('Vist Website',$product->product_website,array('class' => 'btn btn-primary','type'=>'button'));
+                            echo CHtml::link('Visit Website',$product->product_website,array('class' => 'btn btn-primary','type'=>'button'));
                           }
                        ?>
                   </div>
