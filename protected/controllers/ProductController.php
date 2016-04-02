@@ -136,19 +136,28 @@ public function actionFilter($id)
 	public function actionProductRegisterSave()
 	{
 		//print_r($_POST['Product']);
-		/*$email = $_POST['Users']['username'];
+		$email = $_POST['Users']['username'];
+		
 		$user = Users::model()->findByAttributes(array('username'=>$email));
 
 		if($user)
 		{
 			$product = new Product;
 			$product->attributes = $_POST['Product'];
-			$product->status = 1;
 			$product->add_date = new CDbExpression('NOW()');
 			$product->user_id = $user->id;
-			$product->customer_count = 0;
-			$product->under_ppc = 0;
-			//$product->website = $_POST['Product']['']
+
+			if($product->save())
+			{
+				$product_id = $product->id;
+
+				foreach($_POST['Categories'] as $category)
+				{
+					$category_id = Categories::model()->findByAttributes(array('name'=>$category->name));
+
+					//create object of product has categories and save.
+				}
+			}
 
 
 		}
