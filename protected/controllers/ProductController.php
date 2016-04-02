@@ -81,7 +81,8 @@ public function actionFilter($id)
 	}
 
 
-	public function actionCalPPC($id)
+
+	public function actionReferring($id)
 	{		
     $product = Product::model()->findByPk($id);
     //CVarDumper::dump($product,10,1);die;
@@ -104,10 +105,80 @@ public function actionFilter($id)
 			$tracking ->save();
       CController:: redirect('http://'.$product->product_website);
     }
+  }
+
+	public function actionProductRegister()
+	{
+		$user = new Users;
+		$product = new Product;
+		$category = new Categories;
+		$this->render('productreg',array('users'=>$user,'product'=>$product,'category'=>$category));
+	}
+
+	public function actionProductRegisterSave()
+	{
+		//print_r($_POST['Product']);
+		/*$email = $_POST['Users']['username'];
+		$user = Users::model()->findByAttributes(array('username'=>$email));
+
+		if($user)
+		{
+			$product = new Product;
+			$product->attributes = $_POST['Product'];
+			$product->status = 1;
+			$product->add_date = new CDbExpression('NOW()');
+			$product->user_id = $user->id;
+			$product->customer_count = 0;
+			$product->under_ppc = 0;
+			//$product->website = $_POST['Product']['']
 
 
+		}
+		else
+		{
+			$m=Yii::app()->getSecurityManager()->generateRandomString(6);
+			$user = new Users;
+			$user->attributes = $_POST['Users'];
+			$user->password = base64_encode($m);
+			$user->role_id = 2;
+			$user->is_verified = 0;
+			$user->add_date = new CDbExpression('NOW()');
+			if($user->save())
+			{
+				
+			}
+		}*/
 
 	}
+
+	public function actionProductProfile($id)
+	{
+		$product = Product::model()->findByPk($id);
+
+		if($product)
+		{
+			$productCategoryFeatures = array();
+			foreach ($product->categories as $productCategory)
+			{
+				foreach ($productCategory->features as $productCategoryFeature)
+				{
+					array_push($productCategoryFeatures, $productCategoryFeature->name);
+				}
+			}
+
+			$productFeatures = array();
+			foreach ($product->features as $productFeature)
+			{
+				array_push($productFeatures,$productFeature->name);
+			}
+
+			$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
+			'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
+		}
+	}
+
+
+	
 
 
 	public function get_client_ip() 
