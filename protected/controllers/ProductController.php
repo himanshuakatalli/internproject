@@ -7,7 +7,6 @@ class ProductController extends Controller
 	   if(isset($_GET["value"]))
 	   {
 
-
       $catName = $_GET["value"];  // taking category name from querystring
       $categoryInfo = Categories::model()->findByAttributes(array('name'=>$catName));    //for getting category Info
 
@@ -106,16 +105,16 @@ public function actionFilter($id)
       if($queryGeoLoc && $queryGeoLoc['status'] == 'success')
       {
       	$tracking ->country = $queryGeoLoc['country'];
-      	$tracking ->country_code = $queryGeoLoc['country'];
-      	$tracking ->region = $queryGeoLoc['country'];
-      	$tracking ->region_name = $queryGeoLoc['country'];
-      	$tracking ->city = $queryGeoLoc['country'];
-      	$tracking ->zip = $queryGeoLoc['country'];
-      	$tracking ->latitude = $queryGeoLoc['country'];
-      	$tracking ->longitude = $queryGeoLoc['country'];
-      	$tracking ->timezone = $queryGeoLoc['country'];
-      	$tracking ->isp = $queryGeoLoc['country'];
-      	$tracking ->org = $queryGeoLoc['country'];
+      	$tracking ->country_code = $queryGeoLoc['countryCode'];
+      	$tracking ->region = $queryGeoLoc['region'];
+      	$tracking ->region_name = $queryGeoLoc['regionName'];
+      	$tracking ->city = $queryGeoLoc['city'];
+      	$tracking ->zip = $queryGeoLoc['zip'];
+      	$tracking ->latitude = $queryGeoLoc['lat'];
+      	$tracking ->longitude = $queryGeoLoc['lon'];
+      	$tracking ->timezone = $queryGeoLoc['timezone'];
+      	$tracking ->isp = $queryGeoLoc['isp'];
+      	$tracking ->org = $queryGeoLoc['org'];
       }
       else 
       {
