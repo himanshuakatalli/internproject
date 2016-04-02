@@ -19,7 +19,7 @@
                             }
                             else
                             {
-                              echo CHtml::link($product->name,$product->product_website,array('class' => ''));
+                              echo CHtml::link($product->name,array('product/CalPPC/','id'=>$product->id),array('class' => '','target'=>'_blank'));
                             }
                          ?>
                     </h2>     
@@ -39,7 +39,7 @@
                           }
                           else
                           {
-                            echo CHtml::link('Visit Website',$product->product_website,array('class' => 'btn btn-primary','type'=>'button'));
+                            echo CHtml::link('Visit Website',array('product/CalPPC/','id'=>$product->id),array('class' => 'btn btn-primary','type'=>'button','target'=>'_blank'));
                           }
                        ?>
                   </div>
