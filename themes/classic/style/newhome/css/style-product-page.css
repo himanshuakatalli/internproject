@@ -13,16 +13,15 @@
     text-decoration: none;
 }
 
-<<<<<<< HEAD
-.main{margin:0; padding:0; background:#f2f2f2;}
-=======
 .main{margin:0; padding:0;}
->>>>>>> 4f5784aef24054d0ee6cdb843db2daefa9c26360
-body{padding:0;margin:0;}
-
+body{
+    font-family: montserratlight !important;
+    font-size: 12px;
+    line-height: 2;
+    color: #424141;}
 .pd10 {
     padding-top: 100px !important;
-	
+    
 }
 
 .half-margin-bottom {
@@ -36,20 +35,31 @@ li{list-style-type:none;}
     list-style: none;
 }
 .pd15{
-	padding-left:15px;
+    padding-left:15px;
 }
 iframe{
-	width:600px;
-	height:320px;
-	border:solid 7px #aaa;
-	margin-top: 40;
+    width:600px;
+    height:320px;
+    border:solid 7px #aaa;
+    margin-top: 40;
+}
+.section-white {
+    min-height: 200px;
+    background: #fff !important;
+    margin-bottom:30px;
+
+}
+.section-bg {
+    background: #fafafb;
+    padding-bottom: 0px;
+    margin-bottom:30px;
 }
 .list-padding{
-	padding: 12px;
-	border-bottom:1px dotted #aaa;
+    padding: 12px;
+    border-bottom:1px dotted #aaa;
 }
 .hr-custom {
-    width: 600px;
+    width: 900px;
     border-bottom: 1px solid #C8BFBE;
     border-radius: 5px 5px 5px 5px;
     border-top: 2px solid #C8BFBE;
@@ -60,15 +70,14 @@ iframe{
     
 }
 .text-padding{
-	padding-left:10px;
+    padding-left:10px;
 }
 .pd12{
-	padding-top:15px;
-	padding-left:25px;
+    padding-top:15px;
+    padding-left:25px;
 }
 .gly-ok-style{
-	color:#00d6cb;
+    color:#00d6cb;
 }
-
 
 

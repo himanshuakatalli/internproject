@@ -46,6 +46,12 @@ if((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVE
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/c-hamburger.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/softcat.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/review.css" rel="stylesheet">
+
+<!-- For displaying ratings as stars -->
+<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+
+<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/style-product-page.css" media="all" rel="stylesheet" type="text/css"/>
+<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/style.css" rel="stylesheet">
 <!-- JQuery -->
 <style type="text/css">
