@@ -1,0 +1,41 @@
+.tabs {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.tabs > li {
+  width: 50%;
+  float: left;
+  height: auto;
+  background: teal;
+  background: transparent;
+}
+
+.tabs > li > input {
+  position: absolute;
+  top: -99999px;
+}
+
+.tabs > li > label {
+  width: 100%;
+  color: #000;
+  height: 100%;
+  padding: 1.8em;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: 600;
+  text-align: center;
+  background: #61a7a3;
+  color: rgba(0,0,0,0.8);
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+.tabs > li > label span {
+  transition: all 0.4s ease-in;
+}
+
+.tabs > li > label:hover span {
+  margin-left: 0.5em;
+}

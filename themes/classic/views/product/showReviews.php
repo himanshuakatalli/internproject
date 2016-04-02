@@ -95,10 +95,10 @@ else
 			<div class="row"> 
 				<div class="col-md-6">
 					<h3><span class="glyphicon glyphicon-info-sign"></span> About This Software </h3> 
-					<p><?php echo $product->description?></p> 
+					<p class="p-text"><?php echo $product->description?></p> 
 				</div> 
 				<div class="col-md-6">
-					<h3><span class="glyphicon glyphicon-star"></span> Average Ratings </h3> 
+					<h3><span class="glyphicon glyphicon-star pd15"></span> Average Ratings </h3> 
 					<div class="check-list check-list-border-bottom half-margin-bottom">
 						<div class="row  list-padding">
 							<div class="col-md-12">
@@ -148,179 +148,187 @@ else
 				</div>  
 			</div>
 		</section>
-		
-<div class="container">
-	<div class="row ">
-		<div class="col-md-6">
-			<h3><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/search.png" alt="product" width="30" height="25"></img> Product Details</h3>
-			<!--start-->
-			<div class="check-list check-list-border-bottom half-margin-bottom">
-				<div class="row ">
-					<div class="col-md-10 list-padding">
-						<div class="col-md-4">
-							<strong>Starting Price</strong>
-						</div>
-						<div class="col-md-6"> 
-							<?php echo $product->starting_price?>
-						</div>
-					</div>
-				</div>
-				<div class="row ">
-					<div class="col-md-10 list-padding">
-						<div class="col-md-4">
-							<strong>Deployment</strong>
-						</div>
-						<div class="col-md-6"> 
-							<?php foreach($deploymentFeatures as $deploymentFeature):?>
-								<span class="glyphicon glyphicon-ok gly-ok-style"></span><?php echo $deploymentFeature->name?>
-								<br>
-							<?php endforeach ?>
-						</div>
-
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-10 list-padding">
-						<div class="col-md-4">
-							<strong>Free Version</strong>
-						</div>
-
-						<div class="col-md-6"> 
-							<span class="<?php echo $versionClass?>"></span><?php echo $freeVersion?>
-							<br>
-						</div>
-
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-10 list-padding">
-						<div class="col-md-4">
-							<strong>Free Trial</strong>
-						</div>
-
-						<div class="col-md-6"> 
-							<span class="<?php echo $trailClass?>"></span><?php echo $trial?>
-							<br>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-10 list-padding">
-						<div class="col-md-4">
-							<strong>Training</strong>
-						</div>
-
-						<div class="col-md-6"> 
-							<?php foreach($trainingFeatures as $trainingFeature): ?>
-								<span class="glyphicon glyphicon-ok gly-ok-style"></span><?php echo $trainingFeature->name?>
-								<br>
-							<?php endforeach ?>
-						</div>
-
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-10 list-padding">
-						<div class="col-md-4">
-							<strong>Support</strong>
-						</div>
-
-						<div class="col-md-6"> 
-							<?php foreach($supportFeatures as $supportFeature): ?>
-								<span class="glyphicon glyphicon-ok gly-ok-style"></span><?php echo $supportFeature->name?>
-								<br>
-							<?php endforeach ?>
-						</div>
-
-					</div>
-				</div>
-				<div class="row">
-					<h3><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/vendor.png" alt="product" width="40" height="40"></img> Vendor Details</h3>
-					<div class="col-md-10 list-padding"> 
-						<strong><?php echo $product->company_name?></strong>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-10 list-padding"> 
-						<strong><?php echo $product->company_website?> </strong>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-10 list-padding"> 
-					<strong>Founded <?php echo $product->founding_year?></strong>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-10 list-padding"> 
-					<strong><?php echo $product->founding_country?></strong>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-6 pd10">
-			<iframe width="600" height="400" src="http://www.youtube.com/embed/KgMt0dtr4Vc" frameborder="1" allowfullscreen></iframe>
-		</div>
-	</div>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 ">
-			<hr class="hr-custom">  
-		</div>
-	</div>
-</div>
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<h3><span class="glyphicon glyphicon-th-list pd15"></span> Feature Checklist</h3> 
+<section class="section-white">
+	<div class="container">
+		<div class="row ">
 			<div class="col-md-6">
-				<?php for($i=0;$i<count($productCategoryFeatures)/2;$i++):?>
-					<h5>
-						<span  class="<?php if (in_array($productCategoryFeatures[$i], $productFeatures)) {
-							echo "available glyphicon glyphicon-ok-sign gly-ok-style";
-						}
-						else
-						{
-							echo "not-available glyphicon glyphicon-ok-sign";
-						}
-						?>">
-						<span class="black-color"><?php echo $productCategoryFeatures[$i]?></span>
-					</span>              
-				</h5>
+				<h3><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/search.png" alt="product" width="30" height="25"></img> Product Details</h3>
+				<!--start-->
+				<div class="check-list check-list-border-bottom half-margin-bottom">
+					<div class="row ">
+						<div class="col-md-10 list-padding">
+							<div class="col-md-4">
+								<strong>Starting Price</strong>
+							</div>
+							<div class="col-md-6"> 
+								<?php echo $product->starting_price?>
+							</div>
+						</div>
+					</div>
+					<div class="row ">
+						<div class="col-md-10 list-padding">
+							<div class="col-md-4">
+								<strong>Deployment</strong>
+							</div>
+							<div class="col-md-6"> 
+								<?php foreach($deploymentFeatures as $deploymentFeature):?>
+									<span class="glyphicon glyphicon-ok gly-ok-style"></span><?php echo $deploymentFeature->name?>
+									<br>
+								<?php endforeach ?>
+							</div>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 list-padding">
+							<div class="col-md-4">
+								<strong>Free Version</strong>
+							</div>
+
+							<div class="col-md-6"> 
+								<span class="<?php echo $versionClass?>"></span><?php echo $freeVersion?>
+								<br>
+							</div>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 list-padding">
+							<div class="col-md-4">
+								<strong>Free Trial</strong>
+							</div>
+
+							<div class="col-md-6"> 
+								<span class="<?php echo $trailClass?>"></span><?php echo $trial?>
+								<br>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-10 list-padding">
+							<div class="col-md-4">
+								<strong>Training</strong>
+							</div>
+
+							<div class="col-md-6"> 
+								<?php foreach($trainingFeatures as $trainingFeature): ?>
+									<span class="glyphicon glyphicon-ok gly-ok-style"></span><?php echo $trainingFeature->name?>
+									<br>
+								<?php endforeach ?>
+							</div>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 list-padding">
+							<div class="col-md-4">
+								<strong>Support</strong>
+							</div>
+
+							<div class="col-md-6"> 
+								<?php foreach($supportFeatures as $supportFeature): ?>
+									<span class="glyphicon glyphicon-ok gly-ok-style"></span><?php echo $supportFeature->name?>
+									<br>
+								<?php endforeach ?>
+							</div>
+
+						</div>
+					</div>
+					<div class="row">
+						<h3><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/vendor.png" alt="product" width="40" height="40"></img> Vendor Details</h3>
+						<div class="col-md-10 list-padding"> 
+							<strong><?php echo $product->company_name?></strong>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 list-padding"> 
+							<strong><?php echo $product->company_website?> </strong>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-10 list-padding"> 
+						<strong>Founded <?php echo $product->founding_year?></strong>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-10 list-padding"> 
+						<strong><?php echo $product->founding_country?></strong>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6 pd10">
+				<iframe width="600" height="400" src="http://www.youtube.com/embed/KgMt0dtr4Vc" frameborder="1" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h3><span class="glyphicon glyphicon-th-list pd15"></span> Feature Checklist</h3> 
+				<div class="col-md-6">
+					<?php for($i=0;$i<count($productCategoryFeatures)/2;$i++):?>
+							<span  class="
+							<?php 
+							if (in_array($productCategoryFeatures[$i], $productFeatures)) {
+								echo "glyphicon glyphicon-ok-sign gly-ok-style";
+								?>">
+								</span>
+								<strong>
+									<span class="available black-color"><?php echo $productCategoryFeatures[$i]?></span>
+								</strong>
+								<?php
+							}
+							else
+							{
+								echo "not-available glyphicon glyphicon-ok-sign";
+								?>">
+								</span>
+								<strong>
+									<span class="not-available black-color"><?php echo $productCategoryFeatures[$i]?></span>
+								</strong>
+								<?php
+							}
+							?>
+					<hr>
+				<?php endfor?>
+			</div>
+			<div class="col-md-6">
+				<?php for($i=count($productCategoryFeatures)/2;$i<count($productCategoryFeatures);$i++):?>
+					<span  class="
+							<?php 
+							if (in_array($productCategoryFeatures[$i], $productFeatures)) {
+								echo "glyphicon glyphicon-ok-sign gly-ok-style";
+								?>">
+								</span>
+								<strong>
+									<span class="available black-color"><?php echo $productCategoryFeatures[$i]?></span>
+								</strong>
+								<?php
+							}
+							else
+							{
+								echo "not-available glyphicon glyphicon-ok-sign";
+								?>">
+								</span>
+								<strong>
+									<span class="not-available black-color"><?php echo $productCategoryFeatures[$i]?></span>
+								</strong>
+								<?php
+							}
+							?>
 				<hr>
 			<?php endfor?>
 		</div>
-		<div class="col-md-6">
-			<?php for($i=count($productCategoryFeatures)/2;$i<count($productCategoryFeatures);$i++):?>
-				<h5>
-					<span  class="<?php if (in_array($productCategoryFeatures[$i], $productFeatures)) {
-						echo "available glyphicon glyphicon-ok-sign gly-ok-style";
-					}
-					else
-					{
-						echo "not-available glyphicon glyphicon-ok-sign";
-					}
-					?>">
-					<span class="black-color"><?php echo $productCategoryFeatures[$i]?></span>
-				</span>
-			</h5>
-			<hr>
-		<?php endfor?>
 	</div>
-</div>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 ">
-			<hr class="hr-custom">  
-		</div>
 	</div>
-</div>
-</div>
+	</div>
+</section>
 
 
 <?php foreach ($reviews as $review ):
