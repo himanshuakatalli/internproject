@@ -1,5 +1,4 @@
-  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-  <style>
+<style>
       body
       {
         background-color: #e9eaed;
@@ -21,6 +20,9 @@
         text-decoration: underline;
         color: #00f;
         font-size: 11px;
+      }
+      .col-md-4 .col-sm-6 .col-xs-12 .pl0 .mb20 .our-r{
+        min-height: 60px;
       }
   </style>
 <body>
