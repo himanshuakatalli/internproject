@@ -155,6 +155,8 @@ public function actionFilter($id)
 	{
 		$product = Product::model()->findByPk($id);
 
+		$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
+
 		if($product)
 		{
 			$productCategoryFeatures = array();
