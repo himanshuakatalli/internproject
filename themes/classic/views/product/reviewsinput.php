@@ -112,21 +112,21 @@
 </section>
 
 </body>
+
 <script type="text/javascript">
 
-	function send(){
-// alert('Submit button');
-var validated = $("#review-edit").parsley().validate();
-console.log(validated);
-if(validated)
-{   
-	var data=$("#review-edit").serialize();   
-	console.log(data);
-	$.ajax({
-		type:'POST',
-		url:'<?php echo Yii::app()->createUrl("product/ProductReviewSave",array('id'=>$product->id)); ?>',
-		data:data,
-		success:function(data){
+function send()
+{
+	var validated = $("#review-edit").parsley().validate();
+	if(validated)
+	{   
+		var data=$("#review-edit").serialize();   
+		console.log(data);
+		$.ajax({
+			type:'POST',
+			url:'<?php echo Yii::app()->createUrl("product/ProductReviewSave",array('id'=>$product->id)); ?>',
+			data:data,
+			success:function(data){
 			var response = $.parseJSON(data);
 			console.log(response);
 			if(response.userSaved == 1)
@@ -139,36 +139,16 @@ if(validated)
 				alert("Your previous comment is updated");
 				window.location.href=response.url + "#review";
 			}
-/*var response = $.parseJSON(data);
-if(response.success==1)
-{
-window.location.href=response.url;
-}alert("data Saved");*/
-},
-error:function(data)
-{
-	alert('Updation failed!!');
-},
-})
+		},
+		error:function(data)
+		{
+			alert('Updation failed!!');
+		},
+	})
+	}
+	else
+	{
+		alert('Please Enter all Required Field');
+	}
 }
-else{
-	alert('Please Enter all Required Field');
-}
-}
-
-/*{$('#input-21a').on('rating.change', function(event, value, caption) {
-console.log(value);
-console.log(caption);
-r1=value;
-});
-$('#input-21b').on('rating.change', function(event, value, caption) {
-console.log(value);
-console.log(caption);
-r2=value;
-});
-$('#input-21c').on('rating.change', function(event, value, caption) {
-console.log(value);
-console.log(caption);
-r3=value;
-});}*/
 </script>
