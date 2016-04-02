@@ -62,11 +62,7 @@ else
 }
 
 ?>
-
-<!-- For displaying ratings as stars -->
-<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
-
-<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/style-product-page.css" media="all" rel="stylesheet" type="text/css"/>
+		
 
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/star-rating-no-edit.js" type="text/javascript">
 </script>
@@ -74,88 +70,85 @@ else
 
 
 <div class="main ">
-	<div class="container">
-		<div class="row pd10">
-			<div class="col-sm-10 ">
-				<div class="media" > 
-					<div class="media-left media-middle ">
-						<img src="<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/'.$product->logo.'.png'; ?>" class="img-thumbnail" alt="Product Icon" width="100px" height="130px" >
-					</div>
-					<div class="media-body">
-						<h2 class="media-header"><?php echo $product->name?></h2>
-						<small>by <?php echo $product->company_name?></small>
-						<input id="input-21b" value="<?php echo $average?>" type="number" class="rating" min="0" max="5" step="0.5" data-size="xs">
+	<section class="section-white">
+		<div class="container">
+		<!-- <section class="section1"> -->
+			<div class="row pd10">
+				<div class="col-sm-10 ">
+					<div class="media" > 
+						<div class="media-left media-middle ">
+							<img src="<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/'.$product->logo.'.png'; ?>" class="img-thumbnail" alt="Product Icon" width="100px" height="130px" >
+						</div>
+						<div class="media-body">
+							<h2 class="media-header"><?php echo $product->name?></h2>
+							<small>by <?php echo $product->company_name?></small>
+							<input id="input-21b" value="<?php echo $average?>" type="number" class="rating" min="0" max="5" step="0.5" data-size="xs">
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<hr class="hr-custom"></hr>
-	</div>
-
+	</section>
 	<!-- about us -->
-	<div class="container">
-		<div class="row"> 
-			<div class="col-md-6">
-				<h3><span class="glyphicon glyphicon-info-sign"></span> About This Software </h3> 
-				<p><?php echo $product->description?></p> 
-			</div> 
-			<div class="col-md-6">
-				<h3><span class="glyphicon glyphicon-star"></span> Average Ratings </h3> 
-				<div class="check-list check-list-border-bottom half-margin-bottom">
-					<div class="row  list-padding">
-						<div class="col-md-12">
-							<div class="col-md-6">
-								<strong>Overall</strong>
-							</div>
-							<div class="col-md-6"> 
-								<input id="input-21b" value="<?php echo $averageOverall?>" type="number" class="rating" min="0" max="5" step="0.5" data-size="xs">
-							</div>
-						</div>
-					</div>
-					<div class="row  list-padding">
-						<div class="col-md-12">
-							<div class="col-md-6">
-								<strong>Ease of Use</strong>
-							</div>
-							<div class="col-md-6"> 
-								<input id="input-21b" value="<?php echo $averageEaseOfUse?>" type="number" class="rating" min="0" max="5" step="0.5" data-size="xs">
-							</div>
-						</div>
-					</div>
-					<div class="row  list-padding">
-						<div class="col-md-12">
-							<div class="col-md-6">
-								<strong>Customer Support</strong>
-							</div>
-							<div class="col-md-6"> 
-								<input id="input-21b" value="<?php echo $averageCustomerSupport?>" type="number" class="rating" min="0" max="5" step="0.5" data-size="xs">
-							</div>
-						</div>
-					</div>
-					<div class="row ">
-						<div class="col-md-12">
-							<div class="col-md-6 pd12">
-								<a href="#review"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/chat-icon.png" width="28" height="28"/>
-									<?php echo $numberOfReviews, " ", $reviewNumber?></a>
+	<section class="section-bg">
+		<div class="container">
+			<div class="row"> 
+				<div class="col-md-6">
+					<h3><span class="glyphicon glyphicon-info-sign"></span> About This Software </h3> 
+					<p><?php echo $product->description?></p> 
+				</div> 
+				<div class="col-md-6">
+					<h3><span class="glyphicon glyphicon-star"></span> Average Ratings </h3> 
+					<div class="check-list check-list-border-bottom half-margin-bottom">
+						<div class="row  list-padding">
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<strong>Overall</strong>
 								</div>
+								<div class="col-md-6"> 
+									<input id="input-21b" value="<?php echo $averageOverall?>" type="number" class="rating" min="0" max="5" step="0.5" data-size="xs">
+								</div>
+							</div>
+						</div>
+						<div class="row  list-padding">
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<strong>Ease of Use</strong>
+								</div>
+								<div class="col-md-6"> 
+									<input id="input-21b" value="<?php echo $averageEaseOfUse?>" type="number" class="rating" min="0" max="5" step="0.5" data-size="xs">
+								</div>
+							</div>
+						</div>
+						<div class="row  list-padding">
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<strong>Customer Support</strong>
+								</div>
+								<div class="col-md-6"> 
+									<input id="input-21b" value="<?php echo $averageCustomerSupport?>" type="number" class="rating" min="0" max="5" step="0.5" data-size="xs">
+								</div>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-md-12">
 								<div class="col-md-6 pd12">
-									<a href="<?php echo Yii::app()->createUrl('/product/ProductReview/',array('id'=>$product->id));?>">
-										Review This Product 
-									</a>
+									<a href="#review"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/chat-icon.png" width="28" height="28"/>
+										<?php echo $numberOfReviews, " ", $reviewNumber?></a>
+									</div>
+									<div class="col-md-6 pd12">
+										<a href="<?php echo Yii::app()->createUrl('/product/ProductReview/',array('id'=>$product->id));?>">
+											Review This Product 
+										</a>
+									</div>
 								</div>
-							</div>
-						</div> 
+							</div> 
+						</div>
 					</div>
-				</div>
-			</div>  
-		</div>
-<!--    <div class="container">
-<div class="row">
-<div class="col-md-12 np">
-<hr class="homepage-sec1"> </hr>  
-</div>
-</div>
-</div> -->
+				</div>  
+			</div>
+		</section>
+		
 <div class="container">
 	<div class="row ">
 		<div class="col-md-6">

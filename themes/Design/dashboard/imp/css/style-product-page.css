@@ -2,27 +2,34 @@
 {
     color: #000000;
 }
-
 .not-available
 {
     text-decoration: line-through;
 }
-
 .available
 {
     text-decoration: none;
 }
-
 .main{margin:0; padding:0;}
+body{padding:0;margin:0;color:#black;}
 
-body{
-    font-family: montserratlight !important;
-    font-size: 12px;
-    line-height: 2;
-    color: #424141;}
+.button-padding{ margin-top:10px; }
+.section1 {
+    background: #fafafb;
+    
+}
+.section2{
+    background: #;
+    padding-bottom: 0px;
+}
 .pd10 {
     padding-top: 100px !important;
-    
+	
+}
+.top-head{
+    background:#7ececa;
+    min-height: 70px;
+    margin-top: 70px;
 }
 
 .half-margin-bottom {
@@ -36,28 +43,17 @@ li{list-style-type:none;}
     list-style: none;
 }
 .pd15{
-    padding-left:15px;
+	padding-left:15px;
 }
 iframe{
-    width:600px;
-    height:320px;
-    border:solid 7px #aaa;
-    margin-top: 40;
-}
-.section-white {
-    min-height: 200px;
-    background: #fff !important;
-    margin-bottom:30px;
-
-}
-.section-bg {
-    background: #fafafb;
-    padding-bottom: 0px;
-    margin-bottom:30px;
+	width:600px;
+	height:320px;
+	border:solid 7px #aaa;
+	margin-top: 40;
 }
 .list-padding{
-    padding: 12px;
-    border-bottom:1px dotted #aaa;
+	padding: 12px;
+	border-bottom:1px dotted #aaa;
 }
 .hr-custom {
     width: 900px;
@@ -71,14 +67,14 @@ iframe{
     
 }
 .text-padding{
-    padding-left:10px;
+	padding-left:10px;
 }
 .pd12{
-    padding-top:15px;
-    padding-left:25px;
+	padding-top:15px;
+	padding-left:25px;
 }
 .gly-ok-style{
-    color:#00d6cb;
+	color:#00d6cb;
 }
 
 
