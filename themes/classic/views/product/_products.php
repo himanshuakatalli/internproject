@@ -17,8 +17,10 @@
                             {
                               echo CHtml::link($product->name,array('product/productprofile/','id'=>$product->id));
                             }
-                            else{
-                              echo CHtml::link($product->name,'http://'.$product->product_website,array('target'=>'blank'));
+
+                            else
+                            {
+                              echo CHtml::link($product->name,array('product/Referring/','id'=>$product->id),array('class' => '','target'=>'_blank'));
                             }
                          ?>
                     </h2>     
@@ -38,8 +40,10 @@
                           }
                           else
                           {
-                            echo CHtml::link('Visit Website','http://'.$product->product_website,array('class' => 'btn btn-primary','type'=>'button','target'=>'blank'));
+
+                            echo CHtml::link('Visit Website',array('product/Referring/','id'=>$product->id),array('class' => 'btn btn-primary','type'=>'button','target'=>'_blank'));
                           }
+
                        ?>
                   </div>
                   <div class="col-sm-12">
