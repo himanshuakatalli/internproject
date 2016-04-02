@@ -36,7 +36,10 @@
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/reset.css" rel="stylesheet">
 <link rel="shortcut icon" href="https://venturepact.com/favicon.ico">
 <!-- CSS -->
+<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/materialize.min.css">
 
+<!-- Compiled and minified JavaScript -->
+<link rel="stylesheet"  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/responsive.css" rel="stylesheet">
 <!--<link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/flexslider.css" rel="stylesheet">-->
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/font-awesome.min.css" rel="stylesheet">
@@ -44,6 +47,12 @@
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/c-hamburger.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/softcat.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/review.css" rel="stylesheet">
+
+<!-- For displaying ratings as stars -->
+<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+
+<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/style-product-page.css" media="all" rel="stylesheet" type="text/css"/>
+<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/style.css" rel="stylesheet">
 <!-- JQuery -->
 <style type="text/css">
