@@ -62,10 +62,19 @@ else
 }
 
 ?>
-		
 
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/star-rating-no-edit.js" type="text/javascript">
 </script>
+<style type="text/css">
+	.p-text{
+    font-size: 14px;
+    color: #4d5a6a;
+    font-family: aller_lightregular;
+    text-align: left;
+    line-height: 26px;
+    margin-top: 20px;
+    float: left;}
+</style>
 <!--  -->
 
 
