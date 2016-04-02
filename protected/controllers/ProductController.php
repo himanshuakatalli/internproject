@@ -174,6 +174,8 @@ public function actionFilter($id)
 	{
 		$product = Product::model()->findByPk($id);
 
+		$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
+
 		if($product)
 		{
 			$productCategoryFeatures = array();
@@ -220,6 +222,80 @@ public function actionFilter($id)
     return $ipaddress;
   }
 
+  public function actionProductReview($id)
+	{
+		$review = new Reviews;
+		$user = new Users;
+		$product = Product::model()->findByAttributes(array('id'=>$id));
+		$this->render('reviewsinput',array('review'=>$review,'user'=>$user,'product'=>$product));
+ 	}
+ 
+	public function actionProductReviewSave($id)
+	{
+		$response="";
+		$email = $_POST['Users']['username'];
+		x:  $user = Users::model()->findByAttributes(array('username'=>$email));
+		if($user)
+		{
+			$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id,'product_id'=>$id));
+			if(empty($review))
+			{
+				$review = new Reviews;
+				$review->attributes = $_POST['Reviews'];
+				$review->user_id = $user->id;
+				$review->product_id = $id;
+				$review->add_date = new CDbExpression('NOW()');
+				if($review->save())
+				{
+					$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id));
+					$categories=RatingCategories::model()->findAll();
+					foreach ($categories as $category)
+					{
+						$rating = new Ratings;
+						$rating->review_id = $review->id;
+						$rating->rating_category_id = $category->id;
+						$rating->rating = $_POST[$category->id];
+						$rating->add_date = new CDbExpression('NOW()');
+						$rating->save();
+					}
+					$response['userSaved'] = 1;
+					$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id));
+				}
+			}
+			else
+			{
+				$review->attributes = $_POST['Reviews'];
+				$review->modify_date = new CDbExpression('NOW()');
+				if($review->update())
+				{
+					foreach ($review->ratings as $rating)
+					{
+						$rating->rating = $_POST[$rating->ratingCategory->id];
+						$rating->modify_date = new CDbExpression('NOW()');
+						$rating->update();
+					}
+					$response['userUpdate']=2;
+					$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id));
+				}
+			}
+			echo json_encode($response);
+			die;
+		}
+		else
+		{
+			$m=Yii::app()->getSecurityManager()->generateRandomString(6);
+			$user = new Users;
+			$user->attributes = $_POST['Users'];
+			$user->password = base64_encode($m);
+			$user->role_id = 3;
+			$user->is_verified = 0;
+			$user->add_date = new CDbExpression('NOW()');
+			if($user>save())
+			{
+				goto x;
+			}
+		}
+	}
 }
 
 // Uncomment the following methods and override them if needed

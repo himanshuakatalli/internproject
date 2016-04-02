@@ -1,6 +1,7 @@
 .review-content {
   margin-top: 5em;
   margin-bottom: 1em;
+  font-family: montserratlight !important;
 }
 .reviews{
   background: #FFF;
@@ -30,6 +31,7 @@
   font-size: 1em;
   display: block;
   line-height: 0.2em;
+  font-family: montserratlight !important;
 }
 
 .reviews .row:first-of-type > div:last-of-type {
@@ -52,6 +54,7 @@
   width: 100%;
   color: #f07762;
   font-size: 1.8em;
+  font-family: montserratlight !important;
 }
 
 .reviews .row:nth-of-type(3) div {
@@ -71,5 +74,6 @@
 }
 .reviews .row:last-of-type h4 {
   width: 100%;
-  font-size: 1.2em; 
-  font-weight: 100;}
+  font-size: 1.1em; 
+  font-weight: 100;
+  font-family: montserratlight !important;}
