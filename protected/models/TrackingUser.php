@@ -10,6 +10,18 @@
  * @property string $cookie
  * @property string $entry_time
  * @property string $action_time
+ * @property integer $status_geo
+ * @property string $country
+ * @property string $country_code
+ * @property string $region
+ * @property string $region_name
+ * @property string $city
+ * @property string $zip
+ * @property double $latitude
+ * @property double $longitude
+ * @property string $timezone
+ * @property string $isp
+ * @property string $org
  */
 class TrackingUser extends CActiveRecord
 {
@@ -30,11 +42,12 @@ class TrackingUser extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('product_id, user_ip, cookie, entry_time, action_time', 'required'),
-			array('product_id', 'numerical', 'integerOnly'=>true),
-			array('user_ip, cookie', 'length', 'max'=>100),
+			array('product_id, status_geo', 'numerical', 'integerOnly'=>true),
+			array('latitude, longitude', 'numerical'),
+			array('user_ip, cookie, country, country_code, region, region_name, city, zip, timezone, isp, org', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, product_id, user_ip, cookie, entry_time, action_time', 'safe', 'on'=>'search'),
+			array('id, product_id, user_ip, cookie, entry_time, action_time, status_geo, country, country_code, region, region_name, city, zip, latitude, longitude, timezone, isp, org', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,6 +74,18 @@ class TrackingUser extends CActiveRecord
 			'cookie' => 'Cookie',
 			'entry_time' => 'Entry Time',
 			'action_time' => 'Action Time',
+			'status_geo' => 'Status Geo',
+			'country' => 'Country',
+			'country_code' => 'Country Code',
+			'region' => 'Region',
+			'region_name' => 'Region Name',
+			'city' => 'City',
+			'zip' => 'Zip',
+			'latitude' => 'Latitude',
+			'longitude' => 'Longitude',
+			'timezone' => 'Timezone',
+			'isp' => 'Isp',
+			'org' => 'Org',
 		);
 	}
 
@@ -88,6 +113,18 @@ class TrackingUser extends CActiveRecord
 		$criteria->compare('cookie',$this->cookie,true);
 		$criteria->compare('entry_time',$this->entry_time,true);
 		$criteria->compare('action_time',$this->action_time,true);
+		$criteria->compare('status_geo',$this->status_geo);
+		$criteria->compare('country',$this->country,true);
+		$criteria->compare('country_code',$this->country_code,true);
+		$criteria->compare('region',$this->region,true);
+		$criteria->compare('region_name',$this->region_name,true);
+		$criteria->compare('city',$this->city,true);
+		$criteria->compare('zip',$this->zip,true);
+		$criteria->compare('latitude',$this->latitude);
+		$criteria->compare('longitude',$this->longitude);
+		$criteria->compare('timezone',$this->timezone,true);
+		$criteria->compare('isp',$this->isp,true);
+		$criteria->compare('org',$this->org,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

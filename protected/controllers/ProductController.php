@@ -102,6 +102,25 @@ public function actionFilter($id)
 			$tracking ->cookie = "P_".$id;
 			$tracking ->entry_time = date("Y-m-d H:i:s",time());
 			$tracking ->action_time = date("Y-m-d H:i:s",time());
+			$queryGeoLoc = @unserialize(file_get_contents('http://ip-api.com/php/'.$tracking ->user_ip));
+      if($queryGeoLoc && $queryGeoLoc['status'] == 'success')
+      {
+      	$tracking ->country = $queryGeoLoc['country'];
+      	$tracking ->country_code = $queryGeoLoc['country'];
+      	$tracking ->region = $queryGeoLoc['country'];
+      	$tracking ->region_name = $queryGeoLoc['country'];
+      	$tracking ->city = $queryGeoLoc['country'];
+      	$tracking ->zip = $queryGeoLoc['country'];
+      	$tracking ->latitude = $queryGeoLoc['country'];
+      	$tracking ->longitude = $queryGeoLoc['country'];
+      	$tracking ->timezone = $queryGeoLoc['country'];
+      	$tracking ->isp = $queryGeoLoc['country'];
+      	$tracking ->org = $queryGeoLoc['country'];
+      }
+      else 
+      {
+        $tracking ->status_geo = 0;
+      }      
 			$tracking ->save();
       CController:: redirect('http://'.$product->product_website);
     }
