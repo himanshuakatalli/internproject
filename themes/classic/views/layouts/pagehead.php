@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
-<!--Code for Canonical URLs-->
-<?php
-if((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443)
-{
-    $actual_link    =   'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-    $seo_link       =   'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    <head>
+    <?php
+    if((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443){
+        $actual_link = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $seo_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     echo '<link rel="canonical" href="'.$seo_link.'"/>';
 }
 ?>
@@ -78,18 +76,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                         <span class="sr-only">Toggle navigation</span>
                         <i class="fa fa-reorder light-grey"></i>
                     </button>
-                    <div id="search-icon-mob" class="sr-web"><a href="javascript:void(0);"><i class="fa fa-search fs14 light-grey"></i></a></div>
                     <?php
-                    if(Yii::app()->user->isGuest)
                         echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo" width="188" height="30">', array('/'),array('class'=>'navbar-brand rs-hide'));
-                    else
-                        echo CHtml::link('<img class="rs-logo rs-hide" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand rs-hide'));
-                    ?>
-                    <?php
-                    if(Yii::app()->user->isGuest)
                         echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo" width="39" height="26">', array('/'),array('class'=>'navbar-brand'));
-                    else
-                        echo CHtml::link('<img class="mobilelogo-show" itemprop="image" src="'.Yii::app()->theme->baseUrl.'/style/newhome/images/vp-logo.png" alt="VenturePact Logo">', array('/'.Yii::app()->user->role),array('class'=>'navbar-brand'));
                     ?>
                 </div>
                 <div id="navbarCollapse" class="collapse navbar-collapse">
@@ -99,6 +88,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                         </li>
                         <li>
                             <a href="<?php echo Yii::app()->createUrl('/site/Categories');?>"><i class="fa fa-list"></i> &nbsp; Software Catagories</a>
+                        </li>
+                        <li>
+                            <a class="boxlink" href="<?php echo Yii::app()->createUrl('/Product/Productregister');?>"><i class="fa fa-plus"></i> &nbsp; Add Product</a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-icon"><i class="fa fa-reorder mr5"></i></a>
@@ -118,7 +110,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                                 <select id="topsearch" name="value" multiple class="demo-default"  placeholder="What type of software are you looking for?"></select>
                             </form>
                         </div>
-                        <a href="javascript:void(0);" class="search-close">X</a>
+                        <a href="javascript:void(0);" class="search-close">
+                            <i class="fa fa-close"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -272,8 +266,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
                                 <p class="fs14 font_newregular pt5">Welcome to VenturePact</p>
                             </div>
                             <div class="col-md-12 col-xs-12 bt mt20 pt20 text-center np rs-hide">
-                                <?php echo CHtml::link('<span class="icon-home mr5" aria-hidden="true"></span> Dashboard',array('/'.Yii::app()->user->role),array('class'=>'fs13 font_newregular orange-new col-md-5 col-xs-12 pl0 pr10 mb5')); ?>
-                                <?php echo CHtml::link('<span class="icon-settings mr5" aria-hidden="true"></span> Settings',array('/'.Yii::app()->user->role.'/account'),array('class'=>'fs13 font_newregular orange-new col-md-4 np pl0 pr10 mb5')); ?>
+                                <?php echo CHtml::link('<span class="icon-home mr5" aria-hidden="true"></span> Dashboard',array('/dashboard'),array('class'=>'fs13 font_newregular orange-new col-md-5 col-xs-12 pl0 pr10 mb5')); ?>
+                                <?php echo CHtml::link('<span class="icon-settings mr5" aria-hidden="true"></span> Settings',array('/dashboard'),array('class'=>'fs13 font_newregular orange-new col-md-4 np pl0 pr10 mb5')); ?>
                                 <?php echo CHtml::link('<span class="icon-power orange-light mr5" aria-hidden="true"></span> Logout',array('/site/logout'),array('class'=>'fs13 font_newregular orange-new col-md-3 np text-right mb5')); ?>
                             </div>
                             <div class="col-md-12 col-xs-12 bt mt20 pt20 pb20 text-center np rs-show">
