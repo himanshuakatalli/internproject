@@ -59,7 +59,7 @@
           <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
         <!--logo start-->
-        <a href="index.html" class="logo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/vp_icon.png"><b>VenturePact</b></a>
+        <a href="<?php echo Yii::app()->createUrl('/dashboard');?>" class="logo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/vp_icon.png"><b>VenturePact</b></a>
         <!--logo end-->
         <div class="top-menu">
           <ul class="nav pull-right top-menu">
@@ -75,7 +75,7 @@
         <div id="sidebar"  class="nav-collapse ">
           <!-- sidebar menu start-->
           <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a href="profile.html"><img src="<?php echo (!empty(Yii::app()->user->image))?Yii::app()->user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
+            <p class="centered"><a href="#"><img src="<?php echo (!empty(Yii::app()->user->image))?Yii::app()->user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
               <h5 class="centered">
                 <?php echo Yii::app()->user->fname;?>
               </h5>
@@ -128,7 +128,7 @@
       <!--sidebar end-->
       <!--main content start-->
       <section id="main-content">
-        
+        <?php echo $content;?>
       </section>
     <!--footer start-->
       <footer class="site-footer">
@@ -143,7 +143,7 @@
     </section>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.8.3.min.js"></script>
-    <script src="imp/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js" async ></script>
     <script class="include" type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.scrollTo.min.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.nicescroll.js" type="text/javascript"></script>

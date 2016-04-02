@@ -1,6 +1,7 @@
 .black-color
 {
-    color: #000000;
+   
+    font-size: 12px;
 }
 
 .not-available
@@ -22,8 +23,15 @@ body{
     color: #424141;}
 .pd10 {
     padding-top: 100px !important;
-    
-}
+    }
+.p-text{
+    font-size: 16px;
+    color: #4d5a6a;
+    font-family: aller_lightregular;
+    text-align: left;
+    line-height: 26px;
+    margin-top: 20px;
+    float: left;}
 
 .half-margin-bottom {
     margin-bottom: 12px;
@@ -37,6 +45,7 @@ li{list-style-type:none;}
 }
 .pd15{
     padding-left:15px;
+    padding-bottom: 20px;
 }
 iframe{
     width:600px;
@@ -51,9 +60,10 @@ iframe{
 
 }
 .section-bg {
+    /*min-height: 200px;*/
     background: #fafafb;
-    padding-bottom: 0px;
-    margin-bottom:30px;
+    /*padding-bottom: 0px;*/
+    margin-bottom:60px;
 }
 .list-padding{
     padding: 12px;

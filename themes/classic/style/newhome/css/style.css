@@ -15551,13 +15551,13 @@ body {
 }
 
 .section6 {
-  background: #fff;
+  background: #2c2e3c;
   min-height: 290px;
   width: 100%;
 }
 
 .our-res {
-  color: #0f3653;
+  color: #fff;
   font-size: 16px;
   margin-bottom: 40px;
   margin-top: 50px;
@@ -15569,20 +15569,24 @@ body {
 }
 
 .or-text {
-  color: #333;
+  color: #ddd;
   font-size: 12px;
   width: 100%;
 }
-
+.or-text :hover{
+  color: #ddd;
+  font-size: 12px;
+  width: 100%;
+}
 .or-link {
-  color: #267bb2;
+  color: #f07762;
   font-size: 11px;
   margin-top: 3px;
   width: auto;
 }
 
 .or-link:hover {
-  color: #0064a4;
+  color: #f07762;
 }
 
 .our-r {
@@ -15720,12 +15724,12 @@ body {
 }
 
 footer {
-  background: #222;
+  background: #2c2e3c;
   min-height: 114px;
 }
 
 .footer-left h4 {
-  color: #929595!important;
+  color: #ddd!important;
   display: inline;
   font-family: open_sansregular;
   font-size: 16px;
@@ -16294,7 +16298,7 @@ footer {
 }
 
 .fl-link-new {
-  color: #267bb2;
+  color: #f07762;
   display: inline-block;
   font-size: 11px;
   margin-top: 3px;
@@ -16302,7 +16306,7 @@ footer {
 }
 
 .fl-link-new:hover {
-  color: #0064a4;
+  color: #f07762;
 }
 
 .fl-link-new .fl-link-icon {

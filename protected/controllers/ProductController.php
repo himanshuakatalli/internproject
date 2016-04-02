@@ -7,7 +7,6 @@ class ProductController extends Controller
 	   if(isset($_GET["value"]))
 	   {
 
-
       $catName = $_GET["value"];  // taking category name from querystring
       $categoryInfo = Categories::model()->findByAttributes(array('name'=>$catName));    //for getting category Info
 
@@ -102,6 +101,25 @@ public function actionFilter($id)
 			$tracking ->cookie = "P_".$id;
 			$tracking ->entry_time = date("Y-m-d H:i:s",time());
 			$tracking ->action_time = date("Y-m-d H:i:s",time());
+			$queryGeoLoc = @unserialize(file_get_contents('http://ip-api.com/php/'.$tracking ->user_ip));
+      if($queryGeoLoc && $queryGeoLoc['status'] == 'success')
+      {
+      	$tracking ->country = $queryGeoLoc['country'];
+      	$tracking ->country_code = $queryGeoLoc['countryCode'];
+      	$tracking ->region = $queryGeoLoc['region'];
+      	$tracking ->region_name = $queryGeoLoc['regionName'];
+      	$tracking ->city = $queryGeoLoc['city'];
+      	$tracking ->zip = $queryGeoLoc['zip'];
+      	$tracking ->latitude = $queryGeoLoc['lat'];
+      	$tracking ->longitude = $queryGeoLoc['lon'];
+      	$tracking ->timezone = $queryGeoLoc['timezone'];
+      	$tracking ->isp = $queryGeoLoc['isp'];
+      	$tracking ->org = $queryGeoLoc['org'];
+      }
+      else 
+      {
+        $tracking ->status_geo = 0;
+      }      
 			$tracking ->save();
       CController:: redirect('http://'.$product->product_website);
     }
@@ -118,19 +136,28 @@ public function actionFilter($id)
 	public function actionProductRegisterSave()
 	{
 		//print_r($_POST['Product']);
-		/*$email = $_POST['Users']['username'];
+		$email = $_POST['Users']['username'];
+		
 		$user = Users::model()->findByAttributes(array('username'=>$email));
 
 		if($user)
 		{
 			$product = new Product;
 			$product->attributes = $_POST['Product'];
-			$product->status = 1;
 			$product->add_date = new CDbExpression('NOW()');
 			$product->user_id = $user->id;
-			$product->customer_count = 0;
-			$product->under_ppc = 0;
-			//$product->website = $_POST['Product']['']
+
+			if($product->save())
+			{
+				$product_id = $product->id;
+
+				foreach($_POST['Categories'] as $category)
+				{
+					$category_id = Categories::model()->findByAttributes(array('name'=>$category->name));
+
+					//create object of product has categories and save.
+				}
+			}
 
 
 		}
@@ -154,6 +181,8 @@ public function actionFilter($id)
 	public function actionProductProfile($id)
 	{
 		$product = Product::model()->findByPk($id);
+
+		$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
 
 		if($product)
 		{
@@ -201,6 +230,80 @@ public function actionFilter($id)
     return $ipaddress;
   }
 
+  public function actionProductReview($id)
+	{
+		$review = new Reviews;
+		$user = new Users;
+		$product = Product::model()->findByAttributes(array('id'=>$id));
+		$this->render('reviewsinput',array('review'=>$review,'user'=>$user,'product'=>$product));
+ 	}
+ 
+	public function actionProductReviewSave($id)
+	{
+		$response="";
+		$email = $_POST['Users']['username'];
+		x:  $user = Users::model()->findByAttributes(array('username'=>$email));
+		if($user)
+		{
+			$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id,'product_id'=>$id));
+			if(empty($review))
+			{
+				$review = new Reviews;
+				$review->attributes = $_POST['Reviews'];
+				$review->user_id = $user->id;
+				$review->product_id = $id;
+				$review->add_date = new CDbExpression('NOW()');
+				if($review->save())
+				{
+					$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id));
+					$categories=RatingCategories::model()->findAll();
+					foreach ($categories as $category)
+					{
+						$rating = new Ratings;
+						$rating->review_id = $review->id;
+						$rating->rating_category_id = $category->id;
+						$rating->rating = $_POST[$category->id];
+						$rating->add_date = new CDbExpression('NOW()');
+						$rating->save();
+					}
+					$response['userSaved'] = 1;
+					$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id));
+				}
+			}
+			else
+			{
+				$review->attributes = $_POST['Reviews'];
+				$review->modify_date = new CDbExpression('NOW()');
+				if($review->update())
+				{
+					foreach ($review->ratings as $rating)
+					{
+						$rating->rating = $_POST[$rating->ratingCategory->id];
+						$rating->modify_date = new CDbExpression('NOW()');
+						$rating->update();
+					}
+					$response['userUpdate']=2;
+					$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id));
+				}
+			}
+			echo json_encode($response);
+			die;
+		}
+		else
+		{
+			$m=Yii::app()->getSecurityManager()->generateRandomString(6);
+			$user = new Users;
+			$user->attributes = $_POST['Users'];
+			$user->password = base64_encode($m);
+			$user->role_id = 3;
+			$user->is_verified = 0;
+			$user->add_date = new CDbExpression('NOW()');
+			if($user>save())
+			{
+				goto x;
+			}
+		}
+	}
 }
 
 // Uncomment the following methods and override them if needed

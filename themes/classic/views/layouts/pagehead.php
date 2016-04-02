@@ -36,12 +36,12 @@
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/reset.css" rel="stylesheet">
 <link rel="shortcut icon" href="https://venturepact.com/favicon.ico">
 <!-- CSS -->
-<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/materialize.min.css">
 
 <!-- Compiled and minified JavaScript -->
 <link rel="stylesheet"  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/responsive.css" rel="stylesheet">
-<!--<link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/flexslider.css" rel="stylesheet">-->
+ <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<!--<link href="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/flexslider.css" rel="stylesheet">-->
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/font-awesome.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/simple-line-icons.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/c-hamburger.min.css" rel="stylesheet">
@@ -126,7 +126,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
 <?php echo $content; ?>
 <section class="section6">
     <div class="container">
-        <h3 class="our-res">Resources To Get You Started</h3>
+        <h2 class="our-res">Resources</h2>
         <div class="col-md-12 col-sm-12 col-xs-12 np">
             <div class="col-md-4 col-sm-6 col-xs-12 pl0 mb20 our-r">
                 <div class="col-sm-4 col-xs-4 pl0">
