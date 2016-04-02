@@ -2348,14 +2348,14 @@ Product Settings styles goes here!!!!!!!!!!
 }
 
 .main-wrap form.container-fluid div.row {
-    margin-top: 1em;
+    margin-top: 2em;
 }
 
 .main-wrap form.container-fluid div.row label {
     color: #aaaaaa;
-    padding: 0.8em 0;
+    padding: 0.9em 0;
     font-weight: 600;
-    font-size: 1.2em;
+    font-size: 1.1em;
     text-align: justify;
 }
 
@@ -2369,21 +2369,37 @@ Product Settings styles goes here!!!!!!!!!!
 }
 
 .input i {
-    width: 2%;
+    /*width: 2%;*/
+    height: 100%;
     padding: 1.2em 1em 0 1em;
     background: #f2f2f2;
 
     transition: all 0.3s ease-in;
 }
 
+.main-wrap form.container-fluid div.row:nth-of-type(2) div {
+    height: auto;
+}
 .input input {
-    width: 95%;
+    /*width: 95%;*/
     border: none;
     font-weight: 600;
     color: rgba(0,0,0,0.6);
     background: #f2f2f2;
-    padding: 1em 0 1em 0.5em;
+    padding: 1em 0 1em 0;
 
+    transition: all 0.3s ease-in;
+}
+
+.input textarea {
+    border: none;
+    resize: none;
+    padding: 1em;
+    height: 250px;
+    font-weight: 600;
+    text-align: justify;
+    background: #f2f2f2;
+    color: rgba(0,0,0,0.6);
     transition: all 0.3s ease-in;
 }
 
@@ -2397,6 +2413,7 @@ Product Settings styles goes here!!!!!!!!!!
     background: #fff;
 }
 
-.input:hover input {
+.input:hover input,
+.input:hover textarea {
     background: #fff;
 }
