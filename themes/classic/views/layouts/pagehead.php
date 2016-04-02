@@ -36,7 +36,10 @@
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/reset.css" rel="stylesheet">
 <link rel="shortcut icon" href="https://venturepact.com/favicon.ico">
 <!-- CSS -->
+<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/materialize.min.css">
 
+<!-- Compiled and minified JavaScript -->
+<link rel="stylesheet"  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/responsive.css" rel="stylesheet">
 <!--<link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/flexslider.css" rel="stylesheet">-->
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/font-awesome.min.css" rel="stylesheet">
