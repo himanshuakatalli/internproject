@@ -364,7 +364,7 @@ else
 			$customerSupport = $rating->rating;
 	}
 	?>
-	<section class="container-fluid" id="review">
+	<section class="section-white" id="review">
 		<div class="review-content">
 
 			<section class="container reviews">
