@@ -57,6 +57,7 @@
 <div class='smile'></div>
 </div> -->
 </div>
+<?php if(Yii::app()->user->isGuest): ?>
 <div class="form-row inputs half">
 	<h3>First Name</h3>
 	<div class="input-field">
@@ -105,6 +106,18 @@
 		<!-- <i class="material-icons right">send</i> -->
 	</div>
 </div>
+
+<?php else : ?>
+
+	<div class="form-row inputs">
+	<div class="input-field">
+		<?php echo CHtml::htmlButton('Submit',array('onclick'=>'send();','class'=>'btn waves-effect waves-light')); ?>
+		<!-- <i class="material-icons right">send</i> -->
+	</div>
+</div>
+
+<?php endif; ?>
+
 
 <?php $this->endWidget();?>
 </section>

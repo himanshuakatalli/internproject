@@ -233,7 +233,12 @@ public function actionFilter($id)
 	public function actionProductReviewSave($id)
 	{
 		$response="";
-		$email = $_POST['Users']['username'];
+
+		if(isset(Yii::app()->user->id))
+		$email = Yii::app()->user->id;
+		else
+			$email = $_POST['Users']['username'];
+
 		x:  $user = Users::model()->findByAttributes(array('username'=>$email));
 		if($user)
 		{
@@ -259,7 +264,7 @@ public function actionFilter($id)
 						$rating->save();
 					}
 					$response['userSaved'] = 1;
-					$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id));
+					$response['url'] = Yii::app()->createUrl('product/productprofile/',array('id'=>$id));
 				}
 			}
 			else
@@ -275,11 +280,10 @@ public function actionFilter($id)
 						$rating->update();
 					}
 					$response['userUpdate']=2;
-					$response['url'] = Yii::app()->createUrl('/productProfile/index/',array('id'=>$id));
+					$response['url'] = Yii::app()->createUrl('product/productprofile/',array('id'=>$id));
 				}
 			}
 			echo json_encode($response);
-			die;
 		}
 		else
 		{
@@ -290,7 +294,7 @@ public function actionFilter($id)
 			$user->role_id = 3;
 			$user->is_verified = 0;
 			$user->add_date = new CDbExpression('NOW()');
-			if($user>save())
+			if($user->save())
 			{
 				goto x;
 			}
