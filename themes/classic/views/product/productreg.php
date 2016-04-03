@@ -7,6 +7,7 @@
 		font-size: 14px;
 		margin-left: 15px;
 		margin-top: 18px;
+		hello
 	}
 </style>
 <div class="container pro">
@@ -82,10 +83,10 @@
 					{
 						array_push($categoryNames,$category->name);
 					}
-					
+
 					 echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"product_category",'required'=>'required','data-parsley-required-message'=>"Category is required"));
 				?>
-				
+
 			</div>
 		</div>
 		<div class="row">
@@ -154,8 +155,8 @@ function send()
 {
 	var validated = $("#formProdReg").parsley().validate();
 	if(validated)
-	{   
-		var data=$("#formProdReg").serialize();   
+	{
+		var data=$("#formProdReg").serialize();
 		console.log(data);
 		$.ajax({
 			type:'POST',

@@ -7,16 +7,15 @@ class ProductController extends Controller
 	   if(isset($_GET["value"]))
 	   {
 
-
       $catName = $_GET["value"];  // taking category name from querystring
       $categoryInfo = Categories::model()->findByAttributes(array('name'=>$catName));    //for getting category Info
 
-      $deployment = DeploymentFeatures::model()->findAll();  // for finding all deployment features 
+      $deployment = DeploymentFeatures::model()->findAll();  // for finding all deployment features
 
       $criteria=new CDbCriteria;                             //for finding products related to that category
 			$criteria->with = array('categories');
 			$criteria->addCondition('category_id= '.$categoryInfo->id);
-			$products = Product::model()->findAll($criteria);  
+			$products = Product::model()->findAll($criteria);
 
 			$criteria2=new CDbCriteria;                          // for finding features related to that category
 			$criteria2->with = array('categories');
@@ -27,12 +26,12 @@ class ProductController extends Controller
 	   	$this->render('product',array('products'=>$products,
 			'features'=>$features,'categoryInfo'=>$categoryInfo,
 			'deployment'=>$deployment));
-        
 
-     
+
+
 
 	   }
-      
+
 	}
 
 
@@ -42,7 +41,7 @@ public function actionFilter($id)
 		//CVarDumper::dump( $id,10,1);die;
 		$criteria=new CDbCriteria;                             //for finding products related to that category
 		$criteria->with = array('categories','features','deploymentFeatures');
-		$criteria->addCondition('category_id= '.$id);     
+		$criteria->addCondition('category_id= '.$id);
 		//adding conditions according to post request
 		if(isset($_POST['deploy']))
 		{
@@ -57,8 +56,8 @@ public function actionFilter($id)
 			$parts = explode('-', $_POST['nuser']);
 			$criteria->addCondition('customer_count >= '.$parts[0] . ' and customer_count <= '.$parts[1]);
 		}
-    
-		$products = Product::model()->findAll($criteria);  
+
+		$products = Product::model()->findAll($criteria);
 		$content = $this->renderPartial('_products',array('products'=>$products),true);
 		die(json_encode(array('content'=>$content,'success'=>1)));
 
@@ -69,21 +68,21 @@ public function actionFilter($id)
 	{
 		if(isset($_GET["key"]))
 		{
-			$criteria=new CDbCriteria;                            
+			$criteria=new CDbCriteria;
 			$criteria->with = array('productHasCategories');
-			$criteria->addCondition("name like '%".$_GET["key"]."%' or "."company_name like '%".$_GET["key"]."%' or "."description like '%".$_GET["key"]."%'" );    
+			$criteria->addCondition("name like '%".$_GET["key"]."%' or "."company_name like '%".$_GET["key"]."%' or "."description like '%".$_GET["key"]."%'" );
 
-			$products = Product::model()->findAll($criteria);  
+			$products = Product::model()->findAll($criteria);
 	    //CVarDumper::dump($products,10,1);die;
 			$this->render('search',array('products'=>$products));
-      
+
 		}
 	}
 
 
 
 	public function actionReferring($id)
-	{		
+	{
     $product = Product::model()->findByPk($id);
     //CVarDumper::dump($product,10,1);die;
     $pCookie = Yii::app()->request->cookies["P_".$id];
@@ -94,8 +93,8 @@ public function actionFilter($id)
     else
     {
       $pCookie = new CHttpCookie("P_".$id,'set' );
-			$pCookie->expire = time()+60*60*24; 
-			Yii::app()->request->cookies["P_".$id] = $pCookie; 
+			$pCookie->expire = time()+60*60*24;
+			Yii::app()->request->cookies["P_".$id] = $pCookie;
 			$tracking = new TrackingUser ;
 			$tracking ->product_id = $id;
 			$tracking ->user_ip = $this->get_client_ip();
@@ -106,21 +105,21 @@ public function actionFilter($id)
       if($queryGeoLoc && $queryGeoLoc['status'] == 'success')
       {
       	$tracking ->country = $queryGeoLoc['country'];
-      	$tracking ->country_code = $queryGeoLoc['country'];
-      	$tracking ->region = $queryGeoLoc['country'];
-      	$tracking ->region_name = $queryGeoLoc['country'];
-      	$tracking ->city = $queryGeoLoc['country'];
-      	$tracking ->zip = $queryGeoLoc['country'];
-      	$tracking ->latitude = $queryGeoLoc['country'];
-      	$tracking ->longitude = $queryGeoLoc['country'];
-      	$tracking ->timezone = $queryGeoLoc['country'];
-      	$tracking ->isp = $queryGeoLoc['country'];
-      	$tracking ->org = $queryGeoLoc['country'];
+      	$tracking ->country_code = $queryGeoLoc['countryCode'];
+      	$tracking ->region = $queryGeoLoc['region'];
+      	$tracking ->region_name = $queryGeoLoc['regionName'];
+      	$tracking ->city = $queryGeoLoc['city'];
+      	$tracking ->zip = $queryGeoLoc['zip'];
+      	$tracking ->latitude = $queryGeoLoc['lat'];
+      	$tracking ->longitude = $queryGeoLoc['lon'];
+      	$tracking ->timezone = $queryGeoLoc['timezone'];
+      	$tracking ->isp = $queryGeoLoc['isp'];
+      	$tracking ->org = $queryGeoLoc['org'];
       }
-      else 
+      else
       {
         $tracking ->status_geo = 0;
-      }      
+      }
 			$tracking ->save();
       CController:: redirect('http://'.$product->product_website);
     }
@@ -131,25 +130,34 @@ public function actionFilter($id)
 		$user = new Users;
 		$product = new Product;
 		$category = new Categories;
-		$this->render('productreg',array('users'=>$user,'product'=>$product,'category'=>$category));
+		return $this->render('product_register',array('users'=>$user,'product'=>$product,'category'=>$category));
 	}
 
-	public function actionProductRegisterSave()
+	/*public function actionProductRegisterSave()
 	{
 		//print_r($_POST['Product']);
-		/*$email = $_POST['Users']['username'];
+		$email = $_POST['Users']['username'];
+
 		$user = Users::model()->findByAttributes(array('username'=>$email));
 
 		if($user)
 		{
 			$product = new Product;
 			$product->attributes = $_POST['Product'];
-			$product->status = 1;
 			$product->add_date = new CDbExpression('NOW()');
 			$product->user_id = $user->id;
-			$product->customer_count = 0;
-			$product->under_ppc = 0;
-			//$product->website = $_POST['Product']['']
+
+			if($product->save())
+			{
+				$product_id = $product->id;
+
+				foreach($_POST['Categories'] as $category)
+				{
+					$category_id = Categories::model()->findByAttributes(array('name'=>$category->name));
+
+					//create object of product has categories and save.
+				}
+			}
 
 
 		}
@@ -164,11 +172,11 @@ public function actionFilter($id)
 			$user->add_date = new CDbExpression('NOW()');
 			if($user->save())
 			{
-				
-			}
-		}*/
 
-	}
+			}
+		}
+
+	}*/
 
 	public function actionProductProfile($id)
 	{
@@ -199,10 +207,10 @@ public function actionFilter($id)
 	}
 
 
-	
 
 
-	public function get_client_ip() 
+
+	public function get_client_ip()
   {
     $ipaddress = '';
     if (isset($_SERVER['HTTP_CLIENT_IP']))
@@ -229,7 +237,7 @@ public function actionFilter($id)
 		$product = Product::model()->findByAttributes(array('id'=>$id));
 		$this->render('reviewsinput',array('review'=>$review,'user'=>$user,'product'=>$product));
  	}
- 
+
 	public function actionProductReviewSave($id)
 	{
 		$response="";
