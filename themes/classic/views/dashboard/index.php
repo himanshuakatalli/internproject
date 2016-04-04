@@ -1,7 +1,10 @@
 <section class="wrapper">
   
 </section>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript">
+  $('#dashboard').addClass('active');
+</script>
 <!--<section class="wrapper">
   <div class="row">
     <div class="main-chart">

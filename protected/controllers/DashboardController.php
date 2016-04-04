@@ -33,7 +33,7 @@ class DashboardController extends Controller
                 'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('index','productsetting'),
+                'actions'=>array('index','productsetting','usersetting'),
                 'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -57,30 +57,14 @@ public function actionProductsetting()
         $this->layout="dashboard/main";
         $this->render('productsetting');
     }
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
-	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
+public function actionUsersetting()
+    {
+        $user = new Users;
+        $this->layout="dashboard/main";
+        return $this->render('usersetting',array('users'=>$user));
+    }
+    public function actionSave()
+    {
+        $usr=new Users;
+    }
 }

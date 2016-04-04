@@ -39,11 +39,10 @@
     <!--external css-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/lineicons/style.css">
-
     <!-- Custom styles for this template -->
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/style.css" rel="stylesheet">
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/style-responsive.css" rel="stylesheet">
-
+    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/dash-style.css" rel="stylesheet">
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/chart-master/Chart.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -87,32 +86,32 @@
                 <?php echo Yii::app()->user->fname;?>
               </h5>
               <li class="mt">
-                <a class="active" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
+                <a id="dashboard" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
                   <i class="fa fa-dashboard"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
 
               <li>
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#addNewProduct">
+                <a id="addProduct" href="javascript:void(0);" data-toggle="modal" data-target="#addNewProduct">
                   <i class="fa fa-plus"></i>
                   <span>Add Product</span>
                 </a>
               </li>
 
               <li class="sub-menu">
-                <a href="#" >
+                <a id="editProduct" href="#" >
                   <i class="fa fa-pencil"></i>
                   <span>Edit Product</span>
                 </a>
                 <ul class="sub">
-                  <li><a  href="<?php echo Yii::app()->createUrl('/dashboard/Productsetting');?>">Product A</a></li>
+                  <li><a href="<?php echo Yii::app()->createUrl('/dashboard/Productsetting');?>">Product A</a></li>
                   <li><a  href="#">Product B</a></li>
                   <li><a  href="#">Product C</a></li>
                 </ul>
               </li>
               <li>
-                <a href="javascript:;" >
+                <a id="userSettings" href="<?php echo Yii::app()->createUrl('/dashboard/Usersetting');?>" >
                   <i class="fa fa-cogs"></i>
                   <span>User Account Settings</span>
                 </a>
