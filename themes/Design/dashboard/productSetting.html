@@ -140,9 +140,25 @@
 									<div class="row">
 										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Category:</label>
 										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
-											<i class="fa fa-product-hunt fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											<i class="fa fa-codiepie fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 											</i>
-					            <select id="category" name="multiselect[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+					            <select id="category" name="category[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+					              <option value="1">Option 1</option>
+					              <option value="2">Option 2</option>
+					              <option value="3">Option 3</option>
+					              <option value="4">Option 4</option>
+					              <option value="5">Option 5</option>
+					              <option value="6">Option 6</option>
+					          </select>
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Features:</label>
+										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+											<i class="fa fa-tasks fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+					            <select id="features" name="features[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
 					              <option value="1">Option 1</option>
 					              <option value="2">Option 2</option>
 					              <option value="3">Option 3</option>
@@ -375,6 +391,9 @@
 	    $(document).ready(function() {
 	        $('#category').multiselect({
 	            enableFiltering: true
+	        });
+	        $('#features').multiselect({
+	        	enableFiltering: true
 	        });
 	    });
 		</script>
