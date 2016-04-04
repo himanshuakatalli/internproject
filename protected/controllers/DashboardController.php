@@ -33,7 +33,7 @@ class DashboardController extends Controller
                 'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('index','productsetting'),
+                'actions'=>array('index','productsetting','usersetting'),
                 'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,6 +56,11 @@ public function actionProductsetting()
     {
         $this->layout="dashboard/main";
         $this->render('productsetting');
+    }
+public function actionUsersetting()
+    {
+        $this->layout="dashboard/main";
+        $this->render('usersetting');
     }
 	// Uncomment the following methods and override them if needed
 	/*
