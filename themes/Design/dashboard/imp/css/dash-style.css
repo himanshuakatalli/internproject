@@ -2394,15 +2394,15 @@ Product Settings styles goes here!!!!!!!!!!
     transition: all 0.3s ease-in;
 }
 
-.input select[id="category"] {
+.input select {
   width: 100% !important;
   background: #fff !important;
 }
 
-.input select[id="category"] ~ div.btn-group {
+.input select ~ div.btn-group {
   width: 91.66% !important;
 }
-.input select[id="category"] ~ div.btn-group button {
+.input select ~ div.btn-group button {
   border: 0;
   border-radius: 0;
   padding: 0.85em 0;
@@ -2413,23 +2413,23 @@ Product Settings styles goes here!!!!!!!!!!
   transition: all 0.3s ease-in;
 }
 
-.input select[id="category"] ~ div.btn-group button:hover {
+.input select ~ div.btn-group button:hover {
   background: #fff;
 }
 
-.input select[id="category"] ~ div.btn-group button:focus {
+.input select ~ div.btn-group button:focus {
   background: #fff;
   box-shadow: none !important;
 }
 
-.input select[id="category"] ~ div.btn-group ul {
+.input select ~ div.btn-group ul {
   width: 100% !important;
   background: #fff;
   border-radius: 0;
 }
 
 
-.input select[id="category"] ~ div.btn-group ul li.multiselect-item > .input-group {
+.input select ~ div.btn-group ul li.multiselect-item > .input-group {
   margin: 0 !important;
   width: 100% !important;
   padding: 0 1em;
@@ -2437,30 +2437,30 @@ Product Settings styles goes here!!!!!!!!!!
   border-bottom: 1px solid #7ececa;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:first-of-type div span {
+.input select ~ div.btn-group ul li:first-of-type div span {
   display: none;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:first-of-type div {
+.input select ~ div.btn-group ul li:first-of-type div {
   padding: 0 1em;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:first-of-type div input.form-control {
+.input select ~ div.btn-group ul li:first-of-type div input.form-control {
   height: 3em;
   margin: 0 auto;
   outline: none;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:first-of-type div input.form-control:focus {
+.input select ~ div.btn-group ul li:first-of-type div input.form-control:focus {
   outline: none;
   box-shadow: none;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:not(:first-of-type) a{
+.input select ~ div.btn-group ul li:not(:first-of-type) a{
   padding: 0 1em;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:not(:first-of-type) input{
+.input select ~ div.btn-group ul li:not(:first-of-type) input{
   display: none;
 }
 

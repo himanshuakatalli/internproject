@@ -84,7 +84,7 @@
           <ul class="sidebar-menu" id="nav-accordion">
             <p class="centered"><a href="#"><img src="<?php echo (!empty(Yii::app()->user->image))?Yii::app()->user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
               <h5 class="centered">
-                <?php echo Yii::app()->user->fname;?>
+              <?php echo Yii::app()->user->fname;?>
               </h5>
               <li class="mt">
                 <a class="active" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
@@ -137,7 +137,7 @@
       </footer>
     <!--footer end-->
     </section>
-    
+
   <div id="addNewProduct" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -175,7 +175,7 @@
               echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'class'=>'form-control'));
               ?>
             </div><br>
-            
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger">Reset</button>
@@ -196,12 +196,15 @@
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/common-scripts.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/sparkline-chart.js"></script>
 
-    
+
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/prettify.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/bootstrap-multiselect.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $('#category').multiselect({
+      enableFiltering: true
+    });
+    $('#features').multiselect({
       enableFiltering: true
     });
     $("#formAddNewProduct").parsley().validate();

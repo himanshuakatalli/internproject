@@ -7,8 +7,7 @@
 		<meta name="author" content="Dashboard">
 		<meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-		<title>DASHGUM - FREE Bootstrap Admin Template</title>
-
+		<title>VenturePact</title>
 		<!-- Bootstrap core CSS -->
 		<link href="imp/css/bootstrap.css" rel="stylesheet">
 		<!--external css-->
@@ -62,7 +61,7 @@
 						</li>
 
 						<li>
-							<a href="javascript:;" >
+							<a href="javascript:void(0);" data-toggle="modal" data-target="#addNewProduct">
 								<i class="fa fa-plus"></i>
 								<span>Add Product</span>
 							</a>
@@ -277,11 +276,74 @@
 		<script src="imp/js/jquery.nicescroll.js" type="text/javascript"></script>
 		<script src="imp/js/jquery.sparkline.js"></script>
 		<script src="imp/js/common-scripts.js"></script>
-<<<<<<< HEAD
-
-		<!--script for this page-->
-=======
->>>>>>> 27d8de67d291f42ce9f4b333149fbad4aad5826e
 		<script src="imp/js/sparkline-chart.js"></script>
+		<div id="addNewProduct" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Add New Product</h4>
+        </div>
+        <form id="formAddNewProduct" class="panel-default" data-parsley-validate="data-parsley-validate">
+          <div class="modal-body">
+          <label>Product Name</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-star-empty"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Product Name" id="productName">
+            </div><br>
+            <label>Product Website</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Product's Website" id="productWebsite"></input>
+            </div><br>
+            <label>Product Description</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <textarea class="form-control" placeholder="Product Description" id="productDescription"></textarea>
+            </div><br>
+            <label>Select a Category</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-codiepie"></i>
+              </span>
+              <select class="form-control" id="countryName">
+              	<option>Select</option>
+              	<option>Accounting</option>
+              	<option>ERP</option>
+              </select>
+            </div><br>
+            <label>Starting Price</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-money"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Product's Starting Price" id="startingPrice">
+            </div><br>
+            <label>Country</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-globe"></i>
+              </span>
+              <select class="form-control" id="countryName">
+              	<option>Select</option>
+              	<option>India</option>
+              	<option>England</option>
+              </select>
+            </div><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger">Reset</button>
+            <button type="button" class="btn btn-primary">Add</button>
+          </div>
+         </form>
+      </div>
+    </div>
+  </div>
 	</body>
 </html>
