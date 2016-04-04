@@ -54,9 +54,15 @@ public function actionIndex()
     }
 public function actionProductsetting()
     {
+        $id=3;
         $this->layout="dashboard/main";
-        $product=new product;
+        $product=Product::model()->findByPk($id);
+        if(isset($_POST['product']))
+         {
 
+
+
+         }
         $this->render('productsetting',array('product'=>$product));
     }
 public function actionUsersetting()
