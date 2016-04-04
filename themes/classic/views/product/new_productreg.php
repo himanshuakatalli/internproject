@@ -17,33 +17,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <?php $form = $this->beginWidget('CActiveForm',array('id'=>'add_project','enableClientValidation'=>true,'htmlOptions'=>array('class'=>'container-fluid')));?>
   <section class="container prod-reg-container">
     <hgroup class="row">
       <h1>Create a free listing on VenturePact</h1>
       <hr class="center-half">
     </hgroup>
-    <form class="container-fluid">
-
+    <!-- <form class="container-fluid"> -->
+    <div class="container-fluid">
 
       <h2>About You</h2>
       <div class="row">
         <div class="input-half">
           <i class="fa fa-user col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-          <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="first_name" placeholder="First Name">
+          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="first_name" placeholder="First Name"> -->
+          <?php echo $form->textField($user,'first_name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'First Name'));?>
         </div>
         <div class="input-half float-right">
           <i class="fa fa-user col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-          <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="last_name" placeholder="Last Name">
+          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="last_name" placeholder="Last Name"> -->
+          <?php echo $form->textField($user,'last_name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Last Name'));?>
         </div>
       </div>
       <div class="row">
         <div class="input-half">
           <i class="fa fa-envelope col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-          <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="email" name="email" placeholder="Email">
+          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="email" name="email" placeholder="Email"> -->
+          <?php echo $form->emailField($user,'username',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Email'));?>
         </div>
         <div class="input-half float-right">
           <i class="fa fa-phone col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-          <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="mobile" placeholder="Mobile Number">
+          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="mobile" placeholder="Mobile Number"> -->
+          <?php echo $form->textField($user,'phone_number',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Mobile Number'));?>
         </div>
       </div>
 
@@ -52,34 +57,43 @@
           <input type="button" value="Company Detail" id="user"></input>
         </div>
       </div>
-		</form>	
+      
+		<!-- </form>	 -->
 		</section>
 					
 	<section class="container prod-reg-container" id="about_company" style="display: none">
-	<form class="container-fluid">
+	<!-- <form class="container-fluid"> -->
+	
+	      
 	      <h2>About Your Company</h2>
 	      <div class="row">
 	        <div class="input-half">
 	          <i class="fa fa-building col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-	          <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="company_name" placeholder="Company Name">
+	          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="company_name" placeholder="Company Name"> -->
+	          <?php echo $form->textField($product,'company_name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'company_name'));?>
 	        </div>
 	        <div class="input-half float-right">
 	          <i class="fa fa-globe col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-	          <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+	          <!-- <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
 	            <option>Select Country</option>
 	            <option>Afghan</option>
 	            <option>India</option>
-	          </select>
+	          </select> -->
+	          <?php 
+	          	$countries = array('India'=>'India','Pakistan'=>'Pakistan','Australia'=>'Australia');
+	          	echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
 	        </div>
 	      </div>
 	      <div class="row">
 	        <div class="input-half">
 	          <i class="fa fa-internet-explorer col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-	          <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="email" name="company_website" placeholder="Company's Website">
+	          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="email" name="company_website" placeholder="Company's Website"> -->
+	          <?php echo $form->textField($product,'company_website',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Company Website'));?>
 	        </div>
 	        <div class="input-half float-right">
 	          <i class="fa fa-calendar col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-	          <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="founding_year" placeholder="Company's Founding Year">
+	          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="founding_year" placeholder="Company's Founding Year"> -->
+	          <?php echo $form->textField($product,'founding_year',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Founding Year'));?>
 	        </div>
 	      </div>
 	      <div class="row">
@@ -87,60 +101,82 @@
           <input type="button" value="Product Detail" id="company"></input>
         </div>
       </div>
-	      </form>
+      
+	      <!-- </form> -->
 	    </section>
 
 		<section class="container prod-reg-container" id="about_product" style="display: none">
-		<form class="container-fluid">
+		<!-- <form class="container-fluid"> -->
+		
+
      <h2>About Your Product</h2>
      <div class="row">
        <div class="input-half">
          <i class="fa fa-product-hunt col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="product_name" placeholder="Product's Name">
+         <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="product_name" placeholder="Product's Name"> -->
+         <?php echo $form->textField($product,'name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Product Name'));?>
+
        </div>
        <div class="input-half float-right">
          <i class="fa fa-internet-explorer col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="product_website" placeholder="Product's Website">
+         <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="product_website" placeholder="Product's Website"> -->
+         <?php echo $form->textField($product,'product_website',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Product Website'));?>
        </div>
      </div>
      <div class="row">
        <div class="input-full">
          <i class="fa fa-bars col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         <textarea class="col-lg-11 col-md-11 col-sm-11 col-xs-11" placeholder="Product's Description"></textarea>
+         <!-- <textarea class="col-lg-11 col-md-11 col-sm-11 col-xs-11" placeholder="Product's Description"></textarea> -->
+         <?php echo $form->textArea($product,'description',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Product Description'));?>
        </div>
      </div>
      <div class="row">
        <div class="input-half resp-half">
          <i class="fa fa-codiepie col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+         <!-- <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
            <option>Select a category</option>
            <option>360 Hosting</option>
            <option>Accouting</option>
-         </select>
+         </select> -->
+         <?php
+         	$categories = Categories::model()->findAll();
+         	
+         	$list = CHtml::listData($categories,'id','name');
+         	
+         	echo $form->dropDownList($category,'id',$list,array('prompt'=>'Select Category','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));
+
+         	/*$data= CHtml::listData(Categories::model()->findAll(), 'id', 'name');
+         	echo $form->widget('ext.EchMultiSelect.EchMultiSelect', array('model'=>$category,
+         		'dropDownAttribute'=>'name','data'=>$data,'dropDownHtmlOptions'=>array('style'=>'width:378px;')));*/
+         ?>
        </div>
        <div class="input-half float-right">
          <i class="fa fa-users col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="user_count" placeholder="Average Customer Count">
+         <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="user_count" placeholder="Average Customer Count"> -->
+         <?php echo $form->textField($product,'customer_count',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Average Customer Count'));?>
        </div>
      </div>
     <div class="row">
       <div class="input-half-radio">
-         <input type="radio" id="trial0" name="trial" checked></input>
+         <input type="radio" id="trial0" name="trial" value="trial" checked></input>
          <label for="trial0" class="col-lg-6">Trial Available</label>
-         <input type="radio" id="trial1" name="trial"></input>
+         <input type="radio" id="trial1" name="trial" value="no_trial"></input>
          <label for="trial1" class="col-lg-6">No Trial Available</label>
+         <!-- <?php echo $form->radioButtonList($product,'has_trial',array('trial'=>'Has Trial','no_trial'=>'No Trial Available'),array('labelOptions'=>array('class'=>'col-lg-6'),'separator'=>''));?> -->
       </div>
       <div class="input-half-radio float-right">
-         <input type="radio" id="free0" name="free_version" checked></input>
+         <input type="radio" id="free0" name="free_version" value="free" checked></input>
          <label for="free0" class="col-lg-6">Has Free Version</label>
-         <input type="radio" id="free1" name="free_version"></input>
+         <input type="radio" id="free1" name="free_version" value="no_free"></input>
          <label for="free1" class="col-lg-6">Only Paid</label>
+         <!-- <?php echo $form->radioButtonList($product,'has_free_version',array('free'=>'Has Free Version','no_free'=>'Only Paid'),array('labelOptions'=>array('class'=>'col-lg-6'),'separator'=>''));?> -->
        </div>
     </div>
      	<div class="row">
        <div class="input-half">
          <i class="fa fa-money col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="starting_price" placeholder="Product's Starting Price">
+         <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="starting_price" placeholder="Product's Starting Price"> -->
+         <?php echo $form->textField($product,'starting_price',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Starting Prie'));?>
        </div>
      	</div>
      	<div class="row">
@@ -148,11 +184,14 @@
           <input type="button" value="Deployment Detail" id="product"></input>
         </div>
       </div>
-     </form>
+     <!-- </form> -->
+     
      </section>
 
     <section class="container prod-reg-container" id="product_deployment" style="display: none">
-		<form class="container-fluid">
+		<!-- <form class="container-fluid"> -->
+		
+
      <h2>Product's Deployment Type</h2>
      	<div class="row">
        	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 input-triad">
@@ -179,39 +218,49 @@
           <input type="button" value="Media Link Detail" id="deployment"></input>
         </div>
       </div>
-     </form>
+     <!-- </form> -->
+     
      </section>
      
 		<section class="container prod-reg-container" id="media_link" style="display: none">
-		<form class="container-fluid">
+		<!-- <form class="container-fluid"> -->
+		
+
      	<h2>Product's Social Media Link</h2>
      	<div class="row">
       	<div class="input-half">
          <i class="fa fa-google-plus col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="googleplus" placeholder="GooglePlus Link">
+         <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="googleplus" placeholder="GooglePlus Link"> -->
+         <?php echo $form->textField($product,'googleplus_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'GooglePlus Link'));?>
        	</div>
        	<div class="input-half float-right">
          <i class="fa fa-facebook-f col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="facebook" placeholder="Facebook Link">
+         <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="facebook" placeholder="Facebook Link"> -->
+         <?php echo $form->textField($product,'facebook_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Facebook Link'));?>
        	</div>
      	</div>
      	<div class="row">
        	<div class="input-half">
         	<i class="fa fa-linkedin col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-        	<input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="linkedin" placeholder="Linkedin Link">
+        	<!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="linkedin" placeholder="Linkedin Link"> -->
+        	<?php echo $form->textField($product,'linkedin_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Linkedin Link'));?>
        	</div>
        	<div class="input-half float-right">
          	<i class="fa fa-youtube col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         	<input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="youtube" placeholder="Youtube Link">
+         	<!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="youtube" placeholder="Youtube Link"> -->
+         	<?php echo $form->textField($product,'youtube_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Youtube Link'));?>
        	</div>
      	</div>
      <div class="row">
        <div class="input-half-submit">
-         <input type="button" value="Create my free listing" name="submit"></input>
+         <!-- <input type="button" value="Create my free listing" name="submit"></input> -->
+         <?php echo CHtml::htmlButton('Create Free Listing',array('onclick'=>'send();','class'=>'btn btn-primary submit-final')); ?>
        </div>
      </div>
-  </form>
+  <!-- </form> -->
+  </div>
   </section>
+  <?php $this->endWidget();?>
 </body>
 <script type="text/javascript">
  $(document).ready(function() {
@@ -255,8 +304,27 @@
         scrollTop: $('#media_link').css('top')
     }, 1000)
 	});
-
-
 });
+
+ function send()
+ {
+ 	alert("Hello");
+
+ 	var data = $("#add_project").serialize();
+ 	console.log(data);
+ 	$.ajax({
+ 		type: 'POST',
+ 		url: '<?php echo Yii::app()->createUrl("product/ProductRegisterSave"); ?>',
+ 		data: data,
+ 		success: function(data)
+ 		{
+ 			alert("success");
+ 		},
+ 		error: function(data)
+ 		{
+ 			alert("failed");
+ 		}
+ 	})
+ }
 </script>
 </html>
