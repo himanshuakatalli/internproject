@@ -84,7 +84,7 @@
           <ul class="sidebar-menu" id="nav-accordion">
             <p class="centered"><a href="#"><img src="<?php echo (!empty(Yii::app()->user->image))?Yii::app()->user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
               <h5 class="centered">
-                <?php echo Yii::app()->user->fname;?>
+              <?php echo Yii::app()->user->fname;?>
               </h5>
               <li class="mt">
                 <a class="active" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
