@@ -17,16 +17,12 @@
 		<link rel="stylesheet" type="text/css" href="imp/lineicons/style.css">
 
 		<!-- Custom styles for this template -->
-		<link href="imp/css/dash-style.css" rel="stylesheet">
 		<link href="imp/css/style-responsive.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="imp/css/tabs.css">
+		<link rel="stylesheet" type="text/css" href="imp/css/bootstrap-multiselect.css">
+		<link rel="stylesheet" type="text/css" href="imp/css/prettify.css">
+		<link href="imp/css/dash-style.css" rel="stylesheet">
 		<script src="imp/js/chart-master/Chart.js"></script>
-
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
 	</head>
 
 	<body>
@@ -71,19 +67,8 @@
 
 						<li class="sub-menu">
 							<a href="javascript:;" >
-								<i class="fa fa-product-hunt"></i>
-								<span>List Products</span>
-							</a>
-							<ul class="sub">
-								<li class="active"><a  href="#">Product A</a></li>
-								<li><a  href="#">Product B</a></li>
-								<li><a  href="#">Product C</a></li>
-							</ul>
-						</li>
-						<li class="sub-menu">
-							<a href="javascript:;" >
 								<i class="fa fa-cog"></i>
-								<span>Product Settings</span>
+								<span>Products</span>
 							</a>
 							<ul class="sub">
 								<li><a  href="#">Product A</a></li>
@@ -91,6 +76,7 @@
 								<li><a  href="#">Product C</a></li>
 							</ul>
 						</li>
+
 						<li>
 							<a href="javascript:;" >
 								<i class="fa fa-cogs"></i>
@@ -109,25 +95,164 @@
 				<div class="row">
 					<aside class="full-height">
 						<ul>
-							<li><a href="#">Product Information</a></li>
-							<li><a href="#">Company Information</a></li>
-							<li><a href="#">Social Media Links</a></li>
-							<li><a href="#">Transactions</a></li>
+							<li><a href="#product_information">Product Information</a></li>
+							<li><a href="#company_information">Company Information</a></li>
+							<li><a href="#social_media">Social Media Links</a></li>
+							<li><a href="#transactions">Transactions</a></li>
 						</ul>
 					</aside>
 					<main class="main-wrap">
-						<div>
-							<div class="row">
-								<h4>Account Information</h4>
+						<div class="prod-edit-container">
+							<div class="row" id="product_information">
+								<h4>Product Information</h4>
 								<figure><img src="imp/img/friends/fr-01.jpg" alt="product logo"></figure>
 								<form class="container-fluid" id="product_information">
+
 									<div class="row">
-										<label class="col-lg-2">Product Name:</label>
-										<div class="input col-lg-10">
-											<i class="fa fa-product-hunt fa-1x">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Name:</label>
+										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+											<i class="fa fa-product-hunt fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 											</i>
-											<input type="text">
+											<input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="product_name" value="Salesforce">
 										</div>
+									</div>
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Description:</label>
+										<div class="input col-lg-10">
+											<i class="fa fa-bars fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+											<textarea class="col-lg-11 col-md-1 col-sm-1 col-xs-1" name="product_description">Bla... Bla...</textarea>
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Website:</label>
+										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+											<i class="fa fa-globe fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+											<input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Category:</label>
+										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+											<i class="fa fa-product-hunt fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+					            <select id="category" name="multiselect[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+					              <option value="1">Option 1</option>
+					              <option value="2">Option 2</option>
+					              <option value="3">Option 3</option>
+					              <option value="4">Option 4</option>
+					              <option value="5">Option 5</option>
+					              <option value="6">Option 6</option>
+					          </select>
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Customers:</label>
+										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+											<i class="fa fa-users fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+											<input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Price:</label>
+										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+											<i class="fa fa-money fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+											<input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Pricing Details:</label>
+										<div class="input col-lg-10">
+											<i class="fa fa-money fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+											<textarea class="col-lg-11 col-md-1 col-sm-1 col-xs-1" name="pricing_details">Bla... Bla...</textarea>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="input-full-radio">
+						          <input type="radio" id="ppc0" name="ppc" checked></input>
+						          <label for="ppc0" class="col-lg-6">PPC</label>
+						          <input type="radio" id="ppc1" name="ppc"></input>
+						          <label for="ppc1" class="col-lg-6">No PPC</label>
+						        </div>
+									</div>
+
+									<div class="row">
+										<div class="input-full-radio">
+						          <input type="radio" id="trial0" name="trial" checked></input>
+						          <label for="trial0" class="col-lg-6">Trial Available</label>
+						          <input type="radio" id="trial1" name="trial"></input>
+						          <label for="trial1" class="col-lg-6">No Trial Available</label>
+						        </div>
+									</div>
+
+									<div class="row">
+										<div class="input-full-radio">
+						          <input type="radio" id="free0" name="free_version" checked></input>
+						          <label for="free0" class="col-lg-6">Has Free Version</label>
+						          <input type="radio" id="free1" name="free_version"></input>
+						          <label for="free1" class="col-lg-6">Only Paid</label>
+						        </div>
+									</div>
+
+									 <div class="row">
+						        <div class="col-lg-4 submit-part">
+						          <input type="submit" value="Save" name="submit"></input>
+						        </div>
+						      </div>
+								</form>
+							</div>
+
+							<div class="row" id="company_information">
+								<h4>Company Information</h4>
+								<form class="container-fluid" id="product_information">
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Name:</label>
+										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+											<i class="fa fa-building fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+											<input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="product_name" value="Salesforce">
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Website:</label>
+										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+											<i class="fa fa-globe fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+											<input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="product_name" value="Salesforce">
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Founding Year:</label>
+										<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+											<i class="fa fa-calendar-o fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+											</i>
+											<input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="product_name" value="Salesforce">
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="input-dash-full resp-half">
+						          <i class="fa fa-codiepie col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+						          <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+						            <option>Select a Country</option>
+						            <option>Amazon</option>
+						            <option>Ghana</option>
+						          </select>
+						        </div>
 									</div>
 								</form>
 							</div>
@@ -154,6 +279,8 @@
 		<script src="imp/js/jquery.js"></script>
 		<script src="imp/js/jquery-1.8.3.min.js"></script>
 		<script src="imp/js/bootstrap.min.js"></script>
+		<script src="imp/js/prettify.js"></script>
+		<script src="imp/js/bootstrap-multiselect.js"></script>
 		<script class="include" type="text/javascript" src="imp/js/jquery.dcjqaccordion.2.7.js"></script>
 		<script src="imp/js/jquery.scrollTo.min.js"></script>
 		<script src="imp/js/jquery.nicescroll.js" type="text/javascript"></script>
@@ -165,5 +292,12 @@
 
 		<!--script for this page-->
 		<script src="imp/js/sparkline-chart.js"></script>
+		<script type="text/javascript">
+	    $(document).ready(function() {
+	        $('#category').multiselect({
+	            enableFiltering: true
+	        });
+	    });
+		</script>
 	</body>
 </html>

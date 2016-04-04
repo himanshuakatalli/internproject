@@ -1,14 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/productReg.css" rel="stylesheet">
-<style type="text/css">
-	.search-close {
-		color: #738b99;
-		display: inline-block;
-		font-size: 14px;
-		margin-left: 15px;
-		margin-top: 18px;
-	}
-</style>
 <div class="container pro">
 	<h1>Create a free listing on VenturePact</h1>
 	<hr class="center-half">
@@ -74,18 +65,13 @@
 				<label for="product_name">Product Name</label>
 			</div>
 			<div class="col-md-6 input-field">
-				<!--  <input type="text" id="product_category" name="product_category" required data-parsley-required-message="Category is required"> -->
 				<?php
 					$categories = Categories::model()->findAll();
 					$categoryNames = array();
 					foreach ($categories as $category)
-					{
 						array_push($categoryNames,$category->name);
-					}
-					
 					 echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"product_category",'required'=>'required','data-parsley-required-message'=>"Category is required"));
 				?>
-				
 			</div>
 		</div>
 		<div class="row">
@@ -144,18 +130,19 @@
 	</div>
 	<?php $this->endWidget(); ?>
 </div>
-</form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 
 <script type="text/javascript">
-
+$(document).ready(function() {
+    $('select').material_select();
+  });
 function send()
 {
 	var validated = $("#formProdReg").parsley().validate();
 	if(validated)
-	{   
-		var data=$("#formProdReg").serialize();   
+	{
+		var data=$("#formProdReg").serialize();
 		console.log(data);
 		$.ajax({
 			type:'POST',

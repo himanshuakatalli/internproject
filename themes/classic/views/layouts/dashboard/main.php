@@ -50,6 +50,13 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+    footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+    </style>
   </head>
   <body>
     <section id="container" >
@@ -80,37 +87,26 @@
                 <?php echo Yii::app()->user->fname;?>
               </h5>
               <li class="mt">
-                <a class="active" href="index.html">
+                <a class="active" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
                   <i class="fa fa-dashboard"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
 
               <li>
-                <a href="javascript:;" >
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#addNewProduct">
                   <i class="fa fa-plus"></i>
                   <span>Add Product</span>
                 </a>
               </li>
 
               <li class="sub-menu">
-                <a href="javascript:;" >
-                  <i class="fa fa-product-hunt"></i>
-                  <span>List Products</span>
-                </a>
-                <ul class="sub">
-                  <li class="active"><a  href="#">Product A</a></li>
-                  <li><a  href="#">Product B</a></li>
-                  <li><a  href="#">Product C</a></li>
-                </ul>
-              </li>
-              <li class="sub-menu">
-                <a href="javascript:;" >
+                <a href="#" >
                   <i class="fa fa-cog"></i>
                   <span>Product Settings</span>
                 </a>
                 <ul class="sub">
-                  <li><a  href="#">Product A</a></li>
+                  <li><a  href="<?php echo Yii::app()->createUrl('/dashboard/Productsetting');?>">Product A</a></li>
                   <li><a  href="#">Product B</a></li>
                   <li><a  href="#">Product C</a></li>
                 </ul>
@@ -141,14 +137,75 @@
       </footer>
     <!--footer end-->
     </section>
-    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js" async ></script>
+    
+  <div id="addNewProduct" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Add New Product</h4>
+        </div>
+        <?php $form=$this->beginWidget('CActiveForm', array('id'=>"formAddNewProduct",'htmlOptions'=>array('class'=>"panel-default",'data-parsley-validate'=>'data-parsley-validate')));?>
+          <div class="modal-body">
+            <label>Product Name</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-star-empty"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Product Name" id="productName">
+            </div><br>
+            <label>Product Description</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </span>
+              <textarea class="form-control" placeholder="Product Description" id="productDescription"></textarea>
+            </div><br>
+            <label>Product Category</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-bookmark"></i>
+              </span>
+              <?php
+              $categories = Categories::model()->findAll();
+              $categoryNames = array();
+              array_push($categoryNames, "Select Category");
+              foreach ($categories as $category)
+                array_push($categoryNames,$category->name);
+              echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'class'=>'form-control'));
+              ?>
+            </div><br>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger">Reset</button>
+            <button type="button" class="btn btn-primary">Add</button>
+          </div>
+        <?php $this->endWidget(); ?>
+      </div>
+    </div>
+  </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.9.1.min.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.scrollTo.min.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.sparkline.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/common-scripts.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/sparkline-chart.js"></script>
+
+    
+<script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/prettify.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/bootstrap-multiselect.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#category').multiselect({
+      enableFiltering: true
+    });
+    $("#formAddNewProduct").parsley().validate();
+  });
+</script>
   </body>
 </html>
