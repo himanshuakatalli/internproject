@@ -102,8 +102,8 @@
 
               <li class="sub-menu">
                 <a href="#" >
-                  <i class="fa fa-cog"></i>
-                  <span>Product Settings</span>
+                  <i class="fa fa-pencil"></i>
+                  <span>Edit Product</span>
                 </a>
                 <ul class="sub">
                   <li><a  href="<?php echo Yii::app()->createUrl('/dashboard/Productsetting');?>">Product A</a></li>
@@ -129,10 +129,7 @@
     <!--footer start-->
       <footer class="site-footer">
         <div class="text-center">
-          2016 - Venturepact
-          <a href="index.html#" class="go-top">
-            <i class="fa fa-angle-up"></i>
-          </a>
+          2016 - VenturePact
         </div>
       </footer>
     <!--footer end-->
