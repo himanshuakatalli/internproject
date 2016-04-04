@@ -8,19 +8,17 @@
 		<meta name="author" content="Dashboard">
 		<meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-		<title>VenturePact</title>
+		<title>Venturepact</title>
 <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
 		<!-- Bootstrap core CSS -->
 		<link href="imp/css/bootstrap.css" rel="stylesheet">
 		<!--external css-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="imp/lineicons/style.css">
-		<link href="imp/css/user-dash-style.css" rel="stylesheet">
-		<!-- Custom styles for this template -->
-		<link href="imp/css/dash-style.css" rel="stylesheet">
-		<link href="imp/css/user-dash-style.css" rel="stylesheet">
-		<link href="imp/css/style-responsive.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="imp/css/tabs.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/tabs.css">
+<link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/dash-style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/prettify.css">
+		<link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/user-dash-style.css" rel="stylesheet">
 		<script src="imp/js/chart-master/Chart.js"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,69 +46,17 @@
 			</div>
 		</header>
 		<!--header end-->
-		<!--sidebar start-->
-		<aside>
-			<div id="sidebar"  class="nav-collapse ">
-				<!-- sidebar menu start-->
-				<ul class="sidebar-menu" id="nav-accordion">
-					<p class="centered"><a href="profile.html"><img src="imp/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-					<h5 class="centered">Vivek Behera</h5>
-					<li class="mt">
-						<a class="active" href="index.html">
-							<i class="fa fa-dashboard"></i>
-							<span>Dashboard</span>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;" >
-							<i class="fa fa-plus"></i>
-							<span>Add Product</span>
-						</a>
-					</li>
-					<li class="sub-menu">
-						<a href="javascript:;" >
-							<i class="fa fa-product-hunt"></i>
-							<span>List Products</span>
-						</a>
-					<ul class="sub">
-						<li class="active"><a  href="#">Product A</a></li>
-						<li><a  href="#">Product B</a></li>
-						<li><a  href="#">Product C</a></li>
-					</ul>
-						</li>
-						<li class="sub-menu">
-							<a href="javascript:;" >
-								<i class="fa fa-cog"></i>
-								<span>Product Settings</span>
-							</a>
-							<ul class="sub">
-								<li><a  href="#">Product A</a></li>
-								<li><a  href="#">Product B</a></li>
-								<li><a  href="#">Product C</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="javascript:;" >
-								<i class="fa fa-cogs"></i>
-								<span>User Account Settings</span>
-							</a>
-						</li>
 
-				</ul>
-					<!-- sidebar menu end-->
-			</div>
-		</aside>
-		<!--sidebar end-->
 		<!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
 		<div class="row">
 			<aside class="full-height" id="scroll-spy">
 				<ul>
-					<li class="active"><a href="#section1-row">Account Information</a></li>
+					<li class="active"><a href="#section1-row">Product Information</a></li>
 					<li><a href="#section2-row">Company Information</a></li>
-					<!-- <li><a href="#section3-row">Transactions</a></li>
-					<li><a href="#section4-row">Reviews</a></li> -->
+					<li><a href="#section3-row">Transactions</a></li>
+					<li><a href="#section4-row">Reviews</a></li>
 				</ul>
 			</aside>
 			<main class="main-wrap">
@@ -216,10 +162,6 @@
 						</div>
 					</form>
 				</div>
-<<<<<<< HEAD
-				
-				<!-- <div class="row" id="section3-row" style="padding-top: 50px">
-=======
 				<div class="row" style="padding-top: 50px">
 					<h4>Users</h4>
 					<div class="row" style="padding-top:50px">
@@ -232,7 +174,6 @@
 					</div>
 				</div>
 				<div class="row" id="section3-row" style="padding-top: 50px">
->>>>>>> 83375379c7f547eb54ed2758a76305a049efc620
 					<h4>Payments</h4>
 					<div class="col-md-12 mt30">
 						<div class="table-b ">
@@ -304,7 +245,7 @@
 						</div>
 					</div>
 				</div>
- -->			</div>
+			</div>
 		</main>
 
 	</div>
@@ -325,19 +266,19 @@
 
 
 		<!-- js placed at the end of the document so the pages load faster -->
-		<script src="imp/js/jquery.js"></script>
+	<!-- 	<script src="imp/js/jquery.js"></script>
 		<script src="imp/js/jquery-1.8.3.min.js"></script>
 		<script src="imp/js/bootstrap.min.js"></script>
 		<script class="include" type="text/javascript" src="imp/js/jquery.dcjqaccordion.2.7.js"></script>
 		<script src="imp/js/jquery.scrollTo.min.js"></script>
 		<script src="imp/js/jquery.nicescroll.js" type="text/javascript"></script>
-		<script src="imp/js/jquery.sparkline.js"></script>
+		<script src="imp/js/jquery.sparkline.js"></script> -->
 
 
-		<!--common script for all pages-->
-		<script src="imp/js/common-scripts.js"></script>
+<!-- 	common script for all pages-->
+<!-- 		<script src="imp/js/common-scripts.js"></script> -->
 
 		<!--script for this page-->
-		<script src="imp/js/sparkline-chart.js"></script>
+		<!-- <script src="imp/js/sparkline-chart.js"></script> -->
 	</body>
 </html>
