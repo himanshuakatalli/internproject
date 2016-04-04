@@ -94,7 +94,7 @@
 </section>
 <section class="section2">
 	<div class="container text-center mt30">
-		<h4 class="features-subheading">Our teams are trusted by</h4>
+		<h4 class="features-subheading">Our Softwares are trusted by</h4>
 		<span  class="img-responsive c-logo sprite-cmpny sp1" alt="AllState"></span>
 		<span  class="img-responsive c-logo sprite-cmpny sp2" alt="Honda"></span>
 		<span  class="img-responsive c-logo sprite-cmpny sp3" alt="FIFA"></span>
