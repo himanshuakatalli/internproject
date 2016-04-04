@@ -2391,6 +2391,76 @@ Product Settings styles goes here!!!!!!!!!!
     transition: all 0.3s ease-in;
 }
 
+.input select[id="category"] {
+  width: 100% !important;
+  background: #fff !important;
+}
+
+.input select[id="category"] ~ div.btn-group {
+  width: 91.66% !important;
+}
+.input select[id="category"] ~ div.btn-group button {
+  border: 0;
+  border-radius: 0;
+  padding: 0.85em 0;
+  width: 100% !important;
+  box-shadow: none !important;
+  background-color: #f2f2f2;
+
+  transition: all 0.3s ease-in;
+}
+
+.input select[id="category"] ~ div.btn-group button:hover {
+  background: #fff;
+}
+
+.input select[id="category"] ~ div.btn-group button:focus {
+  background: #fff;
+  box-shadow: none !important;
+}
+
+.input select[id="category"] ~ div.btn-group ul {
+  width: 100% !important;
+  background: #fff;
+  border-radius: 0;
+}
+
+
+.input select[id="category"] ~ div.btn-group ul li.multiselect-item > .input-group {
+  margin: 0 !important;
+  width: 100% !important;
+  padding: 0 1em;
+  outline: none;
+  border-bottom: 1px solid #7ececa;
+}
+
+.input select[id="category"] ~ div.btn-group ul li:first-of-type div span {
+  display: none;
+}
+
+.input select[id="category"] ~ div.btn-group ul li:first-of-type div {
+  padding: 0 1em;
+}
+
+.input select[id="category"] ~ div.btn-group ul li:first-of-type div input.form-control {
+  height: 3em;
+  margin: 0 auto;
+  outline: none;
+}
+
+.input select[id="category"] ~ div.btn-group ul li:first-of-type div input.form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.input select[id="category"] ~ div.btn-group ul li:not(:first-of-type) a{
+  padding: 0 1em;
+}
+
+.input select[id="category"] ~ div.btn-group ul li:not(:first-of-type) input{
+  display: none;
+}
+
 .input textarea {
     border: none;
     resize: none;
@@ -2416,4 +2486,124 @@ Product Settings styles goes here!!!!!!!!!!
 .input:hover input,
 .input:hover textarea {
     background: #fff;
+}
+
+.input-full-radio {
+  width: 100%;
+  float: left;
+  border: 1px solid rgba(0,0,0,0.15);
+  transition: all 0.3s ease-in;
+}
+
+.input-full-radio input[type="radio"] {
+  display: none;
+}
+
+.input-full-radio label{
+  margin: 0;
+  display: block;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.8em 0;
+  font-weight: 400;
+  text-align: center !important;
+  position: relative;
+  color: rgba(0,0,0,0.6);
+  letter-spacing: 0.08em;
+
+  transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+
+.input-full-radio input[id="ppc0"]:checked ~ label[for="ppc0"],
+.input-full-radio input[id="ppc1"]:checked ~ label[for="ppc1"],
+.input-full-radio input[id="free0"]:checked ~ label[for="free0"],
+.input-full-radio input[id="free1"]:checked ~ label[for="free1"],
+.input-full-radio input[id="trial0"]:checked ~ label[for="trial0"],
+.input-full-radio input[id="trial1"]:checked ~ label[for="trial1"]{
+  color: #fff;
+  background: #7ececa;
+}
+
+.submit-part{
+  padding: 0 !important;
+  margin-bottom: 4em;
+}
+
+.submit-part input[type="submit"] {
+  width: 100%;
+  padding: 1em 2em;
+  background: rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.15);
+
+  transition: all 0.3s ease-in;
+}
+
+.submit-part input[type="submit"]:hover {
+  color: #fff;
+  background: #f07762;
+}
+
+.input-dash-full {
+  width: 100%;
+  float: left;
+  padding: 0 0.5em 0 1em;
+  border: 1px solid rgba(0,0,0,0.15);
+
+  transition: all 0.3s ease-in;
+}
+
+.input-dash-full i{
+  height: 42px;
+  background: none;
+  padding-top: 1em;
+  padding-left: 0.5em;
+  color: rgba(0,0,0,0.4);
+
+  transition: all 0.3s ease-in;
+}
+
+.input-dash-full:hover {
+  background: #fff;
+  border: 1px solid #7ececa;
+  transition: all 0.3s ease-in;
+}
+
+.input-dash-full:hover i {
+  color: #7ececa;
+  transition: all 0.3s ease-in;
+}
+
+.input-dash-full select {
+  /*width: 100%;*/
+  border: none;
+  line-height: 2em;
+  padding: .5em 0.5em;
+  color: rgba(0,0,0,0.8);
+  background: transparent;
+  position: relative;
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: rgba(0,0,0,0.8) !important;
+
+  transition: all 0.3s ease-in;
+}
+
+.input-dash-full select option {
+  border: none;
+  outline: none;
+  height: 1.85em;
+  padding: 0.5em 1em;
+  color: rgba(0,0,0,0.5) !important;
+
+  transition: all 0.3s ease-in;
+}
+
+.input-dash-full:hover select{
+  background: #fff;
+  transition: all 0.3s ease-in;
 }

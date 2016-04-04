@@ -80,14 +80,14 @@
                 <?php echo Yii::app()->user->fname;?>
               </h5>
               <li class="mt">
-                <a class="active" href="index.html">
+                <a class="active" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
                   <i class="fa fa-dashboard"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
 
               <li>
-                <a href="javascript:;" >
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#addNewProduct">
                   <i class="fa fa-plus"></i>
                   <span>Add Product</span>
                 </a>
@@ -141,9 +141,11 @@
       </footer>
     <!--footer end-->
     </section>
-    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.js"></script>
+    
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js" async ></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.scrollTo.min.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.nicescroll.js" type="text/javascript"></script>

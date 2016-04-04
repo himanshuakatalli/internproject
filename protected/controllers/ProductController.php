@@ -130,7 +130,7 @@ public function actionFilter($id)
 		$user = new Users;
 		$product = new Product;
 		$category = new Categories;
-		return $this->render('product_register',array('users'=>$user,'product'=>$product,'category'=>$category));
+		return $this->render('new_productreg',array('users'=>$user,'product'=>$product,'category'=>$category));
 	}
 
 	/*public function actionProductRegisterSave()
