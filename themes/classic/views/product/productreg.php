@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/productReg.css" rel="stylesheet">
-
 <div class="container pro">
 	<h1>Create a free listing on VenturePact</h1>
 	<hr class="center-half">
@@ -73,7 +72,7 @@
 						array_push($categoryNames,$category->name);
 					 echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"product_category",'required'=>'required','data-parsley-required-message'=>"Category is required"));
 				?>
-  		</div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12 input-field">
@@ -142,8 +141,8 @@ function send()
 {
 	var validated = $("#formProdReg").parsley().validate();
 	if(validated)
-	{   
-		var data=$("#formProdReg").serialize();   
+	{
+		var data=$("#formProdReg").serialize();
 		console.log(data);
 		$.ajax({
 			type:'POST',
