@@ -1,17 +1,7 @@
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/bootstrap.css">
-<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 
-<script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/materialize.min.js"></script>
-<script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/star-rating.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/reviewInput.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<style type="text/css">
-	.navbar-nav li a:hover{
-    background-color: transparent;
-  }
-</style>
-<body>
 	<section class="form-container clear-fix">
 		<div class="form-header">
 			<div><img src="<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/'.$product->logo.'.png'; ?>"></div>
@@ -41,16 +31,16 @@
 		<div class="form-row inputs">
 			<h3>Title of review</h3>
 			<h4>Give a quick summary of your experience with the software</h4>
-			<div class="input-field">
-				<?php echo $form->textField($review,'title',array('id'=>'title','class'=>'validate','required'=>'required'));?>
+			<div class="form-group">
+				<?php echo $form->textField($review,'title',array('id'=>'title','class'=>'validate form-control','placeholder'=>'Review Title','required'=>'required')); ?>
 			</div>
 		</div>
 		<div class="form-row inputs">
 			<h3>Comments</h3>
 			<h4>Share the pros, cons, and details about your experience with this software.</h4>
-			<div class="input-field">
-				<?php echo $form->textArea($review,'comment',array('id'=>'comments','class'=>'materialize-textarea','data-parsley-trigger'=>"keyup",'data-parsley-minlength'=>"10" ,'data-parsley-maxlength'=>"100" ,'data-parsley-minlength-message'=>"Come on! You need to enter at least a 10 character comment..",'data-parsley-validation-threshold'=>"5",'required'=>'required')); ?>
-			</div>
+			 <div class="form-group">
+			 	<?php echo $form->textArea($review,'comment',array('id'=>'comments','class'=>'form-control','placeholder'=>'Comment','data-parsley-trigger'=>"keyup",'data-parsley-minlength'=>"10" ,'data-parsley-maxlength'=>"100" ,'data-parsley-minlength-message'=>"Come on! You need to enter at least a 10 character comment..",'data-parsley-validation-threshold'=>"5",'required'=>'required')); ?>
+			 </div>
 <!-- <div class='smiley-red'>
 <div class='left-eye'></div>
 <div class='right-eye'></div>
@@ -59,58 +49,51 @@
 </div>
 <div class="form-row inputs half">
 	<h3>First Name</h3>
-	<div class="input-field">
-		<?php echo $form->textField($user,'first_name',array('id'=>'firstname','class'=>'validate','required'=>'required','data-parsley-error-message'=>'*Name is Required'));?>
-		<label for="firstname">First Name</label>
+	<div class="form-group">
+		<?php echo $form->textField($user,'first_name',array('id'=>'firstname','class'=>'validate form-control','placeholder'=>'First Name','required'=>'required','data-parsley-error-message'=>'*Name is Required'));?>
 	</div>
 </div>
 <div class="form-row inputs half">
 	<h3>Last Name</h3>
-	<div class="input-field">
-		<?php echo $form->textField($user,'last_name',array('id'=>'lastname','class'=>'validate','required'=>'required'));?>
-		<label for="lastname">Last Name</label>
+	<div class="form-group">
+		<?php echo $form->textField($user,'last_name',array('id'=>'lastname','class'=>'validate form-control','placeholder'=>'Last Name','required'=>'required'));?>
 	</div>
 </div>
 <div class="form-row inputs half">
 	<h3>Organization</h3>
-	<div class="input-field">
-		<?php echo $form->textField($user,'organization',array('id'=>'organization','class'=>'validate'));?>
-		<label for="organization">Organization</label>
+	<div class="form-group">
+		<?php echo $form->textField($user,'organization',array('id'=>'organization','class'=>'validate form-control','placeholder'=>'Organization'));?>
 	</div>
 </div>
 <div class="form-row inputs half">
 	<h3>Job Profile</h3>
-	<div class="input-field">
-		<?php echo $form->textField($user,'job_profile',array('id'=>'jobtitle','class'=>'validate'));?>
-		<label for="jobtitle">Job Title</label>
+	<div class="form-group">
+		<?php echo $form->textField($user,'job_profile',array('id'=>'jobtitle','class'=>'validate form-control','placeholder'=>'Job Profile'));?>
 	</div>
 </div>
 <div class="form-row inputs half">
 	<h3>Email</h3>
-	<div class="input-field">
-		<?php echo $form->emailField($user,'username',array('id'=>'email','class'=>'validate','required'=>'required','data-parsley-error-message'=>'*Email is Required','data-parsley-type'=>'email'));?>
+	<div class="form-group">
+		<?php echo $form->emailField($user,'username',array('id'=>'email','class'=>'validate form-control','required'=>'required','data-parsley-error-message'=>'*Email is Required','data-parsley-type'=>'email'));?>
 		<label for="email" data-error="wrong" data-success="right">Email</label>
 	</div>
 </div>
 <div class="form-row inputs half">
 	<h3>Mobile</h3>
-	<div class="input-field">
-		<?php echo $form->textField($user,'phone_number',array('id'=>'phone_number','class'=>'validate','required'=>'required','data-parsley-type'=>'integer'));?>
-		<label for="Mobile">Mobile</label>
+	<div class="form-group">
+		<?php echo $form->textField($user,'phone_number',array('id'=>'phone_number','class'=>'validate form-control','placeholder'=>'Mobile Number','required'=>'required','data-parsley-type'=>'integer'));?>
 	</div>
 </div>
 <div class="form-row inputs">
-	<div class="input-field">
-		<?php echo CHtml::htmlButton('Submit',array('onclick'=>'send();','class'=>'btn waves-effect waves-light')); ?>
+	<div class="form-group">
+		<?php echo CHtml::htmlButton('Submit',array('onclick'=>'send();','class'=>'btn btn-primary')); ?>
 		<!-- <i class="material-icons right">send</i> -->
 	</div>
 </div>
 
 <?php $this->endWidget();?>
 </section>
-
-</body>
-
+<script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/star-rating.js" type="text/javascript"></script>
 <script type="text/javascript">
 
 function send()
