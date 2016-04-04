@@ -2306,6 +2306,11 @@ Product Settings styles goes here!!!!!!!!!!
     transition: all 0.3s ease-in;
 }
 
+.full-height > ul > li a:active {
+  color: #127ba9 !important;
+  background: #f2f2f2;
+}
+
 .full-height > ul > li a:hover {
     color: #127ba9 !important;
     background: #f2f2f2;
@@ -2317,41 +2322,42 @@ Product Settings styles goes here!!!!!!!!!!
     padding-left: 321px;
 }
 
-.main-wrap > div {
+.main-wrap > form {
     width: 70%;
     height: 600px;
     margin: 0 auto;
     padding: 2em 0;
     background: #f2f2f2;
 }
-.main-wrap > div > div.row h4 {
+
+.main-wrap > form > div.row:not(:first-of-type) {
+  margin-top: 5em;
+}
+
+.main-wrap > form > div.row h4 {
     width: 100%;
     padding-bottom: 1em;
     color: rgba(0,0,0,0.8);
     border-bottom: 1px solid rgba(0,0,0,0.15);
 }
-.main-wrap > div > div.row figure {
+.main-wrap > form > div.row figure {
     width: 100%;
     padding-top: 3em;
     text-align: center;
     padding-bottom: 2.5em;
 }
 
-.main-wrap > div > div.row figure img {
+.main-wrap > form > div.row figure img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
 
-.main-wrap form.container-fluid {
-    height: 400px;
-}
-
-.main-wrap form.container-fluid div.row {
+.main-wrap div.container-fluid div.row {
     margin-top: 2em;
 }
 
-.main-wrap form.container-fluid div.row label {
+.main-wrap div.container-fluid div.row label {
     color: #aaaaaa;
     padding: 0.9em 0;
     font-weight: 600;
@@ -2377,9 +2383,6 @@ Product Settings styles goes here!!!!!!!!!!
     transition: all 0.3s ease-in;
 }
 
-.main-wrap form.container-fluid div.row:nth-of-type(2) div {
-    height: auto;
-}
 .input input {
     /*width: 95%;*/
     border: none;
@@ -2391,15 +2394,15 @@ Product Settings styles goes here!!!!!!!!!!
     transition: all 0.3s ease-in;
 }
 
-.input select[id="category"] {
+.input select {
   width: 100% !important;
   background: #fff !important;
 }
 
-.input select[id="category"] ~ div.btn-group {
+.input select ~ div.btn-group {
   width: 91.66% !important;
 }
-.input select[id="category"] ~ div.btn-group button {
+.input select ~ div.btn-group button {
   border: 0;
   border-radius: 0;
   padding: 0.85em 0;
@@ -2410,23 +2413,23 @@ Product Settings styles goes here!!!!!!!!!!
   transition: all 0.3s ease-in;
 }
 
-.input select[id="category"] ~ div.btn-group button:hover {
+.input select ~ div.btn-group button:hover {
   background: #fff;
 }
 
-.input select[id="category"] ~ div.btn-group button:focus {
+.input select ~ div.btn-group button:focus {
   background: #fff;
   box-shadow: none !important;
 }
 
-.input select[id="category"] ~ div.btn-group ul {
+.input select ~ div.btn-group ul {
   width: 100% !important;
   background: #fff;
   border-radius: 0;
 }
 
 
-.input select[id="category"] ~ div.btn-group ul li.multiselect-item > .input-group {
+.input select ~ div.btn-group ul li.multiselect-item > .input-group {
   margin: 0 !important;
   width: 100% !important;
   padding: 0 1em;
@@ -2434,30 +2437,30 @@ Product Settings styles goes here!!!!!!!!!!
   border-bottom: 1px solid #7ececa;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:first-of-type div span {
+.input select ~ div.btn-group ul li:first-of-type div span {
   display: none;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:first-of-type div {
+.input select ~ div.btn-group ul li:first-of-type div {
   padding: 0 1em;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:first-of-type div input.form-control {
+.input select ~ div.btn-group ul li:first-of-type div input.form-control {
   height: 3em;
   margin: 0 auto;
   outline: none;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:first-of-type div input.form-control:focus {
+.input select ~ div.btn-group ul li:first-of-type div input.form-control:focus {
   outline: none;
   box-shadow: none;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:not(:first-of-type) a{
+.input select ~ div.btn-group ul li:not(:first-of-type) a{
   padding: 0 1em;
 }
 
-.input select[id="category"] ~ div.btn-group ul li:not(:first-of-type) input{
+.input select ~ div.btn-group ul li:not(:first-of-type) input{
   display: none;
 }
 
@@ -2606,4 +2609,18 @@ Product Settings styles goes here!!!!!!!!!!
 .input-dash-full:hover select{
   background: #fff;
   transition: all 0.3s ease-in;
+}
+
+#transactions > div > div.row table thead{
+  background: black;
+  line-height: 4em;
+}
+
+#transactions > div > div.row table thead tr {
+  height: 100%;
+  background: #fff;
+}
+
+#transactions > div > div.row table tbody tr{
+  line-height: 3em;
 }
