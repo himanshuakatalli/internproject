@@ -1,60 +1,7 @@
 <section class="wrapper">
-  <div id="addNewProduct" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Add New Product</h4>
-        </div>
-        <?php $form=$this->beginWidget('CActiveForm', array('id'=>"formAddNewProduct",'htmlOptions'=>array('class'=>"panel-default",'data-parsley-validate'=>'data-parsley-validate')));?>
-          <div class="modal-body">
-            <label>Product Name</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-star-empty"></i>
-              </span>
-              <input type="text" class="form-control" placeholder="Product Name" id="productName">
-            </div><br>
-            <label>Product Description</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </span>
-              <textarea class="form-control" placeholder="Product Description" id="productDescription"></textarea>
-            </div><br>
-            <label>Product Category</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-bookmark"></i>
-              </span>
-              <?php
-              $categories = Categories::model()->findAll();
-              $categoryNames = array();
-              array_push($categoryNames, "Select Category");
-              foreach ($categories as $category)
-                array_push($categoryNames,$category->name);
-              echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'class'=>'form-control'));
-              ?>
-            </div><br>
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger">Reset</button>
-            <button type="button" class="btn btn-primary">Add</button>
-          </div>
-        <?php $this->endWidget(); ?>
-      </div>
-    </div>
-  </div>
+  
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $("#formAddNewProduct").parsley().validate();
-  });
-</script>
+
 <!--<section class="wrapper">
   <div class="row">
     <div class="main-chart">
