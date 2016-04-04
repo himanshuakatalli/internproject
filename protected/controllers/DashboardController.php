@@ -55,7 +55,9 @@ public function actionIndex()
 public function actionProductsetting()
     {
         $this->layout="dashboard/main";
-        $this->render('productsetting');
+        $product=new product;
+
+        $this->render('productsetting',array('product'=>$product));
     }
 public function actionUsersetting()
     {
