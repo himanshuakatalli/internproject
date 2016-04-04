@@ -48,20 +48,27 @@ class DashboardController extends Controller
 
 
 public function actionIndex()
-    {
-        $this->layout="dashboard/main";
-        $this->render('index');
-    }
+{
+    // $productArray = Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+    $this->layout="dashboard/main";
+    // if(count($product) > 1) {
+    //     foreach ($product as $productDetails) {
+    //         # code...
+
+    //     }
+    // }
+    $this->render('index');
+}
 public function actionProductsetting()
-    {
-        $this->layout="dashboard/main";
-        $this->render('productsetting');
-    }
+{
+    $this->layout="dashboard/main";
+    $this->render('productsetting');
+}
 public function actionUsersetting()
-    {
-        $this->layout="dashboard/main";
-        $this->render('usersetting');
-    }
+{
+    $this->layout="dashboard/main";
+    $this->render('usersetting');
+}
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()

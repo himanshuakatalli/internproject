@@ -82,7 +82,7 @@ public function actionLogin()
 		if($model->validate() && $model->login())
 		{
 			$response['success']='1';
-			$response['url']	=Yii::app()->createUrl('dashboard');
+			$response['url'] = Yii::app()->createUrl('dashboard');
 			echo json_encode($response);
 		}else{
 			$response['success']='User Name Is Not Valid.';

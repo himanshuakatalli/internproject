@@ -1,8 +1,4 @@
 <section class="wrapper">
-  
-</section>
-
-<!--<section class="wrapper">
   <div class="row">
     <div class="main-chart">
 
@@ -161,4 +157,3 @@
     </div>
   </div>
 </section>
--->
