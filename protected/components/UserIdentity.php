@@ -30,6 +30,9 @@ class UserIdentity extends CUserIdentity
 				$this->errorCode=self::ERROR_NONE;
 				Yii::app()->user->setState('id',$username);
 				Yii::app()->user->setState('fname',$user->first_name);
+				Yii::app()->user->setState('user_id',$user->id);
+				Yii::app()->user->setState('lname',$user->last_name);
+				Yii::app()->user->setState('jProf',$user->job_profile);
 				Yii::app()->user->setState('role',$user->role->name);
 				Yii::app()->user->setState('image',$user->profile_img);
 		     }

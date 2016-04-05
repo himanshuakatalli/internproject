@@ -85,6 +85,7 @@ class Product extends CActiveRecord
 			'supportFeatures' => array(self::MANY_MANY, 'SupportFeatures', 'product_has_support_features(product_id, support_feature_id)'),
 			'trainingFeatures' => array(self::MANY_MANY, 'TrainingFeatures', 'product_has_training_features(product_id, training_feature_id)'),
 			'users' => array(self::MANY_MANY, 'Users', 'reviews(product_id, user_id)'),
+			'reviews' => array(self::HAS_MANY, 'Reviews', 'product_id'),
 		);
 	}
 

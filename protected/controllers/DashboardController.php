@@ -47,12 +47,45 @@ class DashboardController extends Controller
     }
 
 
-public function actionIndex()
+    public function actionIndex()
     {
         $this->layout="dashboard/main";
-        $this->render('index');
+        $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+        if(!$productArray) {
+            $this->render('indexAlt');
+            return true;
+        }
+        $max = 0;
+        $indexOfMax = 0;
+        $ratingCount = array();
+        foreach ($productArray as $product) {
+                # code...
+            $overallRating = 0;
+            if(!$product->reviews) {
+                array_push($ratingCount, 0);
+                continue;
+            }
+            foreach ($product->reviews as $review) {
+                # code...
+                $totalRating = 0;
+                foreach ($review->ratings as $rating) {
+                    # code...
+                    $totalRating += $rating->rating;
+                }
+                $overallRating += $totalRating / count($review->ratings);
+            }
+            array_push($ratingCount, $overallRating);
+        }
+        foreach ($ratingCount as $key => $val) {
+            if ($val > $max) {
+                $max = $val;
+                $indexOfMax = $key;
+            }
+        }
+        $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
     }
-public function actionProductsetting()
+
+   public function actionProductsetting()
     {
         $id=1;
         $this->layout="dashboard/main";
@@ -107,30 +140,4 @@ public function actionUsersetting()
         $this->layout="dashboard/main";
         $this->render('usersetting');
     }
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
-	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
 }

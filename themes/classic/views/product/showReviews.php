@@ -3,34 +3,41 @@
 $averageOverall = 0;
 $averageEaseOfUse = 0;
 $averageCustomerSupport = 0;
+$average = 0;
 
-$numberOfReviews = count($reviews);
+$reviewNumber = "Review";
+$numberOfReviews = 0;
 
-if ($numberOfReviews > 1)
-	$reviewNumber = "Reviews";
-else
-	$reviewNumber = "Review";
-
-foreach ($reviews as $review)
+if(!empty($reviews))
 {
-	$ratings = $review->ratings;
+	$numberOfReviews = count($reviews);
 
-	foreach ($ratings as $rating)
+	if ($numberOfReviews > 1)
+		$reviewNumber = "Reviews";
+	else
+		$reviewNumber = "Review";
+
+	foreach ($reviews as $review)
 	{
-		if ($rating->rating_category_id == 1)
-			$averageOverall += $rating->rating;
-		else if ($rating->rating_category_id == 2)
-			$averageEaseOfUse += $rating->rating;
-		else
-			$averageCustomerSupport += $rating->rating;
+		$ratings = $review->ratings;
+
+		foreach ($ratings as $rating)
+		{
+			if ($rating->rating_category_id == 1)
+				$averageOverall += $rating->rating;
+			else if ($rating->rating_category_id == 2)
+				$averageEaseOfUse += $rating->rating;
+			else
+				$averageCustomerSupport += $rating->rating;
+		}
 	}
+
+	$averageOverall /= $numberOfReviews;
+	$averageCustomerSupport /= $numberOfReviews;
+	$averageEaseOfUse /= $numberOfReviews;
+
+	$average = ($averageOverall + $averageEaseOfUse + $averageCustomerSupport)/3;
 }
-
-$averageOverall /= $numberOfReviews;
-$averageCustomerSupport /= $numberOfReviews;
-$averageEaseOfUse /= $numberOfReviews;
-
-$average = ($averageOverall + $averageEaseOfUse + $averageCustomerSupport)/3;
 /*Calculating average ratings*/
 
 $deploymentFeatures = $product->deploymentFeatures;
@@ -305,7 +312,8 @@ else
 							}
 							?>
 					<hr>
-				<?php endfor?>
+				<?php endfor
+				?>
 			</div>
 			<div class="col-md-6">
 				<?php for($i=count($productCategoryFeatures)/2;$i<count($productCategoryFeatures);$i++):?>
