@@ -85,7 +85,9 @@ class DashboardController extends Controller
         $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
     }
 
+
 public function actionProductsetting($id)
+
     {
 
         $this->layout="dashboard/main";
@@ -129,13 +131,14 @@ public function actionProductsettingsave($id)
 								echo json_encode($response);
 						}
 
-	      }
 
-}
+    	     }
 
-public function actionUsersetting()
-    {
-        $this->layout="dashboard/main";
-        $this->render('usersetting');
     }
-}
+
+    public function actionUsersetting()
+        {
+            $this->layout="dashboard/main";
+            $this->render('usersetting');
+        }
+    }

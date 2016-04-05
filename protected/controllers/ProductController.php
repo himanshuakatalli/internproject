@@ -26,12 +26,7 @@ class ProductController extends Controller
 	   	$this->render('product',array('products'=>$products,
 			'features'=>$features,'categoryInfo'=>$categoryInfo,
 			'deployment'=>$deployment));
-
-
-
-
 	   }
-
 	}
 
 
@@ -95,12 +90,13 @@ public function actionFilter($id)
       $pCookie = new CHttpCookie("P_".$id,'set' );
 			$pCookie->expire = time()+60*60*24;
 			Yii::app()->request->cookies["P_".$id] = $pCookie;
-			$tracking = new TrackingUser ;
+			$tracking = new TrackingUser;
 			$tracking ->product_id = $id;
 			$tracking ->user_ip = $this->get_client_ip();
 			$tracking ->cookie = "P_".$id;
 			$tracking ->entry_time = date("Y-m-d H:i:s",time());
 			$tracking ->action_time = date("Y-m-d H:i:s",time());
+			$tracking->add_date = date("Y-m-d H:i:s",time());
 			$queryGeoLoc = @unserialize(file_get_contents('http://ip-api.com/php/'.$tracking ->user_ip));
       if($queryGeoLoc && $queryGeoLoc['status'] == 'success')
       {
@@ -121,6 +117,10 @@ public function actionFilter($id)
         $tracking ->status_geo = 0;
       }
 			$tracking ->save();
+			$ppcCount = $product->ppc_count;
+			$ppcCount++;
+			$product->ppc_count = $ppcCount;
+			$product->update();
       CController:: redirect('http://'.$product->product_website);
     }
   }
@@ -192,7 +192,7 @@ public function actionFilter($id)
 				$productHasCategories->add_date = new CDbExpression('NOW()');
 
 				if($productHasCategories->save())
-				{					
+				{
 					foreach($deploymentFeatures as $key)
 					{
 						$productHasDeploymentFeatures = new ProductHasDeploymentFeatures;
@@ -208,14 +208,14 @@ public function actionFilter($id)
 		else
 		{
 			$randomPassword = Yii::app()->getSecurityManager()->generateRandomString(6);
-			
+
 			$user = new Users;
 			$user->attributes = $_POST['Users'];
 			$user->password = base64_encode($randomPassword);
 			$user->role_id = 2;
 			$user->is_verified = 0;
 			$user->add_date = new CDbExpression('NOW()');
-			
+
 			if($user->save())
 			{
 				goto x;
@@ -243,7 +243,7 @@ public function actionFilter($id)
 		{
 			array_push($productFeatures,$productFeature->name);
 		}
-		
+
 		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
 		'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
 	}

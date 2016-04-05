@@ -325,7 +325,6 @@ $(document).ready(function(){
                         alert(response.message);
                         $('#save_record').val('save');
                         	}
-
                       });
  });
  });
