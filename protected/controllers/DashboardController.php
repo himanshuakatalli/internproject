@@ -46,19 +46,18 @@ class DashboardController extends Controller
 
     public function actionIndex()
     {
-        $this->layout="dashboard/main";
-        $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
-        if(!$productArray) {
-            $this->render('indexAlt');
-            return true;
-        }
+      $this->layout="dashboard/main";
+      $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+      if(empty($productArray)) {
+          $this->render('indexAlt');
+      }else {
         $max = 0;
         $indexOfMax = 0;
         $ratingCount = array();
         foreach ($productArray as $product) {
                 # code...
             $overallRating = 0;
-            if(!$product->reviews) {
+            if(empty($product->reviews)) {
                 array_push($ratingCount, 0);
                 continue;
             }
@@ -80,6 +79,7 @@ class DashboardController extends Controller
             }
         }
         $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
+  		}
     }
 
    public function actionProductsetting($id)
