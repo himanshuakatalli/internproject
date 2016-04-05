@@ -14,28 +14,28 @@
 					<label class="control-label col-sm-2" for="firstName">First Name:</label>
 					<div class="col-sm-10">
 						<i class="fa fa-user col-lg-1"></i>
-						<?php echo $form->textField($users,'first_name',array('id'=>"first_name",'placeholder'=>'First Name', 'class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Name is required','required'=>'required','value'=>Yii::app()->user->fname,'data-parsley-trigger'=>"focusout", 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'data-parsley-minlength'=>"2"));?>
+						<?php echo $form->textField($user,'first_name',array('id'=>"first_name",'placeholder'=>'First Name', 'class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Name is required','required'=>'required','value'=>Yii::app()->user->fname,'data-parsley-trigger'=>"focusout", 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'data-parsley-minlength'=>"2"));?>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="lastName">Last Name:</label>
 					<div class="col-sm-10">
 						<i class="fa fa-user col-lg-1"></i>
-						<?php echo $form->textField($users,'first_name',array('id'=>"last_name",'placeholder'=>'Last Name', 'class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Name is required','required'=>'required','value'=>Yii::app()->user->lname,'data-parsley-trigger'=>"focusout",'data-parsley-pattern'=>"^[a-zA-Z ]+$",'data-parsley-minlength'=>"2"));?>
+						<?php echo $form->textField($user,'first_name',array('id'=>"last_name",'placeholder'=>'Last Name', 'class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Name is required','required'=>'required','value'=>Yii::app()->user->lname,'data-parsley-trigger'=>"focusout",'data-parsley-pattern'=>"^[a-zA-Z ]+$",'data-parsley-minlength'=>"2"));?>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="email">Email:</label>
 					<div class="col-sm-10">
 						<i class="fa fa-user col-lg-1"></i>
-						<?php echo $form->textField($users,'username',array('id'=>"email",'placeholder'=>'Email', 'class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Email is required','required'=>'required','data-parsley-trigger'=>"focusout",'value'=>Yii::app()->user->id,'data-parsley-type'=>"email"));?>
+						<?php echo $form->textField($user,'username',array('id'=>"email",'placeholder'=>'Email', 'class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Email is required','required'=>'required','data-parsley-trigger'=>"focusout",'value'=>Yii::app()->user->id,'data-parsley-type'=>"email"));?>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="password">Password:</label>
 					<div class="col-sm-10">
 						<i class="fa fa-user col-lg-1"></i>
-						<?php echo $form->passwordField($users,'password',array('id'=>"password",'placeholder'=>'Password','value'=>'**********','disabled'=>'disabled', 'class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Password is required','required'=>'required','data-parsley-trigger'=>"focusout"));?>
+						<?php echo $form->passwordField($user,'password',array('id'=>"password",'placeholder'=>'Password','value'=>'**********','disabled'=>'disabled', 'class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Password is required','required'=>'required','data-parsley-trigger'=>"focusout"));?>
 						<a href="#" id="changeP"><span class="fa fa-pencil"> change</span></a>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 					<label class="control-label col-sm-2" for="jProfile">Job profile:</label>
 					<div class="col-sm-10">
 						<i class="fa fa-user col-lg-1"></i>
-						<?php echo $form->textField($users,'job_profile',array('id'=>"jProfile",'placeholder'=>'Job Profile', 'class'=>"input-box col-lg-11",'value'=>Yii::app()->user->jProf,'data-parsley-required-message'=>'Job Profile is required','required'=>'required','data-parsley-trigger'=>"focusout"));?>
+						<?php echo $form->textField($user,'job_profile',array('id'=>"jProfile",'placeholder'=>'Job Profile', 'class'=>"input-box col-lg-11",'value'=>Yii::app()->user->jProf,'data-parsley-required-message'=>'Job Profile is required','required'=>'required','data-parsley-trigger'=>"focusout"));?>
 					</div>
 				</div>
 				<div class="form-group">
