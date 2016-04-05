@@ -125,7 +125,7 @@
 
 							</div>
 						</div>
-<div class="row">
+        <div class="row">
 										<div class="input-full-radio">
 
 
@@ -314,8 +314,6 @@ $(document).ready(function(){
 
  $('#save_record').on('click',function()
  {
-
-
                 $('#save_record').val('Please Wait');
                 $.ajax({
                     type: 'POST',
@@ -324,16 +322,11 @@ $(document).ready(function(){
                     data:$("#product_setting").serialize(),
                     success :function(data){
                         var response = JSON.parse(data);
-
                         alert(response.message);
-
-
+                        $('#save_record').val('save');
                         	}
 
                       });
-
-
-
  });
  });
 

@@ -85,9 +85,9 @@ class DashboardController extends Controller
         $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
     }
 
-   public function actionProductsetting()
+public function actionProductsetting($id)
     {
-        $id=1;
+
         $this->layout="dashboard/main";
         $product=Product::model()->findByPk($id);
 
@@ -113,7 +113,7 @@ class DashboardController extends Controller
 	       // CVarDumper::dump($productFeatures,10,1); die;
 
         $this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
-    }
+ }
 
 
 public function actionProductsettingsave($id)
@@ -122,8 +122,6 @@ public function actionProductsettingsave($id)
 		if(isset($_POST['Product']))
 	     {
 			     	$product->attributes = $_POST['Product'];
-
-
 
 			     	if($product->update())
 			     	{
