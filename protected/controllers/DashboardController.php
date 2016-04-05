@@ -34,7 +34,7 @@ public $layout="dashboard/main";
                 'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('index','productsetting','usersetting','Productsettingsave'),
+                'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate'),
                 'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
