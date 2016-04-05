@@ -404,6 +404,7 @@ ul.sidebar-menu  > li a.active i {
 #main-content {
     margin-left: 210px;
     transition: all 0.3s ease-in;
+    margin-bottom: 50px;
 }
 
 .header, .footer {

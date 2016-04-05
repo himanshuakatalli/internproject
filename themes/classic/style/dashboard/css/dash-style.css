@@ -2613,7 +2613,7 @@ Product Settings styles goes here!!!!!!!!!!
 
 #transactions > div > div.row table thead{
   background: black;
-  line-height: 4em;
+  line-height: 2em;
 }
 
 #transactions > div > div.row table thead tr {
@@ -2623,8 +2623,4 @@ Product Settings styles goes here!!!!!!!!!!
 
 #transactions > div > div.row table tbody tr{
   line-height: 3em;
-}
-
-#transactions {
-    padding-bottom: 10em;
 }

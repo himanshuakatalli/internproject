@@ -130,53 +130,98 @@ public function actionFilter($id)
 		$user = new Users;
 		$product = new Product;
 		$category = new Categories;
-		return $this->render('new_productreg',array('users'=>$user,'product'=>$product,'category'=>$category));
+		return $this->render('new_productreg',array('user'=>$user,'product'=>$product,'category'=>$category));
 	}
 
-	/*public function actionProductRegisterSave()
+	public function actionProductRegisterSave()
 	{
 		//print_r($_POST['Product']);
-		$email = $_POST['Users']['username'];
+		if(isset(Yii::app()->user->id))
+			$email = Yii::app()->user->id;
+		else
+			$email = $_POST['Users']['username'];
 
-		$user = Users::model()->findByAttributes(array('username'=>$email));
+		x:$user = Users::model()->findByAttributes(array('username'=>$email));
 
 		if($user)
 		{
+
 			$product = new Product;
 			$product->attributes = $_POST['Product'];
 			$product->add_date = new CDbExpression('NOW()');
 			$product->user_id = $user->id;
 
+			if(isset($_POST['trial']))
+			{
+				if($_POST['trial'] == 'trial')
+				{
+					$product->has_trial = 1;
+				}
+			}
+
+			if(isset($_POST['free_version']))
+			{
+				if($_POST['free_version'] == 'free')
+				{
+					$product->has_free_version = 1;
+				}
+			}
+
+			$deploymentFeatures = array();
+
+			if(isset($_POST['web']))
+			{
+				array_push($deploymentFeatures,'1');
+			}
+			if(isset($_POST['desktop']))
+			{
+				array_push($deploymentFeatures,'2');
+			}
+			if(isset($_POST['mobile']))
+			{
+				array_push($deploymentFeatures,'3');
+			}
+
 			if($product->save())
 			{
 				$product_id = $product->id;
 
-				foreach($_POST['Categories'] as $category)
-				{
-					$category_id = Categories::model()->findByAttributes(array('name'=>$category->name));
+				$productHasCategories = new ProductHasCategories;
+				$productHasCategories->product_id = $product_id;
+				$productHasCategories->category_id = $_POST['Categories']['id'];
+				$productHasCategories->add_date = new CDbExpression('NOW()');
 
-					//create object of product has categories and save.
+				if($productHasCategories->save())
+				{					
+					foreach($deploymentFeatures as $key)
+					{
+						$productHasDeploymentFeatures = new ProductHasDeploymentFeatures;
+						$productHasDeploymentFeatures->product_id = $product_id;
+						$productHasDeploymentFeatures->deployment_feature_id = $key;
+						$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
+
+						$productHasDeploymentFeatures->save();
+					}
 				}
 			}
-
-
 		}
 		else
 		{
-			$m=Yii::app()->getSecurityManager()->generateRandomString(6);
+			$randomPassword = Yii::app()->getSecurityManager()->generateRandomString(6);
+			
 			$user = new Users;
 			$user->attributes = $_POST['Users'];
-			$user->password = base64_encode($m);
+			$user->password = base64_encode($randomPassword);
 			$user->role_id = 2;
 			$user->is_verified = 0;
 			$user->add_date = new CDbExpression('NOW()');
+			
 			if($user->save())
 			{
-
+				goto x;
 			}
 		}
-
-	}*/
+	}
 
 	public function actionProductProfile($id)
 	{
@@ -184,26 +229,23 @@ public function actionFilter($id)
 
 		$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
 
-		if($product)
+		$productCategoryFeatures = array();
+		foreach ($product->categories as $productCategory)
 		{
-			$productCategoryFeatures = array();
-			foreach ($product->categories as $productCategory)
+			foreach ($productCategory->features as $productCategoryFeature)
 			{
-				foreach ($productCategory->features as $productCategoryFeature)
-				{
-					array_push($productCategoryFeatures, $productCategoryFeature->name);
-				}
+				array_push($productCategoryFeatures, $productCategoryFeature->name);
 			}
-
-			$productFeatures = array();
-			foreach ($product->features as $productFeature)
-			{
-				array_push($productFeatures,$productFeature->name);
-			}
-
-			$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
-			'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
 		}
+
+		$productFeatures = array();
+		foreach ($product->features as $productFeature)
+		{
+			array_push($productFeatures,$productFeature->name);
+		}
+		
+		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
+		'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
 	}
 
 
