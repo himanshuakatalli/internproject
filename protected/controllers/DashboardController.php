@@ -3,7 +3,6 @@
 class DashboardController extends Controller
 {
 
-
     /**
      * @return array action filters
      */
@@ -33,7 +32,7 @@ class DashboardController extends Controller
                 'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('index','productsetting','usersetting'),
+                'actions'=>array('index','productsetting','usersetting','Productsettingsave'),
                 'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -47,28 +46,98 @@ class DashboardController extends Controller
     }
 
 
-public function actionIndex()
+    public function actionIndex()
     {
         $this->layout="dashboard/main";
-        $this->render('index');
+        $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+        if(!$productArray) {
+            $this->render('indexAlt');
+            return true;
+        }
+        $max = 0;
+        $indexOfMax = 0;
+        $ratingCount = array();
+        foreach ($productArray as $product) {
+                # code...
+            $overallRating = 0;
+            if(!$product->reviews) {
+                array_push($ratingCount, 0);
+                continue;
+            }
+            foreach ($product->reviews as $review) {
+                # code...
+                $totalRating = 0;
+                foreach ($review->ratings as $rating) {
+                    # code...
+                    $totalRating += $rating->rating;
+                }
+                $overallRating += $totalRating / count($review->ratings);
+            }
+            array_push($ratingCount, $overallRating);
+        }
+        foreach ($ratingCount as $key => $val) {
+            if ($val > $max) {
+                $max = $val;
+                $indexOfMax = $key;
+            }
+        }
+        $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
     }
-public function actionProductsetting()
+
+
+public function actionProductsetting($id)
+
     {
-        $id=3;
+
         $this->layout="dashboard/main";
         $product=Product::model()->findByPk($id);
-        if(isset($_POST['product']))
-         {
+
+        $productCategoryNames=array();
+				foreach ($product->categories as $product_Category)
+						{
+								array_push($productCategoryNames, $product_Category->name);
+						}
+					//CVarDumper::dump($productCategory,10,1); die;
+				$productCategoryFeatures = array();
+				foreach ($product->categories as $productCategory)
+				{
+						foreach ($productCategory->features as $productCategoryFeature)
+							{
+								array_push($productCategoryFeatures, $productCategoryFeature->name);
+							}
+				}
+				$productFeatures = array();
+				foreach ($product->features as $productFeature)
+				{
+					array_push($productFeatures,$productFeature->name);
+				}
+	       // CVarDumper::dump($productFeatures,10,1); die;
+
+        $this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
+ }
 
 
+public function actionProductsettingsave($id)
+{
+		$product=$product=product::model()->findByPk($id);
+		if(isset($_POST['Product']))
+	     {
+			     	$product->attributes = $_POST['Product'];
 
-         }
-        $this->render('productsetting',array('product'=>$product));
+			     	if($product->update())
+			     	{
+								$response['message']="successfully Updated.";
+								echo json_encode($response);
+						}
+
+
+    	     }
+
     }
-public function actionUsersetting()
-    {
-        $user = new Users;
-        $this->layout="dashboard/main";
-        return $this->render('usersetting',array('users'=>$user));
+
+    public function actionUsersetting()
+        {
+            $this->layout="dashboard/main";
+            $this->render('usersetting');
+        }
     }
-}

@@ -46,7 +46,6 @@ a, a:hover, a:focus {
 .modal-header {
 	background: #68dff0;
 }
-
 .modal-title {
 	color: white;
 }
@@ -841,6 +840,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .mtbox {
 	margin-top: 80px;
 	margin-bottom: 40px;
+    text-align: center;
     transition: all 0.3s ease-in;
 }
 
@@ -893,7 +893,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .main-chart {
     width: 90%;
     margin: 0 auto;
-	padding-top: 20px;
+    padding-top: 20px;
 }
 
 .mleft {

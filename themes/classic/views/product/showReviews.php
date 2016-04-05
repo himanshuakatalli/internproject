@@ -3,16 +3,20 @@
 $averageOverall = 0;
 $averageEaseOfUse = 0;
 $averageCustomerSupport = 0;
+$average = 0;
 
-$numberOfReviews = count($reviews);
+$reviewNumber = "Review";
+$numberOfReviews = 0;
 
-if ($numberOfReviews > 1)
-	$reviewNumber = "Reviews";
-else
-	$reviewNumber = "Review";
-
-if($reviews)
+if(!empty($reviews))
 {
+	$numberOfReviews = count($reviews);
+
+	if ($numberOfReviews > 1)
+		$reviewNumber = "Reviews";
+	else
+		$reviewNumber = "Review";
+
 	foreach ($reviews as $review)
 	{
 		$ratings = $review->ratings;
@@ -27,14 +31,13 @@ if($reviews)
 				$averageCustomerSupport += $rating->rating;
 		}
 	}
+
 	$averageOverall /= $numberOfReviews;
 	$averageCustomerSupport /= $numberOfReviews;
 	$averageEaseOfUse /= $numberOfReviews;
 
 	$average = ($averageOverall + $averageEaseOfUse + $averageCustomerSupport)/3;
 }
-
-
 /*Calculating average ratings*/
 
 $deploymentFeatures = $product->deploymentFeatures;
@@ -309,7 +312,8 @@ else
 							}
 							?>
 					<hr>
-				<?php endfor?>
+				<?php endfor
+				?>
 			</div>
 			<div class="col-md-6">
 				<?php for($i=count($productCategoryFeatures)/2;$i<count($productCategoryFeatures);$i++):?>
@@ -344,34 +348,30 @@ else
 </section>
 
 
-<?php 
+<?php foreach ($reviews as $review ):
 
-if($reviews)
-{
-	foreach ($reviews as $review ):
+	$user = $review->user;
 
-		$user = $review->user;
+	$ratings = $review->ratings;
 
-		$ratings = $review->ratings;
-
-		$splitTimeStamp = explode(" ",$review->add_date);
-		$date = $splitTimeStamp[0];
+	$splitTimeStamp = explode(" ",$review->add_date);
+	$date = $splitTimeStamp[0];
 //$time = $splitTimeStamp[1];
 
-		$overall = 0;
-		$easeOfUse = 0;
-		$customerSupport = 0;
+	$overall = 0;
+	$easeOfUse = 0;
+	$customerSupport = 0;
 
-		foreach ($ratings as $rating )
-		{
-			if ($rating->rating_category_id == 1)
-				$overall = $rating->rating;
-			else if ($rating->rating_category_id == 2)
-				$easeOfUse = $rating->rating;
-			else
-				$customerSupport = $rating->rating;
-		}
-		?>
+	foreach ($ratings as $rating )
+	{
+		if ($rating->rating_category_id == 1)
+			$overall = $rating->rating;
+		else if ($rating->rating_category_id == 2)
+			$easeOfUse = $rating->rating;
+		else
+			$customerSupport = $rating->rating;
+	}
+	?>
 	<section class="section-white" id="review">
 		<div class="review-content">
 
@@ -414,7 +414,4 @@ if($reviews)
 		</div>  
 	</section>
 
-<?php 
-	endforeach
-}
-?>
+<?php endforeach?>

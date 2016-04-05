@@ -55,6 +55,10 @@
     bottom: 0;
     width: 100%;
 }
+.modal-body {
+    max-height: calc(100vh - 212px);
+    overflow-y: auto;
+}
     </style>
   </head>
   <body>
@@ -77,6 +81,7 @@
       </header>
       <!--header end-->
       <!--sidebar start-->
+      <?php $product = Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id),array('select'=>'name,id')); ?>
       <aside>
         <div id="sidebar"  class="nav-collapse ">
           <!-- sidebar menu start-->
@@ -105,9 +110,17 @@
                   <span>Edit Product</span>
                 </a>
                 <ul class="sub">
-                  <li><a href="<?php echo Yii::app()->createUrl('/dashboard/Productsetting');?>">Product A</a></li>
-                  <li><a  href="#">Product B</a></li>
-                  <li><a  href="#">Product C</a></li>
+                  <?php if(count($product) >= 1):?>
+                      <?php foreach ($product as $prodDetails): ?>
+                        <li>
+                          <a href="<?php echo $this->createUrl('Productsetting',array('id'=>$prodDetails->id)); ?>">
+                            <?php echo $prodDetails->name; ?>
+                          </a>
+                        </li>
+                      <?php endforeach; ?>
+                  <?php else: ?>
+                    <li><a href="#">No Product</a></li>
+                  <?php endif; ?>
                 </ul>
               </li>
               <li>
@@ -157,6 +170,13 @@
               </span>
               <textarea class="form-control" placeholder="Product Description" id="productDescription"></textarea>
             </div><br>
+            <label>Product Website</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-internet-explorer"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Product Website" id="productWebsite">
+            </div><br>
             <label>Product Category</label>
             <div class="input-group">
               <span class="input-group-addon">
@@ -171,7 +191,45 @@
               echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'class'=>'form-control'));
               ?>
             </div><br>
-
+            <label>Starting Price</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-money"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Product's Starting Price" id="startingPrice">            
+            </div><br>
+            <label>Number of users</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-users"></i>
+              </span>
+              <input class="form-control" type="text" name="user_count" placeholder="Number of user counts" id="user_count">
+            </div><br>
+            <div class="input-group">
+              <label>Trial Available</label>
+              <select name="trial" id="trial" class="form-control">
+                <option value="">Select</option>
+                <option value="trial">Yes</option>
+                <option value="no_trial">No</option>
+              </select>
+            </div><br>
+            <div class="input-group">
+              <label>Free Version Available</label>
+              <select name="ferr" id="free" class="form-control">
+                <option value="">select</option>
+                <option value="free">Yes</option>
+                <option value="not_free">No</option>
+              </select>
+            </div><br>
+            <div class="input-group">
+              <label>Deployement Detail</label>
+              <select name="ferr" id="free" class="form-control">
+                <option value="">select</option>
+                <option value="Mobile">Mobile</option>
+                <option value="Desktop">Desktop</option>
+                <option value="Web">Web</option>
+              </select>
+            </div><br>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger">Reset</button>
@@ -183,7 +241,7 @@
   </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.9.1.min.js"></script>
+   <!--  <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.8.3.min.js"></script> -->
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.scrollTo.min.js"></script>
