@@ -3,6 +3,7 @@
 class DashboardController extends Controller
 {
 
+public $layout="dashboard/main";
 
     /**
      * @return array action filters
@@ -49,7 +50,7 @@ class DashboardController extends Controller
 
     public function actionIndex()
     {
-        $this->layout="dashboard/main";
+
         $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
         if(!$productArray) {
             $this->render('indexAlt');
@@ -87,34 +88,44 @@ class DashboardController extends Controller
 
 
 public function actionProductsetting($id)
-
     {
 
-        $this->layout="dashboard/main";
-        $product=Product::model()->findByPk($id);
 
-        $productCategoryNames=array();
-				foreach ($product->categories as $product_Category)
+            $productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+// CVarDumper::dump($productexist,10,1); die;
+            if($productexist)
+            {
+            $product=Product::model()->findByPk($id);
+
+            $productCategoryNames=array();
+			foreach ($product->categories as $product_Category)
+					{
+							array_push($productCategoryNames, $product_Category->name);
+					}
+				//CVarDumper::dump($productCategory,10,1); die;
+			$productCategoryFeatures = array();
+			foreach ($product->categories as $productCategory)
+			{
+					foreach ($productCategory->features as $productCategoryFeature)
 						{
-								array_push($productCategoryNames, $product_Category->name);
+							array_push($productCategoryFeatures, $productCategoryFeature->name);
 						}
-					//CVarDumper::dump($productCategory,10,1); die;
-				$productCategoryFeatures = array();
-				foreach ($product->categories as $productCategory)
-				{
-						foreach ($productCategory->features as $productCategoryFeature)
-							{
-								array_push($productCategoryFeatures, $productCategoryFeature->name);
-							}
-				}
-				$productFeatures = array();
-				foreach ($product->features as $productFeature)
-				{
-					array_push($productFeatures,$productFeature->name);
-				}
-	       // CVarDumper::dump($productFeatures,10,1); die;
+			}
+			$productFeatures = array();
+			foreach ($product->features as $productFeature)
+			{
+				array_push($productFeatures,$productFeature->name);
+			}
+    	       // CVarDumper::dump($productFeatures,10,1); die;
 
-        $this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
+            $this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
+        }else
+        {
+            $this->render('indexAlt');
+
+        }
+
+
  }
 
 
@@ -129,8 +140,7 @@ public function actionProductsettingsave($id)
 			     	{
 								$response['message']="successfully Updated.";
 								echo json_encode($response);
-						}
-
+					}
 
     	     }
 
@@ -138,7 +148,7 @@ public function actionProductsettingsave($id)
 
     public function actionUsersetting()
         {
-            $this->layout="dashboard/main";
+            // $this->layout="dashboard/main";
             $this->render('usersetting');
         }
     }
