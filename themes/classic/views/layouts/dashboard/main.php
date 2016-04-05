@@ -78,7 +78,7 @@
       </header>
       <!--header end-->
       <!--sidebar start-->
-      <?php $product = Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id)); ?>
+      <?php $product = Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id),array('select'=>'name,id')); ?>
       <aside>
         <div id="sidebar"  class="nav-collapse ">
           <!-- sidebar menu start-->
@@ -107,17 +107,17 @@
                   <span>Product Settings</span>
                 </a>
                 <ul class="sub">
-                  <?php
-                    if(count($product) >= 1) {
-                      foreach ($product as $prodDetails) {
-                        # code...
-                        echo "<li><a href=\"".Yii::app()->createUrl('/dashboard/Productsetting',array('id'=>$prodDetails->id))."\">$prodDetails->name</a></li>";
-                      }
-                    }
-                    else {
-                      echo "<li><a href=\"#\">No Product</a></li>";
-                    }
-                  ?>
+                  <?php if(count($product) >= 1):?>
+                      <?php foreach ($product as $prodDetails): ?>
+                        <li>
+                          <a href="<?php echo $this->createUrl('Productsetting',array('id'=>$prodDetails->id)); ?>">
+                            <?php echo $prodDetails->name; ?>
+                          </a>
+                        </li>
+                      <?php endforeach; ?>
+                  <?php else: ?>
+                    <li><a href="#">No Product</a></li>
+                  <?php endif; ?>
                 </ul>
               </li>
               <li>

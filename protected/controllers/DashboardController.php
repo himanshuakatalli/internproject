@@ -49,15 +49,39 @@ class DashboardController extends Controller
 
 public function actionIndex()
 {
-    // $productArray = Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
     $this->layout="dashboard/main";
-    // if(count($product) > 1) {
-    //     foreach ($product as $productDetails) {
-    //         # code...
-
-    //     }
-    // }
-    $this->render('index');
+    $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+    if(!$productArray) {
+        $this->render('indexAlt');
+    }
+    $max = 0;
+    $indexOfMax = 0;
+    $ratingCount = array();
+    foreach ($productArray as $product) {
+            # code...
+        $overallRating = 0;
+        if(!$product->reviews) {
+            array_push($ratingCount, 0);
+            continue;
+        }
+        foreach ($product->reviews as $review) {
+            # code...
+            $totalRating = 0;
+            foreach ($review->ratings as $rating) {
+                # code...
+                $totalRating += $rating->rating;
+            }
+            $overallRating += $totalRating / count($review->ratings);
+        }
+        array_push($ratingCount, $overallRating);
+    }
+    foreach ($ratingCount as $key => $val) {
+        if ($val > $max) {
+            $max = $val;
+            $indexOfMax = $key;
+        }
+    }
+    $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
 }
 public function actionProductsetting()
 {

@@ -55,6 +55,7 @@ class Reviews extends CActiveRecord
 		return array(
 			'ratingCategories' => array(self::MANY_MANY, 'RatingCategories', 'ratings(review_id, rating_category_id)'),
 			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
+			'product' => array(self::BELONGS_TO, 'Product', 'product_id'),
 			'ratings' => array(self::HAS_MANY, 'Ratings', 'review_id'),
 		);
 	}
