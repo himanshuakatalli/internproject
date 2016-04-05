@@ -60,15 +60,28 @@
 								<i class="fa fa-codiepie fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
 
-		            <select id="category" name="productCategory[name]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-		            	<?php for($i=0;$i<count($productCategory);$i++)
+		            <select id="category" name="productCategory[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+
+
+		            	<?php
+
+		            	$category=Categories::model()->findAll();
+		            	foreach($category as $categoryname)
 		            	{?>
 
-		              <option value="<?php echo $productCategory[$i] ;?>" selected > <?php echo $productCategory[$i] ;?></option>
+		              <option value="<?php echo $categoryname->name;?>"
+
+		             <?php
+							   if (in_array($categoryname->name, $productCategory)) {
+							    	echo "selected";
+							    }
+								?>
+		              >
+		              <?php echo $categoryname->name;?>
+		              </option>
+
 
 		              <?php }?>
-										</span>
-
 		           </select>
 
 							</div>
@@ -79,7 +92,7 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-tasks fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-		            <select id="features" name="productCategoryFeatures[name]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+		            <select id="features" name="productCategoryFeatures[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
 		             <?php for($i=0;$i<count($productCategoryFeatures);$i++)
 		            	{?>
 		              <option value="<?php echo $productCategoryFeatures[$i] ;?>"
@@ -89,8 +102,6 @@
 							    	echo "selected";
 							    }
 								?>
-
-
 
 		              ><?php echo $productCategoryFeatures[$i] ;?></option>
 		              <?php }?>
@@ -196,11 +207,11 @@
 						<div class="row">
 							<div class="input-dash-full resp-half">
 			          <i class="fa fa-codiepie col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-			          <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="Product[founding_country]">
-			            <option>Select a Country</option>
-			            <option value="<?php echo $product->founding_country ?>"  selected><?php echo $product->founding_country ?></option>
 
-			          </select>
+									<?php
+              $countries = Controller::getCountryNames();
+              echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+
 			        </div>
 						</div>
 					</div>

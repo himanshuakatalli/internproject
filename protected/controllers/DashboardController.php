@@ -90,35 +90,34 @@ public $layout="dashboard/main";
 public function actionProductsetting($id)
     {
 
-
             $productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
 // CVarDumper::dump($productexist,10,1); die;
             if($productexist)
             {
-            $product=Product::model()->findByPk($id);
+                $product=Product::model()->findByPk($id);
 
-            $productCategoryNames=array();
-			foreach ($product->categories as $product_Category)
-					{
-							array_push($productCategoryNames, $product_Category->name);
-					}
-				//CVarDumper::dump($productCategory,10,1); die;
-			$productCategoryFeatures = array();
-			foreach ($product->categories as $productCategory)
-			{
-					foreach ($productCategory->features as $productCategoryFeature)
-						{
-							array_push($productCategoryFeatures, $productCategoryFeature->name);
-						}
-			}
-			$productFeatures = array();
-			foreach ($product->features as $productFeature)
-			{
-				array_push($productFeatures,$productFeature->name);
-			}
-    	       // CVarDumper::dump($productFeatures,10,1); die;
+                $productCategoryNames=array();
+    			foreach ($product->categories as $product_Category)
+    					{
+    							array_push($productCategoryNames, $product_Category->name);
+    					}
+    				//CVarDumper::dump($productCategory,10,1); die;
+    			$productCategoryFeatures = array();
+    			foreach ($product->categories as $productCategory)
+    			{
+    					foreach ($productCategory->features as $productCategoryFeature)
+    						{
+    							array_push($productCategoryFeatures, $productCategoryFeature->name);
+    						}
+    			}
+    			$productFeatures = array();
+    			foreach ($product->features as $productFeature)
+    			{
+    				array_push($productFeatures,$productFeature->name);
+    			}
+        	       // CVarDumper::dump($productFeatures,10,1); die;
 
-            $this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
+                $this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
         }else
         {
             $this->render('indexAlt');
@@ -132,23 +131,28 @@ public function actionProductsetting($id)
 public function actionProductsettingsave($id)
 {
 		$product=$product=product::model()->findByPk($id);
-		if(isset($_POST['Product']))
-	     {
-			     	$product->attributes = $_POST['Product'];
 
-			     	if($product->update())
-			     	{
-								$response['message']="successfully Updated.";
-								echo json_encode($response);
-					}
+         // CVarDumper::dump($_POST['productCategory'],10,1);die;
+        if(isset($_POST['Product']))
+         {
 
-    	     }
+                $product->attributes = $_POST['Product'];
 
+
+                if($product->update())
+                {
+                            $response['message']="successfully Updated.";
+                            echo json_encode($response);
+                }
+
+           }
+
+}
+
+public function actionUsersetting()
+    {
+        // $this->layout="dashboard/main";
+        $this->render('usersetting');
     }
 
-    public function actionUsersetting()
-        {
-            // $this->layout="dashboard/main";
-            $this->render('usersetting');
-        }
     }
