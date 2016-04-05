@@ -17,7 +17,7 @@
 		<main class="main-wrap">
 
 			<!-- <form class="prod-edit-container"> -->
-<?php $form=$this->beginWidget('CActiveForm', array('action'=>Yii::app()->createUrl(''),'enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"prod-edit-container",'data-parsley-validate'=>'data-parsley-validate')));?>
+<?php $form=$this->beginWidget('CActiveForm', array('id'=>'product_setting','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"prod-edit-container",'data-parsley-validate'=>'data-parsley-validate')));?>
 
 
 				<div class="row" id="product_information">
@@ -59,14 +59,18 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-codiepie fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-		            <select id="category" name="Product[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-		              <option value="1">Option 1</option>
-		              <option value="2">Option 2</option>
-		              <option value="3">Option 3</option>
-		              <option value="4">Option 4</option>
-		              <option value="5">Option 5</option>
-		              <option value="6">Option 6</option>
-		          </select>
+
+		            <select id="category" name="productCategory[name]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+		            	<?php for($i=0;$i<count($productCategory);$i++)
+		            	{?>
+
+		              <option value="<?php echo $productCategory[$i] ;?>" selected > <?php echo $productCategory[$i] ;?></option>
+
+		              <?php }?>
+										</span>
+
+		           </select>
+
 							</div>
 						</div>
 
@@ -75,13 +79,21 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-tasks fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-		            <select id="features" name="features[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-		              <option value="1">Option 1</option>
-		              <option value="2">Option 2</option>
-		              <option value="3">Option 3</option>
-		              <option value="4">Option 4</option>
-		              <option value="5">Option 5</option>
-		              <option value="6">Option 6</option>
+		            <select id="features" name="productCategoryFeatures[name]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+		             <?php for($i=0;$i<count($productCategoryFeatures);$i++)
+		            	{?>
+		              <option value="<?php echo $productCategoryFeatures[$i] ;?>"
+
+								<?php
+							if (in_array($productCategoryFeatures[$i], $productFeatures)) {
+							    	echo "selected";
+							    }
+								?>
+
+
+
+		              ><?php echo $productCategoryFeatures[$i] ;?></option>
+		              <?php }?>
 		          </select>
 							</div>
 						</div>
@@ -248,7 +260,10 @@
 
 						<div class="row">
 			        <div class="col-lg-4 submit-part">
-			          <input type="submit" value="Save" name="save"></input>
+
+			          <!-- <input type="submit" value="Save" name="save"></input> -->
+			          <?php echo CHtml::button('Save',array('name'=>'Submit','id'=>'save_record')); ?>
+
 			        </div>
 			      </div>
 					</div>
@@ -292,3 +307,34 @@
 		</main>
 	</div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+ $('#save_record').on('click',function()
+ {
+
+
+                $('#save_record').val('Please Wait');
+                $.ajax({
+                    type: 'POST',
+                    url :"<?php echo Yii::app()->createUrl('dashboard/Productsettingsave',array('id'=>$product->id));?>",
+                    datatype:'json',
+                    data:$("#product_setting").serialize(),
+                    success :function(data){
+                        var response = JSON.parse(data);
+
+                        alert(response.message);
+
+
+                        	}
+
+                      });
+
+
+
+ });
+ });
+
+</script>
