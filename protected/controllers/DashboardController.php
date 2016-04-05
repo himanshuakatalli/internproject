@@ -50,9 +50,9 @@ public $layout="dashboard/main";
 
     public function actionIndex()
     {
+
       $this->layout="dashboard/main";
-      $user_id = Users::model()->findByAttributes(array('username'=>Yii::app()->user->id));
-      $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>$user_id->id));
+      $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
       if(empty($productArray)) {
           $this->render('indexAlt');
       }else {

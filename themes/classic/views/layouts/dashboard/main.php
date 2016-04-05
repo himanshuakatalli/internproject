@@ -88,7 +88,8 @@
           <ul class="sidebar-menu" id="nav-accordion">
             <p class="centered"><a href="#"><img src="<?php echo (!empty(Yii::app()->user->image))?Yii::app()->user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
               <h5 class="centered">
-              <?php echo Yii::app()->user->fname;?>
+              <?php $user = Users::model()->findByPk(Yii::app()->user->user_id);?>
+              <?php echo $user->first_name;?>
               </h5>
               <li class="mt">
                 <a id="dashboard" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
@@ -196,7 +197,7 @@
               <span class="input-group-addon">
                 <i class="fa fa-money"></i>
               </span>
-              <input type="text" class="form-control" placeholder="Product's Starting Price" id="startingPrice">            
+              <input type="text" class="form-control" placeholder="Product's Starting Price" id="startingPrice">
             </div><br>
             <label>Number of users</label>
             <div class="input-group">
