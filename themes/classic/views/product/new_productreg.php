@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Product Registration</title>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/reset.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/new_prod.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <?php $form = $this->beginWidget('CActiveForm',array('id'=>'add_project','enableClientValidation'=>true,'htmlOptions'=>array('class'=>'container-fluid')));?>
-  <section class="container prod-reg-container">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/new_prod.css">
+<?php $form = $this->beginWidget('CActiveForm',array('id'=>'add_project','enableClientValidation'=>true,'htmlOptions'=>array('class'=>'container-fluid')));?>
+<section class="container prod-reg-container">
     <hgroup class="row">
       <h1>Create a free listing on VenturePact</h1>
       <hr class="center-half">
@@ -74,14 +57,9 @@
           </div>
           <div class="input-half float-right">
             <i class="fa fa-globe col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-            <!-- <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-              <option>Select Country</option>
-              <option>Afghan</option>
-              <option>India</option>
-            </select> -->
-            <?php 
-              $countries = array('India'=>'India','Pakistan'=>'Pakistan','Australia'=>'Australia');
-              echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+            <?php
+                $countryNames = array("Afghanistan"=>"AFGHANISTAN","Albania"=>"ALBANIA","Algeria"=>"ALGERIA","American Samoa"=>"AMERICAN SAMOA","Andorra"=>"ANDORRA","Angola"=>"ANGOLA","Anguilla"=>"ANGUILLA","Antarctica"=>"ANTARCTICA","Antigua and Barbuda"=>"ANTIGUA AND BARBUDA","Argentina"=>"ARGENTINA","Armenia"=>"ARMENIA","Aruba"=>"ARUBA","Australia"=>"AUSTRALIA","Austria"=>"AUSTRIA","Azerbaijan"=>"AZERBAIJAN","Bahamas"=>"BAHAMAS","Bahrain"=>"BAHRAIN","Bangladesh"=>"BANGLADESH","Barbados"=>"BARBADOS","Belarus"=>"BELARUS","Belgium"=>"BELGIUM","Belize"=>"BELIZE","Benin"=>"BENIN","Bermuda"=>"BERMUDA","Bhutan"=>"BHUTAN","Bolivia"=>"BOLIVIA","Bosnia and Herzegovina"=>"BOSNIA AND HERZEGOVINA","Botswana"=>"BOTSWANA","Bouvet Island"=>"BOUVET ISLAND","Brazil"=>"BRAZIL","British Indian Ocean Territory"=>"BRITISH INDIAN OCEAN TERRITORY","Brunei Darussalam"=>"BRUNEI DARUSSALAM","Bulgaria"=>"BULGARIA","Burkina Faso"=>"BURKINA FASO","Burundi"=>"BURUNDI","Cambodia"=>"CAMBODIA","Cameroon"=>"CAMEROON","Canada"=>"CANADA","Cape Verde"=>"CAPE VERDE","Cayman Islands"=>"CAYMAN ISLANDS","Central African Republic"=>"CENTRAL AFRICAN REPUBLIC","Chad"=>"CHAD","Chile"=>"CHILE","China"=>"CHINA","Christmas Island"=>"CHRISTMAS ISLAND","Cocos (Keeling) Islands"=>"COCOS (KEELING) ISLANDS","Colombia"=>"COLOMBIA","Comoros"=>"COMOROS","Congo"=>"CONGO","Congo, the Democratic Republic of the"=>"CONGO, THE DEMOCRATIC REPUBLIC OF THE","Cook Islands"=>"COOK ISLANDS","Costa Rica"=>"COSTA RICA","Cote D'Ivoire"=>"COTE D'IVOIRE","Croatia"=>"CROATIA","Cuba"=>"CUBA","Cyprus"=>"CYPRUS","Czech Republic"=>"CZECH REPUBLIC","Denmark"=>"DENMARK","Djibouti"=>"DJIBOUTI","Dominica"=>"DOMINICA","Dominican Republic"=>"DOMINICAN REPUBLIC","Ecuador"=>"ECUADOR","Egypt"=>"EGYPT","El Salvador"=>"EL SALVADOR","Equatorial Guinea"=>"EQUATORIAL GUINEA","Eritrea"=>"ERITREA","Estonia"=>"ESTONIA","Ethiopia"=>"ETHIOPIA","Falkland Islands (Malvinas)"=>"FALKLAND ISLANDS (MALVINAS)","Faroe Islands"=>"FAROE ISLANDS","Fiji"=>"FIJI","Finland"=>"FINLAND","France"=>"FRANCE","French Guiana"=>"FRENCH GUIANA","French Polynesia"=>"FRENCH POLYNESIA","French Southern Territories"=>"FRENCH SOUTHERN TERRITORIES","Gabon"=>"GABON","Gambia"=>"GAMBIA","Georgia"=>"GEORGIA","Germany"=>"GERMANY","Ghana"=>"GHANA","Gibraltar"=>"GIBRALTAR","Greece"=>"GREECE","Greenland"=>"GREENLAND","Grenada"=>"GRENADA","Guadeloupe"=>"GUADELOUPE","Guam"=>"GUAM","Guatemala"=>"GUATEMALA","Guinea"=>"GUINEA","Guinea-Bissau"=>"GUINEA-BISSAU","Guyana"=>"GUYANA","Haiti"=>"HAITI","Heard Island and Mcdonald Islands"=>"HEARD ISLAND AND MCDONALD ISLANDS","Holy See (Vatican City State)"=>"HOLY SEE (VATICAN CITY STATE)","Honduras"=>"HONDURAS","Hong Kong"=>"HONG KONG","Hungary"=>"HUNGARY","Iceland"=>"ICELAND","India"=>"INDIA","Indonesia"=>"INDONESIA","Iran, Islamic Republic of"=>"IRAN, ISLAMIC REPUBLIC OF","Iraq"=>"IRAQ","Ireland"=>"IRELAND","Israel"=>"ISRAEL","Italy"=>"ITALY","Jamaica"=>"JAMAICA","Japan"=>"JAPAN","Jordan"=>"JORDAN","Kazakhstan"=>"KAZAKHSTAN","Kenya"=>"KENYA","Kiribati"=>"KIRIBATI","Korea, Democratic People's Republic of"=>"KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF","Korea, Republic of"=>"KOREA, REPUBLIC OF","Kuwait"=>"KUWAIT","Kyrgyzstan"=>"KYRGYZSTAN","Lao People's Democratic Republic"=>"LAO PEOPLE'S DEMOCRATIC REPUBLIC","Latvia"=>"LATVIA","Lebanon"=>"LEBANON","Lesotho"=>"LESOTHO","Liberia"=>"LIBERIA","Libyan Arab Jamahiriya"=>"LIBYAN ARAB JAMAHIRIYA","Liechtenstein"=>"LIECHTENSTEIN","Lithuania"=>"LITHUANIA","Luxembourg"=>"LUXEMBOURG","Macao"=>"MACAO","Macedonia, the Former Yugoslav Republic of"=>"MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF","Madagascar"=>"MADAGASCAR","Malawi"=>"MALAWI","Malaysia"=>"MALAYSIA","Maldives"=>"MALDIVES","Mali"=>"MALI","Malta"=>"MALTA","Marshall Islands"=>"MARSHALL ISLANDS","Martinique"=>"MARTINIQUE","Mauritania"=>"MAURITANIA","Mauritius"=>"MAURITIUS","Mayotte"=>"MAYOTTE","Mexico"=>"MEXICO","Micronesia, Federated States of"=>"MICRONESIA, FEDERATED STATES OF","Moldova, Republic of"=>"MOLDOVA, REPUBLIC OF","Monaco"=>"MONACO","Mongolia"=>"MONGOLIA","Montserrat"=>"MONTSERRAT","Morocco"=>"MOROCCO","Mozambique"=>"MOZAMBIQUE","Myanmar"=>"MYANMAR","Namibia"=>"NAMIBIA","Nauru"=>"NAURU","Nepal"=>"NEPAL","Netherlands"=>"NETHERLANDS","Netherlands Antilles"=>"NETHERLANDS ANTILLES","New Caledonia"=>"NEW CALEDONIA","New Zealand"=>"NEW ZEALAND","Nicaragua"=>"NICARAGUA","Niger"=>"NIGER","Nigeria"=>"NIGERIA","Niue"=>"NIUE","Norfolk Island"=>"NORFOLK ISLAND","Northern Mariana Islands"=>"NORTHERN MARIANA ISLANDS","Norway"=>"NORWAY","Oman"=>"OMAN","Pakistan"=>"PAKISTAN","Palau"=>"PALAU","Palestinian Territory, Occupied"=>"PALESTINIAN TERRITORY, OCCUPIED","Panama"=>"PANAMA","Papua New Guinea"=>"PAPUA NEW GUINEA","Paraguay"=>"PARAGUAY","Peru"=>"PERU","Philippines"=>"PHILIPPINES","Pitcairn"=>"PITCAIRN","Poland"=>"POLAND","Portugal"=>"PORTUGAL","Puerto Rico"=>"PUERTO RICO","Qatar"=>"QATAR","Reunion"=>"REUNION","Romania"=>"ROMANIA","Russian Federation"=>"RUSSIAN FEDERATION","Rwanda"=>"RWANDA","Saint Helena"=>"SAINT HELENA","Saint Kitts and Nevis"=>"SAINT KITTS AND NEVIS","Saint Lucia"=>"SAINT LUCIA","Saint Pierre and Miquelon"=>"SAINT PIERRE AND MIQUELON","Saint Vincent and the Grenadines"=>"SAINT VINCENT AND THE GRENADINES","Samoa"=>"SAMOA","San Marino"=>"SAN MARINO","Sao Tome and Principe"=>"SAO TOME AND PRINCIPE","Saudi Arabia"=>"SAUDI ARABIA","Senegal"=>"SENEGAL","Serbia and Montenegro"=>"SERBIA AND MONTENEGRO","Seychelles"=>"SEYCHELLES","Sierra Leone"=>"SIERRA LEONE","Singapore"=>"SINGAPORE","Slovakia"=>"SLOVAKIA","Slovenia"=>"SLOVENIA","Solomon Islands"=>"SOLOMON ISLANDS","Somalia"=>"SOMALIA","South Africa"=>"SOUTH AFRICA","South Georgia and the South Sandwich Islands"=>"SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS","Spain"=>"SPAIN","Sri Lanka"=>"SRI LANKA","Sudan"=>"SUDAN","Suriname"=>"SURINAME","Svalbard and Jan Mayen"=>"SVALBARD AND JAN MAYEN","Swaziland"=>"SWAZILAND","Sweden"=>"SWEDEN","Switzerland"=>"SWITZERLAND","Syrian Arab Republic"=>"SYRIAN ARAB REPUBLIC","Taiwan, Province of China"=>"TAIWAN, PROVINCE OF CHINA","Tajikistan"=>"TAJIKISTAN","Tanzania, United Republic of"=>"TANZANIA, UNITED REPUBLIC OF","Thailand"=>"THAILAND","Timor-Leste"=>"TIMOR-LESTE","Togo"=>"TOGO","Tokelau"=>"TOKELAU","Tonga"=>"TONGA","Trinidad and Tobago"=>"TRINIDAD AND TOBAGO","Tunisia"=>"TUNISIA","Turkey"=>"TURKEY","Turkmenistan"=>"TURKMENISTAN","Turks and Caicos Islands"=>"TURKS AND CAICOS ISLANDS","Tuvalu"=>"TUVALU","Uganda"=>"UGANDA","Ukraine"=>"UKRAINE","United Arab Emirates"=>"UNITED ARAB EMIRATES","United Kingdom"=>"UNITED KINGDOM","United States"=>"UNITED STATES","United States Minor Outlying Islands"=>"UNITED STATES MINOR OUTLYING ISLANDS","Uruguay"=>"URUGUAY","Uzbekistan"=>"UZBEKISTAN","Vanuatu"=>"VANUATU","Venezuela"=>"VENEZUELA","Viet Nam"=>"VIET NAM","Virgin Islands, British"=>"VIRGIN ISLANDS, BRITISH","Virgin Islands, U.s."=>"VIRGIN ISLANDS, U.S.","Wallis and Futuna"=>"WALLIS AND FUTUNA","Western Sahara"=>"WESTERN SAHARA","Yemen"=>"YEMEN","Zambia"=>"ZAMBIA","Zimbabwe"=>"ZIMBABWE");
+              echo $form->dropDownList($product,'founding_country',$countryNames,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
           </div>
         </div>
         <div class="row">
@@ -260,7 +238,6 @@
   </div>
   </section>
   <?php $this->endWidget();?>
-</body>
 <script type="text/javascript">
  $(document).ready(function() {
   $('#user').click(function() {
@@ -312,4 +289,3 @@
   })
  }
 </script>
-</html>
