@@ -42,3 +42,4 @@ class UserIdentity extends CUserIdentity
  		 	$this->errorCode=self::ERROR_USERNAME_INVALID;
  		 }
  	}
+}
