@@ -80,7 +80,7 @@
               <option>India</option>
             </select> -->
             <?php 
-              $countries = array('India'=>'India','Pakistan'=>'Pakistan','Australia'=>'Australia');
+              $countries = ProductController::getCountryNames();
               echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
           </div>
         </div>
@@ -294,7 +294,6 @@
 });
  function send()
  {
-  alert("Hello");
   var data = $("#add_project").serialize();
   console.log(data);
   $.ajax({
@@ -303,7 +302,7 @@
     data: data,
     success: function(data)
     {
-      alert("success");
+      alert("Product listed");
     },
     error: function(data)
     {
