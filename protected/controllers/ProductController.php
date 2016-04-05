@@ -96,7 +96,7 @@ public function actionFilter($id)
 			$tracking ->cookie = "P_".$id;
 			$tracking ->entry_time = date("Y-m-d H:i:s",time());
 			$tracking ->action_time = date("Y-m-d H:i:s",time());
-			$tracking->add_date = date("Y-m-d H:i:s",time());
+			$tracking ->add_date = date("Y-m-d H:i:s", time());
 			$queryGeoLoc = @unserialize(file_get_contents('http://ip-api.com/php/'.$tracking ->user_ip));
       if($queryGeoLoc && $queryGeoLoc['status'] == 'success')
       {

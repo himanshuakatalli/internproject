@@ -47,7 +47,8 @@ class DashboardController extends Controller
     public function actionIndex()
     {
       $this->layout="dashboard/main";
-      $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+      $user_id = Users::model()->findByAttributes(array('username'=>Yii::app()->user->id));
+      $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>$user_id->id));
       if(empty($productArray)) {
           $this->render('indexAlt');
       }else {
