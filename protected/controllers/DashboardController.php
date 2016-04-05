@@ -171,6 +171,7 @@ public function actionProductsettingsave($id)
 		
 		$user->attributes = $_POST['Users'];
 
+        $user->job_profile = $_POST['Users']['job_profile'];
 
 		if($user->password == "")
 		{
