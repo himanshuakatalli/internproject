@@ -85,7 +85,7 @@ public $layout="dashboard/main";
             }
         }
         $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
-  		}
+	   }
     }
 
 
@@ -168,7 +168,7 @@ public function actionProductsettingsave($id)
 	{
 		$user_id = Yii::app()->user->id;
 		$user = Users::model()->findByAttributes(array('username'=>$user_id));
-		
+
 		$user->attributes = $_POST['Users'];
 
 
