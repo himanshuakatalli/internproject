@@ -47,7 +47,7 @@
         $max = 0;
         $index;
         foreach ($productArray as $key => $prod) {
-          if ($max < $prod->customer_count){
+          if ($max <= $prod->customer_count){
               $max = $prod->customer_count;
               $index = $key;
           }
