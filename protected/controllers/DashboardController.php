@@ -128,7 +128,8 @@ class DashboardController extends Controller
 
   public function actionUsersetting()
       {
-          $this->layout="dashboard/main";
-          $this->render('usersetting');
+      	$user = new Users;
+        $this->layout="dashboard/main";
+        $this->render('usersetting',array('user'=>$user));
       }
   }
