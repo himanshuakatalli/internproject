@@ -2,8 +2,6 @@
 
 class DashboardController extends Controller
 {
-
-
 	/**
 	 * @return array action filters
 	 */
@@ -46,48 +44,46 @@ class DashboardController extends Controller
 		);
 	}
 
+    public function actionIndex()
+    {
+        $this->layout="dashboard/main";
+        $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+        if(!$productArray) {
+            $this->render('indexAlt');
+            return true;
+        }
+        $max = 0;
+        $indexOfMax = 0;
+        $ratingCount = array();
+        foreach ($productArray as $product) {
+                # code...
+            $overallRating = 0;
+            if(!$product->reviews) {
+                array_push($ratingCount, 0);
+                continue;
+            }
+            foreach ($product->reviews as $review) {
+                # code...
+                $totalRating = 0;
+                foreach ($review->ratings as $rating) {
+                    # code...
+                    $totalRating += $rating->rating;
+                }
+                $overallRating += $totalRating / count($review->ratings);
+            }
+            array_push($ratingCount, $overallRating);
+        }
+        foreach ($ratingCount as $key => $val) {
+            if ($val > $max) {
+                $max = $val;
+                $indexOfMax = $key;
+            }
+        }
+        $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
+    }
 
-	public function actionIndex()
-	{
-		$this->layout="dashboard/main";
-		$productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
-		if(empty($productArray)) {
-			$this->render('indexAlt');
-		} else {
-			$max = 0;
-			$indexOfMax = 0;
-			$ratingCount = array();
-			foreach ($productArray as $product) {
-					# code...
-				$overallRating = 0;
-				if(empty($product->reviews)) {
-					array_push($ratingCount, 0);
-					continue;
-				} else {
-					foreach ($product->reviews as $review) {
-						# code...
-						$totalRating = 0;
-						foreach ($review->ratings as $rating) {
-							# code...
-							$totalRating += $rating->rating;
-						}
-						$overallRating += $totalRating / count($review->ratings);
-					}
-					array_push($ratingCount, $overallRating);
-				}
-			}
-			foreach ($ratingCount as $key => $val) {
-				if ($val > $max) {
-					$max = $val;
-					$indexOfMax = $key;
-				}
-			}
-			$this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
-		}
-	}
-   public function actionProductsetting()
-	{
-		$id=1;
+   public function actionProductsetting($id)
+		{
 		$this->layout="dashboard/main";
 		$product=Product::model()->findByPk($id);
 
@@ -130,9 +126,9 @@ class DashboardController extends Controller
 
 	}
 
-	public function actionUsersetting()
-		{
-			$this->layout="dashboard/main";
-			$this->render('usersetting');
-		}
-	}
+  public function actionUsersetting()
+      {
+          $this->layout="dashboard/main";
+          $this->render('usersetting');
+      }
+  }
