@@ -60,11 +60,15 @@
 								<i class="fa fa-codiepie fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
 
-		            <select id="category" name="Product[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+		            <select id="category" name="productCategory[name]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
 		            	<?php for($i=0;$i<count($productCategory);$i++)
 		            	{?>
-		              <option value="<?php echo $productCategory[$i] ;?>" selected><?php echo $productCategory[$i] ;?></option>
+
+		              <option value="<?php echo $productCategory[$i] ;?>" selected > <?php echo $productCategory[$i] ;?></option>
+
 		              <?php }?>
+										</span>
+
 		           </select>
 
 							</div>
@@ -75,10 +79,20 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-tasks fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-		            <select id="features" name="features[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+		            <select id="features" name="productCategoryFeatures[name]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
 		             <?php for($i=0;$i<count($productCategoryFeatures);$i++)
 		            	{?>
-		              <option value="<?php echo $productCategoryFeatures[$i] ;?>" selected><?php echo $productCategoryFeatures[$i] ;?></option>
+		              <option value="<?php echo $productCategoryFeatures[$i] ;?>"
+
+								<?php
+							if (in_array($productCategoryFeatures[$i], $productFeatures)) {
+							    	echo "selected";
+							    }
+								?>
+
+
+
+		              ><?php echo $productCategoryFeatures[$i] ;?></option>
 		              <?php }?>
 		          </select>
 							</div>

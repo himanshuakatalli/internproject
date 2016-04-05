@@ -54,7 +54,7 @@ public function actionIndex()
     }
 public function actionProductsetting()
     {
-        $id=3;
+        $id=1;
         $this->layout="dashboard/main";
         $product=Product::model()->findByPk($id);
 
