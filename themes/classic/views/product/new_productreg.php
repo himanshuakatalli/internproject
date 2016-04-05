@@ -1,5 +1,23 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/new_prod.css">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Registration</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/reset.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/new_prod.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <?php $form = $this->beginWidget('CActiveForm',array('id'=>'add_project','enableClientValidation'=>true,'htmlOptions'=>array('class'=>'container-fluid')));?>
   <section class="container prod-reg-container">
     <hgroup class="row">
       <h1>Create a free listing on VenturePact</h1>
@@ -7,6 +25,7 @@
     </hgroup>
     <!-- <form class="container-fluid"> -->
     <div class="container-fluid">
+
       <h2>About You</h2>
       <div class="row">
         <div class="input-half">
@@ -39,56 +58,56 @@
         </div>
       </div>
       
-		<!-- </form>	 -->
-		</section>
-					
-	<section class="container prod-reg-container" id="about_company" style="display: none">
-	<!-- <form class="container-fluid"> -->
-	
-	      
-	      <h2>About Your Company</h2>
-	      <div class="row">
-	        <div class="input-half">
-	          <i class="fa fa-building col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-	          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="company_name" placeholder="Company Name"> -->
-	          <?php echo $form->textField($product,'company_name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'company_name'));?>
-	        </div>
-	        <div class="input-half float-right">
-	          <i class="fa fa-globe col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-	          <!-- <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-	            <option>Select Country</option>
-	            <option>Afghan</option>
-	            <option>India</option>
-	          </select> -->
-	          <?php 
-	          	$countries = array('India'=>'India','Pakistan'=>'Pakistan','Australia'=>'Australia');
-	          	echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
-	        </div>
-	      </div>
-	      <div class="row">
-	        <div class="input-half">
-	          <i class="fa fa-internet-explorer col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-	          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="email" name="company_website" placeholder="Company's Website"> -->
-	          <?php echo $form->textField($product,'company_website',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Company Website'));?>
-	        </div>
-	        <div class="input-half float-right">
-	          <i class="fa fa-calendar col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-	          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="founding_year" placeholder="Company's Founding Year"> -->
-	          <?php echo $form->textField($product,'founding_year',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Founding Year'));?>
-	        </div>
-	      </div>
-	      <div class="row">
+    <!-- </form>   -->
+    </section>
+          
+  <section class="container prod-reg-container" id="about_company" style="display: none">
+  <!-- <form class="container-fluid"> -->
+  
+        
+        <h2>About Your Company</h2>
+        <div class="row">
+          <div class="input-half">
+            <i class="fa fa-building col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+            <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="company_name" placeholder="Company Name"> -->
+            <?php echo $form->textField($product,'company_name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'company_name'));?>
+          </div>
+          <div class="input-half float-right">
+            <i class="fa fa-globe col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+            <!-- <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+              <option>Select Country</option>
+              <option>Afghan</option>
+              <option>India</option>
+            </select> -->
+            <?php 
+              $countries = array('India'=>'India','Pakistan'=>'Pakistan','Australia'=>'Australia');
+              echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-half">
+            <i class="fa fa-internet-explorer col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+            <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="email" name="company_website" placeholder="Company's Website"> -->
+            <?php echo $form->textField($product,'company_website',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Company Website'));?>
+          </div>
+          <div class="input-half float-right">
+            <i class="fa fa-calendar col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+            <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="founding_year" placeholder="Company's Founding Year"> -->
+            <?php echo $form->textField($product,'founding_year',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Founding Year'));?>
+          </div>
+        </div>
+        <div class="row">
         <div class="input-half-submit">
           <input type="button" value="Product Detail" id="company"></input>
         </div>
       </div>
       
-	      <!-- </form> -->
-	    </section>
+        <!-- </form> -->
+      </section>
 
-		<section class="container prod-reg-container" id="about_product" style="display: none">
-		<!-- <form class="container-fluid"> -->
-		
+    <section class="container prod-reg-container" id="about_product" style="display: none">
+    <!-- <form class="container-fluid"> -->
+    
 
      <h2>About Your Product</h2>
      <div class="row">
@@ -120,15 +139,14 @@
            <option>Accouting</option>
          </select> -->
          <?php
-         	$categories = Categories::model()->findAll();
-         	
-         	$list = CHtml::listData($categories,'id','name');
-         	
-         	echo $form->dropDownList($category,'id',$list,array('prompt'=>'Select Category','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));
-
-         	/*$data= CHtml::listData(Categories::model()->findAll(), 'id', 'name');
-         	echo $form->widget('ext.EchMultiSelect.EchMultiSelect', array('model'=>$category,
-         		'dropDownAttribute'=>'name','data'=>$data,'dropDownHtmlOptions'=>array('style'=>'width:378px;')));*/
+          $categories = Categories::model()->findAll();
+          
+          $list = CHtml::listData($categories,'id','name');
+          
+          echo $form->dropDownList($category,'id',$list,array('prompt'=>'Select Category','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));
+          /*$data= CHtml::listData(Categories::model()->findAll(), 'id', 'name');
+          echo $form->widget('ext.EchMultiSelect.EchMultiSelect', array('model'=>$category,
+            'dropDownAttribute'=>'name','data'=>$data,'dropDownHtmlOptions'=>array('style'=>'width:378px;')));*/
          ?>
        </div>
        <div class="input-half float-right">
@@ -153,14 +171,14 @@
          <!-- <?php echo $form->radioButtonList($product,'has_free_version',array('free'=>'Has Free Version','no_free'=>'Only Paid'),array('labelOptions'=>array('class'=>'col-lg-6'),'separator'=>''));?> -->
        </div>
     </div>
-     	<div class="row">
+      <div class="row">
        <div class="input-half">
          <i class="fa fa-money col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="starting_price" placeholder="Product's Starting Price"> -->
          <?php echo $form->textField($product,'starting_price',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Starting Prie'));?>
        </div>
-     	</div>
-     	<div class="row">
+      </div>
+      <div class="row">
         <div class="input-half-submit">
           <input type="button" value="Deployment Detail" id="product"></input>
         </div>
@@ -170,31 +188,31 @@
      </section>
 
     <section class="container prod-reg-container" id="product_deployment" style="display: none">
-		<!-- <form class="container-fluid"> -->
-		
+    <!-- <form class="container-fluid"> -->
+    
 
      <h2>Product's Deployment Type</h2>
-     	<div class="row">
-       	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 input-triad">
-        	<input type="checkbox" name="web" id="web">
-         	<label class="col-lg-12" for="web">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 input-triad">
+          <input type="checkbox" name="web" id="web">
+          <label class="col-lg-12" for="web">
           <i class="fa fa-globe"></i>&nbsp;&nbsp;Web
-         	</label>
-       	</div>
-       	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 input-triad">
-         	<input type="checkbox" name="mobile" id="mobile">
-         	<label class="col-lg-12" for="mobile">
+          </label>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 input-triad">
+          <input type="checkbox" name="mobile" id="mobile">
+          <label class="col-lg-12" for="mobile">
           <i class="fa fa-phone"></i>&nbsp;&nbsp;Mobile
-         	</label>
-       	</div>
-       	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 input-triad">
-         	<input type="checkbox" name="desktop" id="desktop">
-         	<label class="col-lg-12" for="desktop">
+          </label>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 input-triad">
+          <input type="checkbox" name="desktop" id="desktop">
+          <label class="col-lg-12" for="desktop">
            <i class="fa fa-desktop"></i>&nbsp;&nbsp;Desktop
-         	</label>
-       	</div>
-     	</div>
-			<div class="row">
+          </label>
+        </div>
+      </div>
+      <div class="row">
         <div class="input-half-submit">
           <input type="button" value="Media Link Detail" id="deployment"></input>
         </div>
@@ -203,35 +221,35 @@
      
      </section>
      
-		<section class="container prod-reg-container" id="media_link" style="display: none">
-		<!-- <form class="container-fluid"> -->
-		
+    <section class="container prod-reg-container" id="media_link" style="display: none">
+    <!-- <form class="container-fluid"> -->
+    
 
-     	<h2>Product's Social Media Link</h2>
-     	<div class="row">
-      	<div class="input-half">
+      <h2>Product's Social Media Link</h2>
+      <div class="row">
+        <div class="input-half">
          <i class="fa fa-google-plus col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="googleplus" placeholder="GooglePlus Link"> -->
          <?php echo $form->textField($product,'googleplus_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'GooglePlus Link'));?>
-       	</div>
-       	<div class="input-half float-right">
+        </div>
+        <div class="input-half float-right">
          <i class="fa fa-facebook-f col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="facebook" placeholder="Facebook Link"> -->
          <?php echo $form->textField($product,'facebook_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Facebook Link'));?>
-       	</div>
-     	</div>
-     	<div class="row">
-       	<div class="input-half">
-        	<i class="fa fa-linkedin col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-        	<!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="linkedin" placeholder="Linkedin Link"> -->
-        	<?php echo $form->textField($product,'linkedin_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Linkedin Link'));?>
-       	</div>
-       	<div class="input-half float-right">
-         	<i class="fa fa-youtube col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-         	<!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="youtube" placeholder="Youtube Link"> -->
-         	<?php echo $form->textField($product,'youtube_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Youtube Link'));?>
-       	</div>
-     	</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-half">
+          <i class="fa fa-linkedin col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="linkedin" placeholder="Linkedin Link"> -->
+          <?php echo $form->textField($product,'linkedin_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Linkedin Link'));?>
+        </div>
+        <div class="input-half float-right">
+          <i class="fa fa-youtube col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="youtube" placeholder="Youtube Link"> -->
+          <?php echo $form->textField($product,'youtube_link',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Youtube Link'));?>
+        </div>
+      </div>
      <div class="row">
        <div class="input-half-submit">
          <!-- <input type="button" value="Create my free listing" name="submit"></input> -->
@@ -242,66 +260,56 @@
   </div>
   </section>
   <?php $this->endWidget();?>
+</body>
 <script type="text/javascript">
  $(document).ready(function() {
-	$('#user').click(function() {
-
-		$('#about_company').toggle();
-		$('#user').toggle();
-
+  $('#user').click(function() {
+    $('#about_company').toggle();
+    $('#user').toggle();
     $('html,body').animate({
         scrollTop: $('#about_company').css('top')
     }, 1000)
-	});
-
-	$('#company').click(function() {
-
-		$('#about_product').toggle();
-		$('#company').toggle();
-
+  });
+  $('#company').click(function() {
+    $('#about_product').toggle();
+    $('#company').toggle();
     $('html,body').animate({
         scrollTop: $('#about_product').css('top')
     }, 1000)
-	});
-
-
-	$('#product').click(function() {
-
-		$('#product_deployment').toggle();
-		$('#product').toggle();
-
+  });
+  $('#product').click(function() {
+    $('#product_deployment').toggle();
+    $('#product').toggle();
     $('html,body').animate({
         scrollTop: $('#product_deployment').css('top')
     }, 1000)
-	});
-
-	$('#deployment').click(function() {
-
-		$('#media_link').toggle();
-		$('#deployment').toggle();
-
+  });
+  $('#deployment').click(function() {
+    $('#media_link').toggle();
+    $('#deployment').toggle();
     $('html,body').animate({
         scrollTop: $('#media_link').css('top')
     }, 1000)
-	});
+  });
 });
-
  function send()
  {
- 	var data = $("#add_project").serialize();
- 	console.log(data);
- 	$.ajax({
- 		type: 'POST',
- 		url: '<?php echo Yii::app()->createUrl("product/ProductRegisterSave"); ?>',
- 		data: data,
- 		success: function(data)
- 		{
- 			alert("success");
- 		},
- 		error: function(data)
- 		{
- 			alert("failed");
- 		}
- 	})
+  alert("Hello");
+  var data = $("#add_project").serialize();
+  console.log(data);
+  $.ajax({
+    type: 'POST',
+    url: '<?php echo Yii::app()->createUrl("product/ProductRegisterSave"); ?>',
+    data: data,
+    success: function(data)
+    {
+      alert("success");
+    },
+    error: function(data)
+    {
+      alert("failed");
+    }
+  })
  }
 </script>
+</html>

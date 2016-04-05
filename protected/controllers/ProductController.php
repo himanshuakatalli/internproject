@@ -145,7 +145,6 @@ public function actionFilter($id)
 
 		if($user)
 		{
-			echo $user->first_name;
 
 			$product = new Product;
 			$product->attributes = $_POST['Product'];
@@ -183,9 +182,6 @@ public function actionFilter($id)
 				array_push($deploymentFeatures,'3');
 			}
 
-
-			print_r($product);
-
 			if($product->save())
 			{
 				$product_id = $product->id;
@@ -195,8 +191,6 @@ public function actionFilter($id)
 				$productHasCategories->category_id = $_POST['Categories']['id'];
 				$productHasCategories->add_date = new CDbExpression('NOW()');
 
-				print_r($productHasCategories);
-
 				if($productHasCategories->save())
 				{					
 					foreach($deploymentFeatures as $key)
@@ -205,8 +199,6 @@ public function actionFilter($id)
 						$productHasDeploymentFeatures->product_id = $product_id;
 						$productHasDeploymentFeatures->deployment_feature_id = $key;
 						$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
-
-						print_r($productHasDeploymentFeatures);
 
 						$productHasDeploymentFeatures->save();
 					}
