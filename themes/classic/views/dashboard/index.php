@@ -47,7 +47,7 @@
         $max = 0;
         $index;
         foreach ($productArray as $key => $prod) {
-          if ($prod->under_ppc == 1 && $max < $prod->customer_count){
+          if ($max < $prod->customer_count){
               $max = $prod->customer_count;
               $index = $key;
           }
@@ -66,7 +66,7 @@
               <div class="col-sm-6 col-xs-6"></div>
             </div>
             <div class="centered">
-              <img src="imp/img/product.png" width="120" alt="<?php echo $productArray[$index]->name ?>">
+              <img src="imp/img/product.png" width="120" alt="<?php echo $productArray[$index]->name; ?>">
             </div>
           </div>
         </div>
@@ -74,15 +74,19 @@
 
         <?php
           $averageMax = 0;
-          foreach ($productArray[$index]->reviews as $reviewKey => $review) {
-            # code...
-            $max = 0;
-            foreach ($review->ratings as $ratingKey => $rating) {
+          if(!empty($productArray[$index]->reviews)) {
+            foreach ($productArray[$index]->reviews as $reviewKey => $review) {
               # code...
-              $max += $rating->rating;
+              $max = 0;
+              foreach ($review->ratings as $ratingKey => $rating) {
+                # code...
+                $max += $rating->rating;
+              }
+              if($averageMax < round($max / count($review->ratings),2))
+                $averageMax = round($max / count($review->ratings));
             }
-            if($averageMax < round($max / count($review->ratings),2))
-              $averageMax = round($max / count($review->ratings));
+          } else {
+
           }
         ?>
         <div class="col-md-4 col-sm-4 mb">
