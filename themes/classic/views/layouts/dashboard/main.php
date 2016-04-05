@@ -85,8 +85,11 @@
       <aside>
         <div id="sidebar"  class="nav-collapse ">
           <!-- sidebar menu start-->
+          <?php
+          $img = User::model()->findByPk(Yii::app()->user->id);
+          ?>
           <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a href="#"><img src="<?php echo (!empty(Yii::app()->user->image))?Yii::app()->user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
+            <p class="centered"><a href="#"><img src="<?php echo (!empty(Yii::app()->user->id))?Yii::app()->user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
               <h5 class="centered">
               <?php echo Yii::app()->user->fname;?>
               </h5>

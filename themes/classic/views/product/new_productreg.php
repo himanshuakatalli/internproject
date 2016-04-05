@@ -123,10 +123,13 @@
          </select> -->
          <?php
           $categories = Categories::model()->findAll();
+          $categoryNames = array();
+          foreach ($categories as $category)
+            array_push($categoryNames,$category->name);
+          //$list = CHtml::listData($categories,'id','name');
           
-          $list = CHtml::listData($categories,'id','name');
-          
-          echo $form->dropDownList($category,'id',$list,array('prompt'=>'Select Category','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));
+          echo $form->dropDownList($category,'id',$categoryNames,array('prompt'=>'Select Category','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','multiple'=>'multiple'));
+
           /*$data= CHtml::listData(Categories::model()->findAll(), 'id', 'name');
           echo $form->widget('ext.EchMultiSelect.EchMultiSelect', array('model'=>$category,
             'dropDownAttribute'=>'name','data'=>$data,'dropDownHtmlOptions'=>array('style'=>'width:378px;')));*/

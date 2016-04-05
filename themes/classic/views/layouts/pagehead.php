@@ -54,6 +54,7 @@
 <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/style-product-page.css" media="all" rel="stylesheet" type="text/css"/>
 <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/css/style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
 <!-- JQuery -->
 <style type="text/css">
     .navbar-custom{
@@ -424,11 +425,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/js/validate.js" async></script>
 <!-- <script src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/bootstrap.min.js"></script> -->
  <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/selectize.js"></script>
+ <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/bootstrap-multiselect.js"></script>
 <!--<script src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/selectize-main.js"></script>
 <script src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/jquery.flexslider.js" async></script>-->
 <!-- <script src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/js/parsley.min.js" async></script> -->
 <script type="text/javascript">
 $(document).ready(function() {
+
+    $('#Category_id').multiselect({
+      enableFiltering: true
+    });
 
     $('#searchFormTop').trigger("reset");
     $('#topsearch').selectize({
