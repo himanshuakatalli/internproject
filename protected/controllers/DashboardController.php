@@ -83,6 +83,7 @@ class DashboardController extends Controller
         }
         $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
     }
+
     public function actionProductsetting()
     {
         $this->layout="dashboard/main";
@@ -119,20 +120,4 @@ class DashboardController extends Controller
 		);
 	}
 	*/
-    public function actionProductsetting()
-    {
-        $id=3;
-        $this->layout="dashboard/main";
-        $product=Product::model()->findByPk($id);
-        if(isset($_POST['product']))
-         {
-         }
-        $this->render('productsetting',array('product'=>$product));
-    }
-    public function actionUsersetting()
-    {
-        $user = new Users;
-        $this->layout="dashboard/main";
-        return $this->render('usersetting',array('users'=>$user));
-    }
 }
