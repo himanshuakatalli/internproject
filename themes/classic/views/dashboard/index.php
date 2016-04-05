@@ -61,7 +61,7 @@
             </div>
             <div class="row">
               <div class="col-sm-6 col-xs-6 goleft">
-                <p><i class="fa fa-heart"></i><?php echo count($productArray[$index]->reviews); ?></p>
+                <p><i class="fa fa-users"></i><?php echo count($productArray[$index]->customer_count); ?></p>
               </div>
               <div class="col-sm-6 col-xs-6"></div>
             </div>

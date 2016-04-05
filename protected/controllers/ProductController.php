@@ -117,9 +117,7 @@ public function actionFilter($id)
         $tracking ->status_geo = 0;
       }
 			$tracking ->save();
-			$ppcCount = $product->ppc_count;
-			$ppcCount++;
-			$product->ppc_count = $ppcCount;
+			$product->ppc_count = $product->ppc_count+1;
 			$product->update();
       CController:: redirect('http://'.$product->product_website);
     }
@@ -243,7 +241,8 @@ public function actionFilter($id)
 		{
 			array_push($productFeatures,$productFeature->name);
 		}
-
+		$product->visit_count = $product->visit_count+1;
+		$product->update();
 		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
 		'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
 	}
