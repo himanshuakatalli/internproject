@@ -53,6 +53,7 @@ class DashboardController extends Controller
         $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
         if(!$productArray) {
             $this->render('indexAlt');
+            return true;
         }
         $max = 0;
         $indexOfMax = 0;
@@ -84,40 +85,5 @@ class DashboardController extends Controller
         $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
     }
 
-    public function actionProductsetting()
-    {
-        $this->layout="dashboard/main";
-        $this->render('productsetting');
-    }
-    public function actionUsersetting()
-    {
-        $this->layout="dashboard/main";
-        $this->render('usersetting');
-    }
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
-	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
 
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
 }

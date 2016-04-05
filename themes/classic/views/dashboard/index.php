@@ -10,7 +10,7 @@
     <div class="main-chart">
 
       <div class="row mtbox">
-        <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+        <div class="col-md-2 col-sm-2 col-md-offset-2 box0">
           <div class="box1">
             <span class="li_heart"></span>
             <h3><?php echo $product->name; ?></h3>
@@ -29,17 +29,9 @@
         <div class="col-md-2 col-sm-2 box0">
           <div class="box1">
             <span class="li_eye"></span>
-            <h3>+<?php echo $product->search_count ?></h3>
+            <h3>+<?php echo $product->visit_count ?></h3>
           </div>
-          <p>Total <?php echo $product->search_count ?> people eyed on <?php echo $product->name; ?> profile</p>
-        </div>
-
-        <div class="col-md-2 col-sm-2 box0">
-          <div class="box1">
-            <span class="li_search"></span>
-            <h3>+<?php echo $product->visit_count; ?></h3>
-          </div>
-          <p><?php echo $product->name; ?> have been searched over <?php echo $product->visit_count; ?> times.</p>
+          <p>Total <?php echo $product->visit_count ?> people eyed on <?php echo $product->name; ?> profile</p>
         </div>
 
         <div class="col-md-2 col-sm-2 box0">
@@ -55,7 +47,7 @@
         $max = 0;
         $index;
         foreach ($productArray as $key => $prod) {
-          if ($max < $prod->customer_count){
+          if ($prod->under_ppc == 1 && $max < $prod->customer_count){
               $max = $prod->customer_count;
               $index = $key;
           }
@@ -81,10 +73,10 @@
 
 
         <?php
-          $max = 0;
           $averageMax = 0;
           foreach ($productArray[$index]->reviews as $reviewKey => $review) {
             # code...
+            $max = 0;
             foreach ($review->ratings as $ratingKey => $rating) {
               # code...
               $max += $rating->rating;
@@ -103,15 +95,15 @@
                 <p><i class="fa fa-star"></i> <?php echo round($averageMax,2);?></p>
               </div>
             </div>
-            <canvas id="serverstatus01" height="120" width="120"></canvas>
+            <canvas id="serverstatus01" height="120" width="120" style="z-index: -999!important;"></canvas>
             <script>
               var doughnutData = [
                   {
-                    value: 70,
+                    value: <?php echo round(20*round($averageMax,2));?>,
                     color:"#f07762"
                   },
                   {
-                    value : 30,
+                    value : <?php echo round(100-20*round($averageMax,2));?>,
                     color : "#fdfdfd"
                   }
                 ];
@@ -126,7 +118,7 @@
               <h5>Transactions</h5>
             </div>
             <p><img src="imp/img/ui-zac.jpg" class="img-circle" width="80"></p>
-            <p class="dark"><b>Salesforce</b></p>
+            <p class="dark"><b><?php echo $productArray[$index]->name; ?></b></p>
             <div class="row">
               <div class="col-md-6 vpOrange">
                 <p class="small mt vpOrange">Done</p>
@@ -147,11 +139,11 @@
         </div>
         <div class="custom-bar-chart">
             <ul class="y-axis">
-                <li><span>10.000</span></li>
-                <li><span>8.000</span></li>
-                <li><span>6.000</span></li>
-                <li><span>4.000</span></li>
-                <li><span>2.000</span></li>
+                <li><span>10000</span></li>
+                <li><span>8000</span></li>
+                <li><span>6000</span></li>
+                <li><span>4000</span></li>
+                <li><span>2000</span></li>
                 <li><span>0</span></li>
             </ul>
             <div class="bar">
