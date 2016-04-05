@@ -187,7 +187,7 @@
   </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.9.1.min.js"></script>
+   <!--  <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.8.3.min.js"></script> -->
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.scrollTo.min.js"></script>
