@@ -50,19 +50,19 @@ public $layout="dashboard/main";
 
     public function actionIndex()
     {
+      $this->layout="dashboard/main";
+      $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+      if(empty($productArray)) {
+          $this->render('indexAlt');
+      }else {
 
-        $productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
-        if(!$productArray) {
-            $this->render('indexAlt');
-            return true;
-        }
         $max = 0;
         $indexOfMax = 0;
         $ratingCount = array();
         foreach ($productArray as $product) {
                 # code...
             $overallRating = 0;
-            if(!$product->reviews) {
+            if(empty($product->reviews)) {
                 array_push($ratingCount, 0);
                 continue;
             }
@@ -84,6 +84,7 @@ public $layout="dashboard/main";
             }
         }
         $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
+  		}
     }
 
 
@@ -155,4 +156,4 @@ public function actionUsersetting()
         $this->render('usersetting');
     }
 
-    }
+}

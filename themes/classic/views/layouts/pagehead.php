@@ -66,6 +66,7 @@ background: linear-gradient(45deg, rgba(58,65,109,1) 0%, rgba(58,65,109,1) 1%, r
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', endColorstr='#3a416d',GradientType=1 ); /* ie6-9 */}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
+
 <!-- <script src="<?php //echo Yii::app()->theme->baseUrl; ?>/style/newhome/js/jquery-1.11.3.min.js"></script> -->
 </head>
 <body>

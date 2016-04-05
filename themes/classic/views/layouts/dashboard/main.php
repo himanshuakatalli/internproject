@@ -55,6 +55,10 @@
     bottom: 0;
     width: 100%;
 }
+.modal-body {
+    max-height: calc(100vh - 212px);
+    overflow-y: auto;
+}
     </style>
   </head>
   <body>
@@ -166,6 +170,13 @@
               </span>
               <textarea class="form-control" placeholder="Product Description" id="productDescription"></textarea>
             </div><br>
+            <label>Product Website</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-internet-explorer"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Product Website" id="productWebsite">
+            </div><br>
             <label>Product Category</label>
             <div class="input-group">
               <span class="input-group-addon">
@@ -180,7 +191,45 @@
               echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'class'=>'form-control'));
               ?>
             </div><br>
-
+            <label>Starting Price</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-money"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Product's Starting Price" id="startingPrice">            
+            </div><br>
+            <label>Number of users</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-users"></i>
+              </span>
+              <input class="form-control" type="text" name="user_count" placeholder="Number of user counts" id="user_count">
+            </div><br>
+            <div class="input-group">
+              <label>Trial Available</label>
+              <select name="trial" id="trial" class="form-control">
+                <option value="">Select</option>
+                <option value="trial">Yes</option>
+                <option value="no_trial">No</option>
+              </select>
+            </div><br>
+            <div class="input-group">
+              <label>Free Version Available</label>
+              <select name="ferr" id="free" class="form-control">
+                <option value="">select</option>
+                <option value="free">Yes</option>
+                <option value="not_free">No</option>
+              </select>
+            </div><br>
+            <div class="input-group">
+              <label>Deployement Detail</label>
+              <select name="ferr" id="free" class="form-control">
+                <option value="">select</option>
+                <option value="Mobile">Mobile</option>
+                <option value="Desktop">Desktop</option>
+                <option value="Web">Web</option>
+              </select>
+            </div><br>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger">Reset</button>
