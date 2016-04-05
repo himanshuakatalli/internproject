@@ -29,6 +29,7 @@ class UserIdentity extends CUserIdentity
 
 				$this->errorCode=self::ERROR_NONE;
 				Yii::app()->user->setState('id',$username);
+				Yii::app()->user->setState('user_id',$user->id);
 		     }
 		     else {
 		     	$this->errorCode=self::ERROR_PASSWORD_INVALID;
