@@ -229,26 +229,23 @@ public function actionFilter($id)
 
 		$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
 
-		if($product)
+		$productCategoryFeatures = array();
+		foreach ($product->categories as $productCategory)
 		{
-			$productCategoryFeatures = array();
-			foreach ($product->categories as $productCategory)
+			foreach ($productCategory->features as $productCategoryFeature)
 			{
-				foreach ($productCategory->features as $productCategoryFeature)
-				{
-					array_push($productCategoryFeatures, $productCategoryFeature->name);
-				}
+				array_push($productCategoryFeatures, $productCategoryFeature->name);
 			}
-
-			$productFeatures = array();
-			foreach ($product->features as $productFeature)
-			{
-				array_push($productFeatures,$productFeature->name);
-			}
-
-			$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
-			'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
 		}
+
+		$productFeatures = array();
+		foreach ($product->features as $productFeature)
+		{
+			array_push($productFeatures,$productFeature->name);
+		}
+		
+		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
+		'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
 	}
 
 
