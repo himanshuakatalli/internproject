@@ -151,10 +151,36 @@ public function actionProductsettingsave($id)
 
 }
 
-public function actionUsersetting()
-    {
-        // $this->layout="dashboard/main";
-        $this->render('usersetting');
-    }
 
+	public function actionUsersetting()
+	{
+		$user_id = Yii::app()->user->id;
+
+		$user = new Users;
+
+		$_user = Users::model()->findByAttributes(array('username'=>$user_id));
+
+		$this->layout="dashboard/main";
+		$this->render('usersetting',array('user'=>$user,'_user'=>$_user));
+	}
+
+	public function actionUserUpdate()
+	{
+		$user_id = Yii::app()->user->id;
+		$user = Users::model()->findByAttributes(array('username'=>$user_id));
+		
+		$user->attributes = $_POST['Users'];
+
+
+		if($user->password == "")
+		{
+			$_user = Users::model()->findByAttributes(array('username'=>$user_id));
+
+			$user->password = $_user->password;
+		}
+
+		$user->modify_date = new CDbExpression('NOW()');
+
+		$user->update();
+	}
 }

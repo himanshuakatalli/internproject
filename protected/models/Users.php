@@ -87,6 +87,7 @@ class Users extends CActiveRecord
 			'last_name' => 'Last Name',
 			'username' => 'Username',
 			'password' => 'Password',
+			'job_profile' => 'Job Profile',
 			'hash' => 'Hash',
 			'phone_number' => 'Phone Number',
 			'is_verified' => 'Is Verified',
