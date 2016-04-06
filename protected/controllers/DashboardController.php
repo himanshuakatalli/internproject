@@ -217,6 +217,6 @@ public function actionProductsettingsave($id)
 						$ppcCountArray[$currDate]++;
 				}
 			}
-			CVarDumper::dump($ppcCountArray,10,1); die;
+			$this->render('showstats',array('ppcCountArray'=>$ppcCountArray,'product_id'=>$id));
 		}
 }
