@@ -21,11 +21,6 @@ public $layout="dashboard/main";
 		 * This method is used by the 'accessControl' filter.
 		 * @return array access control rules
 		 */
-		/**
-		 * Specifies the access control rules.
-		 * This method is used by the 'accessControl' filter.
-		 * @return array access control rules
-		 */
 		public function accessRules()
 		{
 				return array(
@@ -89,7 +84,6 @@ public $layout="dashboard/main";
 		 }
 		}
 
-
 public function actionProductsetting($id)
 		{
 
@@ -133,68 +127,189 @@ public function actionProductsetting($id)
 
 public function actionProductsettingsave($id)
 {
-		$product=Product::model()->findByPk($id);
+	$product = Product::model()->findByPk($id);
 
-				 // CVarDumper::dump($_POST['productCategory'],10,1);die;
-				if(isset($_POST['Product']))
-				 {
+	if(!empty($product))
+	{
+		$productOldCategory = array();
+		foreach ($product->categories as $product_Category)
+		{
+			array_push($productOldCategory, $product_Category->name);
+		}
 
-								$product->attributes = $_POST['Product'];
+		$productOldFeatures = array();
+		foreach ($product->features as $productFeature)
+		{
+			array_push($productOldFeatures,$productFeature->name);
+		}
+	}
 
+	if(isset($_POST['Product']))
+	{
+		$product->attributes = $_POST['Product'];
+		print_r($product);
 
-								if($product->update())
-								{
-														$response['message']="successfully Updated.";
-														echo json_encode($response);
-								}
+		if($product->update())
+		{
 
-					 }
+			foreach($productOldCategory as $category)
+			{
+				$_category = Categories::model()->findByAttributes(array('name'=>$category));
+					
+				$productHasCategories = ProductHasCategories::model()->findByAttributes(array('product_id'=>$id,'category_id'=>$_category->id));
 
+				if(!empty($productHasCategories))
+				{
+					$productHasCategories->status = 0;
+					$productHasCategories->modify_date = new CDbExpression('NOW()');
+
+					$productHasCategories->update();
+				}
+
+			}
+
+			foreach($productOldFeatures as $features)
+			{
+				$_feature = Features::model()->findByAttributes(array('name'=>$features));
+					
+				$productHasFeatures = ProductHasFeatures::model()->findByAttributes(array('product_id'=>$id,'feature_id'=>$_feature->id));
+
+				if(!empty($productHasFeatures))
+				{
+					$productHasFeatures->status = 0;
+					$productHasFeatures->modify_date = new CDbExpression('NOW()');
+
+					$productHasFeatures->update();
+				}
+
+			}
+
+			if(isset($_POST['productCategory']))
+			{
+				foreach($_POST['productCategory'] as $category)
+				{
+					$_category = Categories::model()->findByAttributes(array('name'=>$category));
+					
+					$productHasCategories = ProductHasCategories::model()->findByAttributes(array('product_id'=>$id,'category_id'=>$_category->id));
+
+					if(empty($productHasCategories))
+					{
+						$productHasCategories = new ProductHasCategories;
+						$productHasCategories->product_id = $id;
+						$productHasCategories->category_id = $_category->id;
+						$productHasCategories->add_date = new CDbExpression('NOW()');
+
+						$productHasCategories->save();
+					}
+					$productHasCategories->status = 1;
+					$productHasCategories->modify_date = null;
+					$productHasCategories->update();
+				}
+			}
+
+			if(isset($_POST['productCategoryFeatures']))
+			{				
+				foreach($_POST['productCategoryFeatures'] as $feature)
+				{
+					$_feature = Features::model()->findByAttributes(array('name'=>$feature));
+					
+					$productHasFeatures = ProductHasFeatures::model()->findByAttributes(array('product_id'=>$id,'feature_id'=>$_feature->id));
+
+					if(empty($productHasFeatures))
+					{
+						$productHasFeatures = new ProductHasFeatures;
+						$productHasFeatures->product_id = $id;
+						$productHasFeatures->feature_id = $_feature->id;
+						$productHasFeatures->add_date = new CDbExpression('NOW()');
+
+						$productHasFeatures->save();
+					}
+					$productHasFeatures->status = 1;
+					$productHasFeatures->modify_date = null;
+					$productHasFeatures->update();
+				}
+			}
+
+		}
+	}
 }
 
 
-	public function actionUsersetting()
+public function actionUsersetting()
+{
+	$user_id = Yii::app()->user->id;
+	$user = new Users;
+	$_user = Users::model()->findByAttributes(array('username'=>$user_id));
+	$this->render('usersetting',array('user'=>$user,'_user'=>$_user));
+
+}
+public function actionViewprofile()
+{
+	$user_id = Yii::app()->user->id;
+	$user = new Users;
+	$_user = Users::model()->findByAttributes(array('username'=>$user_id));
+	$this->render('viewprofile',array('user'=>$user,'_user'=>$_user));
+
+}
+public function actionSocialnetworks()
+{
+
+	$this->render('socialnetworks');
+
+}
+
+public function actionUserUpdate()
+{
+	$user_id = Yii::app()->user->id;
+	$user = Users::model()->findByAttributes(array('username'=>$user_id));
+
+	$user->attributes = $_POST['Users'];
+
+	$user->job_profile = $_POST['Users']['job_profile'];
+
+	$user->profile_img = $_POST['Users']['profile_img'];
+
+	if($user->password == "")
 	{
-		$user_id = Yii::app()->user->id;
-		$user = new Users;
 		$_user = Users::model()->findByAttributes(array('username'=>$user_id));
-		$this->render('usersetting',array('user'=>$user,'_user'=>$_user));
 
-	}
-	public function actionViewprofile()
-	{
-		$user_id = Yii::app()->user->id;
-		$user = new Users;
-		$_user = Users::model()->findByAttributes(array('username'=>$user_id));
-		$this->render('viewprofile',array('user'=>$user,'_user'=>$_user));
-
-	}
-	public function actionSocialnetworks()
-	{
-
-		$this->render('socialnetworks');
-
+		$user->password = $_user->password;
 	}
 
-	public function actionUserUpdate()
+	$user->modify_date = new CDbExpression('NOW()');
+
+	$user->update();
+}
+
+public function actionGetFeatures()
+{
+	$features = array();
+
+	if(!empty($_POST['categories']))
 	{
-		$user_id = Yii::app()->user->id;
-		$user = Users::model()->findByAttributes(array('username'=>$user_id));
-
-		$user->attributes = $_POST['Users'];
-
-				$user->job_profile = $_POST['Users']['job_profile'];
-				$user->profile_img = $_POST['Users']['profile_img'];
-		if($user->password == "")
+		foreach($_POST['categories'] as $category)
 		{
-			$_user = Users::model()->findByAttributes(array('username'=>$user_id));
+			$_category = Categories::model()->findByAttributes(array('name'=>$category));
 
-			$user->password = $_user->password;
+			foreach($_category->features as $feature)
+			{
+				if(!in_array($feature->name, $features))
+					array_push($features, $feature->name);
+			}
 		}
+	}
 
-		$user->modify_date = new CDbExpression('NOW()');
-
-		$user->update();
+	if(empty($features))
+	{
+		echo "";
+	}
+	echo "<i class='fa fa-tasks fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1'></i>
+	<select id='features' name='productCategoryFeatures[]' multiple='multiple' class='col-lg-11 col-md-11 col-sm-11 col-xs-11' >";
+		for($i=0;$i<count($features);$i++)
+		{
+			echo "<option value='$features[$i]'>$features[$i]</option>";
+		}
+		echo "</select>";
 	}
 
 		public function actionShowStats($id) {

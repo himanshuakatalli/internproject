@@ -1,25 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "product_has_categories".
+ * This is the model class for table "product_has_features".
  *
- * The followings are the available columns in table 'product_has_categories':
+ * The followings are the available columns in table 'product_has_features':
  * @property integer $id
  * @property integer $product_id
- * @property integer $category_id
+ * @property integer $feature_id
  * @property string $admin_notes
  * @property integer $status
  * @property string $add_date
  * @property string $modify_date
  */
-class ProductHasCategories extends CActiveRecord
+class ProductHasFeatures extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'product_has_categories';
+		return 'product_has_features';
 	}
 
 	/**
@@ -30,12 +30,12 @@ class ProductHasCategories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('product_id, category_id, add_date', 'required'),
-			array('product_id, category_id, status', 'numerical', 'integerOnly'=>true),
+			array('product_id, feature_id, add_date', 'required'),
+			array('product_id, feature_id, status', 'numerical', 'integerOnly'=>true),
 			array('admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, product_id, category_id, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			array('id, product_id, feature_id, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,7 +58,7 @@ class ProductHasCategories extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'product_id' => 'Product',
-			'category_id' => 'Category',
+			'feature_id' => 'Feature',
 			'admin_notes' => 'Admin Notes',
 			'status' => 'Status',
 			'add_date' => 'Add Date',
@@ -86,7 +86,7 @@ class ProductHasCategories extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('product_id',$this->product_id);
-		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('feature_id',$this->feature_id);
 		$criteria->compare('admin_notes',$this->admin_notes,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('add_date',$this->add_date,true);
@@ -101,7 +101,7 @@ class ProductHasCategories extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return ProductHasCategories the static model class
+	 * @return ProductHasFeatures the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
