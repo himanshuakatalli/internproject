@@ -2,16 +2,48 @@
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/new_prod.css">
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
 <style type="text/css">
+  #selCat {
+    width: 49% !important;
+    float: left;
+    border: 1px solid rgba(0,0,0,0.15);
+
+    transition: all 0.3s ease-in;
+  }
+  #selCat i {
+    height: 42px;
+    width: 8.33%;
+    z-index: 999;
+    background: #fff;
+    padding-top: 14px;
+    color: rgba(0,0,0,0.4) !important;
+  }
   #selCat .btn-group{
-    width: 100%;
+    width: 91.67%;
+    box-shadow: none;
   }
   #selCat .btn-group button{
     background: none;
-    width:200%;
+    width: 100%;
     height:42px;
+    border: none;
+    box-shadow: none;
   }
   #selCat .btn-group button:hover{
     background: none;
+  }
+  #selCat .btn-group ul{
+    width: 100%;
+  }
+  #selCat .btn-group ul li:first-of-type div {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  #selCat .btn-group ul li:first-of-type div span {
+    display: none;
+  }
+  #selCat .btn-group ul li:first-of-type div input {
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
   }
 </style>
 <?php $form = $this->beginWidget('CActiveForm',array('id'=>'add_project','enableClientValidation'=>true,'htmlOptions'=>array('class'=>'container-fluid')));?>
@@ -54,14 +86,14 @@
           <input type="button" value="Company Detail" id="user"></input>
         </div>
       </div>
-      
+
     <!-- </form>   -->
     </section>
-          
+
   <section class="container prod-reg-container" id="about_company" style="display: none">
   <!-- <form class="container-fluid"> -->
-  
-        
+
+
         <h2>About Your Company</h2>
         <div class="row">
           <div class="input-half">
@@ -76,7 +108,7 @@
               <option>Afghan</option>
               <option>India</option>
             </select> -->
-            <?php 
+            <?php
               $countries = ProductController::getCountryNames();
               echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
           </div>
@@ -98,13 +130,13 @@
           <input type="button" value="Product Detail" id="company"></input>
         </div>
       </div>
-      
+
         <!-- </form> -->
       </section>
 
     <section class="container prod-reg-container" id="about_product" style="display: none">
     <!-- <form class="container-fluid"> -->
-    
+
 
      <h2>About Your Product</h2>
      <div class="row">
@@ -130,7 +162,7 @@
      <small class="pull-left">Select Category</small>
      <div class="row">
        <div class="pull-left" id="selCat">
-         <i class="fa fa-codiepie col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+         <i class="fa fa-check-circle col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
          <!-- <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
            <option>Select a category</option>
            <option>360 Hosting</option>
@@ -183,12 +215,12 @@
         </div>
       </div>
      <!-- </form> -->
-     
+
      </section>
 
     <section class="container prod-reg-container" id="product_deployment" style="display: none">
     <!-- <form class="container-fluid"> -->
-    
+
 
      <h2>Product's Deployment Type</h2>
       <div class="row">
@@ -217,12 +249,12 @@
         </div>
       </div>
      <!-- </form> -->
-     
+
      </section>
-     
+
     <section class="container prod-reg-container" id="media_link" style="display: none">
     <!-- <form class="container-fluid"> -->
-    
+
 
       <h2>Product's Social Media Link</h2>
       <div class="row">
