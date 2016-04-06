@@ -184,7 +184,7 @@ public function actionProductsettingsave($id)
 		$user->attributes = $_POST['Users'];
 
 				$user->job_profile = $_POST['Users']['job_profile'];
-
+				$user->profile_img = $_POST['Users']['profile_img'];
 		if($user->password == "")
 		{
 			$_user = Users::model()->findByAttributes(array('username'=>$user_id));

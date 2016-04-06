@@ -20,9 +20,11 @@
 <?php $form=$this->beginWidget('CActiveForm', array('id'=>'product_setting','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"prod-edit-container",'data-parsley-validate'=>'data-parsley-validate',)));?>
 				<div class="row" id="product_information">
 					<h4>Product Information</h4>
-					<figure><img src="<?php echo Yii::app()->theme->baseUrl; ?>/../product_logo/IMG_1.png" alt="product logo"></figure>
+					<figure>
+					<a href="#" id="productImga"><img id="productImg" src="<?php echo (!empty($product->logo))?$product->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png.png";?>" alt="product logo"></a>
+					</figure>
 					<div class="container-fluid" id="product_information">
-
+					<?php echo $form->textField($product,'logo',array('hidden'=>"hidden",'title'=>"Logo",'id'=>'prod_img'));?>
 						<div class="row">
 							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Name:</label>
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -277,7 +279,7 @@
 			        <div class="col-lg-4 submit-part">
 
 			          <!-- <input type="submit" value="Save" name="save"></input> -->
-			          <?php echo CHtml::button('Save',array('name'=>'Submit','id'=>'save_record')); ?>
+			          <?php echo CHtml::button('Save',array('name'=>'Submit','id'=>'save_record','class'=>'btn btn-primary')); ?>
 
 			        </div>
 			      </div>
@@ -346,4 +348,22 @@ $("#product_setting").parsley().validate();
  });
  });
 
+
+ 	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
+filepicker.setKey(yourApiKey);
+
+document.getElementById("productImga").onclick = function(){
+  filepicker.pick({
+      services: ['COMPUTER', 'FACEBOOK', 'CLOUDAPP'],
+      mimetype:'image/*',
+      cropRatio:1,
+      cropForce:true,
+    },
+    function onSuccess(Blob){
+      var image = document.getElementById("imgPlaceholder");
+      $('#prod_img').val(Blob.url);
+      $('#productImg').attr('src',Blob.url);
+    }
+  );
+};
 </script>
