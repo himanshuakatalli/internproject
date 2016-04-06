@@ -34,7 +34,7 @@ public $layout="dashboard/main";
                 'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate'),
+                'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks'),
                 'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -155,13 +155,24 @@ public function actionProductsettingsave($id)
 	public function actionUsersetting()
 	{
 		$user_id = Yii::app()->user->id;
-
 		$user = new Users;
-
 		$_user = Users::model()->findByAttributes(array('username'=>$user_id));
-
-		$this->layout="dashboard/main";
 		$this->render('usersetting',array('user'=>$user,'_user'=>$_user));
+
+	}
+	public function actionViewprofile()
+	{
+		$user_id = Yii::app()->user->id;
+		$user = new Users;
+		$_user = Users::model()->findByAttributes(array('username'=>$user_id));
+		$this->render('viewprofile',array('user'=>$user,'_user'=>$_user));
+
+	}
+	public function actionSocialnetworks()
+	{
+
+		$this->render('socialnetworks');
+
 	}
 
 	public function actionUserUpdate()
