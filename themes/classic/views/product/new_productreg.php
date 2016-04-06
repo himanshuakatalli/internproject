@@ -12,7 +12,6 @@
   #selCat i {
     height: 42px;
     width: 8.33%;
-    z-index: 999;
     background: #fff;
     padding-top: 14px;
     color: rgba(0,0,0,0.4) !important;
