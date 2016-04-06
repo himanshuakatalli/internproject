@@ -5,7 +5,7 @@
 
 			<?php $form = $this->beginWidget('CActiveForm',array('id'=>'update_user','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"form-horizontal",'data-parsley-validate'=>'data-parsley-validate')));?>
 
-				<figure><p class="centered"><a href="#" id="changeProfileImg"><img id="pimg" src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p></figure><br>
+				<figure><p class="centered"><a href="#" id="changeProfileImg"><img id="pimg" src="<?php echo (!empty($_user->profile_img))?$_user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"/></a></p></figure><br>
 				<?php echo $form->textField($user,'profile_img',array('placeholder'=>'Profile Image','id'=>'profImg','hidden'=>"hidden" ,'class'=>"input-box col-lg-11",'value'=>$_user->profile_img));?>
 					</div>
 				<div class="form-group">

@@ -6,7 +6,8 @@
           <div class="media">
               <div class="media-left media-middle">
                   <a href="<?php echo Yii::app()->createUrl('/product/productprofile/',array('id'=>$product->id))?>">
-                       <img class="media-object img-thumbnail" src=<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/'.$product->logo.'.png'; ?> alt="Pic">
+                       <img class="media-object img-thumbnail" src="<?php echo (!empty($product->logo))?$product->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" alt="product logo">
+
                   </a>
               </div>
               <div class="media-body">

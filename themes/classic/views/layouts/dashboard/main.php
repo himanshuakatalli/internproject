@@ -310,6 +310,7 @@
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/prettify.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/bootstrap-multiselect.js"></script>
 <script type="text/javascript">
+
   $(document).ready(function(){
     $('#category').multiselect({
       enableFiltering: true
