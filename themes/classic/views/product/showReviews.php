@@ -93,7 +93,7 @@ else
 				<div class="col-sm-10 ">
 					<div class="media" > 
 						<div class="media-left media-middle ">
-							<img src="<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/'.$product->logo.'.png'; ?>" class="img-thumbnail" alt="Product Icon" width="100px" height="130px" >
+							<img class="media-object img-thumbnail" src="<?php echo (!empty($product->logo))?$product->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" alt="product logo">
 						</div>
 						<div class="media-body">
 							<h2 class="media-header"><?php echo $product->name?></h2>

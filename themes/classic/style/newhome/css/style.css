@@ -1335,9 +1335,8 @@ a:focus {
   border: 1px solid #ddd;
   border-radius: 4px;
   display: inline-block;
-  height: auto;
-  line-height: 1.42857;
-  max-width: 100%;
+  width: 120px;
+  height: 120px;
   padding: 4px;
   transition: all .2s ease-in-out 0s;
 }

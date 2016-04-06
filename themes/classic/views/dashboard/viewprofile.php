@@ -35,13 +35,7 @@
 						<?php echo $form->textField($user,'phone_number',array('placeholder'=>'Phone Number','class'=>"input-box col-lg-11",'value'=>$_user->phone_number,'data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"10",'disabled'=>'disabled'));?>
 					</div>
 					</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="password">New Password:</label>
-					<div class="col-sm-10">
-						<i class="fa fa-user col-lg-1"></i>
-						<?php echo $form->passwordField($user,'password',array('placeholder'=>'Leave blank in case you dont want to update','class'=>"input-box col-lg-11",'disabled'=>'disabled'));?>
-					</div>
-				</div>
+
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="job_profile">Job profile:</label>
 					<div class="col-sm-10">
