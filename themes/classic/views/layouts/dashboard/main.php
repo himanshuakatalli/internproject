@@ -138,14 +138,49 @@
                   <?php endif; ?>
                 </ul>
               </li>
-              <li>
-                <a id="userSettings" href="<?php echo Yii::app()->createUrl('/dashboard/Usersetting');?>" >
-                  <i class="fa fa-cogs"></i>
-                  <span>User Account Settings</span>
+
+              <li class="sub-menu">
+                <a id="editProduct" href="#" >
+                  <i class="fa fa-bars"></i>
+                  <span>Show Stats</span>
                 </a>
+                <ul class="sub">
+                  <?php if(count($product) >= 1):?>
+                      <?php foreach ($product as $prodDetails): ?>
+                        <li>
+                          <a href="<?php echo $this->createUrl('ShowStats',array('id'=>$prodDetails->id)); ?>">
+                            <?php echo $prodDetails->name; ?>
+                          </a>
+                        </li>
+                      <?php endforeach; ?>
+                  <?php else: ?>
+                    <li><a href="#">No Product</a></li>
+                  <?php endif; ?>
+                </ul>
               </li>
+
+              <?php if($user->oauth_uid):?>
+                <li class="sub-menu">
+                  <a href="javascript:;" >
+                    <i class="fa fa-cogs"></i>
+                    <span>User Account Settings</span>
+                  </a>
+                  <ul class="sub">
+                    <li><a  href="<?php echo $this->createUrl('viewprofile');?>">View Profile</a></li>
+                    <li><a  href="<?php echo $this->createUrl('socialnetworks');?>">Social Networks</a></li>
+                  </ul>
+                </li>
+              <?php else: ?>
+                <li>
+                  <a id="usersetting" href="<?php echo $this->createUrl('usersetting');?>">
+                    <i class="fa fa-cogs"></i>
+                    <span>User Account Settings</span>
+                  </a>
+                </li>
+              <?php endif; ?>
             </ul>
             <!-- sidebar menu end-->
+
         </div>
       </aside>
       <!--sidebar end-->
