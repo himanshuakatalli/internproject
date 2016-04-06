@@ -140,7 +140,7 @@
         $criteria = new CDbCriteria();
         for($a=1; $a<=7; $a++) {
           $str = date("Y-m-d",time()-$a*24*60*60);
-          $criteria->condition = "add_date like '%".$str."%' AND product_id=".$productArray[$index]->id;
+          $criteria->condition = "entry_time like '%".$str."%' AND product_id=".$productArray[$index]->id;
           $criteria->params = array(':str'=>$str);
           array_push($ppcCount,TrackingUser::model()->count($criteria));
         }
@@ -174,7 +174,7 @@
         $criteria = new CDbCriteria();
         for($a=1; $a<=7; $a++) {
           $str = date("Y-m-d",time()-$a*24*60*60);
-          $criteria->condition = "add_date like '%".$str."%' AND product_id=".$productArray[$indexOfMax]->id;
+          $criteria->condition = "entry_time like '%".$str."%' AND product_id=".$productArray[$indexOfMax]->id;
           $criteria->params = array(':str'=>$str);
           array_push($ppcCount,TrackingUser::model()->count($criteria));
         }
