@@ -55,12 +55,23 @@
     bottom: 0;
     width: 100%;
 }
+.chmg{
+  color: #fff;
+  position: absolute;
+  display: none;
+}
+#changeProfileImg:hover .chmg{
+  display: inline-block;
+}
 .modal-body {
     max-height: calc(100vh - 212px);
     overflow-y: auto;
 }
     </style>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
+    <script type="text/javascript">
+(function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filestackapi.com/filestack.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document);
+</script>
   </head>
   <body>
     <section id="container" >
@@ -88,7 +99,8 @@
           <!-- sidebar menu start-->
           <?php $user = Users::model()->findByPk(Yii::app()->user->user_id);?>
           <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a href="#"><img src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
+            <p class="centered"><a href="#" id="changeProfileImg"><img src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a><small class="chmg">change Image</small>
+            </p>
               <h5 class="centered">
 
               <?php echo $user->first_name;?>
@@ -175,6 +187,7 @@
       <!--main content start-->
       <section id="main-content">
         <?php echo $content;?>
+        
       </section>
     <!--footer start-->
       <footer class="site-footer">
@@ -318,6 +331,24 @@
     });
     $("#formAddNewProduct").parsley().validate();
   });
+
+
+  var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
+filepicker.setKey(yourApiKey);
+
+document.getElementById("changeProfileImg").onclick = function(){
+  filepicker.pick({
+      services: ['COMPUTER', 'FACEBOOK', 'CLOUDAPP'],
+      mimetype:'image/*',
+      cropRatio:1,
+      cropForce:true,
+    },
+    function onSuccess(Blob){
+      var image = document.getElementById("imgPlaceholder");
+      alert(Blob.url);
+    }
+  );
+};
 </script>
   </body>
 </html>

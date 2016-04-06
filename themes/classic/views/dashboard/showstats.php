@@ -1,7 +1,6 @@
 <?php
   $product = Product::model()->findByPk($product_id);
 ?>
-<link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/dash-style.css" rel="stylesheet">
 <section class="wrapper">
   <section class="centered-wrapper">
     <h4>Showing stats for</h4>
