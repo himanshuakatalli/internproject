@@ -123,6 +123,14 @@
 									<?php echo $form->textField($product,'starting_price',array('placeholder'=>"Starting Price",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
 							</div>
 						</div>
+						<div class="row">
+							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Bidding Amount:</label>
+							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+								<i class="fa fa-money fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
+								</i>
+									<?php echo $form->textField($product,'bidding_amount',array('placeholder'=>"Bidding Amount",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
+							</div>
+						</div>
 
 						<div class="row">
 							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Pricing Details:</label>
