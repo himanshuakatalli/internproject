@@ -5,7 +5,7 @@
 <section class="wrapper">
   <section class="centered-wrapper">
     <h4>Showing stats for</h4>
-    <h3>Leader Nation</h3>
+    <h3><?php echo $product->name; ?></h3>
     <hr class="half-center">
 
     <div class="row">
