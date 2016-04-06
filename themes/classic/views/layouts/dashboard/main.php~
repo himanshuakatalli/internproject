@@ -60,7 +60,6 @@
     overflow-y: auto;
 }
     </style>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
   </head>
   <body>
     <section id="container" >
@@ -88,13 +87,13 @@
           <!-- sidebar menu start-->
           <?php $user = Users::model()->findByPk(Yii::app()->user->user_id);?>
           <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a href="#"><img src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
+            <p class="centered"><a href="#"><img src="<?php echo (!empty(Yii::app()->user->user_id))?$user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
               <h5 class="centered">
-
+              
               <?php echo $user->first_name;?>
               </h5>
               <li class="mt">
-                <a id="dashboard" class="active" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
+                <a id="dashboard" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
                   <i class="fa fa-dashboard"></i>
                   <span>Dashboard</span>
                 </a>
@@ -126,32 +125,14 @@
                   <?php endif; ?>
                 </ul>
               </li>
-              <?php if($user->oauth_uid):?>
-              <li class="sub-menu">
-                <a href="javascript:;" >
+              <li>
+                <a id="userSettings" href="<?php echo Yii::app()->createUrl('/dashboard/Usersetting');?>" >
                   <i class="fa fa-cogs"></i>
                   <span>User Account Settings</span>
                 </a>
-
-                  <ul class="sub">
-                    <li><a  href="<?php echo $this->createUrl('viewprofile');?>">View Profile</a></li>
-                    <li><a  href="<?php echo $this->createUrl('socialnetworks');?>">Social Networks</a></li>
-                  </ul>
-            </li>
-            <?php else: ?>
-
-                  <li>
-                <a id="usersetting" href="<?php echo $this->createUrl('usersetting');?>">
-                  <i class="fa fa-user"></i>
-                  <span>User Account Settings</span>
-                </a>
               </li>
-
-          <?php endif; ?>
-
             </ul>
             <!-- sidebar menu end-->
-
         </div>
       </aside>
       <!--sidebar end-->
@@ -206,22 +187,11 @@
               <?php
               $categories = Categories::model()->findAll();
               $categoryNames = array();
+              array_push($categoryNames, "Select Category");
               foreach ($categories as $category)
                 array_push($categoryNames,$category->name);
-              echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'multiple'=>"multiple",'class'=>'form-control'));
+              echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'class'=>'form-control'));
               ?>
-            </div><br>
-            <label>Product Features</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicons-life-preserver"></i>
-              </span>
-              <select class="form-control" multiple="multiple" id="productFeatures" name="features">
-                <option value="1">features1</option>
-                <option value="2">features2</option>
-                <option value="3">features3</option>
-                <option value="4">features4</option>
-              </select>
             </div><br>
             <label>Starting Price</label>
             <div class="input-group">
@@ -291,12 +261,6 @@
       enableFiltering: true
     });
     $('#features').multiselect({
-      enableFiltering: true
-    });
-    $('#productCategory').multiselect({
-      enableFiltering: true
-    });
-    $('#productFeatures').multiselect({
       enableFiltering: true
     });
     $("#formAddNewProduct").parsley().validate();
