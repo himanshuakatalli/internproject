@@ -30,7 +30,7 @@
 					<label class="control-label col-sm-2" for="phone_number">Phone Number</label>
 					<div class="col-sm-10">
 						<i class="fa fa-user col-lg-1"></i>
-						<?php echo $form->textField($user,'phone_number',array('placeholder'=>'Phone Number','class'=>"input-box col-lg-11",'value'=>$_user->phone_number,'data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"10"));?>
+						<?php echo $form->textField($user,'phone_number',array('placeholder'=>'Phone Number','class'=>"input-box col-lg-11",'value'=>$_user->phone_number,'required'=>'required','data-parsley-trigger'=>"focusout",'data-parsley-required-message'=>"Phone Number is required",'data-parsley-minlength'=>"10",'data-parsley-type'=>"digits"));?>
 					</div>
 					</div>
 				<div class="form-group">
@@ -59,10 +59,10 @@
 	</div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
 <script type="text/javascript">
-
+	$('#userSettings').addClass('active');
+	$('#dashboard').removeClass('active');
   $(document).ready(function(){
   	$("#formUserSettings").parsley().validate();
   	$('#userInfo').click(function(){
