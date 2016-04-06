@@ -142,7 +142,7 @@
 
                   <li>
                 <a id="usersetting" href="<?php echo $this->createUrl('usersetting');?>">
-                  <i class="fa fa-user"></i>
+                  <i class="fa fa-cogs"></i>
                   <span>User Account Settings</span>
                 </a>
               </li>

@@ -111,7 +111,7 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-users fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-								<?php echo $form->textField($product,'customer_count',array('placeholder'=>"No. of people",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11',,'data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
+								<?php echo $form->textField($product,'customer_count',array('placeholder'=>"No. of people",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
 							</div>
 						</div>
 
@@ -120,7 +120,7 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-money fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-									<?php echo $form->textField($product,'starting_price',array('placeholder'=>"Starting Price",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11',,'data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
+									<?php echo $form->textField($product,'starting_price',array('placeholder'=>"Starting Price",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
 							</div>
 						</div>
 
@@ -196,7 +196,7 @@
 								<i class="fa fa-calendar-o fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
 								<!-- <input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="founding_year" value="Salesforce"> -->
-								<?php echo $form->textField($product,'founding_year',array('placeholder'=>"Founding Year",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11',,'data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"4",'data-parsley-type'=>"digits"));?>
+								<?php echo $form->textField($product,'founding_year',array('placeholder'=>"Founding Year",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"4",'data-parsley-type'=>"digits"));?>
 
 							</div>
 						</div>
