@@ -193,6 +193,18 @@
               echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'multiple'=>"multiple",'class'=>'form-control'));
               ?>
             </div><br>
+            <label>Product Features</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicons-life-preserver"></i>
+              </span>
+              <select class="form-control" multiple="multiple" id="productFeatures" name="features">
+                <option value="1">features1</option>
+                <option value="2">features2</option>
+                <option value="3">features3</option>
+                <option value="4">features4</option>
+              </select>
+            </div><br>
             <label>Starting Price</label>
             <div class="input-group">
               <span class="input-group-addon">
@@ -264,6 +276,9 @@
       enableFiltering: true
     });
     $('#productCategory').multiselect({
+      enableFiltering: true
+    });
+    $('#productFeatures').multiselect({
       enableFiltering: true
     });
     $("#formAddNewProduct").parsley().validate();
