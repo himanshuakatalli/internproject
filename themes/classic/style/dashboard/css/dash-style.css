@@ -2624,3 +2624,90 @@ Product Settings styles goes here!!!!!!!!!!
 #transactions > div > div.row table tbody tr{
   line-height: 3em;
 }
+
+/***************************************
+Style for show stats
+***************************************/
+.centered-wrapper {
+    width: 70%;
+    margin: 0 auto;
+    height: 500px;
+    color: rgba(0,0,0,0.4);
+}
+
+.centered-wrapper h3,
+.centered-wrapper h4 {
+    text-align: center;
+}
+.centered-wrapper h3 {
+    margin-top: 0;
+    color: rgba(0,0,0,0.6);
+}
+
+.half-center {
+    width: 100%;
+    height: 1px;
+    border: none;
+    color: #f07762;
+    background: #f07762;
+}
+
+.centered-wrapper > div.row:first-of-type > div{
+
+}
+
+.stat-box {
+    width: 100%;
+    padding: 1.5em;
+    padding-bottom: 1em;
+    cursor: pointer;
+    background: #fff;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.2);
+
+    transition: all 0.3s ease-in;
+}
+.stat-box:hover {
+    border: 1px solid #7ececa;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2), 0 0 10px rgba(0,0,0,0.1);
+}
+.stat-box p {
+    color: #f07762;
+    margin-top: 1em;
+    font-weight: 600;
+}
+
+.centered-wrapper > div.row:nth-of-type(2) {
+    margin-top: 4em;
+}
+
+.centered-wrapper > div.row:nth-of-type(2) table{
+    margin-top: 2em;
+}
+
+.centered-wrapper > div.row:nth-of-type(2) table thead tr {
+    font-weight: 600;
+    color: #f07762;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.4);
+}
+
+.centered-wrapper > div.row:nth-of-type(2) table thead tr td {
+    padding: 1em 1em;
+    padding-left: 2em;
+    text-align: justify;
+}
+
+.centered-wrapper > div.row:nth-of-type(2) table tbody {
+    border: 1px solid rgba(0,0,0,0.4);
+}
+
+.centered-wrapper > div.row:nth-of-type(2) table tbody tr {
+    color: rgba(0,0,0,0.6);
+}
+
+.centered-wrapper > div.row:nth-of-type(2) table tbody tr td {
+    padding: 1em 1em;
+    padding-left: 2em;
+    text-align: justify;
+}
