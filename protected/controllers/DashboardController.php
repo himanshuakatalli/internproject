@@ -29,7 +29,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -312,6 +312,41 @@ public function actionGetFeatures()
 		echo "</select>";
 	}
 
+
+	public function actionGetFeaturesByID()
+	{
+		$features = array();
+
+		if(!empty($_POST['categories']))
+		{
+			foreach($_POST['categories'] as $category_id)
+			{
+				$_category = Categories::model()->findByPk($category_id);
+
+				foreach($_category->features as $feature)
+				{
+					if(!in_array($feature->name, $features))
+						array_push($features, $feature->name);
+				}
+			}
+		}
+
+		if(empty($features))
+		{
+			echo "";
+		}
+
+		echo "<span class='input-group-addon'><i class='glyphicon glyphicons-life-preserver'></i></span>
+    	    <select class='form-control' multiple='multiple' id='productFeatures' name='features[]'>";
+
+  	for($i=0;$i<count($features);$i++)
+		{
+			echo "<option value='$features[$i]'>$features[$i]</option>";
+		}
+
+		echo "</select>";
+	}
+
 		public function actionShowStats($id) {
 			$criteria = new CDbCriteria();
 			$criteria->order = 'entry_time ASC';
@@ -338,24 +373,77 @@ public function actionGetFeatures()
 //dashboard add product page.
 	public function actionAddproduct()
 	{
-		$product=new Product;
-		$category=new Categories;
-		$producthasCategories=new ProductHasCategories;
-		$producthasdeployment=new ProductHasDeploymentFeatures;
-		if(isset($_POST['submit']))
+		$product = new Product;
+
+		$product->user_id = Yii::app()->user->user_id;
+		$product->name = $_POST['product_name'];
+		$product->description = $_POST['product_description'];
+		$product->product_website = $_POST['product_website'];
+		$product->starting_price = $_POST['starting_price'];
+		$product->customer_count = $_POST['user_count'];
+		$product->company_name = $_POST['company_name'];
+		$product->company_website = $_POST['company_website'];
+		$product->founding_country = $_POST['founding_country'];
+		$product->founding_year = $_POST['founding_year'];
+		$product->status = 1;
+		$product->search_count = 0;
+		$product->visit_count = 0;
+		$product->add_date= new CDbExpression('NOW()');
+		
+
+		if(isset($_POST['trial']))
 		{
-			$product->user_id=Yii::app()->user->user_id;
-			$product->name=$_POST['product_name'];
-			$product->description=$_POST['description'];
-			$product->product_website=$_POST['product_website'];
-			$product->starting_price=$_POST['starting_price'];
-			$product->customer_count=$_POST['user_count'];
-			$product->has_free_version=$_POST['free_version'];
-			$product->has_trial=$_POST['trial'];
-			$product->save();
-			CVarDumper::dump($product,10,1); die;
+			if($_POST['trial'] == 'trial')
+			{
+				$product->has_trial = 1;
+			}
 		}
 
+		if(isset($_POST['free_version']))
+		{
+			if($_POST['free_version'] == 'free')
+			{
+				$product->has_free_version = 1;
+			}
+		}
 
+		if($product->save())
+		{
+			foreach($_POST['Categories']['id'] as $category_id)
+			{
+				$productHasCategories = new ProductHasCategories;
+				$productHasCategories->product_id = $product->id;
+				$productHasCategories->category_id = $category_id;
+				$productHasCategories->add_date = new CDbExpression('NOW()');
+
+				$productHasCategories->save();
+			}
+
+			foreach($_POST['features'] as $feature)
+			{
+				$_feature = Features::model()->findByAttributes(array('name'=>$feature));
+
+				$productHasFeatures = new ProductHasFeatures;
+				$productHasFeatures->product_id = $product->id;
+				$productHasFeatures->feature_id = $_feature->id;
+				$productHasFeatures->add_date = new CDbExpression('NOW()');
+
+				$productHasFeatures->save();
+			}
+
+			foreach($_POST['deployment_features'] as $deploymentFeatureID)
+			{
+
+				$productHasDeploymentFeatures = new ProductHasDeploymentFeatures;
+				$productHasDeploymentFeatures->product_id = $product->id;
+				$productHasDeploymentFeatures->deployment_feature_id = $deploymentFeatureID;
+				$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
+	
+				$productHasDeploymentFeatures->save();
+			}
+
+		}	
 	}
+
+
 }
