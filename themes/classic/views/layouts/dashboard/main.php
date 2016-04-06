@@ -179,7 +179,7 @@
       <!--main content start-->
       <section id="main-content">
         <?php echo $content;?>
-        
+
       </section>
     <!--footer start-->
       <footer class="site-footer">
@@ -204,21 +204,21 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-star-empty"></i>
               </span>
-              <input type="text" class="form-control" placeholder="Product Name" id="productName">
+              <input type="text" class="form-control" name="product_name" placeholder="Product Name" id="productName">
             </div><br>
             <label>Product Description</label>
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-pencil"></i>
               </span>
-              <textarea class="form-control" placeholder="Product Description" id="productDescription"></textarea>
+              <textarea class="form-control" name="product_description" placeholder="Product Description" id="productDescription"></textarea>
             </div><br>
             <label>Product Website</label>
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="fa fa-internet-explorer"></i>
               </span>
-              <input type="text" class="form-control" placeholder="Product Website" id="productWebsite">
+              <input type="text" class="form-control" name="product_website" placeholder="Product Website" id="productWebsite">
             </div><br>
             <label>Product Category</label>
             <div class="input-group">
@@ -230,8 +230,10 @@
               $categoryNames = array();
               foreach ($categories as $category)
                 array_push($categoryNames,$category->name);
+
               echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'multiple'=>"multiple",'class'=>'form-control'));
               ?>
+
             </div><br>
             <label>Product Features</label>
             <div class="input-group">
@@ -250,7 +252,7 @@
               <span class="input-group-addon">
                 <i class="fa fa-money"></i>
               </span>
-              <input type="text" class="form-control" placeholder="Product's Starting Price" id="startingPrice">
+              <input type="text" class="form-control" name="starting_price" placeholder="Product's Starting Price" id="startingPrice">
             </div><br>
             <label>Number of users</label>
             <div class="input-group">
@@ -269,7 +271,7 @@
             </div><br>
             <div class="input-group">
               <label>Free Version Available</label>
-              <select name="ferr" id="free" class="form-control">
+              <select name="free_version" id="free" class="form-control">
                 <option value="">select</option>
                 <option value="free">Yes</option>
                 <option value="not_free">No</option>
@@ -277,7 +279,7 @@
             </div><br>
             <div class="input-group">
               <label>Deployement Detail</label>
-              <select name="ferr" id="free" class="form-control">
+              <select name="dep_feature" id="free" class="form-control">
                 <option value="">select</option>
                 <option value="Mobile">Mobile</option>
                 <option value="Desktop">Desktop</option>
@@ -286,8 +288,8 @@
             </div><br>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger">Reset</button>
-            <button type="button" class="btn btn-primary">Add</button>
+
+            <button type="button" id="add_product" name="submit" class="btn btn-primary">Add</button>
           </div>
         <?php $this->endWidget(); ?>
       </div>
@@ -322,8 +324,33 @@
     $('#productFeatures').multiselect({
       enableFiltering: true
     });
-    $("#formAddNewProduct").parsley().validate();
+    // $("#formAddNewProduct").parsley().validate();
   });
+</script>
+<script>
+$(document).ready(function(){
+
+$("#add_product").on('click',function(){
+
+var data = $("#formAddNewProduct").serialize();
+      alert(data);
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo Yii::app()->createUrl("dashboard/addproduct"); ?>',
+        data: data,
+        success: function(data)
+        {
+          alert("Profile Updated");
+        },
+        error: function(data)
+        {
+          alert("failed");
+        }
+      });
+
+});
+
+});
 </script>
   </body>
 </html>

@@ -124,3 +124,10 @@ document.getElementById("changeProfileImg").onclick = function(){
   );
 };
 </script>
+<style>
+#pimg:hover{
+
+	opacity:0.5;
+}
+
+</style>
