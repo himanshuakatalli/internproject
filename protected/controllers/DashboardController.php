@@ -34,7 +34,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -219,4 +219,28 @@ public function actionProductsettingsave($id)
 			}
 			$this->render('showstats',array('ppcCountArray'=>$ppcCountArray,'product_id'=>$id));
 		}
+
+//dashboard add product page.
+	public function actionAddproduct()
+	{
+		$product=new Product;
+		$category=new Categories;
+		$producthasCategories=new ProductHasCategories;
+		$producthasdeployment=new ProductHasDeploymentFeatures;
+		if(isset($_POST['submit']))
+		{
+			$product->user_id=Yii::app()->user->user_id;
+			$product->name=$_POST['product_name'];
+			$product->description=$_POST['description'];
+			$product->product_website=$_POST['product_website'];
+			$product->starting_price=$_POST['starting_price'];
+			$product->customer_count=$_POST['user_count'];
+			$product->has_free_version=$_POST['free_version'];
+			$product->has_trial=$_POST['trial'];
+			$product->save();
+			CVarDumper::dump($product,10,1); die;
+		}
+
+
+	}
 }
