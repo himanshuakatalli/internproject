@@ -125,14 +125,32 @@
                   <?php endif; ?>
                 </ul>
               </li>
-              <li>
-                <a id="userSettings" href="<?php echo Yii::app()->createUrl('/dashboard/Usersetting');?>" >
+              <?php if($user->oauth_uid):?>
+              <li class="sub-menu">
+                <a href="javascript:;" >
                   <i class="fa fa-cogs"></i>
                   <span>User Account Settings</span>
                 </a>
+
+                  <ul class="sub">
+                    <li><a  href="<?php echo $this->createUrl('viewprofile');?>">View Profile</a></li>
+                    <li><a  href="<?php echo $this->createUrl('socialnetworks');?>">Social Networks</a></li>
+                  </ul>
+            </li>
+            <?php else: ?>
+
+                  <li>
+                <a id="usersetting" href="<?php echo $this->createUrl('usersetting');?>">
+                  <i class="fa fa-user"></i>
+                  <span>User Account Settings</span>
+                </a>
               </li>
+
+          <?php endif; ?>
+
             </ul>
             <!-- sidebar menu end-->
+
         </div>
       </aside>
       <!--sidebar end-->
