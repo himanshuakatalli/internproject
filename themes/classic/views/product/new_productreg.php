@@ -1,6 +1,19 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/new_prod.css">
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
+<style type="text/css">
+  #selCat .btn-group{
+    width: 100%;
+  }
+  #selCat .btn-group button{
+    background: none;
+    width:200%;
+    height:42px;
+  }
+  #selCat .btn-group button:hover{
+    background: none;
+  }
+</style>
 <?php $form = $this->beginWidget('CActiveForm',array('id'=>'add_project','enableClientValidation'=>true,'htmlOptions'=>array('class'=>'container-fluid')));?>
 <section class="container prod-reg-container">
     <hgroup class="row">
@@ -114,8 +127,9 @@
          <?php echo $form->textArea($product,'description',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Product Description'));?>
        </div>
      </div>
+     <small class="pull-left">Select Category</small>
      <div class="row">
-       <div class="input-half resp-half float-left">
+       <div class="pull-left" id="selCat">
          <i class="fa fa-codiepie col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
          <!-- <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
            <option>Select a category</option>
@@ -124,13 +138,11 @@
          </select> -->
          <?php
           $categories = Categories::model()->findAll();
-          $categoryNames = array();
+          /*$categoryNames = array();
           foreach ($categories as $category)
-            array_push($categoryNames,$category->name);
-          //$list = CHtml::listData($categories,'id','name');
-          
-          echo $form->dropDownList($category,'id',$categoryNames,array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','multiple'=>'multiple'));
-
+            array_push($categoryNames,$category->name);*/
+          $list = CHtml::listData($categories,'id','name');
+          echo $form->dropDownList($category,'id',$list,array('prompt'=>'Select Category','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','multiple'=>'multiple'));
           /*$data= CHtml::listData(Categories::model()->findAll(), 'id', 'name');
           echo $form->widget('ext.EchMultiSelect.EchMultiSelect', array('model'=>$category,
             'dropDownAttribute'=>'name','data'=>$data,'dropDownHtmlOptions'=>array('style'=>'width:378px;')));*/
@@ -251,7 +263,8 @@
 <script type="text/javascript">
  $(document).ready(function() {
   $('#Categories_id').multiselect({
-      enableFiltering: true
+      enableFiltering: true,
+      numberDisplayed: 0,
     });
   $('#user').click(function() {
     $('#about_company').toggle();
