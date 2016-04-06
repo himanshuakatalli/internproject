@@ -87,9 +87,9 @@
           <!-- sidebar menu start-->
           <?php $user = Users::model()->findByPk(Yii::app()->user->user_id);?>
           <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a href="#"><img src="<?php echo (!empty($user->image))?$user->image:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
+            <p class="centered"><a href="#"><img src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p>
               <h5 class="centered">
-              
+
               <?php echo $user->first_name;?>
               </h5>
               <li class="mt">

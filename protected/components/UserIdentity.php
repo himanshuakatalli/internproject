@@ -25,21 +25,22 @@ class UserIdentity extends CUserIdentity
 
 		if(!empty($user))
 		{
-		    if($password==$user->password) {
-
-				$this->errorCode=self::ERROR_NONE;
-				Yii::app()->user->setState('id',$username);
-				Yii::app()->user->setState('user_id',$user->id);
-		     }
-		     else {
+		    if($password==$user->password)
+		    {
+		    	$this->errorCode=self::ERROR_NONE;
+					Yii::app()->user->setState('id',$username);
+					Yii::app()->user->setState('user_id',$user->id);
+					Yii::app()->user->setState('role',$user->role->id);
+		    }
+		     else
+		     {
 		     	$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		     }
-
-		} else {
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		}
-
-		return !$this->errorCode;
-	}
-
+		     return !$this->errorCode;
+ 		 }
+ 		 else
+ 		 {
+ 		 	$this->errorCode=self::ERROR_USERNAME_INVALID;
+ 		 }
+ 	}
 }

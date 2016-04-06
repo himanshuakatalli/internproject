@@ -34,7 +34,7 @@ public $layout="dashboard/main";
                 'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('index','productsetting','usersetting','Productsettingsave'),
+                'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate'),
                 'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -85,7 +85,7 @@ public $layout="dashboard/main";
             }
         }
         $this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
-  		}
+	   }
     }
 
 
@@ -132,7 +132,7 @@ public function actionProductsetting($id)
 
 public function actionProductsettingsave($id)
 {
-		$product=$product=product::model()->findByPk($id);
+		$product=Product::model()->findByPk($id);
 
          // CVarDumper::dump($_POST['productCategory'],10,1);die;
         if(isset($_POST['Product']))
@@ -151,10 +151,37 @@ public function actionProductsettingsave($id)
 
 }
 
-public function actionUsersetting()
-    {
-        // $this->layout="dashboard/main";
-        $this->render('usersetting');
-    }
 
+	public function actionUsersetting()
+	{
+		$user_id = Yii::app()->user->id;
+
+		$user = new Users;
+
+		$_user = Users::model()->findByAttributes(array('username'=>$user_id));
+
+		$this->layout="dashboard/main";
+		$this->render('usersetting',array('user'=>$user,'_user'=>$_user));
+	}
+
+	public function actionUserUpdate()
+	{
+		$user_id = Yii::app()->user->id;
+		$user = Users::model()->findByAttributes(array('username'=>$user_id));
+
+		$user->attributes = $_POST['Users'];
+
+        $user->job_profile = $_POST['Users']['job_profile'];
+
+		if($user->password == "")
+		{
+			$_user = Users::model()->findByAttributes(array('username'=>$user_id));
+
+			$user->password = $_user->password;
+		}
+
+		$user->modify_date = new CDbExpression('NOW()');
+
+		$user->update();
+	}
 }

@@ -137,49 +137,61 @@
         </div>
       </div>
 
+
+      <?php
+        $ppcCount = array();
+        $criteria = new CDbCriteria();
+        for($a=1; $a<=7; $a++) {
+          $str = date("Y-m-d",time()-$a*24*60*60);
+          $criteria->condition = "add_date like '%".$str."%' AND product_id=".$productArray[$index]->id;
+          $criteria->params = array(':str'=>$str);
+          array_push($ppcCount,TrackingUser::model()->count($criteria));
+        }
+      ?>
       <div class="row mt">
         <div class="border-head">
-            <h3>LEAD STATS - LAST WEEK <?php echo date('D',time());?></h3>
+            <h3>LEAD STATS - LAST SEVEN DAYS[<?php echo $productArray[$index]->name; ?>] - Top Selling Product</h3>
         </div>
         <div class="custom-bar-chart">
             <ul class="y-axis">
-                <li><span>10000</span></li>
-                <li><span>8000</span></li>
-                <li><span>6000</span></li>
-                <li><span>4000</span></li>
-                <li><span>2000</span></li>
+                <li><span>10</span></li>
+                <li><span>8</span></li>
+                <li><span>6</span></li>
+                <li><span>4</span></li>
+                <li><span>2</span></li>
                 <li><span>0</span></li>
             </ul>
-            <div class="bar">
-                <div class="title">SUN</div>
-                <div class="value tooltips" data-original-title="8500" data-toggle="tooltip" data-placement="top">85%</div>
-            </div>
-            <div class="bar ">
-                <div class="title">MON</div>
-                <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-            </div>
-            <div class="bar ">
-                <div class="title">TUE</div>
-                <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-            </div>
-            <div class="bar ">
-                <div class="title">WED</div>
-                <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-            </div>
-            <div class="bar">
-                <div class="title">THU</div>
-                <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-            </div>
-            <div class="bar ">
-                <div class="title">FRI</div>
-                <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-            </div>
-            <div class="bar">
-                <div class="title">SAT</div>
-                <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
-            </div>
+            <?php foreach ($ppcCount as $key => $count): ?>
+              <div class="bar">
+                  <div class="title"><?php echo date('D d',time()-($key+1)*24*60*60);?></div>
+                  <div class="value tooltips" data-original-title="<?php echo $count; ?>" data-toggle="tooltip" data-placement="top"><?php echo ($count/10)*100; ?></div>
+              </div>
+            <?php endforeach; ?>
         </div>
       </div>
+
+      <div class="row mt">
+        <div class="border-head">
+            <h3>LEAD STATS - LAST SEVEN DAYS[<?php echo $productArray[$indexOfMax]->name; ?>] Trending Product</h3>
+        </div>
+        <div class="custom-bar-chart">
+            <ul class="y-axis">
+                <li><span>10</span></li>
+                <li><span>8</span></li>
+                <li><span>6</span></li>
+                <li><span>4</span></li>
+                <li><span>2</span></li>
+                <li><span>0</span></li>
+            </ul>
+            <?php foreach ($ppcCount as $key => $count): ?>
+              <div class="bar">
+                  <div class="title"><?php echo date('D d',time()-($key+1)*24*60*60);?></div>
+                  <div class="value tooltips" data-original-title="<?php echo $count; ?>" data-toggle="tooltip" data-placement="top"><?php echo ($count/10)*100; ?></div>
+              </div>
+            <?php endforeach; ?>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
