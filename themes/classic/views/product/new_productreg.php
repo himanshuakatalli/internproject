@@ -98,7 +98,7 @@
           <div class="input-half">
             <i class="fa fa-building col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
             <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="company_name" placeholder="Company Name"> -->
-            <?php echo $form->textField($product,'company_name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'company_name'));?>
+            <?php echo $form->textField($product,'company_name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Company Name'));?>
           </div>
           <div class="input-half float-right">
             <i class="fa fa-globe col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
@@ -114,7 +114,7 @@
         </div>
         <div class="row">
           <div class="input-half">
-            <i class="fa fa-internet-explorer col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+            <i class="fa fa-globe col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
             <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="email" name="company_website" placeholder="Company's Website"> -->
             <?php echo $form->textField($product,'company_website',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Company Website'));?>
           </div>
@@ -140,13 +140,13 @@
      <h2>About Your Product</h2>
      <div class="row">
        <div class="input-half">
-         <i class="fa fa-product-hunt col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+         <i class="fa fa-plug col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="product_name" placeholder="Product's Name"> -->
          <?php echo $form->textField($product,'name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Product Name'));?>
 
        </div>
        <div class="input-half float-right">
-         <i class="fa fa-internet-explorer col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+         <i class="fa fa-globe col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
          <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="product_website" placeholder="Product's Website"> -->
          <?php echo $form->textField($product,'product_website',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Product Website'));?>
        </div>
