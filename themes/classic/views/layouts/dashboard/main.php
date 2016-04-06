@@ -55,14 +55,6 @@
     bottom: 0;
     width: 100%;
 }
-.chmg{
-  color: #fff;
-  position: absolute;
-  display: none;
-}
-#changeProfileImg:hover .chmg{
-  display: inline-block;
-}
 .modal-body {
     max-height: calc(100vh - 212px);
     overflow-y: auto;
@@ -99,7 +91,7 @@
           <!-- sidebar menu start-->
           <?php $user = Users::model()->findByPk(Yii::app()->user->user_id);?>
           <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a href="#" id="changeProfileImg"><img src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a><small class="chmg">change Image</small>
+            <p class="centered"><a href="#"><img src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a>
             </p>
               <h5 class="centered">
 
@@ -331,24 +323,6 @@
     });
     $("#formAddNewProduct").parsley().validate();
   });
-
-
-  var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
-filepicker.setKey(yourApiKey);
-
-document.getElementById("changeProfileImg").onclick = function(){
-  filepicker.pick({
-      services: ['COMPUTER', 'FACEBOOK', 'CLOUDAPP'],
-      mimetype:'image/*',
-      cropRatio:1,
-      cropForce:true,
-    },
-    function onSuccess(Blob){
-      var image = document.getElementById("imgPlaceholder");
-      alert(Blob.url);
-    }
-  );
-};
 </script>
   </body>
 </html>

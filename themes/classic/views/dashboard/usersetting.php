@@ -4,8 +4,10 @@
 		<div style="padding-top: 30px; padding-left:30px; width: 60%;" class="">
 
 			<?php $form = $this->beginWidget('CActiveForm',array('id'=>'update_user','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"form-horizontal",'data-parsley-validate'=>'data-parsley-validate')));?>
-				<figure><p class="centered"><a href="#"><img src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p></figure><br>
 
+				<figure><p class="centered"><a href="#" id="changeProfileImg"><img id="pimg" src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p></figure><br>
+				<?php echo $form->textField($user,'profile_img',array('placeholder'=>'Profile Image','id'=>'profImg','hidden'=>"hidden" ,'class'=>"input-box col-lg-11",'value'=>$_user->profile_img));?>
+					</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="firstName">First Name:</label>
 					<div class="col-sm-10">
@@ -104,4 +106,21 @@
   		})
  		}
  	}
+ 	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
+filepicker.setKey(yourApiKey);
+
+document.getElementById("changeProfileImg").onclick = function(){
+  filepicker.pick({
+      services: ['COMPUTER', 'FACEBOOK', 'CLOUDAPP'],
+      mimetype:'image/*',
+      cropRatio:1,
+      cropForce:true,
+    },
+    function onSuccess(Blob){
+      var image = document.getElementById("imgPlaceholder");
+      $('#profImg').val(Blob.url);
+      $('#pimg').attr('src',Blob.url);
+    }
+  );
+};
 </script>
