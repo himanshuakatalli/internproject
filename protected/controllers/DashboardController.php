@@ -155,13 +155,15 @@ public function actionProductsettingsave($id)
 	public function actionUsersetting()
 	{
 		$user_id = Yii::app()->user->id;
-
 		$user = new Users;
-
 		$_user = Users::model()->findByAttributes(array('username'=>$user_id));
-
-		$this->layout="dashboard/main";
-		$this->render('usersetting',array('user'=>$user,'_user'=>$_user));
+		if(empty($_user->oauth_uid))
+		{
+			// $this->layout="dashboard/main";
+			$this->render('usersetting',array('user'=>$user,'_user'=>$_user));
+	  }else{
+	  			 $this->render('linkedinuser');
+	       }
 	}
 
 	public function actionUserUpdate()
