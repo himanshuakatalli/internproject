@@ -17,9 +17,7 @@
 		<main class="main-wrap">
 
 			<!-- <form class="prod-edit-container"> -->
-<?php $form=$this->beginWidget('CActiveForm', array('id'=>'product_setting','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"prod-edit-container",'data-parsley-validate'=>'data-parsley-validate')));?>
-
-
+<?php $form=$this->beginWidget('CActiveForm', array('id'=>'product_setting','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"prod-edit-container",'data-parsley-validate'=>'data-parsley-validate',)));?>
 				<div class="row" id="product_information">
 					<h4>Product Information</h4>
 					<figure><img src="<?php echo Yii::app()->theme->baseUrl; ?>/../product_logo/IMG_1.png" alt="product logo"></figure>
@@ -31,8 +29,7 @@
 								<i class="fa fa-product-hunt fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
 
-								<?php echo $form->textField($product,'name',array('data-parsley-required-message'=>'Name is required','placeholder'=>"Name",'required'=>'required','title'=>"Name",'data-parsley-pattern'=>"^[a-zA-Z ]+$",'data-parsley-minlength'=>"2",'class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11 required alphanum minlength','length'=>"2",'tabindex'=>'1'));?>
-
+								<?php echo $form->textField($product,'name',array('data-parsley-required-message'=>'Name is required','placeholder'=>"Name",'required'=>'required','title'=>"Name",'data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"2",'class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11 required alphanum minlength','length'=>"2",'tabindex'=>'1'));?>
 							</div>
 						</div>
 
@@ -41,7 +38,7 @@
 							<div class="input col-lg-10">
 								<i class="fa fa-bars fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-								<?php echo $form->textArea($product,'description',array('placeholder'=>"product_description",'required'=>'required','class'=>'col-lg-11 col-md-1 col-sm-1 col-xs-1'));?>
+								<?php echo $form->textArea($product,'description',array('placeholder'=>"product_description",'required'=>'required','class'=>'col-lg-11 col-md-1 col-sm-1 col-xs-1','data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"50"));?>
 							</div>
 						</div>
 
@@ -114,7 +111,7 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-users fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-								<?php echo $form->textField($product,'customer_count',array('placeholder'=>"No. of people",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+								<?php echo $form->textField($product,'customer_count',array('placeholder'=>"No. of people",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11',,'data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
 							</div>
 						</div>
 
@@ -123,7 +120,7 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-money fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-									<?php echo $form->textField($product,'starting_price',array('placeholder'=>"Starting Price",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+									<?php echo $form->textField($product,'starting_price',array('placeholder'=>"Starting Price",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11',,'data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
 							</div>
 						</div>
 
@@ -132,7 +129,7 @@
 							<div class="input col-lg-10">
 								<i class="fa fa-money fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-							<?php echo $form->textArea($product,'pricing_details',array('placeholder'=>"Pricing details",'required'=>'required','class'=>'col-lg-11 col-md-1 col-sm-1 col-xs-1'));?>
+							<?php echo $form->textArea($product,'pricing_details',array('placeholder'=>"Pricing details",'required'=>'required','class'=>'col-lg-11 col-md-1 col-sm-1 col-xs-1','data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"5"));?>
 
 							</div>
 						</div>
@@ -178,7 +175,7 @@
 								</i>
 
 								<!-- <input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="company_name" value="Salesforce"> -->
-									<?php echo $form->textField($product,'company_name',array('placeholder'=>"Company Name",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+									<?php echo $form->textField($product,'company_name',array('placeholder'=>"Company Name",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"3"));?>
 
 							</div>
 						</div>
@@ -189,7 +186,7 @@
 								<i class="fa fa-globe fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
 								<!-- <input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="company_website" value="Salesforce"> -->
-									<?php echo $form->textField($product,'company_website',array('placeholder'=>"Company Website",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+									<?php echo $form->textField($product,'company_website',array('placeholder'=>"Company Website",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"url"));?>
 							</div>
 						</div>
 
@@ -199,7 +196,7 @@
 								<i class="fa fa-calendar-o fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
 								<!-- <input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="founding_year" value="Salesforce"> -->
-								<?php echo $form->textField($product,'founding_year',array('placeholder'=>"Founding Year",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+								<?php echo $form->textField($product,'founding_year',array('placeholder'=>"Founding Year",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11',,'data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"4",'data-parsley-type'=>"digits"));?>
 
 							</div>
 						</div>
@@ -210,8 +207,7 @@
 
 									<?php
               $countries = Controller::getCountryNames();
-              echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
-
+              echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','required'=>"required",'data-parsley-trigger'=>"focusout"));?>
 			        </div>
 						</div>
 					</div>
@@ -228,7 +224,7 @@
 								</i>
 
 								<!-- <input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="googleplus" value="Salesforce"> -->
-									<?php echo $form->textField($product,'googleplus_link',array('placeholder'=>"Google plus profile",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+									<?php echo $form->textField($product,'googleplus_link',array('placeholder'=>"Google plus profile",'class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"url"));?>
 
 							</div>
 						</div>
@@ -240,7 +236,7 @@
 								</i>
 
 								<!-- <input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="facebook" value="Salesforce"> -->
-								<?php echo $form->textField($product,'facebook_link',array('placeholder'=>"facebook profile",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+								<?php echo $form->textField($product,'facebook_link',array('placeholder'=>"facebook profile",'class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"url"));?>
 
 							</div>
 						</div>
@@ -251,7 +247,7 @@
 								<i class="fa fa-youtube fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
 								<!-- <input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="youtube" value="Salesforce"> -->
-								<?php echo $form->textField($product,'youtube_link',array('placeholder'=>"youtube profile",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+								<?php echo $form->textField($product,'youtube_link',array('placeholder'=>"youtube profile",'class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"url"));?>
 
 							</div>
 						</div>
@@ -264,7 +260,7 @@
 
 								<!-- <input type="text" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" name="linkedin" value="Salesforce"> -->
 
-									<?php echo $form->textField($product,'linkedin_link',array('placeholder'=>"linkedin profile",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11'));?>
+									<?php echo $form->textField($product,'linkedin_link',array('placeholder'=>"linkedin profile",'class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"url"));?>
 
 							</div>
 						</div>
@@ -319,10 +315,12 @@
 	</div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
 <script type="text/javascript">
-
+$('#editProduct').addClass('active');
+$('#dashboard').removeClass('active');
 $(document).ready(function(){
-
+$("#product_setting").parsley().validate();
  $('#save_record').on('click',function()
  {
                 $('#save_record').val('Please Wait');

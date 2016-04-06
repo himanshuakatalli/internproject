@@ -60,6 +60,7 @@
     overflow-y: auto;
 }
     </style>
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
   </head>
   <body>
     <section id="container" >
@@ -93,7 +94,7 @@
               <?php echo $user->first_name;?>
               </h5>
               <li class="mt">
-                <a id="dashboard" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
+                <a id="dashboard" class="active" href="<?php echo Yii::app()->createUrl('/dashboard');?>">
                   <i class="fa fa-dashboard"></i>
                   <span>Dashboard</span>
                 </a>
@@ -187,10 +188,9 @@
               <?php
               $categories = Categories::model()->findAll();
               $categoryNames = array();
-              array_push($categoryNames, "Select Category");
               foreach ($categories as $category)
                 array_push($categoryNames,$category->name);
-              echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'class'=>'form-control'));
+              echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'multiple'=>"multiple",'class'=>'form-control'));
               ?>
             </div><br>
             <label>Starting Price</label>
@@ -261,6 +261,9 @@
       enableFiltering: true
     });
     $('#features').multiselect({
+      enableFiltering: true
+    });
+    $('#productCategory').multiselect({
       enableFiltering: true
     });
     $("#formAddNewProduct").parsley().validate();

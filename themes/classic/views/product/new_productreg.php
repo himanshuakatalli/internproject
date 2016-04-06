@@ -134,6 +134,8 @@
           echo $form->widget('ext.EchMultiSelect.EchMultiSelect', array('model'=>$category,
             'dropDownAttribute'=>'name','data'=>$data,'dropDownHtmlOptions'=>array('style'=>'width:378px;')));*/
          ?>
+
+         
        </div>
        <div class="input-half float-right">
          <i class="fa fa-users col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
