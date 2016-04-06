@@ -1,9 +1,10 @@
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/user-dash-style.css" rel="stylesheet">
-<section class="wrapper">
-	<div class="row">
+<section class="wrapper ">
+	<div class="row ">
 		<div style="padding-top: 30px; padding-left:30px; width: 60%;" class="">
-			
+
 			<?php $form = $this->beginWidget('CActiveForm',array('id'=>'update_user','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"form-horizontal",'data-parsley-validate'=>'data-parsley-validate')));?>
+				<figure><p class="centered"><a href="#"><img src="<?php echo (!empty($user->profile_img))?$user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"></a></p></figure><br>
 
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="firstName">First Name:</label>
