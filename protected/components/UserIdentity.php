@@ -30,6 +30,7 @@ class UserIdentity extends CUserIdentity
 		    	$this->errorCode=self::ERROR_NONE;
 					Yii::app()->user->setState('id',$username);
 					Yii::app()->user->setState('user_id',$user->id);
+					Yii::app()->user->setState('role',$user->role->id);
 		    }
 		     else
 		     {
@@ -37,7 +38,7 @@ class UserIdentity extends CUserIdentity
 		     }
 		     return !$this->errorCode;
  		 }
- 		 else 
+ 		 else
  		 {
  		 	$this->errorCode=self::ERROR_USERNAME_INVALID;
  		 }
