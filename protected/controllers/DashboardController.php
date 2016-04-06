@@ -132,7 +132,7 @@ public function actionProductsetting($id)
 
 public function actionProductsettingsave($id)
 {
-		$product=$product=product::model()->findByPk($id);
+		$product=Product::model()->findByPk($id);
 
          // CVarDumper::dump($_POST['productCategory'],10,1);die;
         if(isset($_POST['Product']))
