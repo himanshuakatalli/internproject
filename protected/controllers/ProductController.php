@@ -117,7 +117,7 @@ public function actionFilter($id)
         $tracking ->status_geo = 0;
       }
 			$tracking ->save();
-			$product->ppc_count = $product->ppc_count+1;
+			$product->customer_count = $product->customer_count+1;
 			$product->update();
       CController:: redirect('http://'.$product->product_website);
     }

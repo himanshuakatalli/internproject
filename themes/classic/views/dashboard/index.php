@@ -61,12 +61,13 @@
             </div>
             <div class="row">
               <div class="col-sm-6 col-xs-6 goleft">
-                <p><i class="fa fa-users"></i><?php echo count($productArray[$index]->customer_count); ?></p>
+                <p><i class="fa fa-users"></i><?php echo $productArray[$index]->customer_count; ?></p>
               </div>
               <div class="col-sm-6 col-xs-6"></div>
             </div>
             <div class="centered">
-              <img src="imp/img/product.png" width="120" alt="<?php echo $productArray[$index]->name; ?>">
+              <img src="<?php echo Yii::app()->request->baseUrl."/themes/product_logo/{$productArray[$index]->logo}.png";?>" class="img-circle" width="80">
+              <p style="margin-top: 1em; margin-left: -0.5em; color: rgba(0,0,0,0.4);"><?php echo $productArray[$index]->name; ?></p>
             </div>
           </div>
         </div>
@@ -121,7 +122,7 @@
             <div class="white-header">
               <h5>Transactions</h5>
             </div>
-            <p><img src="imp/img/ui-zac.jpg" class="img-circle" width="80"></p>
+            <p><img src="<?php echo Yii::app()->request->baseUrl."/themes/product_logo/{$productArray[$index]->logo}.png";?>" class="img-circle" width="80"></p>
             <p class="dark"><b><?php echo $productArray[$index]->name; ?></b></p>
             <div class="row">
               <div class="col-md-6 vpOrange">
@@ -150,7 +151,8 @@
       ?>
       <div class="row mt">
         <div class="border-head">
-            <h3>LEAD STATS - LAST SEVEN DAYS[<?php echo $productArray[$index]->name; ?>] - Top Selling Product</h3>
+            <h3>LEAD STATS - LAST SEVEN DAYS<br><br>
+            <?php echo $productArray[$index]->name; ?> - Top Selling Product</h3>
         </div>
         <div class="custom-bar-chart">
             <ul class="y-axis">
@@ -163,30 +165,43 @@
             </ul>
             <?php foreach ($ppcCount as $key => $count): ?>
               <div class="bar">
-                  <div class="title"><?php echo date('D d',time()-($key+1)*24*60*60);?></div>
-                  <div class="value tooltips" data-original-title="<?php echo $count; ?>" data-toggle="tooltip" data-placement="top"><?php echo ($count/10)*100; ?></div>
+                <?php $c = ($count/10)*100;?>
+                <div class="title"><?php echo date('D d',time()-($key+1)*24*60*60);?></div>
+                <div class="value tooltips" data-original-title="<?php echo $count; ?>" data-toggle="tooltip" data-placement="top"><?php echo "{$c}%"; ?></div>
               </div>
             <?php endforeach; ?>
         </div>
       </div>
 
+      <?php
+        $ppcCount = array();
+        $criteria = new CDbCriteria();
+        for($a=1; $a<=7; $a++) {
+          $str = date("Y-m-d",time()-$a*24*60*60);
+          $criteria->condition = "add_date like '%".$str."%' AND product_id=".$productArray[$indexOfMax]->id;
+          $criteria->params = array(':str'=>$str);
+          array_push($ppcCount,TrackingUser::model()->count($criteria));
+        }
+      ?>
+
       <div class="row mt">
         <div class="border-head">
-            <h3>LEAD STATS - LAST SEVEN DAYS[<?php echo $productArray[$indexOfMax]->name; ?>] Trending Product</h3>
+            <h3><?php echo $productArray[$indexOfMax]->name; ?> - Trending Product</h3>
         </div>
         <div class="custom-bar-chart">
             <ul class="y-axis">
-                <li><span>10</span></li>
-                <li><span>8</span></li>
-                <li><span>6</span></li>
-                <li><span>4</span></li>
-                <li><span>2</span></li>
+                <li><span>10.000</span></li>
+                <li><span>8.000</span></li>
+                <li><span>6.000</span></li>
+                <li><span>4.000</span></li>
+                <li><span>2.000</span></li>
                 <li><span>0</span></li>
             </ul>
             <?php foreach ($ppcCount as $key => $count): ?>
+              <?php $c = ($count/10)*100;?>
               <div class="bar">
                   <div class="title"><?php echo date('D d',time()-($key+1)*24*60*60);?></div>
-                  <div class="value tooltips" data-original-title="<?php echo $count; ?>" data-toggle="tooltip" data-placement="top"><?php echo ($count/10)*100; ?></div>
+                  <div class="value tooltips" data-original-title="<?php echo $count; ?>" data-toggle="tooltip" data-placement="top"><?php echo "{$c}%";?></div>
               </div>
             <?php endforeach; ?>
         </div>
