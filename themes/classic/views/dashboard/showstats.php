@@ -30,8 +30,9 @@
           <tr class="row">
             <td class="col-lg-2">S.No.</td>
             <td class="col-lg-3">Date</td>
-            <td class="col-lg-3">Day</td>
-            <td class="col-lg-2">Clicks</td>
+            <td class="col-lg-2">Day</td>
+            <td class="col-lg-1">Clicks</td>
+            <td class="col-lg-2">Bid Cost</td>
             <td class="col-lg-2">Amount</td>
           </tr>
         </thead>
@@ -46,9 +47,10 @@
             <tr class="row">
               <td class="col-lg-2"><?php echo $index; ?></td>
               <td class="col-lg-3"><?php echo $date; ?></td>
-              <td class="col-lg-3"><?php echo $weekday; ?></td>
-              <td class="col-lg-2"><?php echo $count; ?></td>
-              <td class="col-lg-2">$8923</td>
+              <td class="col-lg-2"><?php echo $weekday; ?></td>
+              <td class="col-lg-1"><?php echo $count; ?></td>
+              <td class="col-lg-2"><?php echo $product->bidding_amount; ?></td>
+              <td class="col-lg-2"><?php echo $product->bidding_amount*$count;?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
