@@ -49,8 +49,8 @@
               <td class="col-lg-3"><?php echo $date; ?></td>
               <td class="col-lg-2"><?php echo $weekday; ?></td>
               <td class="col-lg-1"><?php echo $count; ?></td>
-              <td class="col-lg-2"><?php echo $product->bidding_amount; ?></td>
-              <td class="col-lg-2"><?php echo $product->bidding_amount*$count;?></td>
+              <td class="col-lg-2"><?php echo "$".$product->bidding_amount; ?></td>
+              <td class="col-lg-2"><?php echo "$".$product->bidding_amount*$count;?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
