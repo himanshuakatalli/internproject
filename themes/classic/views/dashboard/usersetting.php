@@ -53,7 +53,7 @@
 				<div class="form-group">
 					<div class="col-sm-10">
 						<?php
-							echo CHtml::Button('Save',array('class'=>'btn btn-primary pull-right','onClick'=>'send();'));
+							echo CHtml::Button('Save',array('class'=>'btn btn-primary pull-right','onClick'=>'user_update();'));
 						?>
 					</div>
 				</div>
@@ -83,7 +83,7 @@
   	});
   });
 
-  function send()
+  function user_update()
  	{
  		var validated = $("#update_user").parsley().validate();
 
