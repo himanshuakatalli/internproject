@@ -94,30 +94,46 @@ public function actionProductsetting($id)
 								$product=Product::model()->findByPk($id);
 
 								$productCategoryNames=array();
-					foreach ($product->categories as $product_Category)
+					foreach ($product->_categories as $_productCategory)
 							{
-								if($product_Category->status == 1)
-									array_push($productCategoryNames, $product_Category->name);
+								if($_productCategory->status == 1)
+								{
+									$productCategory = Categories::model()->findByPk($_productCategory->category_id);
+									array_push($productCategoryNames, $productCategory->name);
+								}
 							}
 						//CVarDumper::dump($productCategory,10,1); die;
 					$productCategoryFeatures = array();
-					foreach ($product->categories as $productCategory)
+					foreach ($product->_categories as $_productCategory)
 					{
-						if($product_Category->status == 1)
+						
+						if($_productCategory->status == 1)
 						{
-							foreach ($productCategory->features as $productCategoryFeature)
+							$productCategory = Categories::model()->findByPk($_productCategory->category_id);
+
+							foreach ($productCategory->_features as $_productCategoryFeature)
 								{
-									if($productCategoryFeature->status == 1)
+									if($_productCategoryFeature->status == 1)
+									{
+										$productCategoryFeature = Features::model()->findByPk($_productCategoryFeature->feature_id);
 										array_push($productCategoryFeatures, $productCategoryFeature->name);
+									}
 								}
 						}
 					}
 					$productFeatures = array();
-					foreach ($product->features as $productFeature)
+					foreach ($product->_features as $_productFeature)
 					{
-						if($productFeature->status == 1)
+						if($_productFeature->status == 1)
+						{
+							$productFeature = Features::model()->findByPk($_productFeature->feature_id);
 							array_push($productFeatures,$productFeature->name);
+						}
 					}
+
+					/*print_r($productCategoryNames);
+					print_r($productCategoryFeatures);
+					print_r($productFeatures);*/
 								 // CVarDumper::dump($productFeatures,10,1); die;
 
 								$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
