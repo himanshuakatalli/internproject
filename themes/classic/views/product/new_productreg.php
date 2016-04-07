@@ -3,7 +3,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
 <style type="text/css">
   #selCat {
-    width: 49% !important;
     float: left;
     border: 1px solid rgba(0,0,0,0.15);
 
@@ -160,7 +159,7 @@
      </div>
      <small class="pull-left">Select Category</small>
      <div class="row">
-       <div class="pull-left" id="selCat">
+       <div class="pull-left input-half" id="selCat">
          <i class="fa fa-check-circle col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
          <!-- <select class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
            <option>Select a category</option>
