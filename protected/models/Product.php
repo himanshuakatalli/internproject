@@ -10,9 +10,12 @@
  * @property string $description
  * @property string $logo
  * @property integer $customer_count
+ * @property integer $search_count
  * @property integer $has_free_version
  * @property integer $has_trial
  * @property integer $under_ppc
+ * @property string $ppc_count
+ * @property integer $visit_count
  * @property string $starting_price
  * @property string $pricing_details
  * @property string $product_website
@@ -58,14 +61,15 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, name, customer_count, under_ppc, product_website, company_name, company_website, add_date', 'required'),
-			array('user_id, customer_count, has_free_version, has_trial, under_ppc, founding_year, status', 'numerical', 'integerOnly'=>true),
+			array('user_id, name, customer_count, search_count, visit_count, product_website, company_name, company_website, add_date', 'required'),
+			array('user_id, customer_count, search_count, has_free_version, has_trial, under_ppc, visit_count, founding_year, status', 'numerical', 'integerOnly'=>true),
 			array('name, starting_price, product_website, company_name, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link', 'length', 'max'=>100),
 			array('logo', 'length', 'max'=>255),
+			array('ppc_count', 'length', 'max'=>20),
 			array('description, pricing_details, admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, name, description, logo, customer_count, has_free_version, has_trial, under_ppc, starting_price, pricing_details, product_website, company_name, founding_year, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			array('id, user_id, name, description, logo, customer_count, search_count, has_free_version, has_trial, under_ppc, ppc_count, visit_count, starting_price, pricing_details, product_website, company_name, founding_year, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -101,9 +105,12 @@ class Product extends CActiveRecord
 			'description' => 'Description',
 			'logo' => 'Logo',
 			'customer_count' => 'Customer Count',
+			'search_count' => 'Search Count',
 			'has_free_version' => 'Has Free Version',
 			'has_trial' => 'Has Trial',
 			'under_ppc' => 'Under Ppc',
+			'ppc_count' => 'Ppc Count',
+			'visit_count' => 'Visit Count',
 			'starting_price' => 'Starting Price',
 			'pricing_details' => 'Pricing Details',
 			'product_website' => 'Product Website',
@@ -147,9 +154,12 @@ class Product extends CActiveRecord
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('logo',$this->logo,true);
 		$criteria->compare('customer_count',$this->customer_count);
+		$criteria->compare('search_count',$this->search_count);
 		$criteria->compare('has_free_version',$this->has_free_version);
 		$criteria->compare('has_trial',$this->has_trial);
 		$criteria->compare('under_ppc',$this->under_ppc);
+		$criteria->compare('ppc_count',$this->ppc_count,true);
+		$criteria->compare('visit_count',$this->visit_count);
 		$criteria->compare('starting_price',$this->starting_price,true);
 		$criteria->compare('pricing_details',$this->pricing_details,true);
 		$criteria->compare('product_website',$this->product_website,true);

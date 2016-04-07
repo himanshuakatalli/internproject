@@ -59,9 +59,7 @@
 								<i class="fa fa-codiepie fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
 
-		            <select id="category" name="productCategory[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-
-
+		            <select id="category" name="productCategory[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" onchange="send()">
 		            	<?php
 
 		            	$category=Categories::model()->findAll();
@@ -88,10 +86,10 @@
 
 						<div class="row">
 							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Features:</label>
-							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
+							<div id="feature_list" class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-tasks fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-		            <select id="features" name="productCategoryFeatures[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+		            <select id="features" name="productCategoryFeatures[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
 		             <?php for($i=0;$i<count($productCategoryFeatures);$i++)
 		            	{?>
 		              <option value="<?php echo $productCategoryFeatures[$i] ;?>"
@@ -130,7 +128,7 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-money fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-									<?php echo $form->textField($product,'bidding_amount',array('placeholder'=>"Bidding Amount",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
+									
 							</div>
 						</div>
 
@@ -329,25 +327,25 @@
 <script type="text/javascript">
 $('#editProduct').addClass('active');
 $('#dashboard').removeClass('active');
+
 $(document).ready(function(){
 $("#product_setting").parsley().validate();
  $('#save_record').on('click',function()
  {
-                $('#save_record').val('Please Wait');
-                $.ajax({
-                    type: 'POST',
-                    url :"<?php echo Yii::app()->createUrl('dashboard/Productsettingsave',array('id'=>$product->id));?>",
-                    datatype:'json',
-                    data:$("#product_setting").serialize(),
-                    success :function(data){
-                        var response = JSON.parse(data);
-                        alert(response.message);
-                        $('#save_record').val('save');
-                        	}
-                      });
+  $.ajax({
+  	type: 'POST',
+  	url :"<?php echo Yii::app()->createUrl('dashboard/Productsettingsave',array('id'=>$product->id));?>",
+    datatype:'json',
+    data:$("#product_setting").serialize(),
+    success :function(data)
+    {
+    	var response = JSON.parse(data);
+    	alert(response.message);
+    	$('#save_record').val('save');
+    }
+  });
  });
  });
-
 
  	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
 filepicker.setKey(yourApiKey);
@@ -366,4 +364,22 @@ document.getElementById("productImga").onclick = function(){
     }
   );
 };
+function send()
+{
+	var data = $('#category').val();
+	console.log(data);
+	$.ajax({
+    type: 'POST',
+    url: '<?php echo Yii::app()->createUrl("dashboard/GetFeatures");?>',
+    data: {categories : data},
+    success: function(data)
+    {
+      $("#feature_list").html(data);
+    },
+    error: function(data)
+    {
+      //alert("failed");
+    }
+  })
+}
 </script>

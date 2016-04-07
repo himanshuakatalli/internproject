@@ -199,6 +199,35 @@
         </div>
         <?php $form=$this->beginWidget('CActiveForm', array('id'=>"formAddNewProduct",'htmlOptions'=>array('class'=>"panel-default",'data-parsley-validate'=>'data-parsley-validate')));?>
           <div class="modal-body">
+
+          <label>Company Name</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-star-empty"></i>
+              </span>
+              <input type="text" class="form-control" name="company_name" placeholder="Company Name">
+            </div><br>
+            <label>Founding Year</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-star-empty"></i>
+              </span>
+              <input type="text" class="form-control" name="founding_year" placeholder="Company Founding Year">
+            </div><br>
+            <label>Founding Country</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-star-empty"></i>
+              </span>
+              <input type="text" class="form-control" name="founding_country" placeholder="Company Founding Country">
+            </div><br>
+            <label>Company Website</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-star-empty"></i>
+              </span>
+              <input type="text" class="form-control" name="company_website" placeholder="Company Website">
+            </div><br>
             <label>Product Name</label>
             <div class="input-group">
               <span class="input-group-addon">
@@ -227,25 +256,19 @@
               </span>
               <?php
               $categories = Categories::model()->findAll();
-              $categoryNames = array();
+              $category = new Categories;
+              /*$categoryNames = array();
               foreach ($categories as $category)
-                array_push($categoryNames,$category->name);
+                array_push($categoryNames,$category->name);*/
+              $categoryNames = CHtml::listData($categories,'id','name');
 
-              echo $form->dropDownList($category,'name',$categoryNames,array('id'=>"productCategory",'multiple'=>"multiple",'class'=>'form-control'));
+              echo $form->dropDownList($category,'id',$categoryNames,array('id'=>"productCategory",'multiple'=>"multiple",'class'=>'form-control','onchange'=>"getFeatures()"));
               ?>
 
             </div><br>
             <label>Product Features</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicons-life-preserver"></i>
-              </span>
-              <select class="form-control" multiple="multiple" id="productFeatures" name="features">
-                <option value="1">features1</option>
-                <option value="2">features2</option>
-                <option value="3">features3</option>
-                <option value="4">features4</option>
-              </select>
+            <div class="input-group" id="features_list">
+              
             </div><br>
             <label>Starting Price</label>
             <div class="input-group">
@@ -277,19 +300,20 @@
                 <option value="not_free">No</option>
               </select>
             </div><br>
+            <label>Deployment Details</label>
             <div class="input-group">
-              <label>Deployement Detail</label>
-              <select name="dep_feature" id="free" class="form-control">
-                <option value="">select</option>
-                <option value="Mobile">Mobile</option>
-                <option value="Desktop">Desktop</option>
-                <option value="Web">Web</option>
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicons-life-preserver"></i>
+              </span>
+              <select class="form-control" multiple="multiple" id="deployment" name="deployment_features[]">
+                <option value="1" name="web">Web Based</option>
+                <option value="2">Desktop</option>
+                <option value="3">Mobile</option>
               </select>
             </div><br>
           </div>
-          <div class="modal-footer">
-
-            <button type="button" id="add_product" name="submit" class="btn btn-primary">Add</button>
+          <div class="modal-footer">            
+            <?php echo CHtml::htmlButton('Add',array('onclick'=>'send();','class'=>'btn btn-primary')); ?>
           </div>
         <?php $this->endWidget(); ?>
       </div>
@@ -324,33 +348,50 @@
     $('#productFeatures').multiselect({
       enableFiltering: true
     });
+    $('#deployment').multiselect({
+      enableFiltering: true
+    });
     // $("#formAddNewProduct").parsley().validate();
   });
-</script>
-<script>
-$(document).ready(function(){
 
-$("#add_product").on('click',function(){
+  function send()
+ {
+  var data = $("#formAddNewProduct").serialize();
+  console.log(data);
+  $.ajax({
+    type: 'POST',
+    url: '<?php echo Yii::app()->createUrl("dashboard/addproduct"); ?>',
+    data: data,
+    success: function(data)
+    {
+      alert("Product listed");
+    },
+    error: function(data)
+    {
+      alert("failed");
+    }
+  })
+ }
 
-var data = $("#formAddNewProduct").serialize();
-      alert(data);
-      $.ajax({
-        type: 'POST',
-        url: '<?php echo Yii::app()->createUrl("dashboard/addproduct"); ?>',
-        data: data,
-        success: function(data)
-        {
-          alert("Profile Updated");
-        },
-        error: function(data)
-        {
-          alert("failed");
-        }
-      });
-
-});
-
-});
+ function getFeatures()
+ {
+  var data = $('#productCategory').val();
+  console.log(data);
+  $.ajax({
+    type: 'POST',
+    url: '<?php echo Yii::app()->createUrl("dashboard/GetFeaturesByID");?>',
+    data: {categories : data},
+    success: function(data)
+    {
+      //alert(data);
+      $("#features_list").html(data);
+    },
+    error: function(data)
+    {
+      //alert("failed");
+    }
+  })
+ }
 </script>
   </body>
 </html>
