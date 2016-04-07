@@ -197,14 +197,17 @@ public function actionProductRegisterSave()
 	{
 		$product_id = $product->id;
 
-		foreach($_POST['Categories']['id'] as $category_id)
+		if(isset($_POST['Categories']))
 		{
-			$productHasCategories = new ProductHasCategories;
-			$productHasCategories->product_id = $product_id;
-			$productHasCategories->category_id = $category_id;
-			$productHasCategories->add_date = new CDbExpression('NOW()');
+			foreach($_POST['Categories']['id'] as $category_id)
+			{
+				$productHasCategories = new ProductHasCategories;
+				$productHasCategories->product_id = $product_id;
+				$productHasCategories->category_id = $category_id;
+				$productHasCategories->add_date = new CDbExpression('NOW()');
 
-			$productHasCategories->save();
+				$productHasCategories->save();
+			}
 		}
 
 		foreach($deploymentFeatures as $key)
