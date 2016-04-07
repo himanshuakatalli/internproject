@@ -148,8 +148,12 @@ public function actionProductRegisterSave()
 		$user->role_id = 2;
 		$user->is_verified = 0;
 		$user->add_date = new CDbExpression('NOW()');
+		$user->hash=md5(uniqid(rand(1,1000)));
 
-		$user->save();
+		if($user->save())
+		{
+			$this->sendVerificationEmail($user->username, $user->hash, $user->password);
+		}
 	}
 
 	$product = new Product;
@@ -209,7 +213,7 @@ public function actionProductRegisterSave()
 			$productHasDeploymentFeatures->product_id = $product_id;
 			$productHasDeploymentFeatures->deployment_feature_id = $key;
 			$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
-	
+
 			$productHasDeploymentFeatures->save();
 		}
 	}
@@ -338,6 +342,20 @@ public function actionProductReviewSave($id)
 			goto x;
 		}
 	}
+}
+
+public function sendVerificationEmail($username, $hash, $password)
+{
+	$to=$username;
+	$from="abhishek.singh@venturepact.com";
+	$from_name="admin";
+	$subject="verify your Email";
+
+	$url = Yii::app()->createUrl('site/verify',array('email'=>$username,'hash'=>$hash));
+	$url ="localhost".$url;
+
+	$message="click to verify account.<br><br><a href=".$url.">Click Here</a><br><br>After verification use <br> ID - $username <br> Password - $password <br> to login.";
+	$this->mailsend($to,$from,$from_name,$subject,$message);
 }
 
 public static function getCountryNames()
