@@ -96,21 +96,27 @@ public function actionProductsetting($id)
 								$productCategoryNames=array();
 					foreach ($product->categories as $product_Category)
 							{
+								if($product_Category->status == 1)
 									array_push($productCategoryNames, $product_Category->name);
 							}
 						//CVarDumper::dump($productCategory,10,1); die;
 					$productCategoryFeatures = array();
 					foreach ($product->categories as $productCategory)
 					{
+						if($product_Category->status == 1)
+						{
 							foreach ($productCategory->features as $productCategoryFeature)
 								{
-									array_push($productCategoryFeatures, $productCategoryFeature->name);
+									if($productCategoryFeature->status == 1)
+										array_push($productCategoryFeatures, $productCategoryFeature->name);
 								}
+						}
 					}
 					$productFeatures = array();
 					foreach ($product->features as $productFeature)
 					{
-						array_push($productFeatures,$productFeature->name);
+						if($productFeature->status == 1)
+							array_push($productFeatures,$productFeature->name);
 					}
 								 // CVarDumper::dump($productFeatures,10,1); die;
 
@@ -155,7 +161,7 @@ public function actionProductsettingsave($id)
 			foreach($productOldCategory as $category)
 			{
 				$_category = Categories::model()->findByAttributes(array('name'=>$category));
-					
+
 				$productHasCategories = ProductHasCategories::model()->findByAttributes(array('product_id'=>$id,'category_id'=>$_category->id));
 
 				if(!empty($productHasCategories))
@@ -171,7 +177,7 @@ public function actionProductsettingsave($id)
 			foreach($productOldFeatures as $features)
 			{
 				$_feature = Features::model()->findByAttributes(array('name'=>$features));
-					
+
 				$productHasFeatures = ProductHasFeatures::model()->findByAttributes(array('product_id'=>$id,'feature_id'=>$_feature->id));
 
 				if(!empty($productHasFeatures))
@@ -189,7 +195,7 @@ public function actionProductsettingsave($id)
 				foreach($_POST['productCategory'] as $category)
 				{
 					$_category = Categories::model()->findByAttributes(array('name'=>$category));
-					
+
 					$productHasCategories = ProductHasCategories::model()->findByAttributes(array('product_id'=>$id,'category_id'=>$_category->id));
 
 					if(empty($productHasCategories))
@@ -208,11 +214,11 @@ public function actionProductsettingsave($id)
 			}
 
 			if(isset($_POST['productCategoryFeatures']))
-			{				
+			{
 				foreach($_POST['productCategoryFeatures'] as $feature)
 				{
 					$_feature = Features::model()->findByAttributes(array('name'=>$feature));
-					
+
 					$productHasFeatures = ProductHasFeatures::model()->findByAttributes(array('product_id'=>$id,'feature_id'=>$_feature->id));
 
 					if(empty($productHasFeatures))
@@ -388,7 +394,7 @@ public function actionGetFeatures()
 		$product->status = 1;
 		$product->visit_count = 0;
 		$product->add_date= new CDbExpression('NOW()');
-		
+
 
 		if(isset($_POST['trial']))
 		{
@@ -437,11 +443,11 @@ public function actionGetFeatures()
 				$productHasDeploymentFeatures->product_id = $product->id;
 				$productHasDeploymentFeatures->deployment_feature_id = $deploymentFeatureID;
 				$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
-	
+
 				$productHasDeploymentFeatures->save();
 			}
 
-		}	
+		}
 	}
 
 

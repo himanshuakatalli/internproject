@@ -119,7 +119,12 @@ public function actionForgot()
 				$subject="Forgot Password";
 				$url = Yii::app()->createUrl('site/newpassword',array('email'=>$username,'hash'=>$user->hash));
 				$url ="localhost".$url;
-				$message="click to reset password.<br><br><a href=".$url.">Click Here</a>";
+				$message="Hey, ".$user->first_name." ".$user->last_name."!<br><br><br>";
+				$message .="A password reset request has been initiated from your account, please click the button below to reset your password.<br><br>";
+				$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Reset Password</button></a><br><br>";
+				$message.=" If you did not initiate this request, kindly ignore this email.<br><br><br>";
+				$message.="Thanks,<br>";
+				$message.="VenturePact Support Team.";
 				$this->mailsend($to,$from,$from_name,$subject,$message);
 
 				$response['success']='1';
@@ -149,7 +154,7 @@ public function actionSignup()
 		$username=$_POST['Users']['username'];
 		$users->password=$_POST['Users']['password'];
 		$users->role_id=$_POST['Users']['role_id'];
-		$users->add_date=date("Y-m-d h:i:sa");
+		$users->add_date=new CDbExpression('NOW()');
 		$users->hash=md5(uniqid(rand(1,1000)));
 		$user_exist=Users::model()->find(array('condition'=>"username='$username'"));
 		if(!$user_exist)
@@ -157,17 +162,7 @@ public function actionSignup()
 			if($users->save())
 			{
 //$to="abhishek.singh@venturepact.com";
-				$to=$username;
-				$from="abhishek.singh@venturepact.com";
-				$from_name="admin";
-				$subject="verify your Email";
-
-				$url = Yii::app()->createUrl('site/verify',array('email'=>$username,'hash'=>$users->hash));
-				$url ="localhost".$url;
-
-
-				$message="click to verify account.<br><br><a href=".$url.">Click Here</a>";
-				$this->mailsend($to,$from,$from_name,$subject,$message);
+				$this->sendVerificationEmailOnSignUP($username, $users->hash);
 
 				$response['success']='1';
 				$response['message']='Successfully Registered.Verify your Email and login.';
@@ -204,10 +199,9 @@ public function actionVerify()
 		if($user)
 		{
 			$user->is_verified=1;
+			$user->hash=null;
 			if($user->update())
 			{
-				$user->hash=null;
-				$user->save();
 				$this->redirect('index');
 			}
 
@@ -367,4 +361,20 @@ public function actionLogout()
 	Yii::app()->user->logout();
 	$this->redirect(Yii::app()->homeUrl);
 }
+
+public function sendVerificationEmailOnSignUP($username, $hash)
+{
+	$to=$username;
+	$from="abhishek.singh@venturepact.com";
+	$from_name="admin";
+	$subject="verify your Email";
+
+	$url = Yii::app()->createUrl('site/verify',array('email'=>$username,'hash'=>$hash));
+	$url ="localhost".$url;
+
+	$message="click to verify account.<br><br><a href=".$url.">Click Here</a>";
+	$this->mailsend($to,$from,$from_name,$subject,$message);
+}
+
+
 }
