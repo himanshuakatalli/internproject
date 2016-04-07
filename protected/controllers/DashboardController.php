@@ -85,66 +85,59 @@ public $layout="dashboard/main";
 		}
 
 public function actionProductsetting($id)
+{
+	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+
+	if($productexist)
+	{
+		$product=Product::model()->findByPk($id);
+
+		$productCategoryNames=array();
+		foreach ($product->_categories as $_productCategory)
 		{
+			if($_productCategory->status == 1)
+			{
+				$productCategory = Categories::model()->findByPk($_productCategory->category_id);
+				array_push($productCategoryNames, $productCategory->name);
+			}
+		}
 
-						$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
-// CVarDumper::dump($productexist,10,1); die;
-						if($productexist)
-						{
-								$product=Product::model()->findByPk($id);
+		$productCategoryFeatures = array();
+		foreach ($product->_categories as $_productCategory)
+		{
+			if($_productCategory->status == 1)
+			{
+				$productCategory = Categories::model()->findByPk($_productCategory->category_id);
 
-								$productCategoryNames=array();
-					foreach ($product->_categories as $_productCategory)
-							{
-								if($_productCategory->status == 1)
-								{
-									$productCategory = Categories::model()->findByPk($_productCategory->category_id);
-									array_push($productCategoryNames, $productCategory->name);
-								}
-							}
-						//CVarDumper::dump($productCategory,10,1); die;
-					$productCategoryFeatures = array();
-					foreach ($product->_categories as $_productCategory)
-					{
-						
-						if($_productCategory->status == 1)
-						{
-							$productCategory = Categories::model()->findByPk($_productCategory->category_id);
-
-							foreach ($productCategory->_features as $_productCategoryFeature)
-								{
-									if($_productCategoryFeature->status == 1)
-									{
-										$productCategoryFeature = Features::model()->findByPk($_productCategoryFeature->feature_id);
-										array_push($productCategoryFeatures, $productCategoryFeature->name);
-									}
-								}
-						}
-					}
-					$productFeatures = array();
-					foreach ($product->_features as $_productFeature)
-					{
-						if($_productFeature->status == 1)
-						{
-							$productFeature = Features::model()->findByPk($_productFeature->feature_id);
-							array_push($productFeatures,$productFeature->name);
-						}
-					}
-
-					/*print_r($productCategoryNames);
-					print_r($productCategoryFeatures);
-					print_r($productFeatures);*/
-								 // CVarDumper::dump($productFeatures,10,1); die;
-
-								$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
-				}else
+				foreach ($productCategory->_features as $_productCategoryFeature)
 				{
-						$this->render('indexAlt');
-
+					if($_productCategoryFeature->status == 1)
+					{
+						$productCategoryFeature = Features::model()->findByPk($_productCategoryFeature->feature_id);
+						array_push($productCategoryFeatures, $productCategoryFeature->name);
+					}
 				}
+			}
+		}
+				
+		$productFeatures = array();
+		foreach ($product->_features as $_productFeature)
+		{
+			if($_productFeature->status == 1)
+			{
+				$productFeature = Features::model()->findByPk($_productFeature->feature_id);
+				array_push($productFeatures,$productFeature->name);
+			}
+		}
 
-
- }
+		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
+				
+	}
+	else
+	{
+		$this->render('indexAlt');
+	}
+}
 
 
 public function actionProductsettingsave($id)
