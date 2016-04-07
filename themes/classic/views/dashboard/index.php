@@ -62,7 +62,7 @@
               <div class="col-sm-6 col-xs-6"></div>
             </div>
             <div class="centered">
-              <img src="<?php echo $productArray[$index]->logo;?>" class="img-circle" width="80">
+              <img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80">
               <p style="margin-top: 1em; margin-left: -0.5em; color: rgba(0,0,0,0.4);"><?php echo $productArray[$index]->name; ?></p>
             </div>
           </div>
@@ -118,7 +118,7 @@
             <div class="white-header">
               <h5>Transactions</h5>
             </div>
-            <p><img src="<?php echo $productArray[$index]->logo;?>" class="img-circle" width="80"></p>
+            <p><img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80"></p>
             <p class="dark"><b><?php echo $productArray[$index]->name; ?></b></p>
             <div class="row">
               <div class="col-md-6 vpOrange">
