@@ -140,7 +140,7 @@ public function actionProductRegisterSave()
 
 	if(empty($user))
 	{
-		$randomPassword = Yii::app()->getSecurityManager()->generateRandomString(6);
+		$randomPassword =uniqid(rand(1,1000));
 
 		$user = new Users;
 		$user->attributes = $_POST['Users'];

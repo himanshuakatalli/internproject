@@ -322,7 +322,7 @@
 	});
 });
  function send(){
-	var validated = $("#add_project").parsley().validate();
+	//var validated = $("#add_project").parsley().validate();
 	var data = $("#add_project").serialize();
 	console.log(data);
 	$.ajax({
