@@ -376,7 +376,7 @@ public function sendVerificationEmail($user)
 	$message.="Password:- ".$user->password."<br><br><br>";
 	$message.="Regards,<br>";
 	$message.="VenturePact Support Team.";
-	echo "Hey";
+	
 	$this->mailsend($to,$from,$from_name,$subject,$message);
 }
 
