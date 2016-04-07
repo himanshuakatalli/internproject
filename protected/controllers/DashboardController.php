@@ -45,7 +45,7 @@ public $layout="dashboard/main";
 
 		public function actionIndex()
 		{
-
+			$userVerificationStatus = Users::model()->find(array("condition"=>"id=:id","params"=>array(":id"=>Yii::app()->user->user_id),"select"=>"is_verified"));
 			$this->layout="dashboard/main";
 			$productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
 
@@ -80,55 +80,64 @@ public $layout="dashboard/main";
 								$indexOfMax = $key;
 						}
 				}
-				$this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
+				$this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax,'status'=>$userVerificationStatus->is_verified));
 		 }
 		}
 
 public function actionProductsetting($id)
+{
+	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+
+	if($productexist)
+	{
+		$product=Product::model()->findByPk($id);
+
+		$productCategoryNames=array();
+		foreach ($product->_categories as $_productCategory)
 		{
+			if($_productCategory->status == 1)
+			{
+				$productCategory = Categories::model()->findByPk($_productCategory->category_id);
+				array_push($productCategoryNames, $productCategory->name);
+			}
+		}
 
-						$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
-// CVarDumper::dump($productexist,10,1); die;
-						if($productexist)
-						{
-								$product=Product::model()->findByPk($id);
+		$productCategoryFeatures = array();
+		foreach ($product->_categories as $_productCategory)
+		{
+			if($_productCategory->status == 1)
+			{
+				$productCategory = Categories::model()->findByPk($_productCategory->category_id);
 
-								$productCategoryNames=array();
-					foreach ($product->categories as $product_Category)
-							{
-								if($product_Category->status == 1)
-									array_push($productCategoryNames, $product_Category->name);
-							}
-						//CVarDumper::dump($productCategory,10,1); die;
-					$productCategoryFeatures = array();
-					foreach ($product->categories as $productCategory)
-					{
-						if($product_Category->status == 1)
-						{
-							foreach ($productCategory->features as $productCategoryFeature)
-								{
-									if($productCategoryFeature->status == 1)
-										array_push($productCategoryFeatures, $productCategoryFeature->name);
-								}
-						}
-					}
-					$productFeatures = array();
-					foreach ($product->features as $productFeature)
-					{
-						if($productFeature->status == 1)
-							array_push($productFeatures,$productFeature->name);
-					}
-								 // CVarDumper::dump($productFeatures,10,1); die;
-
-								$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
-				}else
+				foreach ($productCategory->_features as $_productCategoryFeature)
 				{
-						$this->render('indexAlt');
-
+					if($_productCategoryFeature->status == 1)
+					{
+						$productCategoryFeature = Features::model()->findByPk($_productCategoryFeature->feature_id);
+						array_push($productCategoryFeatures, $productCategoryFeature->name);
+					}
 				}
+			}
+		}
+				
+		$productFeatures = array();
+		foreach ($product->_features as $_productFeature)
+		{
+			if($_productFeature->status == 1)
+			{
+				$productFeature = Features::model()->findByPk($_productFeature->feature_id);
+				array_push($productFeatures,$productFeature->name);
+			}
+		}
 
-
- }
+		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
+				
+	}
+	else
+	{
+		$this->render('indexAlt');
+	}
+}
 
 
 public function actionProductsettingsave($id)

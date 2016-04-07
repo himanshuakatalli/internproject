@@ -1,10 +1,24 @@
+<style>
+  .warning {
+    width: 100%;
+    color: #f2f2f2;
+    text-align: center;
+    background: #e57373;
+    text-align: justify;
+    padding: 2em 1em;
+  }
+</style>
 <?php
   $product = $productArray[$indexOfMax];
 ?>
 <section class="wrapper">
   <div class="row">
     <div class="main-chart">
-
+      <?php if(!$status): ?>
+        <div class="warning">
+          <i class="fa fa-exclamation-triangle"></i><h3>Your account is not verified and soon will be listed as unprovisioned. Please verify your account to enjoy uninterrupted services</h3>
+        </div>
+      <?php endif; ?>
       <div class="row mtbox">
         <div class="col-md-2 col-sm-2 col-md-offset-2 box0">
           <div class="box1">
