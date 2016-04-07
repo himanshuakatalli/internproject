@@ -388,6 +388,7 @@ public function actionGetFeatures()
 			}
 			$this->render('showstats',array('ppcCountArray'=>$ppcCountArray,'product_id'=>$id));
 		}else{
+
 			$this->render('indexAlt');
 		}
 }
