@@ -362,9 +362,11 @@ public function actionGetFeatures()
 		echo "</select>";
 	}
 
-		public function actionShowStats($id) {
-				$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
-{
+		public function actionShowStats($id)
+		{
+			$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+			if($productexist)
+			{
 			$criteria = new CDbCriteria();
 			$criteria->order = 'entry_time ASC';
 			$criteria->condition = 'product_id=:id';
