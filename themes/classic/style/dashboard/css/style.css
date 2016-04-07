@@ -765,8 +765,9 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .sidebar-closed #sidebar {
-    margin-left: -180px;
+    width: 0 !important;
 }
+
 
 
 /* Dash Side */
@@ -2269,4 +2270,3 @@ label {
 .site-min-height {
     min-height: 900px;
 }
-

@@ -128,7 +128,10 @@ public function actionProductRegister()
 	$category = new Categories;
 	return $this->render('new_productreg',array('user'=>$user,'product'=>$product,'category'=>$category));
 }
-
+public function randomPassword(){
+	$str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	return substr(str_shuffle($str),0,10);
+}
 public function actionProductRegisterSave()
 {
 	if(isset(Yii::app()->user->id))
@@ -140,7 +143,7 @@ public function actionProductRegisterSave()
 
 	if(empty($user))
 	{
-		$randomPassword = Yii::app()->getSecurityManager()->generateRandomString(6);
+		$randomPassword =$this->randomPassword();
 
 		$user = new Users;
 		$user->attributes = $_POST['Users'];
@@ -197,14 +200,17 @@ public function actionProductRegisterSave()
 	{
 		$product_id = $product->id;
 
-		foreach($_POST['Categories']['id'] as $category_id)
+		if(isset($_POST['Categories']))
 		{
-			$productHasCategories = new ProductHasCategories;
-			$productHasCategories->product_id = $product_id;
-			$productHasCategories->category_id = $category_id;
-			$productHasCategories->add_date = new CDbExpression('NOW()');
+			foreach($_POST['Categories']['id'] as $category_id)
+			{
+				$productHasCategories = new ProductHasCategories;
+				$productHasCategories->product_id = $product_id;
+				$productHasCategories->category_id = $category_id;
+				$productHasCategories->add_date = new CDbExpression('NOW()');
 
-			$productHasCategories->save();
+				$productHasCategories->save();
+			}
 		}
 
 		foreach($deploymentFeatures as $key)
@@ -344,10 +350,9 @@ public function actionProductReviewSave($id)
 	}
 	else
 	{
-		$m=Yii::app()->getSecurityManager()->generateRandomString(6);
 		$user = new Users;
 		$user->attributes = $_POST['Users'];
-		$user->password = base64_encode($m);
+		$user->password = $this->randomPassword();
 		$user->role_id = 3;
 		$user->is_verified = 0;
 		$user->add_date = new CDbExpression('NOW()');

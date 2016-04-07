@@ -59,27 +59,27 @@
 								<i class="fa fa-codiepie fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
 
-		            <select id="category" name="productCategory[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" onchange="send()">
-		            	<?php
+								<select id="category" name="productCategory[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" onchange="send()">
+									<?php
 
-		            	$category=Categories::model()->findAll();
-		            	foreach($category as $categoryname)
-		            	{?>
+									$category=Categories::model()->findAll();
+									foreach($category as $categoryname)
+									{?>
 
-		              <option value="<?php echo $categoryname->name;?>"
+									<option value="<?php echo $categoryname->name;?>"
 
-		             <?php
-							   if (in_array($categoryname->name, $productCategory)) {
-							    	echo "selected";
-							    }
+								 <?php
+								 if (in_array($categoryname->name, $productCategory)) {
+										echo "selected";
+									}
 								?>
-		              >
-		              <?php echo $categoryname->name;?>
-		              </option>
+									>
+									<?php echo $categoryname->name;?>
+									</option>
 
 
-		              <?php }?>
-		           </select>
+									<?php }?>
+							 </select>
 
 							</div>
 						</div>
@@ -89,20 +89,20 @@
 							<div id="feature_list" class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-tasks fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-		            <select id="features" name="productCategoryFeatures[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
-		             <?php for($i=0;$i<count($productCategoryFeatures);$i++)
-		            	{?>
-		              <option value="<?php echo $productCategoryFeatures[$i] ;?>"
+								<select id="features" name="productCategoryFeatures[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
+								 <?php for($i=0;$i<count($productCategoryFeatures);$i++)
+									{?>
+									<option value="<?php echo $productCategoryFeatures[$i] ;?>"
 
 								<?php
 							if (in_array($productCategoryFeatures[$i], $productFeatures)) {
-							    	echo "selected";
-							    }
+										echo "selected";
+									}
 								?>
 
-		              ><?php echo $productCategoryFeatures[$i] ;?></option>
-		              <?php }?>
-		          </select>
+									><?php echo $productCategoryFeatures[$i] ;?></option>
+									<?php }?>
+							</select>
 							</div>
 						</div>
 
@@ -141,35 +141,35 @@
 
 							</div>
 						</div>
-        <div class="row">
+				<div class="row">
 										<div class="input-full-radio">
 
 
-						          <input type="radio" id="ppc0" name="Product[under_ppc]" value="1" <?php if($product->under_ppc){ echo "checked";}else{}?>></input>
-						          <label for="ppc0" class="col-lg-6">PPC</label>
+											<input type="radio" id="ppc0" name="Product[under_ppc]" value="1" <?php if($product->under_ppc){ echo "checked";}else{}?>></input>
+											<label for="ppc0" class="col-lg-6">PPC</label>
 
-						          <input type="radio" id="ppc1" name="Product[under_ppc]" value="0" <?php if($product->under_ppc){ }else{echo "checked";}?> ></input>
-						          <label for="ppc1" class="col-lg-6">No PPC</label>
+											<input type="radio" id="ppc1" name="Product[under_ppc]" value="0" <?php if($product->under_ppc){ }else{echo "checked";}?> ></input>
+											<label for="ppc1" class="col-lg-6">No PPC</label>
 
-						        </div>
+										</div>
 									</div>
 
 									<div class="row">
 										<div class="input-full-radio">
-						          <input type="radio" id="trial0" name="Product[has_trial]" value="1" <?php if($product->has_trial){ echo "checked";}else{}?> ></input>
-						          <label for="trial0" class="col-lg-6">Trial Available</label>
-						          <input type="radio" id="trial1" name="Product[has_trial]" value="0" <?php if($product->has_trial){ }else{echo "checked";}?> ></input>
-						          <label for="trial1" class="col-lg-6">No Trial Available</label>
-						        </div>
+											<input type="radio" id="trial0" name="Product[has_trial]" value="1" <?php if($product->has_trial){ echo "checked";}else{}?> ></input>
+											<label for="trial0" class="col-lg-6">Trial Available</label>
+											<input type="radio" id="trial1" name="Product[has_trial]" value="0" <?php if($product->has_trial){ }else{echo "checked";}?> ></input>
+											<label for="trial1" class="col-lg-6">No Trial Available</label>
+										</div>
 									</div>
 
 									<div class="row">
 										<div class="input-full-radio">
-						          <input type="radio" id="free0" name="Product[has_free_version]" value="1" <?php if($product->has_free_version){ echo "checked";}else{}?>></input>
-						          <label for="free0" class="col-lg-6">Has Free Version</label>
-						          <input type="radio" id="free1" name="Product[has_free_version]" value="0" <?php if($product->has_free_version){ }else{echo "checked";}?>></input>
-						          <label for="free1" class="col-lg-6">Only Paid</label>
-						        </div>
+											<input type="radio" id="free0" name="Product[has_free_version]" value="1" <?php if($product->has_free_version){ echo "checked";}else{}?>></input>
+											<label for="free0" class="col-lg-6">Has Free Version</label>
+											<input type="radio" id="free1" name="Product[has_free_version]" value="0" <?php if($product->has_free_version){ }else{echo "checked";}?>></input>
+											<label for="free1" class="col-lg-6">Only Paid</label>
+										</div>
 									</div>
 
 				<div class="row" id="company_information">
@@ -211,12 +211,12 @@
 
 						<div class="row">
 							<div class="input-dash-full resp-half">
-			          <i class="fa fa-codiepie col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
+								<i class="fa fa-codiepie col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
 
 									<?php
-              $countries = Controller::getCountryNames();
-              echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','required'=>"required",'data-parsley-trigger'=>"focusout"));?>
-			        </div>
+							$countries = Controller::getCountryNames();
+							echo $form->dropDownList($product,'founding_country',$countries,array('prompt'=>'Select Country','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','required'=>"required",'data-parsley-trigger'=>"focusout"));?>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -274,13 +274,13 @@
 						</div>
 
 						<div class="row">
-			        <div class="col-lg-4 submit-part">
+							<div class="col-lg-4 submit-part">
 
-			          <!-- <input type="submit" value="Save" name="save"></input> -->
-			          <?php echo CHtml::button('Save',array('name'=>'Submit','id'=>'save_record','class'=>'btn btn-primary')); ?>
+								<!-- <input type="submit" value="Save" name="save"></input> -->
+								<?php echo CHtml::button('Save',array('name'=>'Submit','id'=>'save_record','class'=>'btn btn-primary')); ?>
 
-			        </div>
-			      </div>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -332,53 +332,53 @@ $(document).ready(function(){
 $("#product_setting").parsley().validate();
  $('#save_record').on('click',function()
  {
-  $.ajax({
-  	type: 'POST',
-  	url :"<?php echo Yii::app()->createUrl('dashboard/Productsettingsave',array('id'=>$product->id));?>",
-    datatype:'json',
-    data:$("#product_setting").serialize(),
-    success :function(data)
-    {
-    	alert("Product Updated");
-    	$('#save_record').val('save');
-    }
-  });
+	$.ajax({
+		type: 'POST',
+		url :"<?php echo Yii::app()->createUrl('dashboard/Productsettingsave',array('id'=>$product->id));?>",
+		datatype:'json',
+		data:$("#product_setting").serialize(),
+		success :function(data)
+		{
+			alert("Product Updated");
+			$('#save_record').val('save');
+		}
+	});
  });
  });
 
- 	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
+	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
 filepicker.setKey(yourApiKey);
 
 document.getElementById("productImga").onclick = function(){
-  filepicker.pick({
-      services: ['COMPUTER', 'FACEBOOK', 'CLOUDAPP'],
-      mimetype:'image/*',
-      cropRatio:1,
-      cropForce:true,
-    },
-    function onSuccess(Blob){
-      var image = document.getElementById("imgPlaceholder");
-      $('#prod_img').val(Blob.url);
-      $('#productImg').attr('src',Blob.url);
-    }
-  );
+	filepicker.pick({
+			services: ['COMPUTER', 'FACEBOOK', 'CLOUDAPP'],
+			mimetype:'image/*',
+			cropRatio:1,
+			cropForce:true,
+		},
+		function onSuccess(Blob){
+			var image = document.getElementById("imgPlaceholder");
+			$('#prod_img').val(Blob.url);
+			$('#productImg').attr('src',Blob.url);
+		}
+	);
 };
 function send()
 {
 	var data = $('#category').val();
 	console.log(data);
 	$.ajax({
-    type: 'POST',
-    url: '<?php echo Yii::app()->createUrl("dashboard/GetFeatures");?>',
-    data: {categories : data},
-    success: function(data)
-    {
-      $("#feature_list").html(data);
-    },
-    error: function(data)
-    {
-      //alert("failed");
-    }
-  })
+		type: 'POST',
+		url: '<?php echo Yii::app()->createUrl("dashboard/GetFeatures");?>',
+		data: {categories : data},
+		success: function(data)
+		{
+			$("#feature_list").html(data);
+		},
+		error: function(data)
+		{
+			//alert("failed");
+		}
+	})
 }
 </script>

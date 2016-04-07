@@ -132,27 +132,25 @@
   border: 1px solid #7ececa;
   transition: all 0.3s ease-in;
 }
-/* #about_user {
-  margin-top: 200px;
-} */
+
 #about_company {
-  top: 530px;
-  margin-top: 200px;
-  margin-bottom: 150px;
+    top: 530px;
+    margin-top: 200px;
+    margin-bottom: 150px;
 }
 #about_product {
-  top: 1050px;
-  margin-top: 200px;
+    top: 1050px;
+    margin-top: 200px;
 }
 #product_deployment {
-  top: 2000px;
-  margin-top: 200px;
-  margin-bottom: 200px;
+    top: 2000px;
+    margin-top: 200px;
+    margin-bottom: 200px;
 }
 #media_link {
-  top: 2500px;
-  margin-top: 200px;
-  margin-bottom: 150px;
+    top: 2500px;
+    margin-top: 200px;
+    margin-bottom: 150px;
 }
 .input-half-submit {
   width: 49%;
@@ -326,6 +324,6 @@
 @media all and (max-width: 600px) {
   .prod-reg-container {
     width: 100% !important;
-    margin: 0 auto !important;
+     margin: 0 auto !important;
   }
 }
