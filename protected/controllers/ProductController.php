@@ -226,19 +226,33 @@ public function actionProductProfile($id)
 	$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
 
 	$productCategoryFeatures = array();
-	foreach ($product->categories as $productCategory)
+	foreach ($product->_categories as $_productCategory)
 	{
-		foreach ($productCategory->features as $productCategoryFeature)
+		if($_productCategory->status == 1)
 		{
-			array_push($productCategoryFeatures, $productCategoryFeature->name);
+			$productCategory = Categories::model()->findByPk($_productCategory->category_id);
+
+			foreach ($productCategory->_features as $_productCategoryFeature)
+			{
+				if($_productCategoryFeature->status == 1)
+				{
+					$productCategoryFeature = Features::model()->findByPk($_productCategoryFeature->feature_id);
+					array_push($productCategoryFeatures, $productCategoryFeature->name);
+				}
+			}
 		}
 	}
 
 	$productFeatures = array();
-	foreach ($product->features as $productFeature)
+	foreach ($product->_features as $_productFeature)
 	{
-		array_push($productFeatures,$productFeature->name);
+		if($_productFeature->status == 1)
+		{
+			$productFeature = Features::model()->findByPk($_productFeature->feature_id);
+			array_push($productFeatures,$productFeature->name);
+		}
 	}
+
 	$product->visit_count = $product->visit_count+1;
 	$product->update();
 	$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
