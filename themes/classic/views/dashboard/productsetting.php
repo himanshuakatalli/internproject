@@ -21,7 +21,7 @@
 				<div class="row" id="product_information">
 					<h4>Product Information</h4>
 					<figure>
-					<a href="#" id="productImga"><img id="productImg" src="<?php echo (!empty($product->logo))?$product->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" alt="product logo"></a>
+					<a href="#" id="productImga"><img id="productImg" src="<?php echo (!empty($product->logo))?$product->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" alt="product logo" width="80px" height="80px"></a>
 					</figure>
 					<div class="container-fluid" id="product_information">
 					<?php echo $form->textField($product,'logo',array('hidden'=>"hidden",'title'=>"Logo",'id'=>'prod_img'));?>
