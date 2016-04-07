@@ -45,7 +45,7 @@ public $layout="dashboard/main";
 
 		public function actionIndex()
 		{
-
+			$userVerificationStatus = Users::model()->find(array("condition"=>"id=:id","params"=>array(":id"=>Yii::app()->user->user_id),"select"=>"is_verified"));
 			$this->layout="dashboard/main";
 			$productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
 
@@ -80,7 +80,7 @@ public $layout="dashboard/main";
 								$indexOfMax = $key;
 						}
 				}
-				$this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax));
+				$this->render('index',array('productArray'=>$productArray,'indexOfMax'=>$indexOfMax,'status'=>$userVerificationStatus->is_verified));
 		 }
 		}
 
@@ -155,7 +155,7 @@ public function actionProductsettingsave($id)
 			foreach($productOldCategory as $category)
 			{
 				$_category = Categories::model()->findByAttributes(array('name'=>$category));
-					
+
 				$productHasCategories = ProductHasCategories::model()->findByAttributes(array('product_id'=>$id,'category_id'=>$_category->id));
 
 				if(!empty($productHasCategories))
@@ -171,7 +171,7 @@ public function actionProductsettingsave($id)
 			foreach($productOldFeatures as $features)
 			{
 				$_feature = Features::model()->findByAttributes(array('name'=>$features));
-					
+
 				$productHasFeatures = ProductHasFeatures::model()->findByAttributes(array('product_id'=>$id,'feature_id'=>$_feature->id));
 
 				if(!empty($productHasFeatures))
@@ -189,7 +189,7 @@ public function actionProductsettingsave($id)
 				foreach($_POST['productCategory'] as $category)
 				{
 					$_category = Categories::model()->findByAttributes(array('name'=>$category));
-					
+
 					$productHasCategories = ProductHasCategories::model()->findByAttributes(array('product_id'=>$id,'category_id'=>$_category->id));
 
 					if(empty($productHasCategories))
@@ -208,11 +208,11 @@ public function actionProductsettingsave($id)
 			}
 
 			if(isset($_POST['productCategoryFeatures']))
-			{				
+			{
 				foreach($_POST['productCategoryFeatures'] as $feature)
 				{
 					$_feature = Features::model()->findByAttributes(array('name'=>$feature));
-					
+
 					$productHasFeatures = ProductHasFeatures::model()->findByAttributes(array('product_id'=>$id,'feature_id'=>$_feature->id));
 
 					if(empty($productHasFeatures))
@@ -388,7 +388,7 @@ public function actionGetFeatures()
 		$product->status = 1;
 		$product->visit_count = 0;
 		$product->add_date= new CDbExpression('NOW()');
-		
+
 
 		if(isset($_POST['trial']))
 		{
@@ -437,11 +437,11 @@ public function actionGetFeatures()
 				$productHasDeploymentFeatures->product_id = $product->id;
 				$productHasDeploymentFeatures->deployment_feature_id = $deploymentFeatureID;
 				$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
-	
+
 				$productHasDeploymentFeatures->save();
 			}
 
-		}	
+		}
 	}
 
 
