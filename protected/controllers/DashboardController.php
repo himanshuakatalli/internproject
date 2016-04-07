@@ -50,7 +50,7 @@ public $layout="dashboard/main";
 			$productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
 
 			if(empty($productArray)) {
-					$this->render('indexAlt');
+					$this->render('indexAlt',array('status'=>$userVerificationStatus->is_verified));
 			}else {
 
 				$max = 0;
