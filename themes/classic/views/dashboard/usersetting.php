@@ -1,12 +1,12 @@
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/user-dash-style.css" rel="stylesheet">
 <style type="text/css">
 	.form-group ul {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 .form-group ul li{
-  font-size: 11px;
-  color: #f00;
+	font-size: 11px;
+	color: #f00;
 }
 </style>
 <section class="wrapper ">
@@ -72,62 +72,62 @@
 <script type="text/javascript">
 	$('#userSettings').addClass('active');
 	$('#dashboard').removeClass('active');
-  $(document).ready(function(){
-  	$("#formUserSettings").parsley().validate();
-  	$('#userInfo').click(function(){
-  		$('#userInfo').addClass('active');
-  		$('#compInfo').removeClass('active');
-  	});
-  	$('#compInfo').click(function(){
-  		$('#compInfo').addClass('active');
-  		$('#userInfo').removeClass('active');
-  	});
-  	$('#changeP').click(function(){
-  		$('#password').removeAttr("disabled")
-  		$('#password').val("");
-  		$('#password').focus();
-  	});
-  });
+	$(document).ready(function(){
+		$("#formUserSettings").parsley().validate();
+		$('#userInfo').click(function(){
+			$('#userInfo').addClass('active');
+			$('#compInfo').removeClass('active');
+		});
+		$('#compInfo').click(function(){
+			$('#compInfo').addClass('active');
+			$('#userInfo').removeClass('active');
+		});
+		$('#changeP').click(function(){
+			$('#password').removeAttr("disabled")
+			$('#password').val("");
+			$('#password').focus();
+		});
+	});
 
-  function user_update()
- 	{
- 		var validated = $("#update_user").parsley().validate();
+	function user_update()
+	{
+		var validated = $("#update_user").parsley().validate();
 
- 		if(validated)
- 		{
- 			var data = $("#update_user").serialize();
- 			console.log(data);
- 			$.ajax({
-    		type: 'POST',
-    		url: '<?php echo Yii::app()->createUrl("dashboard/UserUpdate"); ?>',
-    		data: data,
-    		success: function(data)
-    		{
-      		alert("Profile Updated");
-    		},
-    		error: function(data)
-    		{
-      		alert("failed");
-   			}
-  		})
- 		}
- 	}
- 	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
+		if(validated)
+		{
+			var data = $("#update_user").serialize();
+			console.log(data);
+			$.ajax({
+				type: 'POST',
+				url: '<?php echo Yii::app()->createUrl("dashboard/UserUpdate"); ?>',
+				data: data,
+				success: function(data)
+				{
+					alert("Profile Updated");
+				},
+				error: function(data)
+				{
+					alert("failed");
+				}
+			})
+		}
+	}
+	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
 filepicker.setKey(yourApiKey);
 
 document.getElementById("changeProfileImg").onclick = function(){
-  filepicker.pick({
-      services: ['COMPUTER', 'FACEBOOK', 'CLOUDAPP'],
-      mimetype:'image/*',
-      cropRatio:1,
-      cropForce:true,
-    },
-    function onSuccess(Blob){
-      var image = document.getElementById("imgPlaceholder");
-      $('#profImg').val(Blob.url);
-      $('#pimg').attr('src',Blob.url);
-    }
-  );
+	filepicker.pick({
+			services: ['COMPUTER', 'FACEBOOK', 'CLOUDAPP'],
+			mimetype:'image/*',
+			cropRatio:1,
+			cropForce:true,
+		},
+		function onSuccess(Blob){
+			var image = document.getElementById("imgPlaceholder");
+			$('#profImg').val(Blob.url);
+			$('#pimg').attr('src',Blob.url);
+		}
+	);
 };
 </script>
 <style>
