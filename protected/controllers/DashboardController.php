@@ -119,7 +119,7 @@ public function actionProductsetting($id)
 				}
 			}
 		}
-				
+
 		$productFeatures = array();
 		foreach ($product->_features as $_productFeature)
 		{
@@ -131,7 +131,7 @@ public function actionProductsetting($id)
 		}
 
 		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
-				
+
 	}
 	else
 	{
@@ -363,6 +363,8 @@ public function actionGetFeatures()
 	}
 
 		public function actionShowStats($id) {
+				$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+{
 			$criteria = new CDbCriteria();
 			$criteria->order = 'entry_time ASC';
 			$criteria->condition = 'product_id=:id';
@@ -383,8 +385,10 @@ public function actionGetFeatures()
 				}
 			}
 			$this->render('showstats',array('ppcCountArray'=>$ppcCountArray,'product_id'=>$id));
+		}else{
+			$this->render('indexAlt');
 		}
-
+}
 //dashboard add product page.
 	public function actionAddproduct()
 	{
