@@ -162,7 +162,7 @@ public function actionSignup()
 			if($users->save())
 			{
 //$to="abhishek.singh@venturepact.com";
-				$this->sendVerificationEmailOnSignUP($username, $users->hash);
+				$this->sendVerificationEmailOnSignUP($username, $users);
 
 				$response['success']='1';
 				$response['message']='Successfully Registered.Verify your Email and login.';
@@ -362,17 +362,20 @@ public function actionLogout()
 	$this->redirect(Yii::app()->homeUrl);
 }
 
-public function sendVerificationEmailOnSignUP($username, $hash)
+public function sendVerificationEmailOnSignUP($username, $users)
 {
 	$to=$username;
 	$from="abhishek.singh@venturepact.com";
-	$from_name="admin";
-	$subject="verify your Email";
+	$from_name="Admin";
+	$subject="Verify your Email";
 
-	$url = Yii::app()->createUrl('site/verify',array('email'=>$username,'hash'=>$hash));
+	$url = Yii::app()->createUrl('site/verify',array('email'=>$username,'hash'=>$users->hash));
 	$url ="localhost".$url;
-
-	$message="click to verify account.<br><br><a href=".$url.">Click Here</a>";
+	$message="Hey, ".$users->first_name." ".$users->last_name."!<br><br><br>";
+	$message.="Thank you for trusting us.<br><br>";
+	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Email</button></a><br><br><br>";
+	$message.="Regards,<br>";
+	$message.="VenturePact Support Team.";
 	$this->mailsend($to,$from,$from_name,$subject,$message);
 }
 

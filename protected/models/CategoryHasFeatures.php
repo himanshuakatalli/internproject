@@ -1,32 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "categories".
+ * This is the model class for table "category_has_features".
  *
- * The followings are the available columns in table 'categories':
+ * The followings are the available columns in table 'category_has_features':
  * @property integer $id
- * @property integer $parent_id
- * @property string $name
- * @property string $description
+ * @property integer $category_id
+ * @property integer $feature_id
  * @property string $admin_notes
  * @property integer $status
  * @property string $add_date
  * @property string $modify_date
- *
- * The followings are the available model relations:
- * @property Categories $parent
- * @property Categories[] $categories
- * @property Features[] $features
- * @property Product[] $products
  */
-class Categories extends CActiveRecord
+class CategoryHasFeatures extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'categories';
+		return 'category_has_features';
 	}
 
 	/**
@@ -37,13 +30,12 @@ class Categories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, add_date', 'required'),
-			array('parent_id, status', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>100),
-			array('description, admin_notes, modify_date', 'safe'),
+			array('category_id, feature_id, add_date', 'required'),
+			array('category_id, feature_id, status', 'numerical', 'integerOnly'=>true),
+			array('admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, parent_id, name, description, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			array('id, category_id, feature_id, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,11 +47,6 @@ class Categories extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'parent' => array(self::BELONGS_TO, 'Categories', 'parent_id'),
-			'categories' => array(self::HAS_MANY, 'Categories', 'parent_id'),
-			'features' => array(self::MANY_MANY, 'Features', 'category_has_features(category_id, feature_id)'),
-			'products' => array(self::MANY_MANY, 'Product', 'product_has_categories(category_id, product_id)'),
-			'_features' => array(self::HAS_MANY, 'CategoryHasFeatures', 'category_id'),
 		);
 	}
 
@@ -70,9 +57,8 @@ class Categories extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'parent_id' => 'Parent',
-			'name' => 'Name',
-			'description' => 'Description',
+			'category_id' => 'Category',
+			'feature_id' => 'Feature',
 			'admin_notes' => 'Admin Notes',
 			'status' => 'Status',
 			'add_date' => 'Add Date',
@@ -99,9 +85,8 @@ class Categories extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('parent_id',$this->parent_id);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description,true);
+		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('feature_id',$this->feature_id);
 		$criteria->compare('admin_notes',$this->admin_notes,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('add_date',$this->add_date,true);
@@ -116,7 +101,7 @@ class Categories extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Categories the static model class
+	 * @return CategoryHasFeatures the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

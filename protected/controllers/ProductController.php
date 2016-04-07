@@ -152,7 +152,7 @@ public function actionProductRegisterSave()
 
 		if($user->save())
 		{
-			$this->sendVerificationEmail($user->username, $user->hash, $user->password);
+			$this->sendVerificationEmail($user);
 		}
 	}
 
@@ -226,19 +226,33 @@ public function actionProductProfile($id)
 	$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
 
 	$productCategoryFeatures = array();
-	foreach ($product->categories as $productCategory)
+	foreach ($product->_categories as $_productCategory)
 	{
-		foreach ($productCategory->features as $productCategoryFeature)
+		if($_productCategory->status == 1)
 		{
-			array_push($productCategoryFeatures, $productCategoryFeature->name);
+			$productCategory = Categories::model()->findByPk($_productCategory->category_id);
+
+			foreach ($productCategory->_features as $_productCategoryFeature)
+			{
+				if($_productCategoryFeature->status == 1)
+				{
+					$productCategoryFeature = Features::model()->findByPk($_productCategoryFeature->feature_id);
+					array_push($productCategoryFeatures, $productCategoryFeature->name);
+				}
+			}
 		}
 	}
 
 	$productFeatures = array();
-	foreach ($product->features as $productFeature)
+	foreach ($product->_features as $_productFeature)
 	{
-		array_push($productFeatures,$productFeature->name);
+		if($_productFeature->status == 1)
+		{
+			$productFeature = Features::model()->findByPk($_productFeature->feature_id);
+			array_push($productFeatures,$productFeature->name);
+		}
 	}
+
 	$product->visit_count = $product->visit_count+1;
 	$product->update();
 	$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
@@ -344,17 +358,25 @@ public function actionProductReviewSave($id)
 	}
 }
 
-public function sendVerificationEmail($username, $hash, $password)
+public function sendVerificationEmail($user)
 {
 	$to=$username;
 	$from="abhishek.singh@venturepact.com";
-	$from_name="admin";
-	$subject="verify your Email";
+	$from_name="Admin";
+	$subject="Verify your Email";
 
-	$url = Yii::app()->createUrl('site/verify',array('email'=>$username,'hash'=>$hash));
+	$url = Yii::app()->createUrl('site/verify',array('email'=>$user->username,'hash'=>$user->hash));
 	$url ="localhost".$url;
 
-	$message="click to verify account.<br><br><a href=".$url.">Click Here</a><br><br>After verification use <br> ID - $username <br> Password - $password <br> to login.";
+	$message="Hey, ".$user->first_name." ".$user->last_name."<br><br><br>";
+	$message.="Your Product is listed. Please Verify your account<br><br>";
+	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Email</button></a><br>";
+	$message.="Use this credential to login and make sure to change password at first login.<br>";
+	$message.="Username:- ".$user->username."<br>";
+	$message.="Password:- ".$user->Password."<br><br><br>";
+	$message.="Regards,<br>";
+	$message.="VenturePact Support Team.";
+
 	$this->mailsend($to,$from,$from_name,$subject,$message);
 }
 
