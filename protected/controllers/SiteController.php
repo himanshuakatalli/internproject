@@ -274,8 +274,8 @@ public function actionLinkedin()
 {
         $baseURL = 'http://localhost/internproject/';
         $callbackURL = 'http://localhost/internproject/index.php/site/linkedin';
-        $linkedinApiKey = '75q7rn79icn4j7';
-        $linkedinApiSecret = 'rDMR36xMUMznAWV0';
+        $linkedinApiKey = Controller::getapikey();
+        $linkedinApiSecret = Controller::getapisecret();
         $linkedinScope = 'r_basicprofile r_emailaddress';
 
         if (isset($_GET["oauth_problem"]) && $_GET["oauth_problem"] <> "") {
@@ -323,7 +323,7 @@ public function linked_in_user($userdata)
 	$oauth_uid = $userdata->id;
 	$username = $userdata->emailAddress;
 
-	$user = Users::model()->findByAttributes(array("username"=>$username, "oauth_uid"=>$oauth_uid));
+	$user = Users::model()->findByAttributes(array("username"=>$username,"oauth_uid"=>$oauth_uid));
 	if(empty($user))
 	{
 		$user = new Users;
