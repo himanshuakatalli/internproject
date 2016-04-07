@@ -327,10 +327,10 @@
 });
  function send()
  {
-  var validated = $("#add_project").parsley().validate();
 
+  /*var validated = $("#add_project").parsley().validate();
  if(validate)
- {
+ {*/
   var data = $("#add_project").serialize();
   console.log(data);
   $.ajax({
@@ -346,6 +346,6 @@
       alert("failed");
     }
   })
-  }
+  //}
  }
 </script>
