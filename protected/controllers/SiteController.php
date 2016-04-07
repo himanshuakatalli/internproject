@@ -373,7 +373,7 @@ public function sendVerificationEmailOnSignUP($username, $users)
 	$url ="localhost".$url;
 	$message="Hey, ".$users->first_name." ".$users->last_name."!<br><br><br>";
 	$message.="Thank you for trusting us.<br><br>";
-	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Email</button></a><br><br><br>";
+	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Your Email</button></a><br><br><br>";
 	$message.="Regards,<br>";
 	$message.="VenturePact Support Team.";
 	$this->mailsend($to,$from,$from_name,$subject,$message);

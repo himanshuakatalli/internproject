@@ -368,9 +368,9 @@ public function sendVerificationEmail($user)
 	$url = Yii::app()->createUrl('site/verify',array('email'=>$user->username,'hash'=>$user->hash));
 	$url ="localhost".$url;
 
-	$message="Hey, ".$user->first_name." ".$user->last_name."<br><br><br>";
+	$message="Hey, ".$user->first_name." ".$user->last_name."!<br><br><br>";
 	$message.="Your Product is listed. Please Verify your account<br><br>";
-	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Email</button></a><br><br><br>";
+	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Your Email</button></a><br><br><br>";
 	$message.="Use this credential to login and make sure to change password at first login.<br>";
 	$message.="Username:- ".$user->username."<br>";
 	$message.="Password:- ".$user->password."<br><br><br>";

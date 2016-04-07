@@ -329,7 +329,7 @@
  function send()
  {
   var validated = $("#add_project").parsley().validate();
- if(validate){
+  if(validate){
   var data = $("#add_project").serialize();
   console.log(data);
   $.ajax({
