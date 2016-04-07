@@ -1,13 +1,20 @@
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/user-dash-style.css" rel="stylesheet">
+<style type="text/css">
+	.form-group ul {
+  margin: 0;
+  padding: 0;
+}
+.form-group ul li{
+  font-size: 11px;
+  color: #f00;
+}
+</style>
 <section class="wrapper ">
 	<div class="row ">
 		<div style="padding-top: 30px; padding-left:30px; width: 60%;" class="">
-
-			<?php $form = $this->beginWidget('CActiveForm',array('id'=>'update_user','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"form-horizontal",'data-parsley-validate'=>'data-parsley-validate')));?>
-
-				<figure><p class="centered"><a href="#" id="changeProfileImg"><img id="pimg" src="<?php echo (!empty($_user->profile_img))?$_user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"/></a></p></figure><br>
-				<?php echo $form->textField($user,'profile_img',array('placeholder'=>'Profile Image','id'=>'profImg','hidden'=>"hidden" ,'class'=>"input-box col-lg-11",'value'=>$_user->profile_img));?>
-					</div>
+		<?php $form = $this->beginWidget('CActiveForm',array('id'=>'update_user','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"form-horizontal",'data-parsley-validate'=>'data-parsley-validate')));?>
+		<figure><p class="centered"><a href="#" id="changeProfileImg"><img id="pimg" src="<?php echo (!empty($_user->profile_img))?$_user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="60"/></a></p></figure><br>
+		<?php echo $form->textField($user,'profile_img',array('placeholder'=>'Profile Image','id'=>'profImg','hidden'=>"hidden" ,'class'=>"input-box col-lg-11",'value'=>$_user->profile_img));?>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="firstName">First Name:</label>
 					<div class="col-sm-10">
@@ -25,28 +32,28 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="email">Email:</label>
 					<div class="col-sm-10">
-						<i class="fa fa-user col-lg-1"></i>
+						<i class="fa fa-envelope-o col-lg-1"></i>
 						<?php echo $form->textField($user,'username',array('placeholder'=>'Email','disabled'=>'disabled','class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Email is required','required'=>'required','data-parsley-trigger'=>"focusout",'value'=>$_user->username,'data-parsley-type'=>"email"));?>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="phone_number">Phone Number</label>
 					<div class="col-sm-10">
-						<i class="fa fa-user col-lg-1"></i>
+						<i class="fa fa-phone col-lg-1"></i>
 						<?php echo $form->textField($user,'phone_number',array('placeholder'=>'Phone Number','class'=>"input-box col-lg-11",'value'=>$_user->phone_number,'required'=>'required','data-parsley-trigger'=>"focusout",'data-parsley-required-message'=>"Phone Number is required",'data-parsley-minlength'=>"10",'data-parsley-type'=>"digits"));?>
 					</div>
 					</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="password">New Password:</label>
 					<div class="col-sm-10">
-						<i class="fa fa-user col-lg-1"></i>
+						<i class="fa fa-key col-lg-1"></i>
 						<?php echo $form->passwordField($user,'password',array('placeholder'=>'Leave blank in case you dont want to update','class'=>"input-box col-lg-11"));?>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="job_profile">Job profile:</label>
 					<div class="col-sm-10">
-						<i class="fa fa-user col-lg-1"></i>
+						<i class="fa fa-user-md col-lg-1"></i>
 						<?php echo $form->textField($user,'job_profile',array('placeholder'=>'Job Profile', 'class'=>"input-box col-lg-11",'value'=>$_user->job_profile,'data-parsley-required-message'=>'Job Profile is required','required'=>'required','data-parsley-trigger'=>"focusout"));?>
 					</div>
 				</div>
@@ -61,8 +68,7 @@
 		</div>
 	</div>
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
+
 <script type="text/javascript">
 	$('#userSettings').addClass('active');
 	$('#dashboard').removeClass('active');
