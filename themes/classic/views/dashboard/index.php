@@ -118,9 +118,7 @@
             <div class="white-header">
               <h5>Transactions</h5>
             </div>
-
             <p><img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80"></p>
-
             <p class="dark"><b><?php echo $productArray[$index]->name; ?></b></p>
             <div class="row">
               <div class="col-md-6 vpOrange">
