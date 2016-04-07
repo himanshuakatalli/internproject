@@ -13,7 +13,7 @@
               <div class="media-body">
                   <div class="col-sm-12 col-md-8 ">
                     <h2>
-                        <?php 
+                        <?php
                             if($product->under_ppc==0)
                             {
                               echo CHtml::link($product->name,array('product/productprofile/','id'=>$product->id));
@@ -24,16 +24,16 @@
                               echo CHtml::link($product->name,array('product/Referring/','id'=>$product->id),array('class' => '','target'=>'_blank'));
                             }
                          ?>
-                    </h2>     
+                    </h2>
                       <h4>
                           <small>
                                by <?php echo $product->company_name ?>
                           </small>
                       </h4>
-                      
+
                   </div>
                   <div>
-                      <?php 
+                      <?php
                           if($product->under_ppc==0)
                           {
                             echo CHtml::link('Visit Profile',array('product/productprofile/',

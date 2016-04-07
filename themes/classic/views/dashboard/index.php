@@ -7,6 +7,16 @@
     text-align: justify;
     padding: 2em 1em;
   }
+  @media all and (max-width: 1040px) {
+    .warning {
+      font-size: 0.8em;
+    }
+  }
+  @media all and (max-width: 800px) {
+    .warning {
+      font-size: 0.6em;
+    }
+  }
 </style>
 <?php
   $product = $productArray[$indexOfMax];
@@ -16,7 +26,7 @@
     <div class="main-chart">
       <?php if(!$status): ?>
         <div class="warning">
-          <i class="fa fa-exclamation-triangle"></i><h3>Your account is not verified and soon will be listed as unprovisioned. Please verify your account to enjoy uninterrupted services</h3>
+          <h3><i class="fa fa-exclamation-triangle"></i>&nbsp;Your account is not verified and soon will be listed as unprovisioned. Please verify your account to enjoy uninterrupted services</h3>
         </div>
       <?php endif; ?>
       <div class="row mtbox">
