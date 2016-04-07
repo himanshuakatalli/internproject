@@ -360,7 +360,7 @@ public function actionProductReviewSave($id)
 
 public function sendVerificationEmail($user)
 {
-	$to=$username;
+	$to=$user->username;
 	$from="abhishek.singh@venturepact.com";
 	$from_name="Admin";
 	$subject="Verify your Email";
@@ -370,13 +370,13 @@ public function sendVerificationEmail($user)
 
 	$message="Hey, ".$user->first_name." ".$user->last_name."<br><br><br>";
 	$message.="Your Product is listed. Please Verify your account<br><br>";
-	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Email</button></a><br>";
+	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Email</button></a><br><br><br>";
 	$message.="Use this credential to login and make sure to change password at first login.<br>";
 	$message.="Username:- ".$user->username."<br>";
-	$message.="Password:- ".$user->Password."<br><br><br>";
+	$message.="Password:- ".$user->password."<br><br><br>";
 	$message.="Regards,<br>";
 	$message.="VenturePact Support Team.";
-
+	echo "Hey";
 	$this->mailsend($to,$from,$from_name,$subject,$message);
 }
 
