@@ -10,11 +10,10 @@
  * @property string $description
  * @property string $logo
  * @property integer $customer_count
- * @property integer $search_count
  * @property integer $has_free_version
  * @property integer $has_trial
  * @property integer $under_ppc
- * @property string $ppc_count
+ * @property double $bidding_amount
  * @property integer $visit_count
  * @property string $starting_price
  * @property string $pricing_details
@@ -32,7 +31,6 @@
  * @property integer $status
  * @property string $add_date
  * @property string $modify_date
- * @property double $bidding_amount
  *
  * The followings are the available model relations:
  * @property Users $user
@@ -43,6 +41,7 @@
  * @property SupportFeatures[] $supportFeatures
  * @property TrainingFeatures[] $trainingFeatures
  * @property Users[] $users
+ * @property TrackingUser[] $trackingUsers
  */
 class Product extends CActiveRecord
 {
@@ -62,16 +61,15 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, name, product_website, company_name, company_website, add_date', 'required'),
-			array('user_id, customer_count, search_count, has_free_version, has_trial, under_ppc, visit_count, founding_year, status', 'numerical', 'integerOnly'=>true),
+			array('user_id, name, customer_count, product_website, company_name, company_website, add_date', 'required'),
+			array('user_id, customer_count, has_free_version, has_trial, under_ppc, visit_count, founding_year, status', 'numerical', 'integerOnly'=>true),
 			array('bidding_amount', 'numerical'),
 			array('name, starting_price, product_website, company_name, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link', 'length', 'max'=>100),
 			array('logo', 'length', 'max'=>255),
-			array('ppc_count', 'length', 'max'=>20),
 			array('description, pricing_details, admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, name, description, logo, customer_count, search_count, has_free_version, has_trial, under_ppc, ppc_count, visit_count, starting_price, pricing_details, product_website, company_name, founding_year, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link, admin_notes, status, add_date, modify_date, bidding_amount', 'safe', 'on'=>'search'),
+			array('id, user_id, name, description, logo, customer_count, has_free_version, has_trial, under_ppc, bidding_amount, visit_count, starting_price, pricing_details, product_website, company_name, founding_year, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -91,6 +89,7 @@ class Product extends CActiveRecord
 			'supportFeatures' => array(self::MANY_MANY, 'SupportFeatures', 'product_has_support_features(product_id, support_feature_id)'),
 			'trainingFeatures' => array(self::MANY_MANY, 'TrainingFeatures', 'product_has_training_features(product_id, training_feature_id)'),
 			'users' => array(self::MANY_MANY, 'Users', 'reviews(product_id, user_id)'),
+			'trackingUsers' => array(self::HAS_MANY, 'TrackingUser', 'product_id'),
 			'reviews' => array(self::HAS_MANY, 'Reviews', 'product_id'),
 		);
 	}
@@ -107,11 +106,10 @@ class Product extends CActiveRecord
 			'description' => 'Description',
 			'logo' => 'Logo',
 			'customer_count' => 'Customer Count',
-			'search_count' => 'Search Count',
 			'has_free_version' => 'Has Free Version',
 			'has_trial' => 'Has Trial',
 			'under_ppc' => 'Under Ppc',
-			'ppc_count' => 'Ppc Count',
+			'bidding_amount' => 'Bidding Amount',
 			'visit_count' => 'Visit Count',
 			'starting_price' => 'Starting Price',
 			'pricing_details' => 'Pricing Details',
@@ -129,7 +127,6 @@ class Product extends CActiveRecord
 			'status' => 'Status',
 			'add_date' => 'Add Date',
 			'modify_date' => 'Modify Date',
-			'bidding_amount' => 'Bidding Amount',
 		);
 	}
 
@@ -157,11 +154,10 @@ class Product extends CActiveRecord
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('logo',$this->logo,true);
 		$criteria->compare('customer_count',$this->customer_count);
-		$criteria->compare('search_count',$this->search_count);
 		$criteria->compare('has_free_version',$this->has_free_version);
 		$criteria->compare('has_trial',$this->has_trial);
 		$criteria->compare('under_ppc',$this->under_ppc);
-		$criteria->compare('ppc_count',$this->ppc_count,true);
+		$criteria->compare('bidding_amount',$this->bidding_amount);
 		$criteria->compare('visit_count',$this->visit_count);
 		$criteria->compare('starting_price',$this->starting_price,true);
 		$criteria->compare('pricing_details',$this->pricing_details,true);
@@ -179,7 +175,6 @@ class Product extends CActiveRecord
 		$criteria->compare('status',$this->status);
 		$criteria->compare('add_date',$this->add_date,true);
 		$criteria->compare('modify_date',$this->modify_date,true);
-		$criteria->compare('bidding_amount',$this->bidding_amount);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

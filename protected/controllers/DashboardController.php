@@ -386,7 +386,6 @@ public function actionGetFeatures()
 		$product->founding_country = $_POST['founding_country'];
 		$product->founding_year = $_POST['founding_year'];
 		$product->status = 1;
-		$product->search_count = 0;
 		$product->visit_count = 0;
 		$product->add_date= new CDbExpression('NOW()');
 		
