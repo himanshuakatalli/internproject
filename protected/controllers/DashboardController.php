@@ -96,21 +96,27 @@ public function actionProductsetting($id)
 								$productCategoryNames=array();
 					foreach ($product->categories as $product_Category)
 							{
+								if($product_Category->status == 1)
 									array_push($productCategoryNames, $product_Category->name);
 							}
 						//CVarDumper::dump($productCategory,10,1); die;
 					$productCategoryFeatures = array();
 					foreach ($product->categories as $productCategory)
 					{
+						if($product_Category->status == 1)
+						{
 							foreach ($productCategory->features as $productCategoryFeature)
 								{
-									array_push($productCategoryFeatures, $productCategoryFeature->name);
+									if($productCategoryFeature->status == 1)
+										array_push($productCategoryFeatures, $productCategoryFeature->name);
 								}
+						}
 					}
 					$productFeatures = array();
 					foreach ($product->features as $productFeature)
 					{
-						array_push($productFeatures,$productFeature->name);
+						if($productFeature->status == 1)
+							array_push($productFeatures,$productFeature->name);
 					}
 								 // CVarDumper::dump($productFeatures,10,1); die;
 
