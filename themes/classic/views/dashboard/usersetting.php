@@ -68,7 +68,7 @@
 		</div>
 	</div>
 </section>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$('#userSettings').addClass('active');
 	$('#dashboard').removeClass('active');
@@ -92,7 +92,6 @@
 	function user_update()
 	{
 		var validated = $("#update_user").parsley().validate();
-
 		if(validated)
 		{
 			var data = $("#update_user").serialize();
@@ -114,7 +113,9 @@
 	}
 	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
 filepicker.setKey(yourApiKey);
+$('#changeProfileImg').click(function(){
 
+});
 document.getElementById("changeProfileImg").onclick = function(){
 	filepicker.pick({
 			services: ['COMPUTER', 'FACEBOOK', 'CLOUDAPP'],
@@ -130,10 +131,3 @@ document.getElementById("changeProfileImg").onclick = function(){
 	);
 };
 </script>
-<style>
-#pimg:hover{
-
-	opacity:0.5;
-}
-
-</style>
