@@ -119,7 +119,12 @@ public function actionForgot()
 				$subject="Forgot Password";
 				$url = Yii::app()->createUrl('site/newpassword',array('email'=>$username,'hash'=>$user->hash));
 				$url ="localhost".$url;
-				$message="click to reset password.<br><br><a href=".$url.">Click Here</a>";
+				$message="Hey, ".$user->first_name." ".$user->last_name."!<br><br><br>";
+				$message .="A password reset request has been initiated from your account, please click the button below to reset your password.<br><br>";
+				$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Reset Password</button></a><br><br>";
+				$message.=" If you did not initiate this request, kindly ignore this email.<br><br><br>";
+				$message.="Thanks,<br>";
+				$message.="VenturePact Support Team.";
 				$this->mailsend($to,$from,$from_name,$subject,$message);
 
 				$response['success']='1';
