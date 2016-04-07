@@ -128,7 +128,7 @@
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-money fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1">
 								</i>
-									
+								<?php echo $form->textField($product,'bidding_amount',array('placeholder'=>"Bidding Amount",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
 							</div>
 						</div>
 
@@ -339,8 +339,7 @@ $("#product_setting").parsley().validate();
     data:$("#product_setting").serialize(),
     success :function(data)
     {
-    	var response = JSON.parse(data);
-    	alert(response.message);
+    	alert("Product Updated");
     	$('#save_record').val('save');
     }
   });
