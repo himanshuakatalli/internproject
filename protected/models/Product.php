@@ -91,6 +91,8 @@ class Product extends CActiveRecord
 			'users' => array(self::MANY_MANY, 'Users', 'reviews(product_id, user_id)'),
 			'trackingUsers' => array(self::HAS_MANY, 'TrackingUser', 'product_id'),
 			'reviews' => array(self::HAS_MANY, 'Reviews', 'product_id'),
+			'_categories' => array(self::HAS_MANY, 'ProductHasCategories', 'product_id'),
+			'_features' => array(self::HAS_MANY, 'ProductHasFeatures', 'product_id'),
 		);
 	}
 
