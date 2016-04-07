@@ -59,6 +59,18 @@
     max-height: calc(100vh - 212px);
     overflow-y: auto;
 }
+.input-group ul {
+  margin: 0;
+  padding: 0;
+}
+.input-group ul li{
+  padding: 0;
+  position: absolute;
+  top: 35px;
+  font-size: 11px;
+  color: #f00;
+  z-index: 99;
+}
     </style>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
     <script type="text/javascript">
@@ -197,57 +209,57 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title">Add New Product</h4>
         </div>
-        <?php $form=$this->beginWidget('CActiveForm', array('id'=>"formAddNewProduct",'htmlOptions'=>array('class'=>"panel-default",'data-parsley-validate'=>'data-parsley-validate')));?>
+        <?php $form=$this->beginWidget('CActiveForm', array('id'=>"formAddNewProduct",'enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"panel-default",'data-parsley-validate'=>'data-parsley-validate')));?>
           <div class="modal-body">
 
           <label>Company Name</label>
             <div class="input-group">
               <span class="input-group-addon">
-                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="fa fa-building"></i>
               </span>
-              <input type="text" class="form-control" name="company_name" placeholder="Company Name">
+              <input type="text" class="form-control" name="company_name" placeholder="Company Name" data-parsley-trigger="focusout" required>
             </div><br>
             <label>Founding Year</label>
             <div class="input-group">
               <span class="input-group-addon">
-                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="fa fa-calendar"></i>
               </span>
-              <input type="text" class="form-control" name="founding_year" placeholder="Company Founding Year">
+              <input type="text" class="form-control" name="founding_year" placeholder="Company Founding Year" data-parsley-trigger="focusout" required='required' data-parsley-type="digits" data-parsley-minlength="4">
             </div><br>
             <label>Founding Country</label>
             <div class="input-group">
               <span class="input-group-addon">
-                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="fa fa-globe"></i>
               </span>
-              <input type="text" class="form-control" name="founding_country" placeholder="Company Founding Country">
+              <input type="text" class="form-control" name="founding_country" placeholder="Company Founding Country" data-parsley-trigger="focusout" required='required'>
             </div><br>
             <label>Company Website</label>
             <div class="input-group">
               <span class="input-group-addon">
-                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="fa fa-internet-explorer"></i>
               </span>
-              <input type="text" class="form-control" name="company_website" placeholder="Company Website">
+              <input type="text" class="form-control" name="company_website" placeholder="Company Website" data-parsley-trigger="focusout" required='required' data-parsley-type="url">
             </div><br>
             <label>Product Name</label>
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-star-empty"></i>
               </span>
-              <input type="text" class="form-control" name="product_name" placeholder="Product Name" id="productName">
+              <input type="text" class="form-control" name="product_name" placeholder="Product Name" id="productName" data-parsley-trigger="focusout" required='required'>
             </div><br>
             <label>Product Description</label>
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-pencil"></i>
               </span>
-              <textarea class="form-control" name="product_description" placeholder="Product Description" id="productDescription"></textarea>
+              <textarea class="form-control" name="product_description" placeholder="Product Description" id="productDescription" data-parsley-trigger="focusout" required='required' data-parsley-minlength="20"></textarea>
             </div><br>
             <label>Product Website</label>
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="fa fa-internet-explorer"></i>
               </span>
-              <input type="text" class="form-control" name="product_website" placeholder="Product Website" id="productWebsite">
+              <input type="text" class="form-control" name="product_website" placeholder="Product Website" id="productWebsite" data-parsley-trigger="focusout" required='required' data-parsley-type="url">
             </div><br>
             <label>Product Category</label>
             <div class="input-group">
@@ -262,13 +274,12 @@
                 array_push($categoryNames,$category->name);*/
               $categoryNames = CHtml::listData($categories,'id','name');
 
-              echo $form->dropDownList($category,'id',$categoryNames,array('id'=>"productCategory",'multiple'=>"multiple",'class'=>'form-control','onchange'=>"getFeatures()"));
+              echo $form->dropDownList($category,'id',$categoryNames,array('id'=>"productCategory",'multiple'=>"multiple",'class'=>'form-control','onchange'=>"getFeatures()",'required'=>'required','data-parsley-trigger'=>"focusout"));
               ?>
 
             </div><br>
             <label>Product Features</label>
             <div class="input-group" id="features_list">
-              
             </div><br>
             <label>Starting Price</label>
             <div class="input-group">
@@ -282,11 +293,11 @@
               <span class="input-group-addon">
                 <i class="fa fa-users"></i>
               </span>
-              <input class="form-control" type="text" name="user_count" placeholder="Number of user counts" id="user_count">
+              <input class="form-control" type="text" name="user_count" placeholder="Number of user counts" id="user_count"value="0" data-parsley-trigger="focusout" data-parsley-type="digits">
             </div><br>
             <div class="input-group">
               <label>Trial Available</label>
-              <select name="trial" id="trial" class="form-control">
+              <select name="trial" id="trial" class="form-control" required='required',data-parsley-trigger="focusout">
                 <option value="">Select</option>
                 <option value="trial">Yes</option>
                 <option value="no_trial">No</option>
@@ -294,7 +305,7 @@
             </div><br>
             <div class="input-group">
               <label>Free Version Available</label>
-              <select name="free_version" id="free" class="form-control">
+              <select name="free_version" id="free" class="form-control" required='required',data-parsley-trigger="focusout">
                 <option value="">select</option>
                 <option value="free">Yes</option>
                 <option value="not_free">No</option>
@@ -305,7 +316,7 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicons-life-preserver"></i>
               </span>
-              <select class="form-control" multiple="multiple" id="deployment" name="deployment_features[]">
+              <select class="form-control" multiple="multiple" id="deployment" name="deployment_features[]" required='required',data-parsley-trigger="focusout">
                 <option value="1" name="web">Web Based</option>
                 <option value="2">Desktop</option>
                 <option value="3">Mobile</option>
@@ -322,6 +333,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
    <!--  <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.8.3.min.js"></script> -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery.scrollTo.min.js"></script>
@@ -333,6 +345,7 @@
 
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/prettify.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/bootstrap-multiselect.js"></script>
+
 <script type="text/javascript">
 
   $(document).ready(function(){
@@ -351,11 +364,12 @@
     $('#deployment').multiselect({
       enableFiltering: true
     });
-    // $("#formAddNewProduct").parsley().validate();
   });
 
   function send()
  {
+  var validated = $("#formAddNewProduct").parsley().validate();
+  if(validate){
   var data = $("#formAddNewProduct").serialize();
   console.log(data);
   $.ajax({
@@ -371,6 +385,7 @@
       alert("failed");
     }
   })
+}
  }
 
  function getFeatures()
