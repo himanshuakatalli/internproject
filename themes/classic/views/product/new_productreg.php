@@ -279,7 +279,7 @@
 		 <div class="row">
 			 <div class="input-half-submit">
 				 <!-- <input type="button" value="Create my free listing" name="submit"></input> -->
-				 <?php echo CHtml::htmlButton('Create Free Listing',array('onclick'=>'send();','class'=>'btn btn-primary submit-final')); ?>
+				 <?php echo CHtml::htmlButton('Create Free Listing',array('onclick'=>'send();','class'=>'btn btn-primary submit-final', 'id'=>'store')); ?>
 			 </div>
 		 </div>
 	<!-- </form> -->
@@ -325,6 +325,7 @@
 	//var validated = $("#add_project").parsley().validate();
 	var data = $("#add_project").serialize();
 	console.log(data);
+	$('#store').prop('disabled',true);
 	$.ajax({
 		type: 'POST',
 		url: '<?php echo Yii::app()->createUrl("product/ProductRegisterSave"); ?>',
@@ -338,5 +339,6 @@
 			alert("failed");
 		}
 	})
+	$('#store').prop('disabled',false);
 }
 </script>
