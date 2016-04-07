@@ -2,47 +2,47 @@
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/new_prod.css">
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
 <style type="text/css">
-	#selCat {
-		width: 49% !important;
-		float: left;
-		border: 1px solid rgba(0,0,0,0.15);
-		transition: all 0.3s ease-in;
-	}
-	#selCat i {
-		height: 42px;
-		width: 8.33%;
-		background: #fff;
-		padding-top: 14px;
-		color: rgba(0,0,0,0.4) !important;
-	}
-	#selCat .btn-group{
-		width: 91.67%;
-		box-shadow: none;
-	}
-	#selCat .btn-group button{
-		background: none;
-		width: 100%;
-		height:42px;
-		border: none;
-		box-shadow: none;
-	}
-	#selCat .btn-group button:hover{
-		background: none;
-	}
-	#selCat .btn-group ul{
-		width: 100%;
-	}
-	#selCat .btn-group ul li:first-of-type div {
-		width: 100% !important;
-		margin: 0 !important;
-	}
-	#selCat .btn-group ul li:first-of-type div span {
-		display: none;
-	}
-	#selCat .btn-group ul li:first-of-type div input {
-		border: none;
-		border-bottom: 1px solid rgba(0,0,0,0.4);
-	}
+  #selCat {
+    float: left;
+    border: 1px solid rgba(0,0,0,0.15);
+
+    transition: all 0.3s ease-in;
+  }
+  #selCat i {
+    height: 42px;
+    width: 8.33%;
+    background: #fff;
+    padding-top: 14px;
+    color: rgba(0,0,0,0.4) !important;
+  }
+  #selCat .btn-group{
+    width: 91.67%;
+    box-shadow: none;
+  }
+  #selCat .btn-group button{
+    background: none;
+    width: 100%;
+    height:42px;
+    border: none;
+    box-shadow: none;
+  }
+  #selCat .btn-group button:hover{
+    background: none;
+  }
+  #selCat .btn-group ul{
+    width: 100%;
+  }
+  #selCat .btn-group ul li:first-of-type div {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  #selCat .btn-group ul li:first-of-type div span {
+    display: none;
+  }
+  #selCat .btn-group ul li:first-of-type div input {
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+  }
 </style>
 <?php $form = $this->beginWidget('CActiveForm',array('id'=>'add_project','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>'container-fluid','data-parsley-validate'=>'data-parsley-validate')));?>
 <section class="container prod-reg-container">
@@ -140,7 +140,6 @@
 				 <i class="fa fa-plug col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
 				 <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="product_name" placeholder="Product's Name"> -->
 				 <?php echo $form->textField($product,'name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Product Name','required'=>'required','title'=>"Product Name",'data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"2",'length'=>"2"));?>
-
 			 </div>
 			 <div class="input-half float-right">
 				 <i class="fa fa-globe col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
