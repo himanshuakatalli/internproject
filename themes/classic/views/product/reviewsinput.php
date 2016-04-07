@@ -17,7 +17,7 @@
 		<h3>How would you rate this product ?</h3>
 		<div class="form-row">
 			<?php
-			$categories=RatingCategories::model()->findAll(); 
+			$categories=RatingCategories::model()->findAll();
 			foreach ($categories as $categorie) {
 				?>
 				<div class="star-rating">
@@ -75,8 +75,8 @@
 <div class="form-row inputs half">
 	<h3>Email</h3>
 	<div class="form-group">
-		<?php echo $form->emailField($user,'username',array('id'=>'email','class'=>'validate form-control','required'=>'required','data-parsley-error-message'=>'*Email is Required','data-parsley-type'=>'email'));?>
-		<label for="email" data-error="wrong" data-success="right">Email</label>
+		<?php echo $form->emailField($user,'username',array('id'=>'email','class'=>'validate form-control','required'=>'required','data-parsley-error-message'=>'*Email is Required','data-parsley-type'=>'email','placeholder'=>'Email'));?>
+		<!-- <label for="email" data-error="wrong" data-success="right">Email</label> -->
 	</div>
 </div>
 <div class="form-row inputs half">
@@ -113,8 +113,8 @@ function send()
 {
 	var validated = $("#review-edit").parsley().validate();
 	if(validated)
-	{   
-		var data=$("#review-edit").serialize();   
+	{
+		var data=$("#review-edit").serialize();
 		console.log(data);
 		$.ajax({
 			type:'POST',
