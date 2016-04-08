@@ -497,7 +497,7 @@ public function actionGetFeatures()
 	public function actionPayment($id)
 	{
 		$user_id=Yii::app()->user->user_id;
-		$token='tok_17xw9LBbTKYuQctaWW2xSnf';
+		$token='tok_17xwKBBbTKYuQctafgo9ICuQ';
 		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'payment_status'=>'0'));
 		if($invoice)
 		{
@@ -551,22 +551,34 @@ public function actionGetFeatures()
 							    }
 						}catch(\Stripe\Error\InvalidRequest $e)
 						{
+							$e_json = $e->getJsonBody();
+              $error = $e_json['error'];
+              $response['error']=$error['message'];
 							$response['message']="Invalid Request.";
 							$response['success']="2";
 							echo json_encode($response);
 						}catch(\Stripe\Error\ApiConnection $e)
 						{
+							$e_json = $e->getJsonBody();
+              $error = $e_json['error'];
+              $response['error']=$error['message'];
 							$response['message']="Network Error.Please make request again";
 							$response['success']="3";
 							echo json_encode($response);
 						}catch (\Stripe\Error\Base $e)
 						 {
+						 	$e_json = $e->getJsonBody();
+              $error = $e_json['error'];
+              $response['error']=$error['message'];
 						 	$response['message']="Something gone wrong.Please try later.";
 							$response['success']="4";
 							echo json_encode($response);
 						 }
 						catch(Exception $e)
 						{
+							$e_json = $e->getJsonBody();
+              $error = $e_json['error'];
+              $response['error']=$error['message'];
 							$response['message']="Internal Server Error.";
 							$response['success']="5";
 							echo json_encode($response);
