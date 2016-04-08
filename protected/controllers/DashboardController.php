@@ -131,7 +131,33 @@ public function actionProductsetting($id)
 			}
 		}
 
-		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
+		$criteria = new CDbCriteria();
+		$criteria->order = 'entry_time ASC';
+		$criteria->condition = 'product_id=:id';
+		$criteria->params = array(':id'=>$id);
+		$tracking_user = TrackingUser::model()->findAll($criteria);
+
+		$currDate = "0000-00";
+		$ppcCountArray = array();
+		foreach ($tracking_user as $value)
+		{
+			if(preg_match_all("/$currDate/", $value->entry_time, $matches) == 0)
+			{
+				$tempDateArray = explode(" ",$value->entry_time);
+				$currYearMonth = explode("-",$tempDateArray[0]);
+				$currYearMonth = array($currYearMonth[0], $currYearMonth[1]);
+				$currDate = implode("-", $currYearMonth);
+				$ppcCountArray[$currDate] = 1;
+			}
+			else
+			{
+				$ppcCountArray[$currDate]++;
+			}
+		}
+		
+		//print_r($ppcCountArray);
+
+		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures,'monthlyBill'=>$ppcCountArray));
 
 	}
 	else
@@ -470,7 +496,6 @@ public function actionGetFeatures()
 
 	public function actionPayment($id)
 	{
-
 		$user_id=Yii::app()->user->user_id;
 
 		\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
@@ -486,8 +511,5 @@ public function actionGetFeatures()
 		{
 		    echo "success";
 		}
-
-
 	}
-
 }
