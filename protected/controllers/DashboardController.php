@@ -1,5 +1,6 @@
 <?php
-
+Yii::import('application.vendors.*');
+require_once('stripe/init.php');
 class DashboardController extends Controller
 {
 
