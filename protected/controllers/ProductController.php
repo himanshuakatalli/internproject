@@ -115,7 +115,8 @@ public function actionSearch()
         $tracking ->status_geo = 0;
       }
 			$tracking ->save();
-			$product->customer_count = $product->customer_count+1;
+			$product->customer_count += 1;
+			$product->visit_count += 1;
 			$product->update();
       CController:: redirect('http://'.$product->product_website);
     }
@@ -259,7 +260,7 @@ public function actionProductProfile($id)
 		}
 	}
 
-	$product->visit_count = $product->visit_count+1;
+	$product->visit_count += 1;
 	$product->update();
 	$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
 		'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
