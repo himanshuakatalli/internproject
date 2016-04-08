@@ -154,7 +154,7 @@ public function actionProductsetting($id)
 				$ppcCountArray[$currDate]++;
 			}
 		}
-		
+
 		//print_r($ppcCountArray);
 
 		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures,'monthlyBill'=>$ppcCountArray));
@@ -497,24 +497,48 @@ public function actionGetFeatures()
 	public function actionPayment($id)
 	{
 		$user_id=Yii::app()->user->user_id;
-		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id));
-		\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
+		$token='tok_17xtsgBbTKYuQctaQLWgflx8';
+		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'status'=>'0'));
+		if($invoice)
+		{
+				\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
 
         $charge = \Stripe\Charge::create(
-              array('card' => $_POST['stripeToken'],
-                    'amount' => $invoice->amount,
-                    'currency' => 'usd',
-                    'description'=>"Amount paid for User ID: ".$user_id."",
-                    ));
+		              array('card' => $token,
+		                    'amount' => $invoice->amount,
+		                    'currency' => 'usd',
+		                    'description'=>"Amount paid for User ID: ".$user_id."",
+		                    ));
 
-	  if($charge->paid)
-		{
-				$transaction new Transaction;
-				$transaction->invoice_id=$invoice->id;
-				$transaction->transaction_id=$charge->balance_transaction;
-				$transaction->transaction_status=$charge->balance_transaction;
+			  if($charge->paid)
+				{
+						$transaction=new Transaction;
+						$transaction->invoice_id=$invoice->id;
+						$transaction->transaction_id=$charge->balance_transaction;
+						$transaction->transaction_status="success";
+						$transaction->status='1';
+						$transaction->description=$charge->description;
+						$transaction->add_date=new CDbExpression('Now()');
+						$transaction->save();
+						$invoice->payment_status='paid';
+						$invoice->status='1';
+						$invoice->update();
+						CVarDumper::dump($transaction,10,1); die;
+				}else{
+						$transaction=new Transaction;
+						$transaction->invoice_id=$invoice->id;
+						$transaction->transaction_id=$charge->balance_transaction;
+						$transaction->transaction_status="failed";
+						$transaction->status='0';
+						$transaction->failure_code=$charge->failure_code;
+						$transaction->failure_message=$charge->failure_message;
+						$transaction->description=$charge->description;
+						$transaction->add_date=new CDbExpression('Now()');
+						$transaction->save();
+				    }
+	 }else{
+	 	echo "invoice is not generated yet.";
+	 }
 
-		    echo "success";
-		}
 	}
 }
