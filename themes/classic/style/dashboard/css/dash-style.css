@@ -3,7 +3,7 @@ Template Name: DASHGUM FREE - Bootstrap 3.2 Admin Theme
 Template Version: 1.0
 Author: Carlos Alvarez
 Website: http://blacktie.co
-Premium: http://www.gridgum.com
+Premium: http://www.g#ridgum.com
 */
 
 /* Import fonts */
@@ -2610,7 +2610,9 @@ Product Settings styles goes here!!!!!!!!!!
   background: #fff;
   transition: all 0.3s ease-in;
 }
-
+#transactions{
+    display: none;
+}
 #transactions > div > div.row table thead{
   background: black;
   line-height: 2em;
