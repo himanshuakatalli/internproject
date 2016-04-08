@@ -495,14 +495,14 @@
 							<span class="input-group-addon">
 								<i class="fa fa-internet-explorer"></i>
 							</span>
-							<input type="text" class="form-control" name="company_website" placeholder="Company Website" data-parsley-trigger="focusout" required='required' data-parsley-type="url">
+							<input type="text" class="form-control" name="company_website" placeholder="Company Website" data-parsley-trigger="focusout" required='required' data-parsley-type="url"/>
 						</div><br>
 						<label>Product Name</label>
 						<div class="input-group">
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-star-empty"></i>
 							</span>
-							<input type="text" class="form-control" name="product_name" placeholder="Product Name" id="productName" data-parsley-trigger="focusout" required='required'>
+							<input type="text" class="form-control" name="product_name" placeholder="Product Name" id="productName" data-parsley-trigger="focusout" required='required'/>
 						</div><br>
 						<label>Product Description</label>
 						<div class="input-group">
@@ -516,7 +516,7 @@
 							<span class="input-group-addon">
 								<i class="fa fa-internet-explorer"></i>
 							</span>
-							<input type="text" class="form-control" name="product_website" placeholder="Product Website" id="productWebsite" data-parsley-trigger="focusout" required='required' data-parsley-type="url">
+							<input type="text" class="form-control" name="product_website" placeholder="Product Website" id="productWebsite" data-parsley-trigger="focusout" required='required' data-parsley-type="url"/>
 						</div><br>
 						<label>Product Category</label>
 						<div class="input-group" id="#cat">
@@ -543,7 +543,7 @@
 							<span class="input-group-addon">
 								<i class="fa fa-money"></i>
 							</span>
-							<input type="text" class="form-control" name="starting_price" placeholder="Product's Starting Price" id="startingPrice">
+							<input type="text" class="form-control" name="starting_price" placeholder="Product's Starting Price" id="startingPrice"/>
 						</div><br>
 						<label>Number of users</label>
 						<div class="input-group">
