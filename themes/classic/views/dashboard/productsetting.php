@@ -397,8 +397,8 @@ function stripeResponseHandler(status, response) {
         var token = response['id'];
         $.ajax({
         			type: 'POST',
-							url: '<?php echo Yii::app()->createUrl("dashboard/payment",array('product_id'=>$product->id));?>',
-							data: {token : token},
+							url: '<?php echo Yii::app()->createUrl("dashboard/payment");?>',
+							data: {token : token, product_id: $product->id},
 							success: function(data)
 							{
 								//alert("success");

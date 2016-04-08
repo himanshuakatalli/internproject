@@ -494,10 +494,12 @@ public function actionGetFeatures()
 	}
 // payment proccessing
 
-	public function actionPayment($id)
+	public function actionPayment()
 	{
 		$user_id=Yii::app()->user->user_id;
-		$token='tok_17xwKBBbTKYuQctafgo9ICuQ';
+		$token=$_POST['token'];
+		$id=$_POST['product_id'];
+		// $token='tok_17xwKBBbTKYuQctafgo9ICuQ';
 		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'payment_status'=>'0'));
 		if($invoice)
 		{
