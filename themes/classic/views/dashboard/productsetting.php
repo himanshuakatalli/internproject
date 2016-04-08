@@ -366,7 +366,7 @@ $('.transactions').click(function(){
 	$('#social_media').css('display','none');
 
 	var myTransition = ($.browser.webkit)  ? '-webkit-transition' :
-	($.browser.mozilla) ? '-moz-transition' : 
+	($.browser.mozilla) ? '-moz-transition' :
 	($.browser.msie)    ? '-ms-transition' :
 	($.browser.opera)   ? '-o-transition' : 'transition',
 	myCSSObj = { opacity : 1 };
