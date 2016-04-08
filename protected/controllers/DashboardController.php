@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -466,6 +466,28 @@ public function actionGetFeatures()
 
 		}
 	}
+// payment proccessing
 
+	public function actionPayment($id)
+	{
+
+		$user_id=Yii::app()->user->user_id;
+
+		\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
+        $charge = \Stripe\Charge::create(
+              array('card' => $_POST['stripeToken'],
+                    'amount' => 2000,
+                    'currency' => 'usd',
+                    'description'=>"Amount paid for User ID: ".$user_id." and Product Id ".$id."",
+                    'receipt_email'=>"user-email@user.com",
+                    ));
+
+	  if($charge->paid)
+		{
+		    echo "success";
+		}
+
+
+	}
 
 }
