@@ -472,18 +472,23 @@ public function actionGetFeatures()
 	{
 
 		$user_id=Yii::app()->user->user_id;
-
+		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id));
 		\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
+
         $charge = \Stripe\Charge::create(
               array('card' => $_POST['stripeToken'],
-                    'amount' => 2000,
+                    'amount' => $invoice->amount,
                     'currency' => 'usd',
-                    'description'=>"Amount paid for User ID: ".$user_id." and Product Id ".$id."",
-                    'receipt_email'=>"user-email@user.com",
+                    'description'=>"Amount paid for User ID: ".$user_id."",
                     ));
 
 	  if($charge->paid)
 		{
+				$transaction new Transaction;
+				$transaction->invoice_id=$invoice->id;
+				$transaction->transaction_id=$charge->balance_transaction;
+				$transaction->transaction_status=$charge->balance_transaction;
+
 		    echo "success";
 		}
 
