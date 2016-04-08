@@ -313,7 +313,7 @@
 						</div>
 						<div class="row">
 							<div class="col-xs-12">
-								<button type="submit" class="btn btn-primary">Submit Payment</button>
+								<input type="submit" class="btn btn-primary submit-button" value="Submit Payment"/>
 							</div>
 						</div>
 					</form>
@@ -328,11 +328,56 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
+<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <script type="text/javascript">
 $('#editProduct').addClass('active');
 $('#dashboard').removeClass('active');
 
+Stripe.setPublishableKey('pk_test_UNYSMPvDrZl3n2EzW6kZqSeT');
+function stripeResponseHandler(status, response) {
+    if (response.error) {
+        // re-enable the submit button
+         $('.submit-button').removeAttr("disabled");
+        // show the errors on the form
+        $(".error").html(response.error.message);
+        return false;
+    } else
+    {
+        var token = response['id'];
+        $.ajax({
+        			type: 'POST',
+							url: '<?php echo Yii::app()->createUrl("dashboard/payment");?>',
+							data: {token : token, product_id: <?php echo $product->id ?>},
+							success: function(data)
+							{
+								//alert("success");
+								var res = $.parseJSON(data);
+								$(".error").html(res.message);
+							},
+							error: function(data)
+							{
+								//alert("failed");
+							}
+        });
+
+    }
+}
+
 $(document).ready(function(){
+
+	$("#payment-form").submit(function(event) {
+				$('.submit-button').val('Please wait...');
+        $('.submit-button').attr("disabled", "disabled");
+        Stripe.createToken({
+            number: $('.card-number').val(),
+            cvc: $('.card-cvc').val(),
+            exp_month: $('.card-expiry-month').val(),
+            exp_year: $('.card-expiry-year').val()
+        }, stripeResponseHandler);
+        return false; // submit from callback
+    });
+
+
 $("#product_setting").parsley().validate();
  $('#save_record').on('click',function()
  {
@@ -408,46 +453,4 @@ function send()
 		}
 	})
 }
-</script>
-<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-<script type="text/javascript">
-Stripe.setPublishableKey('pk_test_UNYSMPvDrZl3n2EzW6kZqSeT');
-function stripeResponseHandler(status, response) {
-    if (response.error) {
-        // re-enable the submit button
-         $('.submit-button').removeAttr("disabled");
-        // show the errors on the form
-        $(".payment-errors").html(response.error.message);
-        return false;
-    } else
-    {
-        var token = response['id'];
-        $.ajax({
-        			type: 'POST',
-							url: '<?php echo Yii::app()->createUrl("dashboard/payment");?>',
-							data: {token : token, product_id: $product->id},
-							success: function(data)
-							{
-								//alert("success");
-							},
-							error: function(data)
-							{
-								//alert("failed");
-							}
-        });
-
-    }
-}
-$(document).ready(function() {
-    $("#payment-form").submit(function(event) {
-        $('.submit-button').attr("disabled", "disabled");
-        Stripe.createToken({
-            number: $('.card-number').val(),
-            cvc: $('.card-cvc').val(),
-            exp_month: $('.card-expiry-month').val(),
-            exp_year: $('.card-expiry-year').val()
-        }, stripeResponseHandler);
-        return false; // submit from callback
-    });
-});
 </script>
