@@ -497,48 +497,86 @@ public function actionGetFeatures()
 	public function actionPayment($id)
 	{
 		$user_id=Yii::app()->user->user_id;
-		$token='tok_17xtsgBbTKYuQctaQLWgflx8';
-		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'status'=>'0'));
+		$token='tok_17xw9LBbTKYuQctaWW2xSnf';
+		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'payment_status'=>'0'));
 		if($invoice)
 		{
-				\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
+			try{
 
-        $charge = \Stripe\Charge::create(
-		              array('card' => $token,
-		                    'amount' => $invoice->amount,
-		                    'currency' => 'usd',
-		                    'description'=>"Amount paid for User ID: ".$user_id."",
-		                    ));
+							\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
+			        $charge = \Stripe\Charge::create(
+				              array('card' => $token,
+				                    'amount' => $invoice->amount,
+				                    'currency' => 'usd',
+				                    'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." ",
+				                    ));
 
-			  if($charge->paid)
-				{
-						$transaction=new Transaction;
-						$transaction->invoice_id=$invoice->id;
-						$transaction->transaction_id=$charge->balance_transaction;
-						$transaction->transaction_status="success";
-						$transaction->status='1';
-						$transaction->description=$charge->description;
-						$transaction->add_date=new CDbExpression('Now()');
-						$transaction->save();
-						$invoice->payment_status='paid';
-						$invoice->status='1';
-						$invoice->update();
-						CVarDumper::dump($transaction,10,1); die;
-				}else{
-						$transaction=new Transaction;
-						$transaction->invoice_id=$invoice->id;
-						$transaction->transaction_id=$charge->balance_transaction;
-						$transaction->transaction_status="failed";
-						$transaction->status='0';
-						$transaction->failure_code=$charge->failure_code;
-						$transaction->failure_message=$charge->failure_message;
-						$transaction->description=$charge->description;
-						$transaction->add_date=new CDbExpression('Now()');
-						$transaction->save();
-				    }
+						  if($charge->paid)
+							{
+										$transaction=new Transaction;
+										$transaction->invoice_id=$invoice->id;
+										$transaction->stripe_transaction_id=$charge->balance_transaction;
+										$transaction->transaction_status='1';
+										$transaction->status='1';
+										$transaction->msg_description=$charge->description;
+										$transaction->add_date=new CDbExpression('Now()');
+										if($transaction->save())
+										{
+											$invoice->payment_status='1';
+										  if($invoice->update())
+										  {
+											  $response['message']="Transaction Successfull.";
+												$response['success']="1";
+												echo json_encode($response);
+										  }
+										}
+							}else{
+										$transaction=new Transaction;
+										$transaction->invoice_id=$invoice->id;
+										$transaction->stripe_transaction_id=$charge->balance_transaction;
+										$transaction->transaction_status='0';
+										$transaction->status='1';
+										$transaction->failure_code=$charge->failure_code;
+										$transaction->failure_message=$charge->failure_message;
+										$transaction->msg_description=$charge->description;
+										$transaction->add_date=new CDbExpression('Now()');
+										if($transaction->save())
+										{
+											$response['message']="Transaction Failed.";
+											$response['error']=$charge->failure_message;
+											$response['success']="0";
+											echo json_encode($response);
+										}
+
+							    }
+						}catch(\Stripe\Error\InvalidRequest $e)
+						{
+							$response['message']="Invalid Request.";
+							$response['success']="2";
+							echo json_encode($response);
+						}catch(\Stripe\Error\ApiConnection $e)
+						{
+							$response['message']="Network Error.Please make request again";
+							$response['success']="3";
+							echo json_encode($response);
+						}catch (\Stripe\Error\Base $e)
+						 {
+						 	$response['message']="Something gone wrong.Please try later.";
+							$response['success']="4";
+							echo json_encode($response);
+						 }
+						catch(Exception $e)
+						{
+							$response['message']="Internal Server Error.";
+							$response['success']="5";
+							echo json_encode($response);
+						}
+
 	 }else{
-	 	echo "invoice is not generated yet.";
-	 }
+	 					  $response['message']="Invalid Invoice.";
+							$response['success']="7";
+							echo json_encode($response);
+			  }
 
 	}
 }

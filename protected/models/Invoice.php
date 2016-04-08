@@ -9,15 +9,15 @@
  * @property integer $user_id
  * @property integer $click_count
  * @property double $amount
- * @property string $payment_status
+ * @property integer $payment_status
  * @property string $admin_notes
  * @property integer $status
  * @property string $add_date
  * @property string $modify_date
  *
  * The followings are the available model relations:
- * @property Users $user
  * @property Product $product
+ * @property Users $user
  * @property Transaction[] $transactions
  */
 class Invoice extends CActiveRecord
@@ -48,10 +48,9 @@ class Invoice extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('product_id, user_id, add_date', 'required'),
-			array('product_id, user_id, click_count, status', 'numerical', 'integerOnly'=>true),
+			array('', 'required'),
+			array('product_id, user_id, click_count, payment_status, status', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
-			array('payment_status', 'length', 'max'=>6),
 			array('admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -67,8 +66,8 @@ class Invoice extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
 			'product' => array(self::BELONGS_TO, 'Product', 'product_id'),
+			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
 			'transactions' => array(self::HAS_MANY, 'Transaction', 'invoice_id'),
 		);
 	}
@@ -108,7 +107,7 @@ class Invoice extends CActiveRecord
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('click_count',$this->click_count);
 		$criteria->compare('amount',$this->amount);
-		$criteria->compare('payment_status',$this->payment_status,true);
+		$criteria->compare('payment_status',$this->payment_status);
 		$criteria->compare('admin_notes',$this->admin_notes,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('add_date',$this->add_date,true);
