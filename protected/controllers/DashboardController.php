@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -131,7 +131,33 @@ public function actionProductsetting($id)
 			}
 		}
 
-		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
+		$criteria = new CDbCriteria();
+		$criteria->order = 'entry_time ASC';
+		$criteria->condition = 'product_id=:id';
+		$criteria->params = array(':id'=>$id);
+		$tracking_user = TrackingUser::model()->findAll($criteria);
+
+		$currDate = "0000-00";
+		$ppcCountArray = array();
+		foreach ($tracking_user as $value)
+		{
+			if(preg_match_all("/$currDate/", $value->entry_time, $matches) == 0)
+			{
+				$tempDateArray = explode(" ",$value->entry_time);
+				$currYearMonth = explode("-",$tempDateArray[0]);
+				$currYearMonth = array($currYearMonth[0], $currYearMonth[1]);
+				$currDate = implode("-", $currYearMonth);
+				$ppcCountArray[$currDate] = 1;
+			}
+			else
+			{
+				$ppcCountArray[$currDate]++;
+			}
+		}
+
+		//print_r($ppcCountArray);
+
+		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures,'monthlyBill'=>$ppcCountArray));
 
 	}
 	else
@@ -376,7 +402,7 @@ public function actionGetFeatures()
 
 			$currDate = "0000-00-00";
 			$ppcCountArray = array();
-			foreach ($tracking_user as $key => $value) {
+			foreach ($tracking_user as $value) {
 					# code...
 				if(preg_match_all("/$currDate/", $value->entry_time, $matches) == 0) {
 						$tempDateArray = explode(" ",$value->entry_time);
@@ -466,6 +492,53 @@ public function actionGetFeatures()
 
 		}
 	}
+// payment proccessing
 
+	public function actionPayment($id)
+	{
+		$user_id=Yii::app()->user->user_id;
+		$token='tok_17xtsgBbTKYuQctaQLWgflx8';
+		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'status'=>'0'));
+		if($invoice)
+		{
+				\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
 
+        $charge = \Stripe\Charge::create(
+		              array('card' => $token,
+		                    'amount' => $invoice->amount,
+		                    'currency' => 'usd',
+		                    'description'=>"Amount paid for User ID: ".$user_id."",
+		                    ));
+
+			  if($charge->paid)
+				{
+						$transaction=new Transaction;
+						$transaction->invoice_id=$invoice->id;
+						$transaction->transaction_id=$charge->balance_transaction;
+						$transaction->transaction_status="success";
+						$transaction->status='1';
+						$transaction->description=$charge->description;
+						$transaction->add_date=new CDbExpression('Now()');
+						$transaction->save();
+						$invoice->payment_status='paid';
+						$invoice->status='1';
+						$invoice->update();
+						CVarDumper::dump($transaction,10,1); die;
+				}else{
+						$transaction=new Transaction;
+						$transaction->invoice_id=$invoice->id;
+						$transaction->transaction_id=$charge->balance_transaction;
+						$transaction->transaction_status="failed";
+						$transaction->status='0';
+						$transaction->failure_code=$charge->failure_code;
+						$transaction->failure_message=$charge->failure_message;
+						$transaction->description=$charge->description;
+						$transaction->add_date=new CDbExpression('Now()');
+						$transaction->save();
+				    }
+	 }else{
+	 	echo "invoice is not generated yet.";
+	 }
+
+	}
 }
