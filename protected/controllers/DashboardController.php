@@ -556,7 +556,7 @@ public function actionGetFeatures()
 							$e_json = $e->getJsonBody();
               $error = $e_json['error'];
               $response['error']=$error['message'];
-							$response['message']="Invalid Request.";
+							// $response['message']="Invalid Request.";
 							$response['success']="2";
 							echo json_encode($response);
 						}catch(\Stripe\Error\ApiConnection $e)
@@ -564,7 +564,7 @@ public function actionGetFeatures()
 							$e_json = $e->getJsonBody();
               $error = $e_json['error'];
               $response['error']=$error['message'];
-							$response['message']="Network Error.Please make request again";
+							// $response['message']="Network Error.Please make request again";
 							$response['success']="3";
 							echo json_encode($response);
 						}catch (\Stripe\Error\Base $e)
@@ -587,7 +587,8 @@ public function actionGetFeatures()
 						}
 
 	 }else{
-	 					  $response['message']="Invalid Invoice.";
+	 					  // $response['message']="Invalid Invoice.";
+	 					  $response['error']="Invalid Invoice.";
 							$response['success']="7";
 							echo json_encode($response);
 			  }

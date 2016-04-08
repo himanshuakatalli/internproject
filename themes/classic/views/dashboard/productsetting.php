@@ -5,6 +5,10 @@
 <style type="text/css">
 .error{
 	color: #f00;
+	font-size: 14px;
+}
+.message{
+	color: #0f0;
 	font-size: 12px;
 }
 </style>
@@ -321,6 +325,9 @@
 			</div>
 			<div class="modal-footer">
 				<div class="error pull-left">
+
+				</div>
+				<div class="message pull-left">
 				</div>
 			</div>
 		</div>
@@ -352,7 +359,8 @@ function stripeResponseHandler(status, response) {
 							{
 								//alert("success");
 								var res = $.parseJSON(data);
-								$(".error").html(res.message);
+								$(".message").html(res.message);
+								$(".error").html(res.error);
 							},
 							error: function(data)
 							{
