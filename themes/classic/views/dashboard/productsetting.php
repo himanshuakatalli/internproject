@@ -2,6 +2,12 @@
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/dash-style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/prettify.css">
+<style type="text/css">
+.error{
+	color: #f00;
+	font-size: 12px;
+}
+</style>
 <section class="wrapper">
 	<div class="row">
 		<aside class="full-height">
@@ -9,7 +15,7 @@
 				<li><a class="trans" href="#product_information">Product Information</a></li>
 				<li><a class="trans" href="#company_information">Company Information</a></li>
 				<li><a class="trans" href="#social_media">Social Media Links</a></li>
-				<li><a id="trans" href="#transactions">Transactions</a></li>
+				<li><a class="transactions" href="#transactions">Transactions</a></li>
 			</ul>
 		</aside>
 		<main class="main-wrap">
@@ -210,6 +216,15 @@
 				</div>
 				<div class="row" id="transactions">
 					<h4>Transactions</h4>
+					<form class="form-control" name="frmTrans" style="width: 50px;">
+						<label>Year</label>
+						<select name="transYear" class="form-control">
+							<option selected value="<?php echo date("Y")-3; ?>"><?php echo date("Y")-3; ?></option>
+							<option selected value="<?php echo date("Y")-2; ?>"><?php echo date("Y")-2; ?></option>
+							<option selected value="<?php echo date("Y")-1; ?>"><?php echo date("Y")-1; ?></option>
+							<option selected value="<?php echo date("Y"); ?>"><?php echo date("Y"); ?></option>
+					</select>
+					</form>
 					<div class="container-fluid">
 						<div class="row">
 							<table class="col-lg-12" class="table-style">
@@ -230,7 +245,9 @@
 										<td class="col-lg-2">289</td>
 										<td class="col-lg-3">983$</td>
 										<td class="col-lg-3">Paid</td>
-										<td class="col-lg-1">&nbsp;</td>
+										<td class="col-lg-1">
+											<a href="#"><i class="fa fa-info-circle"></i></a>
+										</td>
 									</tr>
 									<tr class="row">
 										<td class="col-lg-1">2</td>
@@ -239,7 +256,7 @@
 										<td class="col-lg-3">456$</td>
 										<td class="col-lg-3">Pending</td>
 										<td class="col-lg-1">
-											<a href="#"><i class="fa fa-credit-card-alt"></i></a>
+											<a href="javascript:void(0);" data-toggle="modal" data-target="#makePayment"><i class="fa fa-credit-card-alt"></i></a>
 										</td>
 									</tr>
 								</tbody>
@@ -251,6 +268,64 @@
 		</main>
 	</div>
 </section>
+<div id="makePayment" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<div class="panel-heading display-table" >
+					<div class="row display-tr" >
+						<h3 class="panel-title display-td" >Payment Details</h3>
+						<div class="display-td" >
+							<img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="panel-body">
+					<form class="panel-default" action="" method="POST" id="payment-form">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="form-group">
+									<label for="cardNumber">CARD NUMBER</label>
+									<div class="input-group">
+										<input type="text" size="20" autocomplete="off" class="card-number form-control" placeholder="Valid Card Number"/>
+										<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-7 col-md-7">
+								<div class="form-group">
+									<label for="cardExpiry"><span class="hidden-xs">EXPIRATION (MM/YYYY)</span><br>
+									<input type="text" size="2" class="card-expiry-month form-control" style="width: 50px;  display: inline-block;" placeholder="MM" />
+									<input type="text" size="4" class="card-expiry-year form-control" style="width: 80px; display: inline-block;" placeholder="YYYY"/>
+								</div>
+							</div>
+							<div class="col-xs-5 col-md-5 pull-right">
+								<div class="form-group">
+									<label for="cardCVC">CV CODE</label>
+									<input type="text" size="4" autocomplete="off" class="card-cvc form-control form-control" style="width: 80px;" placeholder="CVV"/>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<button type="submit" class="btn btn-primary">Submit Payment</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="error pull-left">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
 <script type="text/javascript">
@@ -276,17 +351,27 @@ $("#product_setting").parsley().validate();
 
 
  });
-$('#trans').click(function(){
-	$('#transactions').css('display','block');
-	$('#product_information').css('display','none');
-	$('#company_information').css('display','none');
-	$('#social_media').css('display','none');
-});
 $('.trans').click(function(){
 	$('#transactions').css('display','none');
 	$('#product_information').css('display','block');
 	$('#company_information').css('display','block');
 	$('#social_media').css('display','block');
+
+
+});
+$('.transactions').click(function(){
+	$('#transactions').css('display','block');
+	$('#product_information').css('display','none');
+	$('#company_information').css('display','none');
+	$('#social_media').css('display','none');
+
+	var myTransition = ($.browser.webkit)  ? '-webkit-transition' :
+	($.browser.mozilla) ? '-moz-transition' : 
+	($.browser.msie)    ? '-ms-transition' :
+	($.browser.opera)   ? '-o-transition' : 'transition',
+	myCSSObj = { opacity : 1 };
+	myCSSObj[myTransition] = 'opacity 1s ease-in-out';
+	$('#transactions').next().css(myCSSObj);
 });
 	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'
 filepicker.setKey(yourApiKey);

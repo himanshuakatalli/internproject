@@ -2610,6 +2610,9 @@ Product Settings styles goes here!!!!!!!!!!
   background: #fff;
   transition: all 0.3s ease-in;
 }
+a{
+    cursor: pointer;
+}
 #transactions{
     display: none;
 }
@@ -2710,3 +2713,4 @@ Product Settings styles goes here!!!!!!!!!!
     padding-left: 2em;
     text-align: justify;
 }
+
