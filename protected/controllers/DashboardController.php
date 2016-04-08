@@ -376,7 +376,7 @@ public function actionGetFeatures()
 
 			$currDate = "0000-00-00";
 			$ppcCountArray = array();
-			foreach ($tracking_user as $key => $value) {
+			foreach ($tracking_user as $value) {
 					# code...
 				if(preg_match_all("/$currDate/", $value->entry_time, $matches) == 0) {
 						$tempDateArray = explode(" ",$value->entry_time);
