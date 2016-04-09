@@ -356,7 +356,7 @@
 				<div class="error pull-left">
 					
 				</div>
-				<a href="<?php echo $this->createUrl('DeleteProduct',array('id'=>$product->id)); ?>" class="btn btn-danger">Yes</a>
+				<a href="<?php echo $this->createUrl('deleteProduct',array('id'=>$product->id)); ?>" class="btn btn-danger">Yes</a>
 				<input type="button" class="btn btn-success" value="No" data-dismiss="modal"/>
 			</div>
 		</div>
