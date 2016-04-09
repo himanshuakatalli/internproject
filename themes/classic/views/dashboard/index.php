@@ -55,11 +55,17 @@
         </div>
 
         <div class="col-md-2 col-sm-2 box0">
+          <?php $invoices = Invoice::model()->with('transactions')->findAll(array('condition'=>'product_id=:id','params'=>array(':id'=>$product->id)));
+            $transCount = 0;
+            foreach ($invoices as $invoice) {
+              $transCount += count($invoice->transactions);
+            }
+          ?>
           <div class="box1">
             <span class="li_vallet"></span>
-            <h3>+3</h3>
+            <h3>+<?php echo $transCount; ?></h3>
           </div>
-          <p>Total 3 transactions have been made for <?php echo $product->name; ?>.</p>
+          <p>Total <?php echo $transCount; ?> transactions have been made for <?php echo $product->name; ?>.</p>
         </div>
       </div>
 

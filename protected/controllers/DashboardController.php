@@ -379,9 +379,9 @@ public function actionGetFeatures()
 		}
 
 		echo "<span class='input-group-addon'><i class='glyphicon glyphicons-life-preserver'></i></span>
-    	    <select class='form-control' multiple='multiple' id='productFeatures' name='features[]'>";
+					<select class='form-control' multiple='multiple' id='productFeatures' name='features[]'>";
 
-  	for($i=0;$i<count($features);$i++)
+		for($i=0;$i<count($features);$i++)
 		{
 			echo "<option value='$features[$i]'>$features[$i]</option>";
 		}
@@ -506,14 +506,14 @@ public function actionGetFeatures()
 			try{
 							$secretkey=Controller::getsecretkey();
 							\Stripe\Stripe::setApiKey($secretkey);
-			        $charge = \Stripe\Charge::create(
-				              array('card' => $token,
-				                    'amount' => (($invoice->amount) * 100),
-				                    'currency' => 'usd',
-				                    'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." ",
-				                    ));
+							$charge = \Stripe\Charge::create(
+											array('card' => $token,
+														'amount' => (($invoice->amount) * 100),
+														'currency' => 'usd',
+														'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." ",
+														));
 
-						  if($charge->paid)
+							if($charge->paid)
 							{
 										$transaction=new Transaction;
 										$transaction->invoice_id=$invoice->id;
@@ -525,12 +525,12 @@ public function actionGetFeatures()
 										if($transaction->save())
 										{
 											$invoice->payment_status='1';
-										  if($invoice->update())
-										  {
-											  $response['message']="Transaction Successfull.";
+											if($invoice->update())
+											{
+												$response['message']="Transaction Successfull.";
 												$response['success']="1";
 												echo json_encode($response);
-										  }
+											}
 										}
 							}else{
 										$transaction=new Transaction;
@@ -550,48 +550,48 @@ public function actionGetFeatures()
 											echo json_encode($response);
 										}
 
-							    }
+									}
 						}catch(\Stripe\Error\InvalidRequest $e)
 						{
 							$e_json = $e->getJsonBody();
-              $error = $e_json['error'];
-              $response['error']=$error['message'];
+							$error = $e_json['error'];
+							$response['error']=$error['message'];
 							// $response['message']="Invalid Request.";
 							$response['success']="2";
 							echo json_encode($response);
 						}catch(\Stripe\Error\ApiConnection $e)
 						{
 							$e_json = $e->getJsonBody();
-              $error = $e_json['error'];
-              $response['error']=$error['message'];
+							$error = $e_json['error'];
+							$response['error']=$error['message'];
 							// $response['message']="Network Error.Please make request again";
 							$response['success']="3";
 							echo json_encode($response);
 						}catch (\Stripe\Error\Base $e)
 						 {
-						 	$e_json = $e->getJsonBody();
-              $error = $e_json['error'];
-              $response['error']=$error['message'];
-						 	$response['message']="Something gone wrong.Please try later.And send us screenshot of this error.";
+							$e_json = $e->getJsonBody();
+							$error = $e_json['error'];
+							$response['error']=$error['message'];
+							$response['message']="Something gone wrong.Please try later.And send us screenshot of this error.";
 							$response['success']="4";
 							echo json_encode($response);
 						 }
 						catch(Exception $e)
 						{
 							$e_json = $e->getJsonBody();
-              $error = $e_json['error'];
-              $response['error']=$error['message'];
+							$error = $e_json['error'];
+							$response['error']=$error['message'];
 							$response['message']="Internal Server Error.";
 							$response['success']="5";
 							echo json_encode($response);
 						}
 
 	 }else{
-	 					  // $response['message']="Invalid Invoice.";
-	 					  $response['error']="Invalid Invoice.";
+							// $response['message']="Invalid Invoice.";
+							$response['error']="Invalid Invoice.";
 							$response['success']="7";
 							echo json_encode($response);
-			  }
+				}
 
 	}
 
@@ -608,7 +608,7 @@ public function actionGetFeatures()
 		$productexist=Product::model()->findByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
 		if($productexist)
 		{
-		 	$productexist->status='0';
+			$productexist->status='0';
 			if($productexist->update())
 			{
 				$this->redirect(array('index'));
