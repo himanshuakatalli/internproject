@@ -113,7 +113,7 @@
 			</header>
 			<!--header end-->
 			<!--sidebar start-->
-			<?php $product = Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id),array('select'=>'name,id')); ?>
+			<?php $product = Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'status'=>'1'),array('select'=>'name,id')); ?>
 			<aside>
 				<div id="sidebar"  class="nav-collapse ">
 					<!-- sidebar menu start-->
