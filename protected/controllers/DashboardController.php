@@ -504,8 +504,8 @@ public function actionGetFeatures()
 		if($invoice)
 		{
 			try{
-
-							\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
+							$secretkey=Controller::getsecretkey();
+							\Stripe\Stripe::setApiKey($secretkey);
 			        $charge = \Stripe\Charge::create(
 				              array('card' => $token,
 				                    'amount' => $invoice->amount,
@@ -517,7 +517,7 @@ public function actionGetFeatures()
 							{
 										$transaction=new Transaction;
 										$transaction->invoice_id=$invoice->id;
-										$transaction->stripe_transaction_id=$charge->balance_transaction;
+										$transaction->stripe_transaction_id=$charge->id;
 										$transaction->transaction_status='1';
 										$transaction->status='1';
 										$transaction->msg_description=$charge->description;
@@ -535,7 +535,7 @@ public function actionGetFeatures()
 							}else{
 										$transaction=new Transaction;
 										$transaction->invoice_id=$invoice->id;
-										$transaction->stripe_transaction_id=$charge->balance_transaction;
+										$transaction->stripe_transaction_id=$charge->id;
 										$transaction->transaction_status='0';
 										$transaction->status='1';
 										$transaction->failure_code=$charge->failure_code;
@@ -572,7 +572,7 @@ public function actionGetFeatures()
 						 	$e_json = $e->getJsonBody();
               $error = $e_json['error'];
               $response['error']=$error['message'];
-						 	$response['message']="Something gone wrong.Please try later.";
+						 	$response['message']="Something gone wrong.Please try later.And send us screenshot of this error.";
 							$response['success']="4";
 							echo json_encode($response);
 						 }

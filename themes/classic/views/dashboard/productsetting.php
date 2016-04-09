@@ -345,6 +345,7 @@ function stripeResponseHandler(status, response) {
     if (response.error) {
         // re-enable the submit button
          $('.submit-button').removeAttr("disabled");
+         $('.submit-button').val('Submit Payment');
         // show the errors on the form
         $(".error").html(response.error.message);
         return false;
