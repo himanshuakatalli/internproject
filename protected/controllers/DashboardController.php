@@ -594,4 +594,15 @@ public function actionGetFeatures()
 			  }
 
 	}
+public function actionDeleteProduct($id)
+{
+	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+	if($productexist)
+	{
+		$productexist->status='0';
+		$productexist->update();
+	}
+
+}
+
 }
