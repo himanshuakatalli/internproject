@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment','ViewInvoice'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -593,5 +593,13 @@ public function actionGetFeatures()
 							echo json_encode($response);
 			  }
 
+	}
+
+	public function actionViewInvoice($id) {
+		$invoice = Invoice::model()->with('product','user')->findByPk($id);
+		if(!empty($invoice))
+			$this->render('viewInvoice',array('invoiceArray'=>$invoice));
+		else
+			CVarDumper::dump("Hello no invoice",10,1);
 	}
 }

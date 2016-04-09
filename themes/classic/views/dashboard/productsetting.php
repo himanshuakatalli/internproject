@@ -220,7 +220,7 @@
 				</div>
 				<div class="row" id="transactions">
 					<h4>Transactions</h4>
-					<form class="form-control" name="frmTrans" style="width: 50px;">
+					<!-- <form class="form-control" name="frmTrans" style="width: 50px;">
 						<label>Year</label>
 						<select name="transYear" class="form-control">
 							<option selected value="<?php echo date("Y")-3; ?>"><?php echo date("Y")-3; ?></option>
@@ -228,13 +228,13 @@
 							<option selected value="<?php echo date("Y")-1; ?>"><?php echo date("Y")-1; ?></option>
 							<option selected value="<?php echo date("Y"); ?>"><?php echo date("Y"); ?></option>
 					</select>
-					</form>
+					</form> -->
 					<div class="container-fluid">
 						<div class="row">
 							<table class="col-lg-12" class="table-style">
 								<thead class="row">
 									<tr class="row">
-										<td class="col-lg-1">S.No.</td>
+										<td class="col-lg-1">Invoice No.</td>
 										<td class="col-lg-3">Billing Date</td>
 										<td class="col-lg-2">Clicks</td>
 										<td class="col-lg-2">Amount</td>
@@ -242,28 +242,31 @@
 										<td class="col-lg-1">Pay</td>
 									</tr>
 								</thead>
-								<tbody class="row">
-									<tr class="row">
-										<td class="col-lg-1">1</td>
-										<td class="col-lg-3">1-1-2016</td>
-										<td class="col-lg-2">289</td>
-										<td class="col-lg-3">983$</td>
-										<td class="col-lg-3">Paid</td>
-										<td class="col-lg-1">
-											<a href="#"><i class="fa fa-info-circle"></i></a>
-										</td>
-									</tr>
-									<tr class="row">
-										<td class="col-lg-1">2</td>
-										<td class="col-lg-3">1-2-2016</td>
-										<td class="col-lg-2">123</td>
-										<td class="col-lg-3">456$</td>
-										<td class="col-lg-3">Pending</td>
-										<td class="col-lg-1">
-											<a href="javascript:void(0);" data-toggle="modal" data-target="#makePayment"><i class="fa fa-credit-card-alt"></i></a>
-										</td>
-									</tr>
-								</tbody>
+								<!-- Need to take care of year condition if showing invoice on monthly and yearly basis -->
+								<?php
+									$invoiceArray = Invoice::model()->findAll(array('condition'=>'product_id=:id','params'=>array(':id'=>$product->id)));
+								?>
+								<?php foreach ($invoiceArray as $invoice): ?>
+									<tbody class="row">
+										<tr class="row">
+											<td class="col-lg-1"><?php echo $invoice->id; ?></td>
+											<td class="col-lg-3"><?php echo explode(' ',$invoice->add_date)[0]; ?></td>
+											<td class="col-lg-2"><?php echo $invoice->click_count; ?></td>
+											<td class="col-lg-3"><?php echo '$'.$invoice->amount; ?></td>
+											<?php if ($invoice->payment_status): ?>
+												<td class="col-lg-3">Paid</td>
+												<td class="col-lg-1">
+													<a href="<?php echo $this->createUrl('dashboard/viewInvoice',array('id'=>$invoice->id)); ?>"><i class="fa fa-info-circle"></i></a>
+												</td>
+											<?php else: ?>
+												<td class="col-lg-3">UnPaid</td>
+												<td class="col-lg-1">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#makePayment"><i class="fa fa-credit-card-alt"></i></a>
+												</td>
+											<?php endif;?>
+										</tr>
+									</tbody>
+								<?php endforeach; ?>
 							</table>
 						</div>
 					</div>
