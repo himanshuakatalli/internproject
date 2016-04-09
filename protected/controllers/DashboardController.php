@@ -596,13 +596,13 @@ public function actionGetFeatures()
 	}
 public function actionDeleteProduct($id)
 {
-	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
+	$productexist=Product::model()->findByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
 	if($productexist)
 	{
 		$productexist->status='0';
 		if($productexist->update())
 		{
-			$this->redirect('dashboard');
+			$this->redirect(array('index'));
 		}
 	}
 
