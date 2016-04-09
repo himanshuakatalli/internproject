@@ -14,7 +14,8 @@ $deployment = DeploymentFeatures::model()->findAll();  // for finding all deploy
 
 $criteria=new CDbCriteria;                             //for finding products related to that category
 $criteria->with = array('categories');
-$criteria->addCondition('category_id= '.$categoryInfo->id);
+$criteria->addCondition('category_id= '.$categoryInfo->id );
+$criteria->addCondition('t.status=1');
 $products = Product::model()->findAll($criteria);
 
 $criteria2=new CDbCriteria;                          // for finding features related to that category
@@ -37,6 +38,9 @@ public function actionFilter($id)
 $criteria=new CDbCriteria;                             //for finding products related to that category
 $criteria->with = array('categories','features','deploymentFeatures');
 $criteria->addCondition('category_id= '.$id);
+$criteria->addCondition('t.status=1');
+// $criteria->addCondition('product.status=1');
+// $criteria->addInCondition('status',1);
 //adding conditions according to post request
 if(isset($_POST['deploy']))
 {
@@ -382,7 +386,7 @@ public function sendVerificationEmail($user)
 	$message.="Password:- ".$user->password."<br><br><br>";
 	$message.="Regards,<br>";
 	$message.="VenturePact Support Team.";
-	
+
 	$this->mailsend($to,$from,$from_name,$subject,$message);
 }
 
