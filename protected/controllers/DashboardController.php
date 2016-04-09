@@ -71,7 +71,10 @@ public $layout="dashboard/main";
 										# code...
 										$totalRating += $rating->rating;
 								}
-								$overallRating += $totalRating / count($review->ratings);
+								if(count($review->ratings)==0)
+									$overallRating = 0;
+								else
+									$overallRating += $totalRating / count($review->ratings);
 						}
 						array_push($ratingCount, $overallRating);
 				}
@@ -599,7 +602,8 @@ public function actionDeleteProduct($id)
 	$productexist=Product::model()->findByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
 	if($productexist)
 	{
-		$productexist->status='0';
+
+		 $productexist->status='0';
 		if($productexist->update())
 		{
 			$this->redirect(array('index'));

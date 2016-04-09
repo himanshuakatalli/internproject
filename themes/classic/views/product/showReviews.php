@@ -83,12 +83,9 @@ else
     float: left;}
 </style>
 <!--  -->
-
-
 <div class="main ">
 	<section class="section-white">
 		<div class="container">
-		<!-- <section class="section1"> -->
 			<div class="row pd10">
 				<div class="col-sm-10 ">
 					<div class="media" > 
@@ -105,12 +102,11 @@ else
 			</div>
 		</div>
 	</section>
-	<!-- about us -->
 	<section class="section-bg">
 		<div class="container">
 			<div class="row"> 
 				<div class="col-md-6">
-					<h3><span class="glyphicon glyphicon-info-sign"></span> About This Software </h3> 
+					<h3><span class="glyphicon glyphicon-info-sign"></span> About This Software </h3>
 					<p class="p-text"><?php echo $product->description?></p> 
 				</div> 
 				<div class="col-md-6">
