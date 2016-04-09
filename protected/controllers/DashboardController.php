@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment','deleteProduct'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -48,7 +48,7 @@ public $layout="dashboard/main";
 		{
 			$userVerificationStatus = Users::model()->find(array("condition"=>"id=:id","params"=>array(":id"=>Yii::app()->user->user_id),"select"=>"is_verified"));
 			$this->layout="dashboard/main";
-			$productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+			$productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'status'=>'1'));
 
 			if(empty($productArray)) {
 					$this->render('indexAlt',array('status'=>$userVerificationStatus->is_verified));
@@ -600,7 +600,10 @@ public function actionDeleteProduct($id)
 	if($productexist)
 	{
 		$productexist->status='0';
-		$productexist->update();
+		if($productexist->update())
+		{
+			$this->redirect('dashboard');
+		}
 	}
 
 }
