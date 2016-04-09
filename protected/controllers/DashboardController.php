@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment','deleteProduct'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment','deleteProduct','viewInvoice'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -508,7 +508,7 @@ public function actionGetFeatures()
 							\Stripe\Stripe::setApiKey($secretkey);
 			        $charge = \Stripe\Charge::create(
 				              array('card' => $token,
-				                    'amount' => $invoice->amount,
+				                    'amount' => (($invoice->amount) * 100),
 				                    'currency' => 'usd',
 				                    'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." ",
 				                    ));
@@ -594,21 +594,25 @@ public function actionGetFeatures()
 			  }
 
 	}
-public function actionDeleteProduct($id)
-{
-	$productexist=Product::model()->findByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
-// CVarDumper::dump($productexist,10,1);
 
-	if($productexist)
-	{
-
-		 $productexist->status='0';
-		if($productexist->update())
-		{
-			$this->redirect(array('index'));
-		}
+	public function actionViewInvoice($id) {
+		$invoice = Invoice::model()->with('product','user')->findByPk($id);
+		if(!empty($invoice))
+			$this->render('viewInvoice',array('invoiceArray'=>$invoice));
+		else
+			CVarDumper::dump("Hello no invoice",10,1);
 	}
 
-}
-
+	public function actionDeleteProduct($id)
+	{
+		$productexist=Product::model()->findByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
+		if($productexist)
+		{
+		 	$productexist->status='0';
+			if($productexist->update())
+			{
+				$this->redirect(array('index'));
+			}
+		}
+	}
 }
