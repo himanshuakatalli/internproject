@@ -87,7 +87,7 @@ public $layout="dashboard/main";
 
 public function actionProductsetting($id)
 {
-	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
 
 	if($productexist)
 	{
@@ -391,7 +391,7 @@ public function actionGetFeatures()
 
 		public function actionShowStats($id)
 		{
-			$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+			$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
 			if($productexist)
 			{
 			$criteria = new CDbCriteria();
@@ -596,7 +596,7 @@ public function actionGetFeatures()
 	}
 public function actionDeleteProduct($id)
 {
-	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
 	if($productexist)
 	{
 		$productexist->status='0';
