@@ -152,7 +152,7 @@ public function actionSignup()
 		$users->first_name=$_POST['Users']['first_name'];
 		$users->username=$_POST['Users']['username'];
 		$username=$_POST['Users']['username'];
-		$users->password=$_POST['Users']['password'];
+		$users->password=base64_encode($_POST['Users']['password']);
 		$users->role_id=$_POST['Users']['role_id'];
 		$users->add_date=new CDbExpression('NOW()');
 		$users->hash=md5(uniqid(rand(1,1000)));
@@ -244,7 +244,7 @@ public function actionReset()
 		$user=Users::model()->find(array('condition'=>"username='$username'"));
 		if($user)
 		{
-			$user->password=$_POST['Reset']['Password'];
+			$user->password=base64_encode($_POST['Reset']['Password']);
 			$user->hash=null;
 			if(!$user->is_verified)
 			{
@@ -333,7 +333,7 @@ public function linked_in_user($userdata)
 	$user->last_name=$userdata->lastName;
 	$user->username=$userdata->emailAddress;
 	$user->oauth_uid=$userdata->id;
-	$user->password=$userdata->id;
+	$user->password=base64_encode($userdata->id);
 	$user->role_id="2";
 	$user->job_profile=$userdata->positions->values[0]->title;
 	$user->organization=$userdata->positions->values[0]->company->name;
