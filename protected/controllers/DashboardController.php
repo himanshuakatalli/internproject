@@ -71,7 +71,10 @@ public $layout="dashboard/main";
 										# code...
 										$totalRating += $rating->rating;
 								}
-								$overallRating += $totalRating / count($review->ratings);
+								if(count($review->ratings)==0)
+									$overallRating = 0;
+								else
+									$overallRating += $totalRating / count($review->ratings);
 						}
 						array_push($ratingCount, $overallRating);
 				}
@@ -602,7 +605,7 @@ public function actionGetFeatures()
 		else
 			CVarDumper::dump("Hello no invoice",10,1);
 	}
-
+	
 	public function actionDeleteProduct($id)
 	{
 		$productexist=Product::model()->findByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));

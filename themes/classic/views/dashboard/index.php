@@ -92,7 +92,7 @@
               <div class="col-sm-6 col-xs-6"></div>
             </div>
             <div class="centered">
-              <img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80">
+              <img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80" height="80">
               <p style="margin-top: 1em; margin-left: -0.5em; color: rgba(0,0,0,0.4);"><?php echo $productArray[$index]->name; ?></p>
             </div>
           </div>
@@ -109,7 +109,9 @@
                 # code...
                 $max += $rating->rating;
               }
-              if($averageMax < round($max / count($review->ratings),2))
+              if(count($review->ratings)==0)
+                $averageMax = 0;
+              else if($averageMax < round($max / count($review->ratings),2))
                 $averageMax = round($max / count($review->ratings));
             }
           } else {
@@ -148,7 +150,7 @@
             <div class="white-header">
               <h5>Transactions</h5>
             </div>
-            <p><img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80"></p>
+            <p><img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80" height="80"></p>
             <p class="dark"><b><?php echo $productArray[$index]->name; ?></b></p>
             <div class="row">
               <div class="col-md-6 vpOrange">
