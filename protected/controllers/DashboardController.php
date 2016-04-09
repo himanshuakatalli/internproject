@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment','ViewInvoice'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment','deleteProduct','viewInvoice'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -48,7 +48,7 @@ public $layout="dashboard/main";
 		{
 			$userVerificationStatus = Users::model()->find(array("condition"=>"id=:id","params"=>array(":id"=>Yii::app()->user->user_id),"select"=>"is_verified"));
 			$this->layout="dashboard/main";
-			$productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id));
+			$productArray = Product::model()->with('reviews.ratings')->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'status'=>'1'));
 
 			if(empty($productArray)) {
 					$this->render('indexAlt',array('status'=>$userVerificationStatus->is_verified));
@@ -87,7 +87,7 @@ public $layout="dashboard/main";
 
 public function actionProductsetting($id)
 {
-	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+	$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
 
 	if($productexist)
 	{
@@ -391,7 +391,7 @@ public function actionGetFeatures()
 
 		public function actionShowStats($id)
 		{
-			$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id));
+			$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
 			if($productexist)
 			{
 			$criteria = new CDbCriteria();
@@ -504,11 +504,11 @@ public function actionGetFeatures()
 		if($invoice)
 		{
 			try{
-
-							\Stripe\Stripe::setApiKey('sk_test_3xLzd6FRdsrKl1uaWAUPTmWQ');
+							$secretkey=Controller::getsecretkey();
+							\Stripe\Stripe::setApiKey($secretkey);
 			        $charge = \Stripe\Charge::create(
 				              array('card' => $token,
-				                    'amount' => $invoice->amount,
+				                    'amount' => (($invoice->amount) * 100),
 				                    'currency' => 'usd',
 				                    'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." ",
 				                    ));
@@ -517,7 +517,7 @@ public function actionGetFeatures()
 							{
 										$transaction=new Transaction;
 										$transaction->invoice_id=$invoice->id;
-										$transaction->stripe_transaction_id=$charge->balance_transaction;
+										$transaction->stripe_transaction_id=$charge->id;
 										$transaction->transaction_status='1';
 										$transaction->status='1';
 										$transaction->msg_description=$charge->description;
@@ -535,7 +535,7 @@ public function actionGetFeatures()
 							}else{
 										$transaction=new Transaction;
 										$transaction->invoice_id=$invoice->id;
-										$transaction->stripe_transaction_id=$charge->balance_transaction;
+										$transaction->stripe_transaction_id=$charge->id;
 										$transaction->transaction_status='0';
 										$transaction->status='1';
 										$transaction->failure_code=$charge->failure_code;
@@ -572,7 +572,7 @@ public function actionGetFeatures()
 						 	$e_json = $e->getJsonBody();
               $error = $e_json['error'];
               $response['error']=$error['message'];
-						 	$response['message']="Something gone wrong.Please try later.";
+						 	$response['message']="Something gone wrong.Please try later.And send us screenshot of this error.";
 							$response['success']="4";
 							echo json_encode($response);
 						 }
@@ -601,5 +601,18 @@ public function actionGetFeatures()
 			$this->render('viewInvoice',array('invoiceArray'=>$invoice));
 		else
 			CVarDumper::dump("Hello no invoice",10,1);
+	}
+
+	public function actionDeleteProduct($id)
+	{
+		$productexist=Product::model()->findByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
+		if($productexist)
+		{
+		 	$productexist->status='0';
+			if($productexist->update())
+			{
+				$this->redirect(array('index'));
+			}
+		}
 	}
 }

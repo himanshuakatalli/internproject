@@ -214,6 +214,7 @@
 						<div class="row">
 							<div class="col-lg-4 submit-part">
 								<?php echo CHtml::button('Save',array('name'=>'Submit','id'=>'save_record','class'=>'btn btn-primary')); ?>
+								<a href="javascript:void(0);" data-toggle="modal" data-target="#deleteProduct" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Delete</a>
 							</div>
 						</div>
 					</div>
@@ -228,7 +229,9 @@
 							<option selected value="<?php echo date("Y")-1; ?>"><?php echo date("Y")-1; ?></option>
 							<option selected value="<?php echo date("Y"); ?>"><?php echo date("Y"); ?></option>
 					</select>
+					<h5><?php echo "Product: ".$product->name; ?></h5>
 					</form> -->
+
 					<div class="container-fluid">
 						<div class="row">
 							<table class="col-lg-12" class="table-style">
@@ -336,6 +339,34 @@
 		</div>
 	</div>
 </div>
+
+<div id="deleteProduct" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<div class="panel-heading display-table" >
+					<div class="row display-tr" >
+						<h3 class="panel-title display-td" >Remove Product</h3>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="panel-body">
+					<h3>Do you want to remove this product</h3>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="error pull-left">
+
+				</div>
+				<a href="<?php echo $this->createUrl('deleteProduct',array('id'=>$product->id)); ?>" class="btn btn-danger">Yes</a>
+				<input type="button" class="btn btn-success" value="No" data-dismiss="modal"/>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
 <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
@@ -348,6 +379,7 @@ function stripeResponseHandler(status, response) {
     if (response.error) {
         // re-enable the submit button
          $('.submit-button').removeAttr("disabled");
+         $('.submit-button').val('Submit Payment');
         // show the errors on the form
         $(".error").html(response.error.message);
         return false;
