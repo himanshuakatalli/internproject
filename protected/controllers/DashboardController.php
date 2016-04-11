@@ -476,8 +476,9 @@ public function actionGetFeatures()
 		$user_id=Yii::app()->user->user_id;
 		$token=$_POST['token'];
 		$id=$_POST['product_id'];
+		$invoice_id=$_POST['invoice_id'];
 		// $token='tok_17xwKBBbTKYuQctafgo9ICuQ';
-		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'payment_status'=>'0'));
+		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'payment_status'=>'0','id'=>$invoice_id));
 		if($invoice)
 		{
 			try{
@@ -579,7 +580,7 @@ public function actionGetFeatures()
 		else
 			CVarDumper::dump("Hello no invoice",10,1);
 	}
-	
+
 	public function actionDeleteProduct($id)
 	{
 		$productexist=Product::model()->findByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));

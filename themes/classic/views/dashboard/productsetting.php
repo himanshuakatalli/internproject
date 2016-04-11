@@ -69,7 +69,7 @@
 									<?php }
 									?>
 								</select>
-							
+
 							</div>
 						</div>
 						<div class="row">
@@ -270,7 +270,7 @@
 											<?php else: ?>
 												<td class="col-lg-3">UnPaid</td>
 												<td class="col-lg-1">
-													<a href="javascript:void(0);" data-toggle="modal" data-target="#makePayment"><i class="fa fa-credit-card-alt"></i></a>
+													<a href="javascript:void(0);" data-id="<?php echo $invoice->id; ?>" class="model_data" data-toggle="modal" data-target="#makePayment"><i class="fa fa-credit-card-alt"></i></a>
 												</td>
 											<?php endif;?>
 										</tr>
@@ -301,6 +301,15 @@
 			<div class="modal-body">
 				<div class="panel-body">
 					<form class="panel-default" action="" method="POST" id="payment-form">
+					<div class="row">
+							<div class="col-xs-12">
+								<div class="form-group">
+									<div class="input-group">
+										<input type="hidden" size="20" id="invoice_id"/>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="form-group">
@@ -377,7 +386,7 @@
 function getFeaturesByName()
 {
 	var data = $('#category').val();
-	//console.log(data);
+
 	$.ajax({
 		type: 'POST',
 		url: '<?php echo Yii::app()->createUrl("dashboard/GetFeatures");?>',
@@ -416,10 +425,11 @@ function stripeResponseHandler(status, response) {
     } else
     {
         var token = response['id'];
+        var invoice_id=$("#invoice_id").val();
         $.ajax({
         			type: 'POST',
 							url: '<?php echo Yii::app()->createUrl("dashboard/payment");?>',
-							data: {token : token, product_id: <?php echo $product->id ?>},
+							data: {token : token, product_id: <?php echo $product->id ?>, invoice_id:invoice_id},
 							success: function(data)
 							{
 								//alert("success");
@@ -437,6 +447,13 @@ function stripeResponseHandler(status, response) {
 }
 
 $(document).ready(function(){
+
+		$(".model_data").click(function(){
+			var invoice_id = $(this).data('id');
+     $("#invoice_id").val( invoice_id );
+     // alert(invoice_id);
+
+		});
 
 	$("#payment-form").submit(function(event) {
 				$('.submit-button').val('Please wait...');
