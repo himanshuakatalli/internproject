@@ -163,11 +163,13 @@ public function actionProductRegisterSave()
 			$this->sendVerificationEmail($user);
 		}
 	}
-
+	
 	$product = new Product;
 	$product->attributes = $_POST['Product'];
 	$product->add_date = new CDbExpression('NOW()');
 	$product->user_id = $user->id;
+
+
 
 	if(isset($_POST['trial']))
 	{

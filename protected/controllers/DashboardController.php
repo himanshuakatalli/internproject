@@ -411,8 +411,6 @@ public function actionGetFeatures()
 		$product->company_website = $_POST['company_website'];
 		$product->founding_country = $_POST['founding_country'];
 		$product->founding_year = $_POST['founding_year'];
-		$product->status = 1;
-		$product->visit_count = 0;
 		$product->add_date= new CDbExpression('NOW()');
 
 
@@ -434,37 +432,47 @@ public function actionGetFeatures()
 
 		if($product->save())
 		{
-			foreach($_POST['Categories']['id'] as $category_id)
-			{
-				$productHasCategories = new ProductHasCategories;
-				$productHasCategories->product_id = $product->id;
-				$productHasCategories->category_id = $category_id;
-				$productHasCategories->add_date = new CDbExpression('NOW()');
 
-				$productHasCategories->save();
+			if(isset($_POST['Categories']))
+			{
+				foreach($_POST['Categories']['id'] as $category_id)
+				{
+					$productHasCategories = new ProductHasCategories;
+					$productHasCategories->product_id = $product->id;
+					$productHasCategories->category_id = $category_id;
+					$productHasCategories->add_date = new CDbExpression('NOW()');
+
+					$productHasCategories->save();
+				}
 			}
 
-			foreach($_POST['features'] as $feature)
+			if(isset($_POST['features']))
 			{
-				$_feature = Features::model()->findByAttributes(array('name'=>$feature));
+				foreach($_POST['features'] as $feature)
+				{
+					$_feature = Features::model()->findByAttributes(array('name'=>$feature));
 
-				$productHasFeatures = new ProductHasFeatures;
-				$productHasFeatures->product_id = $product->id;
-				$productHasFeatures->feature_id = $_feature->id;
-				$productHasFeatures->add_date = new CDbExpression('NOW()');
+					$productHasFeatures = new ProductHasFeatures;
+					$productHasFeatures->product_id = $product->id;
+					$productHasFeatures->feature_id = $_feature->id;
+					$productHasFeatures->add_date = new CDbExpression('NOW()');
 
-				$productHasFeatures->save();
+					$productHasFeatures->save();
+				}
 			}
 
-			foreach($_POST['deployment_features'] as $deploymentFeatureID)
+			if(isset($_POST['deployment_features']))
 			{
+				foreach($_POST['deployment_features'] as $deploymentFeatureID)
+				{
 
-				$productHasDeploymentFeatures = new ProductHasDeploymentFeatures;
-				$productHasDeploymentFeatures->product_id = $product->id;
-				$productHasDeploymentFeatures->deployment_feature_id = $deploymentFeatureID;
-				$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
+					$productHasDeploymentFeatures = new ProductHasDeploymentFeatures;
+					$productHasDeploymentFeatures->product_id = $product->id;
+					$productHasDeploymentFeatures->deployment_feature_id = $deploymentFeatureID;
+					$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
 
-				$productHasDeploymentFeatures->save();
+					$productHasDeploymentFeatures->save();
+				}
 			}
 
 		}
@@ -473,12 +481,12 @@ public function actionGetFeatures()
 
 	public function actionPayment()
 	{
-		$user_id=Yii::app()->user->user_id;
-		$token=$_POST['token'];
-		$id=$_POST['product_id'];
-		$invoice_id=$_POST['invoice_id'];
+		$user_id = Yii::app()->user->user_id;
+		$token = $_POST['token'];
+		$id = $_POST['product_id'];
+		$invoice_id = $_POST['invoice_id'];
 		// $token='tok_17xwKBBbTKYuQctafgo9ICuQ';
-		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'payment_status'=>'0','id'=>$invoice_id));
+		$invoice = Invoice::model()->findByPk($invoice_id);
 		if($invoice)
 		{
 			try{
@@ -486,7 +494,7 @@ public function actionGetFeatures()
 							\Stripe\Stripe::setApiKey($secretkey);
 							$charge = \Stripe\Charge::create(
 											array('card' => $token,
-														'amount' => (($invoice->amount) * 100),
+														'amount' => ($invoice->amount * 100),
 														'currency' => 'usd',
 														'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." Date: ".$invoice->month."/".$invoice->year."",
 														));

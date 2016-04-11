@@ -12,6 +12,9 @@
 	font-size: 12px;
 }
 </style>
+<?php
+header('Access-Control-Allow-Origin:*');
+?>
 <section class="wrapper">
 	<div class="row">
 		<aside class="full-height">
@@ -427,6 +430,7 @@ function stripeResponseHandler(status, response) {
         var token = response['id'];
         var invoice_id=$("#invoice_id").val();
         $.ajax({
+        			headers: {"Accept": "application/json"},
         			type: 'POST',
 							url: '<?php echo Yii::app()->createUrl("dashboard/payment");?>',
 							data: {token : token, product_id: <?php echo $product->id ?>, invoice_id:invoice_id},
