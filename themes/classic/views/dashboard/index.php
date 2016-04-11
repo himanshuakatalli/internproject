@@ -72,10 +72,21 @@
       <?php
         $max = 0;
         $index;
+        $paidCount=0;
+        $pendingCount=0;
         foreach ($productArray as $key => $prod) {
           if ($max <= $prod->customer_count){
               $max = $prod->customer_count;
               $index = $key;
+          }
+        }
+        $invoice_selling_product = Invoice::model()->findAll(array('condition'=>'product_id=:id','params'=>array(':id'=>$productArray[$index]->id)));
+        foreach ($invoice_selling_product as $invoice) {
+          foreach ($invoice->transactions as $transaction) {
+            if($transaction->status)
+              $paidCount+=1;
+            else
+              $pendingCount+=1;
           }
         }
       ?>
@@ -155,11 +166,11 @@
             <div class="row">
               <div class="col-md-6 vpOrange">
                 <p class="small mt vpOrange">Done</p>
-                <p>$129</p>
+                <p>$<?php echo $paidCount; ?></p>
               </div>
               <div class="col-md-6 vpOrange">
                 <p class="small mt vpOrange">Pending</p>
-                <p>$47</p>
+                <p>$<?php echo $pendingCount; ?></p>
               </div>
             </div>
           </div>
