@@ -65,8 +65,22 @@
 	$pdf->Cell(100,10,'Total',1,0,'R');
 
 	$pdf->Cell(30,10,'$'.$invoiceArray->amount,1,0,'C');
+	$pdf->Ln(10);
+
+	if($invoiceArray->payment_status) {
+		$pdf->SetFont('Times','',12);
+		$pdf->SetFont('Arial','B',15);
+		$pdf->SetTextColor(126,206,202);
+		$pdf->Cell(130,10,'PAID',0,0,'R');
+	} else {
+		$pdf->SetFont('Times','',12);
+		$pdf->SetFont('Arial','B',15);
+		$pdf->SetTextColor(255,0,0);
+		$pdf->Cell(130,10,'UNPAID',0,0,'R');
+	}
 
 	$pdf->SetY(109);
+	$pdf->SetTextColor(42,42,42);
 	$pdf->SetFont('Arial','I',6);
 	$pdf->Cell(0,10,'Please note that the invoices are generated on monthly basis. You can change the billing cycle of your product from Product Settings page.',0,0,'C');
 	$pdf->SetFont('Arial','B',6);

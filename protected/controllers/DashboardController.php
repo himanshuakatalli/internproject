@@ -575,10 +575,10 @@ public function actionGetFeatures()
 
 	public function actionViewInvoice($id) {
 		$invoice = Invoice::model()->with('product','user')->findByPk($id);
-		if(!empty($invoice))
+		if(!empty($invoice) && $invoice->payment_status)
 			$this->render('viewInvoice',array('invoiceArray'=>$invoice));
 		else
-			CVarDumper::dump("Hello no invoice",10,1);
+			$this->render('indexAlt');
 	}
 
 	public function actionDeleteProduct($id)
