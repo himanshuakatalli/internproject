@@ -1,27 +1,13 @@
 <?php
 
 /**
- * This is the model class for table "tracking_user".
+ * This is the model class for table "product_has_media_links".
  *
- * The followings are the available columns in table 'tracking_user':
+ * The followings are the available columns in table 'product_has_media_links':
  * @property integer $id
  * @property integer $product_id
- * @property string $user_ip
- * @property string $cookie
- * @property string $entry_time
- * @property string $action_time
- * @property integer $status_geo
- * @property string $country
- * @property string $country_code
- * @property string $region
- * @property string $region_name
- * @property string $city
- * @property string $zip
- * @property double $latitude
- * @property double $longitude
- * @property string $timezone
- * @property string $isp
- * @property string $org
+ * @property string $link_address
+ * @property string $link_type
  * @property integer $status
  * @property string $admin_notes
  * @property string $add_date
@@ -30,14 +16,14 @@
  * The followings are the available model relations:
  * @property Product $product
  */
-class TrackingUser extends CActiveRecord
+class ProductHasMediaLinks extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tracking_user';
+		return 'product_has_media_links';
 	}
 
 	/**
@@ -48,14 +34,14 @@ class TrackingUser extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('product_id, user_ip, cookie, entry_time, action_time, add_date', 'required'),
-			array('product_id, status_geo, status', 'numerical', 'integerOnly'=>true),
-			array('latitude, longitude', 'numerical'),
-			array('user_ip, cookie, country, country_code, region, region_name, city, zip, timezone, isp, org', 'length', 'max'=>100),
+			array('product_id, link_address, link_type, add_date', 'required'),
+			array('product_id, status', 'numerical', 'integerOnly'=>true),
+			array('link_address', 'length', 'max'=>255),
+			array('link_type', 'length', 'max'=>20),
 			array('admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, product_id, user_ip, cookie, entry_time, action_time, status_geo, country, country_code, region, region_name, city, zip, latitude, longitude, timezone, isp, org, status, admin_notes, add_date, modify_date', 'safe', 'on'=>'search'),
+			array('id, product_id, link_address, link_type, status, admin_notes, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,22 +65,8 @@ class TrackingUser extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'product_id' => 'Product',
-			'user_ip' => 'User Ip',
-			'cookie' => 'Cookie',
-			'entry_time' => 'Entry Time',
-			'action_time' => 'Action Time',
-			'status_geo' => 'Status Geo',
-			'country' => 'Country',
-			'country_code' => 'Country Code',
-			'region' => 'Region',
-			'region_name' => 'Region Name',
-			'city' => 'City',
-			'zip' => 'Zip',
-			'latitude' => 'Latitude',
-			'longitude' => 'Longitude',
-			'timezone' => 'Timezone',
-			'isp' => 'Isp',
-			'org' => 'Org',
+			'link_address' => 'Link Address',
+			'link_type' => 'Link Type',
 			'status' => 'Status',
 			'admin_notes' => 'Admin Notes',
 			'add_date' => 'Add Date',
@@ -122,22 +94,8 @@ class TrackingUser extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('product_id',$this->product_id);
-		$criteria->compare('user_ip',$this->user_ip,true);
-		$criteria->compare('cookie',$this->cookie,true);
-		$criteria->compare('entry_time',$this->entry_time,true);
-		$criteria->compare('action_time',$this->action_time,true);
-		$criteria->compare('status_geo',$this->status_geo);
-		$criteria->compare('country',$this->country,true);
-		$criteria->compare('country_code',$this->country_code,true);
-		$criteria->compare('region',$this->region,true);
-		$criteria->compare('region_name',$this->region_name,true);
-		$criteria->compare('city',$this->city,true);
-		$criteria->compare('zip',$this->zip,true);
-		$criteria->compare('latitude',$this->latitude);
-		$criteria->compare('longitude',$this->longitude);
-		$criteria->compare('timezone',$this->timezone,true);
-		$criteria->compare('isp',$this->isp,true);
-		$criteria->compare('org',$this->org,true);
+		$criteria->compare('link_address',$this->link_address,true);
+		$criteria->compare('link_type',$this->link_type,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('admin_notes',$this->admin_notes,true);
 		$criteria->compare('add_date',$this->add_date,true);
@@ -152,7 +110,7 @@ class TrackingUser extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return TrackingUser the static model class
+	 * @return ProductHasMediaLinks the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

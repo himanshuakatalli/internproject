@@ -1,34 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "transaction".
+ * This is the model class for table "product_has_support_features".
  *
- * The followings are the available columns in table 'transaction':
+ * The followings are the available columns in table 'product_has_support_features':
  * @property integer $id
- * @property integer $invoice_id
- * @property string $stripe_transaction_id
- * @property integer $transaction_status
- * @property integer $month
- * @property integer $year
- * @property string $failure_code
- * @property string $failure_message
- * @property string $msg_description
+ * @property integer $product_id
+ * @property integer $support_feature_id
  * @property string $admin_notes
  * @property integer $status
  * @property string $add_date
  * @property string $modify_date
- *
- * The followings are the available model relations:
- * @property Invoice $invoice
  */
-class Transaction extends CActiveRecord
+class ProductHasSupportFeatures extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'transaction';
+		return 'product_has_support_features';
 	}
 
 	/**
@@ -39,13 +30,12 @@ class Transaction extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('invoice_id, add_date', 'required'),
-			array('invoice_id, transaction_status, month, year, status', 'numerical', 'integerOnly'=>true),
-			array('stripe_transaction_id, failure_code, failure_message, msg_description', 'length', 'max'=>255),
+			array('product_id, support_feature_id, add_date', 'required'),
+			array('product_id, support_feature_id, status', 'numerical', 'integerOnly'=>true),
 			array('admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, invoice_id, stripe_transaction_id, transaction_status, month, year, failure_code, failure_message, msg_description, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			array('id, product_id, support_feature_id, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +47,6 @@ class Transaction extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'invoice' => array(self::BELONGS_TO, 'Invoice', 'invoice_id'),
 		);
 	}
 
@@ -68,14 +57,8 @@ class Transaction extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'invoice_id' => 'Invoice',
-			'stripe_transaction_id' => 'Stripe Transaction',
-			'transaction_status' => 'Transaction Status',
-			'month' => 'Month',
-			'year' => 'Year',
-			'failure_code' => 'Failure Code',
-			'failure_message' => 'Failure Message',
-			'msg_description' => 'Msg Description',
+			'product_id' => 'Product',
+			'support_feature_id' => 'Support Feature',
 			'admin_notes' => 'Admin Notes',
 			'status' => 'Status',
 			'add_date' => 'Add Date',
@@ -102,14 +85,8 @@ class Transaction extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('invoice_id',$this->invoice_id);
-		$criteria->compare('stripe_transaction_id',$this->stripe_transaction_id,true);
-		$criteria->compare('transaction_status',$this->transaction_status);
-		$criteria->compare('month',$this->month);
-		$criteria->compare('year',$this->year);
-		$criteria->compare('failure_code',$this->failure_code,true);
-		$criteria->compare('failure_message',$this->failure_message,true);
-		$criteria->compare('msg_description',$this->msg_description,true);
+		$criteria->compare('product_id',$this->product_id);
+		$criteria->compare('support_feature_id',$this->support_feature_id);
 		$criteria->compare('admin_notes',$this->admin_notes,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('add_date',$this->add_date,true);
@@ -124,7 +101,7 @@ class Transaction extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Transaction the static model class
+	 * @return ProductHasSupportFeatures the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

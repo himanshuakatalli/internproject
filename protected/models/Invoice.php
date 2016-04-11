@@ -9,6 +9,8 @@
  * @property integer $user_id
  * @property integer $click_count
  * @property double $amount
+ * @property integer $month
+ * @property integer $year
  * @property integer $payment_status
  * @property string $admin_notes
  * @property integer $status
@@ -22,16 +24,6 @@
  */
 class Invoice extends CActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return Invoice the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
 	/**
 	 * @return string the associated database table name
 	 */
@@ -48,13 +40,13 @@ class Invoice extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('', 'required'),
-			array('product_id, user_id, click_count, payment_status, status', 'numerical', 'integerOnly'=>true),
+			array('product_id, user_id, month, year, add_date', 'required'),
+			array('product_id, user_id, click_count, month, year, payment_status, status', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			array('admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, product_id, user_id, click_count, amount, payment_status, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			// @todo Please remove those attributes that should not be searched.
+			array('id, product_id, user_id, click_count, amount, month, year, payment_status, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -83,6 +75,8 @@ class Invoice extends CActiveRecord
 			'user_id' => 'User',
 			'click_count' => 'Click Count',
 			'amount' => 'Amount',
+			'month' => 'Month',
+			'year' => 'Year',
 			'payment_status' => 'Payment Status',
 			'admin_notes' => 'Admin Notes',
 			'status' => 'Status',
@@ -93,12 +87,19 @@ class Invoice extends CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -107,6 +108,8 @@ class Invoice extends CActiveRecord
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('click_count',$this->click_count);
 		$criteria->compare('amount',$this->amount);
+		$criteria->compare('month',$this->month);
+		$criteria->compare('year',$this->year);
 		$criteria->compare('payment_status',$this->payment_status);
 		$criteria->compare('admin_notes',$this->admin_notes,true);
 		$criteria->compare('status',$this->status);
@@ -116,5 +119,16 @@ class Invoice extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return Invoice the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
 	}
 }

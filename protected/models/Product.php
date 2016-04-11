@@ -33,6 +33,7 @@
  * @property string $modify_date
  *
  * The followings are the available model relations:
+ * @property Invoice[] $invoices
  * @property Users $user
  * @property Categories[] $categories
  * @property DeploymentFeatures[] $deploymentFeatures
@@ -61,7 +62,7 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, name, customer_count, product_website, company_name, company_website, add_date', 'required'),
+			array('user_id, name, customer_count, visit_count, product_website, company_name, company_website, add_date', 'required'),
 			array('user_id, customer_count, has_free_version, has_trial, under_ppc, visit_count, founding_year, status', 'numerical', 'integerOnly'=>true),
 			array('bidding_amount', 'numerical'),
 			array('name, starting_price, product_website, company_name, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link', 'length', 'max'=>100),
@@ -81,6 +82,7 @@ class Product extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'invoices' => array(self::HAS_MANY, 'Invoice', 'product_id'),
 			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
 			'categories' => array(self::MANY_MANY, 'Categories', 'product_has_categories(product_id, category_id)'),
 			'deploymentFeatures' => array(self::MANY_MANY, 'DeploymentFeatures', 'product_has_deployment_features(product_id, deployment_feature_id)'),
