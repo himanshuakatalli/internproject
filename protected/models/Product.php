@@ -62,7 +62,7 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, name, customer_count, visit_count, product_website, company_name, company_website, add_date', 'required'),
+			array('user_id, name, product_website, company_name, company_website, add_date', 'required'),
 			array('user_id, customer_count, has_free_version, has_trial, under_ppc, visit_count, founding_year, status', 'numerical', 'integerOnly'=>true),
 			array('bidding_amount', 'numerical'),
 			array('name, starting_price, product_website, company_name, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link', 'length', 'max'=>100),

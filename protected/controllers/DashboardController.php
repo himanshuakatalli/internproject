@@ -411,8 +411,6 @@ public function actionGetFeatures()
 		$product->company_website = $_POST['company_website'];
 		$product->founding_country = $_POST['founding_country'];
 		$product->founding_year = $_POST['founding_year'];
-		$product->status = 1;
-		$product->visit_count = 0;
 		$product->add_date= new CDbExpression('NOW()');
 
 
@@ -434,37 +432,47 @@ public function actionGetFeatures()
 
 		if($product->save())
 		{
-			foreach($_POST['Categories']['id'] as $category_id)
-			{
-				$productHasCategories = new ProductHasCategories;
-				$productHasCategories->product_id = $product->id;
-				$productHasCategories->category_id = $category_id;
-				$productHasCategories->add_date = new CDbExpression('NOW()');
 
-				$productHasCategories->save();
+			if(isset($_POST['Categories']))
+			{
+				foreach($_POST['Categories']['id'] as $category_id)
+				{
+					$productHasCategories = new ProductHasCategories;
+					$productHasCategories->product_id = $product->id;
+					$productHasCategories->category_id = $category_id;
+					$productHasCategories->add_date = new CDbExpression('NOW()');
+
+					$productHasCategories->save();
+				}
 			}
 
-			foreach($_POST['features'] as $feature)
+			if(isset($_POST['features']))
 			{
-				$_feature = Features::model()->findByAttributes(array('name'=>$feature));
+				foreach($_POST['features'] as $feature)
+				{
+					$_feature = Features::model()->findByAttributes(array('name'=>$feature));
 
-				$productHasFeatures = new ProductHasFeatures;
-				$productHasFeatures->product_id = $product->id;
-				$productHasFeatures->feature_id = $_feature->id;
-				$productHasFeatures->add_date = new CDbExpression('NOW()');
+					$productHasFeatures = new ProductHasFeatures;
+					$productHasFeatures->product_id = $product->id;
+					$productHasFeatures->feature_id = $_feature->id;
+					$productHasFeatures->add_date = new CDbExpression('NOW()');
 
-				$productHasFeatures->save();
+					$productHasFeatures->save();
+				}
 			}
 
-			foreach($_POST['deployment_features'] as $deploymentFeatureID)
+			if(isset($_POST['deployment_features']))
 			{
+				foreach($_POST['deployment_features'] as $deploymentFeatureID)
+				{
 
-				$productHasDeploymentFeatures = new ProductHasDeploymentFeatures;
-				$productHasDeploymentFeatures->product_id = $product->id;
-				$productHasDeploymentFeatures->deployment_feature_id = $deploymentFeatureID;
-				$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
+					$productHasDeploymentFeatures = new ProductHasDeploymentFeatures;
+					$productHasDeploymentFeatures->product_id = $product->id;
+					$productHasDeploymentFeatures->deployment_feature_id = $deploymentFeatureID;
+					$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
 
-				$productHasDeploymentFeatures->save();
+					$productHasDeploymentFeatures->save();
+				}
 			}
 
 		}
