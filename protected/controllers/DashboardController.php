@@ -486,7 +486,7 @@ public function actionGetFeatures()
 							\Stripe\Stripe::setApiKey($secretkey);
 							$charge = \Stripe\Charge::create(
 											array('card' => $token,
-														'amount' => (9 * 100),
+														'amount' => ($invoice->amount * 100),
 														'currency' => 'usd',
 														'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." ",
 														));
