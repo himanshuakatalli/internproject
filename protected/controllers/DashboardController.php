@@ -473,12 +473,12 @@ public function actionGetFeatures()
 
 	public function actionPayment()
 	{
-		$user_id=Yii::app()->user->user_id;
-		$token=$_POST['token'];
-		$id=$_POST['product_id'];
-		$invoice_id=$_POST['invoice_id'];
+		$user_id = Yii::app()->user->user_id;
+		$token = $_POST['token'];
+		$id = $_POST['product_id'];
+		$invoice_id = $_POST['invoice_id'];
 		// $token='tok_17xwKBBbTKYuQctafgo9ICuQ';
-		$invoice=Invoice::model()->findByAttributes(array('user_id'=>$user_id,'product_id'=>$id,'payment_status'=>'0','id'=>$invoice_id));
+		$invoice = Invoice::model()->findByPk($invoice_id);
 		if($invoice)
 		{
 			try{
@@ -486,7 +486,7 @@ public function actionGetFeatures()
 							\Stripe\Stripe::setApiKey($secretkey);
 							$charge = \Stripe\Charge::create(
 											array('card' => $token,
-														'amount' => (($invoice->amount) * 100),
+														'amount' => (9 * 100),
 														'currency' => 'usd',
 														'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." ",
 														));
