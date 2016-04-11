@@ -488,7 +488,7 @@ public function actionGetFeatures()
 											array('card' => $token,
 														'amount' => (($invoice->amount) * 100),
 														'currency' => 'usd',
-														'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." ",
+														'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." Date: ".$invoice->month."/".$invoice->year."",
 														));
 
 							if($charge->paid)
