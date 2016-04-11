@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment','deleteProduct','viewInvoice'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment','deleteProduct','viewInvoice','GetFeatures'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -134,33 +134,7 @@ public function actionProductsetting($id)
 			}
 		}
 
-		$criteria = new CDbCriteria();
-		$criteria->order = 'entry_time ASC';
-		$criteria->condition = 'product_id=:id';
-		$criteria->params = array(':id'=>$id);
-		$tracking_user = TrackingUser::model()->findAll($criteria);
-
-		$currDate = "0000-00";
-		$ppcCountArray = array();
-		foreach ($tracking_user as $value)
-		{
-			if(preg_match_all("/$currDate/", $value->entry_time, $matches) == 0)
-			{
-				$tempDateArray = explode(" ",$value->entry_time);
-				$currYearMonth = explode("-",$tempDateArray[0]);
-				$currYearMonth = array($currYearMonth[0], $currYearMonth[1]);
-				$currDate = implode("-", $currYearMonth);
-				$ppcCountArray[$currDate] = 1;
-			}
-			else
-			{
-				$ppcCountArray[$currDate]++;
-			}
-		}
-
-		//print_r($ppcCountArray);
-
-		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures,'monthlyBill'=>$ppcCountArray));
+		$this->render('productsetting',array('product'=>$product,'productCategory'=>$productCategoryNames,'productCategoryFeatures'=>$productCategoryFeatures,'productFeatures'=>$productFeatures));
 
 	}
 	else

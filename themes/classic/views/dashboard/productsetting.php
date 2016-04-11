@@ -56,18 +56,20 @@
 							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Category:</label>
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-codiepie fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-								<select id="category" name="productCategory[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" onchange="send()">
+								<select id="category" name="productCategory[]" multiple="multiple" class="col-lg-11 col-md-11 col-sm-11 col-xs-11" onchange="getFeaturesByName()">
 								<?php
-								$category=Categories::model()->findAll();
-								foreach($category as $categoryname){?>
-									<option value="<?php echo $categoryname->name;?>"
-									<?php if (in_array($categoryname->name, $productCategory)) {
+								$categories = Categories::model()->findAll();
+								foreach($categories as $category){?>
+									<option value="<?php echo $category->name;?>"
+									<?php if (in_array($category->name, $productCategory)) {
 										echo "selected";
 										}?>
-										><?php echo $categoryname->name;?>
+										><?php echo $category->name;?>
 									</option>
-									<?php }?>
+									<?php }
+									?>
 								</select>
+							
 							</div>
 						</div>
 						<div class="row">
@@ -105,7 +107,7 @@
 							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Bidding Amount:</label>
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-usd fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-								<?php echo $form->textField($product,'bidding_amount',array('placeholder'=>"Bidding Amount",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits"));?>
+								<?php echo $form->textField($product,'bidding_amount',array('placeholder'=>"Bidding Amount",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"number"));?>
 							</div>
 						</div>
 						<div class="row">
@@ -241,6 +243,8 @@
 										<td class="col-lg-3">Billing Date</td>
 										<td class="col-lg-2">Clicks</td>
 										<td class="col-lg-2">Amount</td>
+										<td class="col-lg-2">Month</td>
+										<td class="col-lg-2">Year</td>
 										<td class="col-lg-3">Payment Status</td>
 										<td class="col-lg-1">Pay</td>
 									</tr>
@@ -256,6 +260,8 @@
 											<td class="col-lg-3"><?php echo explode(' ',$invoice->add_date)[0]; ?></td>
 											<td class="col-lg-2"><?php echo $invoice->click_count; ?></td>
 											<td class="col-lg-3"><?php echo '$'.$invoice->amount; ?></td>
+											<td class="col-lg-3"><?php echo $invoice->month; ?></td>
+											<td class="col-lg-3"><?php echo $invoice->year; ?></td>
 											<?php if ($invoice->payment_status): ?>
 												<td class="col-lg-3">Paid</td>
 												<td class="col-lg-1">
@@ -367,6 +373,30 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+function getFeaturesByName()
+{
+	var data = $('#category').val();
+	//console.log(data);
+	$.ajax({
+		type: 'POST',
+		url: '<?php echo Yii::app()->createUrl("dashboard/GetFeatures");?>',
+		data: {categories : data},
+		success: function(data)
+		{
+			$("#feature_list").html(data);
+			$('#features').multiselect({
+				enableFiltering: true
+			});
+		},
+		error: function(data)
+		{
+			//alert("failed");
+		}
+	})
+}
+</script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
 <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
@@ -421,9 +451,11 @@ $(document).ready(function(){
     });
 
 
-$("#product_setting").parsley().validate();
  $('#save_record').on('click',function()
  {
+ 	var validated = $("#product_setting").parsley().validate();
+ 	if(validated)
+ 	{
 	$.ajax({
 		type: 'POST',
 		url :"<?php echo Yii::app()->createUrl('dashboard/Productsettingsave',array('id'=>$product->id));?>",
@@ -434,11 +466,13 @@ $("#product_setting").parsley().validate();
 			alert("Product Updated");
 			$('#save_record').val('save');
 		}
-	});
+	})
+	}
  });
 
 
  });
+
 $('.trans').click(function(){
 	$('#transactions').css('display','none');
 	$('#product_information').css('display','block');
@@ -478,22 +512,5 @@ document.getElementById("productImga").onclick = function(){
 		}
 	);
 };
-function send()
-{
-	var data = $('#category').val();
-	console.log(data);
-	$.ajax({
-		type: 'POST',
-		url: '<?php echo Yii::app()->createUrl("dashboard/GetFeatures");?>',
-		data: {categories : data},
-		success: function(data)
-		{
-			$("#feature_list").html(data);
-		},
-		error: function(data)
-		{
-			//alert("failed");
-		}
-	})
-}
+
 </script>
