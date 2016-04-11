@@ -55,21 +55,38 @@
         </div>
 
         <div class="col-md-2 col-sm-2 box0">
+          <?php $invoices = Invoice::model()->with('transactions')->findAll(array('condition'=>'product_id=:id','params'=>array(':id'=>$product->id)));
+            $transCount = 0;
+            foreach ($invoices as $invoice) {
+              $transCount += count($invoice->transactions);
+            }
+          ?>
           <div class="box1">
             <span class="li_vallet"></span>
-            <h3>+3</h3>
+            <h3>+<?php echo $transCount; ?></h3>
           </div>
-          <p>Total 3 transactions have been made for <?php echo $product->name; ?>.</p>
+          <p>Total <?php echo $transCount; ?> transactions have been made for <?php echo $product->name; ?>.</p>
         </div>
       </div>
 
       <?php
         $max = 0;
         $index;
+        $paidCount=0;
+        $pendingCount=0;
         foreach ($productArray as $key => $prod) {
           if ($max <= $prod->customer_count){
               $max = $prod->customer_count;
               $index = $key;
+          }
+        }
+        $invoice_selling_product = Invoice::model()->findAll(array('condition'=>'product_id=:id','params'=>array(':id'=>$productArray[$index]->id)));
+        foreach ($invoice_selling_product as $invoice) {
+          foreach ($invoice->transactions as $transaction) {
+            if($transaction->status)
+              $paidCount+=1;
+            else
+              $pendingCount+=1;
           }
         }
       ?>
@@ -86,7 +103,7 @@
               <div class="col-sm-6 col-xs-6"></div>
             </div>
             <div class="centered">
-              <img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80">
+              <img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80" height="80">
               <p style="margin-top: 1em; margin-left: -0.5em; color: rgba(0,0,0,0.4);"><?php echo $productArray[$index]->name; ?></p>
             </div>
           </div>
@@ -103,7 +120,9 @@
                 # code...
                 $max += $rating->rating;
               }
-              if($averageMax < round($max / count($review->ratings),2))
+              if(count($review->ratings)==0)
+                $averageMax = 0;
+              else if($averageMax < round($max / count($review->ratings),2))
                 $averageMax = round($max / count($review->ratings));
             }
           } else {
@@ -142,16 +161,16 @@
             <div class="white-header">
               <h5>Transactions</h5>
             </div>
-            <p><img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80"></p>
+            <p><img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80" height="80"></p>
             <p class="dark"><b><?php echo $productArray[$index]->name; ?></b></p>
             <div class="row">
               <div class="col-md-6 vpOrange">
                 <p class="small mt vpOrange">Done</p>
-                <p>$129</p>
+                <p>$<?php echo $paidCount; ?></p>
               </div>
               <div class="col-md-6 vpOrange">
                 <p class="small mt vpOrange">Pending</p>
-                <p>$47</p>
+                <p>$<?php echo $pendingCount; ?></p>
               </div>
             </div>
           </div>
