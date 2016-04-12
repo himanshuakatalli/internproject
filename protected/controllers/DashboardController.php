@@ -515,7 +515,9 @@ public function actionGetFeatures()
 											{
 												$response['message']="Transaction Successfull.";
 												$response['success']="1";
+												$response['url'] = $this->createUrl('productsetting',array('id'=>$id));
 												echo json_encode($response);
+												// $this->redirect('productsetting',array('id'=>$id));
 											}
 										}
 							}else{

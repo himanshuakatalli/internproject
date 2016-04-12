@@ -440,6 +440,9 @@ function stripeResponseHandler(status, response) {
 								var res = $.parseJSON(data);
 								$(".message").html(res.message);
 								$(".error").html(res.error);
+								if(res.success == 1) {
+									window.location.href = res.url;
+								}
 							},
 							error: function(data)
 							{
