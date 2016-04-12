@@ -279,6 +279,7 @@ public function actionSocialnetworks()
 
 public function actionUserUpdate()
 {
+	
 	$user_id = Yii::app()->user->id;
 	$user = Users::model()->findByAttributes(array('username'=>$user_id));
 
@@ -293,6 +294,10 @@ public function actionUserUpdate()
 		$_user = Users::model()->findByAttributes(array('username'=>$user_id));
 
 		$user->password = $_user->password;
+	}
+	else
+	{
+		$user->password = base64_encode($_POST['Users']['password']); 
 	}
 
 	$user->modify_date = new CDbExpression('NOW()');
