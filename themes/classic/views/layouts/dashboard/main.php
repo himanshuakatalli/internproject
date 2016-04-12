@@ -114,7 +114,7 @@
 			<!--header end-->
 			<!--sidebar start-->
 			<?php $product = Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'status'=>'1'),array('select'=>'name,id')); ?>
-			<aside style="z-index: 999;">
+			<aside style="z-index: 999; position: absolute;">
 				<div id="sidebar"  class="nav-collapse ">
 					<!-- sidebar menu start-->
 					<?php $user = Users::model()->findByPk(Yii::app()->user->user_id);?>
