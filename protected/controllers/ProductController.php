@@ -370,7 +370,7 @@ public function actionProductReviewSave($id)
 	{
 		$user = new Users;
 		$user->attributes = $_POST['Users'];
-		$user->password = $this->randomPassword();
+		$user->password = base64_encode($this->randomPassword());
 		$user->role_id = 3;
 		$user->is_verified = 0;
 		$user->add_date = new CDbExpression('NOW()');
