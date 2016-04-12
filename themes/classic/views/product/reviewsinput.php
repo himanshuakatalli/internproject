@@ -4,7 +4,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<section class="form-container clear-fix">
 		<div class="form-header">
-			<div><img src="<?php echo Yii::app()->request->baseUrl.'/themes/product_logo/'.$product->logo.'.png'; ?>"></div>
+			<div><img src="<?php echo (!empty($product->logo))?$product->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>"></div>
 			<hgroup>
 				<h2><?php echo $product->name?></h2>
 				<h3><?php echo $product->product_website?></h3>

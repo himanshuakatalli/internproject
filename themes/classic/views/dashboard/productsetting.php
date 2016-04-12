@@ -17,7 +17,7 @@ header('Access-Control-Allow-Origin:*');
 ?>
 <section class="wrapper">
 	<div class="row">
-		<aside class="full-height">
+		<aside class="full-height" style="z-index: -2;">
 			<ul>
 				<li><a class="trans" href="#product_information">Product Information</a></li>
 				<li><a class="trans" href="#company_information">Company Information</a></li>
@@ -440,6 +440,9 @@ function stripeResponseHandler(status, response) {
 								var res = $.parseJSON(data);
 								$(".message").html(res.message);
 								$(".error").html(res.error);
+								if(res.success == 1) {
+									window.location.href = res.url;
+								}
 							},
 							error: function(data)
 							{

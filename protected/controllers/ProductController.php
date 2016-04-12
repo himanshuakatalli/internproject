@@ -229,6 +229,9 @@ public function actionProductRegisterSave()
 
 			$productHasDeploymentFeatures->save();
 		}
+
+		$response['url'] = Yii::app()->createUrl('product/productprofile', array('id'=>$product_id));
+		echo json_encode($response);
 	}
 }
 
@@ -236,40 +239,48 @@ public function actionProductProfile($id)
 {
 	$product = Product::model()->findByPk($id);
 
-	$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
-
-	$productCategoryFeatures = array();
-	foreach ($product->_categories as $_productCategory)
+	if(!empty($product))
 	{
-		if($_productCategory->status == 1)
-		{
-			$productCategory = Categories::model()->findByPk($_productCategory->category_id);
 
-			foreach ($productCategory->_features as $_productCategoryFeature)
+		$reviews = Reviews::model()->findAllByAttributes(array('product_id'=>$id));
+
+		$productCategoryFeatures = array();
+		foreach ($product->_categories as $_productCategory)
+		{
+			if($_productCategory->status == 1)
 			{
-				if($_productCategoryFeature->status == 1)
+				$productCategory = Categories::model()->findByPk($_productCategory->category_id);
+
+				foreach ($productCategory->_features as $_productCategoryFeature)
 				{
-					$productCategoryFeature = Features::model()->findByPk($_productCategoryFeature->feature_id);
-					array_push($productCategoryFeatures, $productCategoryFeature->name);
+					if($_productCategoryFeature->status == 1)
+					{
+						$productCategoryFeature = Features::model()->findByPk($_productCategoryFeature->feature_id);
+						array_push($productCategoryFeatures, $productCategoryFeature->name);
+					}
 				}
 			}
 		}
-	}
 
-	$productFeatures = array();
-	foreach ($product->_features as $_productFeature)
-	{
-		if($_productFeature->status == 1)
+		$productFeatures = array();
+		foreach ($product->_features as $_productFeature)
 		{
-			$productFeature = Features::model()->findByPk($_productFeature->feature_id);
-			array_push($productFeatures,$productFeature->name);
+			if($_productFeature->status == 1)
+			{
+				$productFeature = Features::model()->findByPk($_productFeature->feature_id);
+				array_push($productFeatures,$productFeature->name);
+			}
 		}
-	}
 
-	$product->visit_count += 1;
-	$product->update();
-	$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
-		'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
+		$product->visit_count += 1;
+		$product->update();
+		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
+			'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
+	}
+	else
+	{
+
+	}
 }
 
 public function get_client_ip()
@@ -385,7 +396,7 @@ public function sendVerificationEmail($user)
 	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Your Email</button></a><br><br><br>";
 	$message.="Use this credential to login and make sure to change password at first login.<br>";
 	$message.="Username:- ".$user->username."<br>";
-	$message.="Password:- ".$user->password."<br><br><br>";
+	$message.="Password:- ".base64_decode($user->password)."<br><br><br>";
 	$message.="Regards,<br>";
 	$message.="VenturePact Support Team.";
 
