@@ -25,7 +25,7 @@ class UserIdentity extends CUserIdentity
 
 		if(!empty($user))
 		{
-		    if($password==base64_decode($user->password))
+		    if(base64_encode($password)==$user->password)
 		    {
 		    	$this->errorCode=self::ERROR_NONE;
 					Yii::app()->user->setState('id',$username);
