@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl;?>/style/newhome/css/new_prod.css">
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/css/bootstrap-multiselect.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js"></script>
 <style type="text/css">
   #selCat {
     float: left;
@@ -61,7 +62,7 @@
 				<div class="input-half float-right">
 					<i class="fa fa-user col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
 					<!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="last_name" placeholder="Last Name"> -->
-					<?php echo $form->textField($user,'last_name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Last Name','data-parsley-trigger'=>"focusout", 'data-parsley-pattern'=>"^[a-zA-Z ]+$",'data-parsley-minlength'=>"2",'required'=>'required'));?>
+					<?php echo $form->textField($user,'last_name',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Last Name','data-parsley-trigger'=>"focusout"));?>
 				</div>
 			</div>
 			<div class="row">
@@ -73,7 +74,7 @@
 				<div class="input-half float-right">
 					<i class="fa fa-phone col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
 					<!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="mobile" placeholder="Mobile Number"> -->
-					<?php echo $form->textField($user,'phone_number',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Mobile Number','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"digits",'required'=>'required'));?>
+					<?php echo $form->textField($user,'phone_number',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Mobile Number','data-parsley-trigger'=>"focusout"));?>
 				</div>
 			</div>
 
@@ -113,7 +114,7 @@
 					<div class="input-half">
 						<i class="fa fa-globe col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
 						<!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="email" name="company_website" placeholder="Company's Website"> -->
-						<?php echo $form->textField($product,'company_website',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Company Website','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"url"));?>
+						<?php echo $form->textField($product,'company_website',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Company Website','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"url",'required'=>'required'));?>
 					</div>
 					<div class="input-half float-right">
 						<i class="fa fa-calendar col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
@@ -178,7 +179,7 @@
 			 <div class="input-half float-right">
 				 <i class="fa fa-users col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
 				 <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="user_count" placeholder="Average Customer Count"> -->
-				 <?php echo $form->textField($product,'customer_count',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Average Customer Count','required'=>'required','data-parsley-trigger'=>"focusout",'data-parsley-type'=>'digits'));?>
+				 <?php echo $form->textField($product,'customer_count',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Average Customer Count','data-parsley-trigger'=>"focusout",'data-parsley-type'=>'digits'));?>
 			 </div>
 		 </div>
 		<div class="row">
@@ -201,7 +202,7 @@
 			 <div class="input-half">
 				 <i class="fa fa-money col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
 				 <!-- <input class="col-lg-11 col-md-11 col-sm-11 col-xs-11" type="text" name="starting_price" placeholder="Product's Starting Price"> -->
-				 <?php echo $form->textField($product,'starting_price',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Starting Price','required'=>'required','data-parsley-trigger'=>"focusout",'data-parsley-type'=>'digits'));?>
+				 <?php echo $form->textField($product,'starting_price',array('class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','placeholder'=>'Starting Price','data-parsley-trigger'=>"focusout",'data-parsley-type'=>'digits'));?>
 			 </div>
 			</div>
 			<div class="row">
@@ -292,26 +293,47 @@
 			enableFiltering: true,
 			numberDisplayed: 0,
 		});
+
+
 	$('#user').click(function() {
-		$('#about_company').toggle();
-		$('#user').toggle();
-		$('html,body').animate({
-				scrollTop: $('#about_company').css('top')
-		}, 1000)
+			var v1 = $('#Users_first_name').parsley().validate();
+			var v2 = $('#Users_username').parsley().validate();
+			if(v1==true && v2==true)
+			{
+				$('#about_company').toggle();
+				$('#user').toggle();
+				$('html,body').animate({
+						scrollTop: $('#about_company').css('top')
+				}, 1000)
+			}
 	});
 	$('#company').click(function() {
-		$('#about_product').toggle();
-		$('#company').toggle();
-		$('html,body').animate({
+			var v1 = $('#Product_company_name').parsley().validate();
+			var v2 = $('#Product_founding_country').parsley().validate();
+			var v3 = $('#Product_company_website').parsley().validate();
+			var v4 = $('#Product_founding_year').parsley().validate();
+			if( v1==true && v2==true && v3==true && v4==true)
+		{
+			$('#about_product').toggle();
+			$('#company').toggle();
+			$('html,body').animate({
 				scrollTop: $('#about_product').css('top')
-		}, 1000)
+			}, 1000)
+		}
 	});
 	$('#product').click(function() {
-		$('#product_deployment').toggle();
-		$('#product').toggle();
-		$('html,body').animate({
-				scrollTop: $('#product_deployment').css('top')
-		}, 1000)
+				var v1 = $('#Product_name').parsley().validate();
+			var v2 = $('#Product_product_website').parsley().validate();
+			var v3 = $('#Product_description').parsley().validate();
+		//	var v4 = $('#Categories_id').parsley().validate();
+			if( v1==true && v2==true && v3==true)
+		{
+			$('#product_deployment').toggle();
+			$('#product').toggle();
+			$('html,body').animate({
+					scrollTop: $('#product_deployment').css('top')
+			}, 1000)
+		}
 	});
 	$('#deployment').click(function() {
 		$('#media_link').toggle();
@@ -321,24 +343,28 @@
 		}, 1000)
 	});
 });
- function send(){
-	//var validated = $("#add_project").parsley().validate();
+ 
+function send(){
+	var validated = $("#add_project").parsley().validate();
 	var data = $("#add_project").serialize();
-	console.log(data);
-	$('#store').prop('disabled',true);
-	$.ajax({
-		type: 'POST',
-		url: '<?php echo Yii::app()->createUrl("product/ProductRegisterSave"); ?>',
-		data: data,
-		success: function(data)
-		{
-			alert("Product listed");
-		},
-		error: function(data)
-		{
-			alert("failed");
-		}
-	})
-	$('#store').prop('disabled',false);
+	//console.log(data);
+	//$('#store').prop('disabled',true);
+	if(validated){
+		$.ajax({
+			type: 'POST',
+			url: '<?php echo Yii::app()->createUrl("product/ProductRegisterSave"); ?>',
+			data: data,
+			success: function(data)
+			{
+				var response = $.parseJSON(data);
+				window.location.href = response.url;
+			},
+			error: function(data)
+			{
+				alert("failed");
+			}
+		})
+		//$('#store').prop('disabled',false);
+	}
 }
 </script>
