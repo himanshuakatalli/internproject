@@ -160,7 +160,7 @@
 							</li>
 
 							<li class="sub-menu">
-								<a id="editProduct" href="#" >
+								<a id="showStats" href="#" >
 									<i class="fa fa-bars"></i>
 									<span>Show Stats</span>
 								</a>

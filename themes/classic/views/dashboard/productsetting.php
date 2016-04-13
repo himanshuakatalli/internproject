@@ -17,9 +17,9 @@ header('Access-Control-Allow-Origin:*');
 ?>
 <section class="wrapper">
 	<div class="row">
-		<aside class="full-height" style="z-index: -2;">
+		<aside class="full-height">
 			<ul>
-				<li><a class="trans" href="#product_information">Product Information</a></li>
+				<li><a class="trans" href="#product_information">Product Informationx</a></li>
 				<li><a class="trans" href="#company_information">Company Information</a></li>
 				<li><a class="trans" href="#social_media">Social Media Links</a></li>
 				<li><a class="transactions" href="#transactions">Transactions</a></li>
