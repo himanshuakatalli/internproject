@@ -230,7 +230,7 @@ public function actionProductRegisterSave()
 			$productHasDeploymentFeatures->save();
 		}
 
-		$response['url'] = Yii::app()->createUrl('product/productprofile', array('id'=>$product_id));
+		$response['url'] = Yii::app()->createUrl('product/productprofile', array('id'=>$product_id,'no_increment'=>true));
 		echo json_encode($response);
 	}
 }
@@ -272,7 +272,11 @@ public function actionProductProfile($id)
 			}
 		}
 
-		$product->visit_count += 1;
+		if(!(isset($_GET['no_increment'])))
+		{
+			$product->visit_count += 1;
+		}
+		
 		$product->update();
 		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
 			'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
