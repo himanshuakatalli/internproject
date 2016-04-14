@@ -57,7 +57,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>
-
+<script type="text/javascript">
+	$('#userSettings').addClass('active');
+	$('#dashboard').removeClass('active');
+</script>
 <!--<script type="text/javascript">
 //   $(document).ready(function(){
 //   	$("#formUserSettings").parsley().validate();

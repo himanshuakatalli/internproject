@@ -4,3 +4,7 @@
       <h5>Your client profile is currently linked with <strong><b>linkedIn</b></strong></h5>
     </div>
 </section>
+<script type="text/javascript">
+	$('#userSettings').addClass('active');
+	$('#dashboard').removeClass('active');
+</script>

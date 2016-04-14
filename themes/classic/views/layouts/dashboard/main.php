@@ -181,7 +181,7 @@
 
 							<?php if($user->oauth_uid):?>
 								<li class="sub-menu">
-									<a href="javascript:;" >
+									<a id="userSettings" href="javascript:;" >
 										<i class="fa fa-cogs"></i>
 										<span>User Account Settings</span>
 									</a>
