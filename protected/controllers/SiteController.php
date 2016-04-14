@@ -309,7 +309,7 @@ public function actionLinkedin()
         }
         if ($client->exit) exit;
         if ($success) {
-//CVarDumper::dump($user,10,1); die;
+ //CVarDumper::dump($user,10,1); die;
                $this->linked_in_user($user);
         } else {
              Yii::app()->user->setState('err_msg',$client->error);
@@ -342,7 +342,6 @@ public function linked_in_user($userdata)
 	$user->modify_date=date("Y-m-d h:i:sa");
 	$user->in_profile_url=$userdata->publicProfileUrl;
 	$user->save();
-
 	$model = new LoginForm;
 	$model->username=$userdata->emailAddress;
 	$model->password=$userdata->id;

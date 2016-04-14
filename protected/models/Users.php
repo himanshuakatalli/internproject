@@ -49,7 +49,7 @@ class Users extends CActiveRecord
 		return array(
 			array('first_name, username, password, role_id, add_date', 'required'),
 			array('is_verified, role_id, status', 'numerical', 'integerOnly'=>true),
-			array('first_name, last_name, in_profile_url', 'length', 'max'=>50),
+			array('first_name, last_name, in_profile_url', 'length', 'max'=>200),
 			array('username, password, job_profile, organization, oauth_uid', 'length', 'max'=>100),
 			array('phone_number', 'length', 'max'=>25),
 			array('hash, image, profile_img', 'length', 'max'=>255),

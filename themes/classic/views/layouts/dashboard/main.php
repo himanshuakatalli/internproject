@@ -181,7 +181,7 @@
 
 							<?php if($user->oauth_uid):?>
 								<li class="sub-menu">
-									<a href="javascript:;" >
+									<a id="userSettings" href="javascript:;" >
 										<i class="fa fa-cogs"></i>
 										<span>User Account Settings</span>
 									</a>
@@ -587,7 +587,6 @@
 			</div>
 		</div>
 	</div>
-
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	 <!--  <script src="<?php echo Yii::app()->theme->baseUrl; ?>/style/dashboard/js/jquery-1.8.3.min.js"></script> -->
 	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.min.js" async></script>

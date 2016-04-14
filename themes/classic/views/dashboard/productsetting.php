@@ -120,6 +120,11 @@ header('Access-Control-Allow-Origin:*');
 								<?php echo $form->textArea($product,'pricing_details',array('placeholder'=>"Pricing details",'class'=>'col-lg-11 col-md-1 col-sm-1 col-xs-1','data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"5"));?>
 							</div>
 						</div>
+						<?php
+							$user = Users::model()->findByPK(Yii::app()->user->user_id);
+							// CVarDumper::dump($user, 10, 1);die;
+							if($user->is_premium){ 
+						?>
 						<div class="row">
 							<div class="input-full-radio">
 								<input type="radio" id="ppc0" name="Product[under_ppc]" value="1"
@@ -130,6 +135,7 @@ header('Access-Control-Allow-Origin:*');
 								<label for="ppc1" class="col-lg-6">No PPC</label>
 							</div>
 						</div>
+						<?php } ?>
 						<div class="row">
 							<div class="input-full-radio">
 								<input type="radio" id="trial0" name="Product[has_trial]" value="1"
