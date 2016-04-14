@@ -133,15 +133,6 @@
 			<div class="modal-body">
 				<div class="panel-body">
 					<form class="panel-default" action="" method="POST" id="payment-form">
-					<div class="row">
-							<div class="col-xs-12">
-								<div class="form-group">
-									<div class="input-group">
-										<input type="hidden" size="20" id="invoice_id"/>
-									</div>
-								</div>
-							</div>
-						</div>
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="form-group">
@@ -187,10 +178,64 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <script type="text/javascript">
 	$('#userSettings').addClass('active');
 	$('#dashboard').removeClass('active');
+
+Stripe.setPublishableKey('pk_test_UNYSMPvDrZl3n2EzW6kZqSeT');
+function stripeResponseHandler(status, response) {
+    if (response.error) {
+        // re-enable the submit button
+         $('.submit-button').removeAttr("disabled");
+         $('.submit-button').val('Submit Payment');
+        // show the errors on the form
+        $(".error").html(response.error.message);
+        return false;
+    } else
+    {
+        var token = response['id'];
+        var invoice_id=$("#invoice_id").val();
+        $.ajax({
+        			headers: {"Accept": "application/json"},
+        			type: 'POST',
+							url: '<?php echo Yii::app()->createUrl("dashboard/add_premium");?>',
+							data: {token : token},
+							success: function(data)
+							{
+								//alert("success");
+								var res = $.parseJSON(data);
+								$(".message").html(res.message);
+								$(".error").html(res.error);
+								if(res.success == 1) {
+									window.location.href = res.url;
+								}
+							},
+							error: function(data)
+							{
+								//alert("failed");
+							}
+        });
+
+    }
+}
+
+
 	$(document).ready(function(){
+
+		$("#payment-form").submit(function(event) {
+				$('.submit-button').val('Please wait...');
+        $('.submit-button').attr("disabled", "disabled");
+        Stripe.createToken({
+            number: $('.card-number').val(),
+            cvc: $('.card-cvc').val(),
+            exp_month: $('.card-expiry-month').val(),
+            exp_year: $('.card-expiry-year').val()
+        }, stripeResponseHandler);
+        return false; // submit from callback
+    });
+
+
 		$("#formUserSettings").parsley().validate();
 		$('#userInfo').click(function(){
 			$('#userInfo').addClass('active');

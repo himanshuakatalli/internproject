@@ -5,24 +5,26 @@
  *
  * The followings are the available columns in table 'transaction':
  * @property integer $id
- * @property integer $invoice_id
- * @property string $stripe_transaction_id
- * @property integer $transaction_status
- * @property integer $month
- * @property integer $year
- * @property string $failure_code
- * @property string $failure_message
- * @property string $msg_description
- * @property string $admin_notes
- * @property integer $status
+ * @property integer $user_id
+ * @property integer $customer_id
+ * @property integer $amount
+ * @property string $description
+ * @property integer $failure_code
  * @property string $add_date
- * @property string $modify_date
- *
- * The followings are the available model relations:
- * @property Invoice $invoice
+ * @property integer $transaction_id
  */
 class Transaction extends CActiveRecord
 {
+	/**
+	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
+	 * @return Transaction the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -39,13 +41,13 @@ class Transaction extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('invoice_id, add_date', 'required'),
-			array('invoice_id, transaction_status, month, year, status', 'numerical', 'integerOnly'=>true),
-			array('stripe_transaction_id, failure_code, failure_message, msg_description', 'length', 'max'=>255),
-			array('admin_notes, modify_date', 'safe'),
+			array('user_id, customer_id, amount, transaction_id', 'required'),
+			array('user_id, customer_id, amount, failure_code, transaction_id', 'numerical', 'integerOnly'=>true),
+			array('description', 'length', 'max'=>250),
+			array('add_date', 'length', 'max'=>6),
 			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, invoice_id, stripe_transaction_id, transaction_status, month, year, failure_code, failure_message, msg_description, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			// Please remove those attributes that should not be searched.
+			array('id, user_id, customer_id, amount, description, failure_code, add_date, transaction_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +59,6 @@ class Transaction extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'invoice' => array(self::BELONGS_TO, 'Invoice', 'invoice_id'),
 		);
 	}
 
@@ -68,66 +69,38 @@ class Transaction extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'invoice_id' => 'Invoice',
-			'stripe_transaction_id' => 'Stripe Transaction',
-			'transaction_status' => 'Transaction Status',
-			'month' => 'Month',
-			'year' => 'Year',
+			'user_id' => 'User',
+			'customer_id' => 'Customer',
+			'amount' => 'Amount',
+			'description' => 'Description',
 			'failure_code' => 'Failure Code',
-			'failure_message' => 'Failure Message',
-			'msg_description' => 'Msg Description',
-			'admin_notes' => 'Admin Notes',
-			'status' => 'Status',
 			'add_date' => 'Add Date',
-			'modify_date' => 'Modify Date',
+			'transaction_id' => 'Transaction',
 		);
 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
 
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('invoice_id',$this->invoice_id);
-		$criteria->compare('stripe_transaction_id',$this->stripe_transaction_id,true);
-		$criteria->compare('transaction_status',$this->transaction_status);
-		$criteria->compare('month',$this->month);
-		$criteria->compare('year',$this->year);
-		$criteria->compare('failure_code',$this->failure_code,true);
-		$criteria->compare('failure_message',$this->failure_message,true);
-		$criteria->compare('msg_description',$this->msg_description,true);
-		$criteria->compare('admin_notes',$this->admin_notes,true);
-		$criteria->compare('status',$this->status);
+		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('customer_id',$this->customer_id);
+		$criteria->compare('amount',$this->amount);
+		$criteria->compare('description',$this->description,true);
+		$criteria->compare('failure_code',$this->failure_code);
 		$criteria->compare('add_date',$this->add_date,true);
-		$criteria->compare('modify_date',$this->modify_date,true);
+		$criteria->compare('transaction_id',$this->transaction_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Transaction the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
 	}
 }

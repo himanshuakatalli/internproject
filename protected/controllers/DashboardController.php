@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','payment','deleteProduct','viewInvoice','GetFeatures'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','add_premium','deleteProduct','viewInvoice','GetFeatures'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -484,60 +484,60 @@ public function actionGetFeatures()
 	}
 // payment proccessing
 
-	public function actionPayment()
+	public function actionAdd_premium()
 	{
 		$user_id = Yii::app()->user->user_id;
+		$user=Users::model()->findByPk($user_id);
 		$token = $_POST['token'];
-		$id = $_POST['product_id'];
-		$invoice_id = $_POST['invoice_id'];
-		// $token='tok_17xwKBBbTKYuQctafgo9ICuQ';
-		$invoice = Invoice::model()->findByPk($invoice_id);
-		if($invoice)
-		{
+
 			try{
 							$secretkey=Controller::getsecretkey();
 							\Stripe\Stripe::setApiKey($secretkey);
+							$customer = \Stripe\Customer::create(
+							          array(
+														  "source" => $token,
+														  'description'=>"Amount paid for premium plan by vendor ".$user->first_name." ".$user->last_name.""
+														  ));
 							$charge = \Stripe\Charge::create(
-											array('card' => $token,
-														'amount' => ($invoice->amount * 100),
+											array(
+														'amount' => (2060),
 														'currency' => 'usd',
-														'description'=>"Amount paid for User ID: ".$user_id." and product ID: ".$id." Date: ".$invoice->month."/".$invoice->year."",
+														"customer" => $customer->id
 														));
 
 							if($charge->paid)
 							{
 										$transaction=new Transaction;
-										$transaction->invoice_id=$invoice->id;
-										$transaction->stripe_transaction_id=$charge->id;
-										$transaction->transaction_status='1';
-										$transaction->status='1';
-										$transaction->msg_description=$charge->description;
+										$transaction->user_id=$user_id;
+										$transaction->customer_id=$customer->id;
+										$transaction->amount='20$';
+										$transaction->transaction_id=$charge->id;
+										$transaction->description=$charge->description;
 										$transaction->add_date=new CDbExpression('Now()');
+										$user->is_premium ='1';
+										$user->customer_id = $customer->id;
+										$transaction->save();
+										CVarDumper::dump($transaction,10,1);die;
 										if($transaction->save())
 										{
-											$invoice->payment_status='1';
-											if($invoice->update())
-											{
-												$response['message']="Transaction Successfull.";
+												$user->update();
+												$response['message']="Card is Successfully saved.";
 												$response['success']="1";
-												$response['url'] = $this->createUrl('productsetting',array('id'=>$id));
+												$response['url'] = $this->createUrl('dashboard');
 												echo json_encode($response);
-												// $this->redirect('productsetting',array('id'=>$id));
-											}
+
 										}
 							}else{
 										$transaction=new Transaction;
-										$transaction->invoice_id=$invoice->id;
-										$transaction->stripe_transaction_id=$charge->id;
-										$transaction->transaction_status='0';
-										$transaction->status='1';
+										$transaction->transaction_id=$charge->id;
+										$transaction->user_id=$user_id;
+										$transaction->amount='20$';
 										$transaction->failure_code=$charge->failure_code;
-										$transaction->failure_message=$charge->failure_message;
-										$transaction->msg_description=$charge->description;
+										$transaction->description=$charge->failure_message;
 										$transaction->add_date=new CDbExpression('Now()');
 										if($transaction->save())
 										{
-											$response['message']="Transaction Failed.";
+											$response['message']="Transaction Failed.Please try later.";
 											$response['error']=$charge->failure_message;
 											$response['success']="0";
 											echo json_encode($response);
@@ -578,13 +578,6 @@ public function actionGetFeatures()
 							$response['success']="5";
 							echo json_encode($response);
 						}
-
-	 }else{
-							// $response['message']="Invalid Invoice.";
-							$response['error']="Invalid Invoice.";
-							$response['success']="7";
-							echo json_encode($response);
-				}
 
 	}
 

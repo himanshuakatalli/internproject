@@ -123,7 +123,7 @@ header('Access-Control-Allow-Origin:*');
 						<?php
 							$user = Users::model()->findByPK(Yii::app()->user->user_id);
 							// CVarDumper::dump($user, 10, 1);die;
-							if($user->is_premium){ 
+							if($user->is_premium){
 						?>
 						<div class="row">
 							<div class="input-full-radio">
