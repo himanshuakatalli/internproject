@@ -602,4 +602,30 @@ public function actionGetFeatures()
 			}
 		}
 	}
+
+	public function actionRemovePremium()
+	{
+		$user = Users::model()->findByPk(Yii::app()->user->user_id);
+
+		if(!empty($user))
+		{
+			$user->is_premium = 0;
+
+			$products = $user->products;
+
+			foreach($products as $product)
+			{
+				if($product->under_ppc)
+				{
+					$product->under_ppc = 0;
+
+					if($product->update())
+					{
+						$user->update;
+					}
+				}
+			}
+		}
+	}
+
 }
