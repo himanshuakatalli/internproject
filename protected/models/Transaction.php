@@ -6,12 +6,12 @@
  * The followings are the available columns in table 'transaction':
  * @property integer $id
  * @property integer $user_id
- * @property integer $customer_id
- * @property integer $amount
+ * @property string $customer_id
+ * @property string $amount
  * @property string $description
  * @property integer $failure_code
  * @property string $add_date
- * @property integer $transaction_id
+ * @property string $transaction_id
  */
 class Transaction extends CActiveRecord
 {
@@ -42,7 +42,9 @@ class Transaction extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, customer_id, amount, transaction_id', 'required'),
-			array('user_id, customer_id, amount, failure_code, transaction_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, failure_code', 'numerical', 'integerOnly'=>true),
+			array('customer_id', 'length', 'max'=>225),
+			array('amount, transaction_id', 'length', 'max'=>255),
 			array('description', 'length', 'max'=>250),
 			array('add_date', 'length', 'max'=>6),
 			// The following rule is used by search().
@@ -92,12 +94,12 @@ class Transaction extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('customer_id',$this->customer_id);
-		$criteria->compare('amount',$this->amount);
+		$criteria->compare('customer_id',$this->customer_id,true);
+		$criteria->compare('amount',$this->amount,true);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('failure_code',$this->failure_code);
 		$criteria->compare('add_date',$this->add_date,true);
-		$criteria->compare('transaction_id',$this->transaction_id);
+		$criteria->compare('transaction_id',$this->transaction_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -516,11 +516,12 @@ public function actionGetFeatures()
 										$transaction->add_date=new CDbExpression('Now()');
 										$user->is_premium ='1';
 										$user->customer_id = $customer->id;
-										$transaction->save();
-										CVarDumper::dump($transaction,10,1);die;
+										// $transaction->save();
+										// CVarDumper::dump($transaction,10,1);die;
 										if($transaction->save())
 										{
 												$user->update();
+												// CVarDumper::dump($transaction,10,1);die;
 												$response['message']="Card is Successfully saved.";
 												$response['success']="1";
 												$response['url'] = $this->createUrl('dashboard');
