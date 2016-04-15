@@ -272,12 +272,13 @@ public function actionProductProfile($id)
 			}
 		}
 
-		if(!(isset($_GET['no_increment'])))
+		if(!(isset($_GET['no_increment'])) && !(Yii::app()->user->user_id == $product->user_id))
 		{
 			$product->visit_count += 1;
 		}
-		
+
 		$product->update();
+
 		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
 			'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
 	}
