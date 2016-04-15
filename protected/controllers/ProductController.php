@@ -17,6 +17,7 @@ $criteria=new CDbCriteria;                             //for finding products re
 $criteria->with = array('categories');
 $criteria->addCondition('category_id= '.$categoryInfo->id );
 $criteria->addCondition('t.status=1');
+$criteria->order = 'bidding_amount DESC';
 $products = Product::model()->findAll($criteria);
 
 $criteria2=new CDbCriteria;                          // for finding features related to that category
@@ -24,7 +25,6 @@ $criteria2->with = array('categories');
 $criteria2->addCondition('category_id= '.$categoryInfo->id);
 $features = Features::model()->findALL($criteria2);
 
-//CVarDumper::dump($features,10,1);die;
 $this->render('product',array('products'=>$products,
 	'features'=>$features,'categoryInfo'=>$categoryInfo,
 	'deployment'=>$deployment));
