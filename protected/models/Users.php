@@ -8,11 +8,13 @@
  * @property string $first_name
  * @property string $last_name
  * @property string $username
+ * @property integer $Customer_ID
  * @property string $password
  * @property string $phone_number
  * @property string $job_profile
  * @property string $organization
  * @property integer $is_verified
+ * @property integer $is_premium
  * @property string $hash
  * @property integer $role_id
  * @property string $oauth_uid
@@ -48,15 +50,16 @@ class Users extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('first_name, username, password, role_id, add_date', 'required'),
-			array('is_verified, role_id, status', 'numerical', 'integerOnly'=>true),
-			array('first_name, last_name, in_profile_url', 'length', 'max'=>200),
+			array('Customer_ID, is_verified, is_premium, role_id, status', 'numerical', 'integerOnly'=>true),
+			array('first_name, last_name', 'length', 'max'=>50),
 			array('username, password, job_profile, organization, oauth_uid', 'length', 'max'=>100),
 			array('phone_number', 'length', 'max'=>25),
 			array('hash, image, profile_img', 'length', 'max'=>255),
+			array('in_profile_url', 'length', 'max'=>200),
 			array('admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, first_name, last_name, username, password, phone_number, job_profile, organization, is_verified, hash, role_id, oauth_uid, in_profile_url, image, profile_img, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			array('id, first_name, last_name, username, Customer_ID, password, phone_number, job_profile, organization, is_verified, is_premium, hash, role_id, oauth_uid, in_profile_url, image, profile_img, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -84,11 +87,13 @@ class Users extends CActiveRecord
 			'first_name' => 'First Name',
 			'last_name' => 'Last Name',
 			'username' => 'Username',
+			'Customer_ID' => 'Customer',
 			'password' => 'Password',
 			'phone_number' => 'Phone Number',
 			'job_profile' => 'Job Profile',
 			'organization' => 'Organization',
 			'is_verified' => 'Is Verified',
+			'is_premium' => 'Is Premium',
 			'hash' => 'Hash',
 			'role_id' => 'Role',
 			'oauth_uid' => 'Oauth Uid',
@@ -124,11 +129,13 @@ class Users extends CActiveRecord
 		$criteria->compare('first_name',$this->first_name,true);
 		$criteria->compare('last_name',$this->last_name,true);
 		$criteria->compare('username',$this->username,true);
+		$criteria->compare('Customer_ID',$this->Customer_ID);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('phone_number',$this->phone_number,true);
 		$criteria->compare('job_profile',$this->job_profile,true);
 		$criteria->compare('organization',$this->organization,true);
 		$criteria->compare('is_verified',$this->is_verified);
+		$criteria->compare('is_premium',$this->is_premium);
 		$criteria->compare('hash',$this->hash,true);
 		$criteria->compare('role_id',$this->role_id);
 		$criteria->compare('oauth_uid',$this->oauth_uid,true);
