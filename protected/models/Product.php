@@ -13,6 +13,7 @@
  * @property integer $has_free_version
  * @property integer $has_trial
  * @property integer $under_ppc
+ * @property integer $was_under_ppc
  * @property double $bidding_amount
  * @property integer $visit_count
  * @property string $starting_price
@@ -63,14 +64,14 @@ class Product extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, name, product_website, company_name, company_website, add_date', 'required'),
-			array('user_id, customer_count, has_free_version, has_trial, under_ppc, visit_count, founding_year, status', 'numerical', 'integerOnly'=>true),
+			array('user_id, customer_count, has_free_version, has_trial, under_ppc, was_under_ppc, visit_count, founding_year, status', 'numerical', 'integerOnly'=>true),
 			array('bidding_amount', 'numerical'),
 			array('name, starting_price, product_website, company_name, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link', 'length', 'max'=>100),
 			array('logo', 'length', 'max'=>255),
 			array('description, pricing_details, admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, name, description, logo, customer_count, has_free_version, has_trial, under_ppc, bidding_amount, visit_count, starting_price, pricing_details, product_website, company_name, founding_year, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
+			array('id, user_id, name, description, logo, customer_count, has_free_version, has_trial, under_ppc, was_under_ppc, bidding_amount, visit_count, starting_price, pricing_details, product_website, company_name, founding_year, founding_country, company_website, facebook_link, twitter_link, linkedin_link, googleplus_link, youtube_link, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -113,6 +114,7 @@ class Product extends CActiveRecord
 			'has_free_version' => 'Has Free Version',
 			'has_trial' => 'Has Trial',
 			'under_ppc' => 'Under Ppc',
+			'was_under_ppc' => 'Was Under Ppc',
 			'bidding_amount' => 'Bidding Amount',
 			'visit_count' => 'Visit Count',
 			'starting_price' => 'Starting Price',
@@ -161,6 +163,7 @@ class Product extends CActiveRecord
 		$criteria->compare('has_free_version',$this->has_free_version);
 		$criteria->compare('has_trial',$this->has_trial);
 		$criteria->compare('under_ppc',$this->under_ppc);
+		$criteria->compare('was_under_ppc',$this->was_under_ppc);
 		$criteria->compare('bidding_amount',$this->bidding_amount);
 		$criteria->compare('visit_count',$this->visit_count);
 		$criteria->compare('starting_price',$this->starting_price,true);

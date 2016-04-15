@@ -20,7 +20,6 @@
  * The followings are the available model relations:
  * @property Product $product
  * @property Users $user
- * @property Transaction[] $transactions
  */
 class Invoice extends CActiveRecord
 {
@@ -60,7 +59,6 @@ class Invoice extends CActiveRecord
 		return array(
 			'product' => array(self::BELONGS_TO, 'Product', 'product_id'),
 			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
-			'transactions' => array(self::HAS_MANY, 'Transaction', 'invoice_id'),
 		);
 	}
 

@@ -29,6 +29,7 @@
  * The followings are the available model relations:
  * @property Invoice[] $invoices
  * @property Product[] $products
+ * @property Transaction[] $transactions
  * @property Roles $role
  */
 class Users extends CActiveRecord
@@ -73,6 +74,7 @@ class Users extends CActiveRecord
 		return array(
 			'invoices' => array(self::HAS_MANY, 'Invoice', 'user_id'),
 			'products' => array(self::MANY_MANY, 'Product', 'reviews(user_id, product_id)'),
+			'transactions' => array(self::HAS_MANY, 'Transaction', 'user_id'),
 			'role' => array(self::BELONGS_TO, 'Roles', 'role_id'),
 		);
 	}
