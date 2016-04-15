@@ -109,7 +109,7 @@
 					<p>Are You sure you want to change account from premium to free</p>
 				</div>
 				<div class="modal-footer">
-					<button class="btn  btn-danger">Confirm</button>
+					<button class="btn  btn-danger" data-dismiss="modal" onClick="remove_premium()">Confirm</button>
 					<button class="btn  btn-primary" data-dismiss="modal" >No</button>
 				</div>
 			</div>
@@ -293,4 +293,20 @@ document.getElementById("changeProfileImg").onclick = function(){
 		}
 	);
 };
+
+function remove_premium()
+{
+	$.ajax({
+		type: 'POST',
+		url: '<?php echo Yii::app()->createUrl("dashboard/RemovePremium"); ?>',
+		success: function(data)
+		{
+			alert("Profile Updated");
+		},
+		error: function(data)
+		{
+			alert("failed");
+		}
+	})
+}
 </script>
