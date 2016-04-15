@@ -54,19 +54,7 @@
           <p>Total <?php echo $product->visit_count ?> people eyed on <?php echo $product->name; ?> profile</p>
         </div>
 
-        <div class="col-md-2 col-sm-2 box0">
-          <?php $invoices = Invoice::model()->with('transactions')->findAll(array('condition'=>'product_id=:id','params'=>array(':id'=>$product->id)));
-            $transCount = 0;
-            foreach ($invoices as $invoice) {
-              $transCount += count($invoice->transactions);
-            }
-          ?>
-          <div class="box1">
-            <span class="li_vallet"></span>
-            <h3>+<?php echo $transCount; ?></h3>
-          </div>
-          <p>Total <?php echo $transCount; ?> transactions have been made for <?php echo $product->name; ?>.</p>
-        </div>
+
       </div>
 
       <?php
@@ -78,15 +66,6 @@
           if ($max <= $prod->customer_count){
               $max = $prod->customer_count;
               $index = $key;
-          }
-        }
-        $invoice_selling_product = Invoice::model()->findAll(array('condition'=>'product_id=:id','params'=>array(':id'=>$productArray[$index]->id)));
-        foreach ($invoice_selling_product as $invoice) {
-          foreach ($invoice->transactions as $transaction) {
-            if($transaction->status)
-              $paidCount+=1;
-            else
-              $pendingCount+=1;
           }
         }
       ?>
@@ -153,26 +132,6 @@
                 ];
                 var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
             </script>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb">
-          <div class="white-panel pn">
-            <div class="white-header">
-              <h5>Transactions</h5>
-            </div>
-            <p><img src="<?php echo (!empty($productArray[$index]->logo))?$productArray[$index]->logo:Yii::app()->theme->baseUrl."/../product_logo/IMG_1.png";?>" class="img-circle" width="80" height="80"></p>
-            <p class="dark"><b><?php echo $productArray[$index]->name; ?></b></p>
-            <div class="row">
-              <div class="col-md-6 vpOrange">
-                <p class="small mt vpOrange">Done</p>
-                <p>$<?php echo $paidCount; ?></p>
-              </div>
-              <div class="col-md-6 vpOrange">
-                <p class="small mt vpOrange">Pending</p>
-                <p>$<?php echo $pendingCount; ?></p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
