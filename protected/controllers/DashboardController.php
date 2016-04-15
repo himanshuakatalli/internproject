@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','add_premium','deleteProduct','viewInvoice','GetFeatures'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','add_premium','deleteProduct','viewInvoice','GetFeatures','RemovePremium'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -166,6 +166,12 @@ public function actionProductsettingsave($id)
 	if(isset($_POST['Product']))
 	{
 		$product->attributes = $_POST['Product'];
+		
+
+		if($product->under_ppc)
+		{
+			$product->was_under_ppc = 1;
+		}
 		print_r($product);
 
 		if($product->update())
@@ -611,18 +617,16 @@ public function actionGetFeatures()
 		{
 			$user->is_premium = 0;
 
-			$products = $user->products;
+			$user->update();
 
+			$products = Product::model()->findAllByAttributes(array('user_id'=>$user->id));
+			
 			foreach($products as $product)
 			{
 				if($product->under_ppc)
 				{
 					$product->under_ppc = 0;
-
-					if($product->update())
-					{
-						$user->update;
-					}
+					$product->update();
 				}
 			}
 		}
