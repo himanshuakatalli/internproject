@@ -30,7 +30,7 @@ public $layout="dashboard/main";
 								'users'=>array('*'),
 						),
 						array('allow', // allow authenticated user to perform 'create' and 'update' actions
-								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','add_premium','deleteProduct','viewInvoice','GetFeatures'),
+								'actions'=>array('index','productsetting','usersetting','Productsettingsave','UserUpdate','Viewprofile','socialnetworks','ShowStats','addproduct','GetFeaturesByID','add_premium','deleteProduct','viewInvoice','GetFeatures','RemovePremium'),
 								'users'=>array('@'),
 						),
 						array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -166,6 +166,12 @@ public function actionProductsettingsave($id)
 	if(isset($_POST['Product']))
 	{
 		$product->attributes = $_POST['Product'];
+		
+
+		if($product->under_ppc)
+		{
+			$product->was_under_ppc = 1;
+		}
 		print_r($product);
 
 		if($product->update())
@@ -490,96 +496,107 @@ public function actionGetFeatures()
 		$user=Users::model()->findByPk($user_id);
 		$token = $_POST['token'];
 
-			try{
-							$secretkey=Controller::getsecretkey();
-							\Stripe\Stripe::setApiKey($secretkey);
-							$customer = \Stripe\Customer::create(
-							          array(
-														  "source" => $token,
-														  'description'=>"Amount paid for premium plan by vendor ".$user->first_name." ".$user->last_name.""
-														  ));
-							$charge = \Stripe\Charge::create(
-											array(
-														'amount' => (2060),
-														'currency' => 'usd',
-														"customer" => $customer->id
-														));
+		try{
+			$secretkey=Controller::getsecretkey();
+			\Stripe\Stripe::setApiKey($secretkey);
+			$customer = \Stripe\Customer::create(
+			array(
+				"source" => $token,
+				'description'=>"Amount paid for premium plan by vendor ".$user->first_name." ".$user->last_name.""
+				));
+			$charge = \Stripe\Charge::create(
+			array(
+				'amount' => (2060),
+				'currency' => 'usd',
+				"customer" => $customer->id
+				));
 
-							if($charge->paid)
-							{
-										$transaction=new Transaction;
-										$transaction->user_id=$user_id;
-										$transaction->customer_id=$customer->id;
-										$transaction->amount='20$';
-										$transaction->transaction_id=$charge->id;
-										$transaction->description=$charge->description;
-										$transaction->add_date=new CDbExpression('Now()');
-										$user->is_premium ='1';
-										$user->Customer_ID = $customer->id;
-										// $transaction->save();
-										// CVarDumper::dump($transaction,10,1);die;
-										if($transaction->save())
-										{
-												$user->update();
-												// CVarDumper::dump($transaction,10,1);die;
-												$response['message']="Card is Successfully saved.";
-												$response['success']="1";
-												$response['url'] = $this->createUrl('index');
-												echo json_encode($response);
+			if($charge->paid)
+			{
+				$user->is_premium ='1';
+				$user->Customer_ID = $customer->id;
 
-										}
-							}else{
-										$transaction=new Transaction;
-										$transaction->transaction_id=$charge->id;
-										$transaction->user_id=$user_id;
-										$transaction->amount='20$';
-										$transaction->failure_code=$charge->failure_code;
-										$transaction->description=$charge->failure_message;
-										$transaction->add_date=new CDbExpression('Now()');
-										if($transaction->save())
-										{
-											$response['message']="Transaction Failed.Please try later.";
-											$response['error']=$charge->failure_message;
-											$response['success']="0";
-											echo json_encode($response);
-										}
+				$products = Product::model()->findAllByAttributes(array('user_id'=>$user->id));
+			
+				foreach($products as $product)
+				{
+					if($product->was_under_ppc)
+					{
+						$product->under_ppc = 1;
+						$product->update();
+					}
+				}
 
-									}
-						}catch(\Stripe\Error\InvalidRequest $e)
-						{
-							$e_json = $e->getJsonBody();
-							$error = $e_json['error'];
-							$response['error']=$error['message'];
-							// $response['message']="Invalid Request.";
-							$response['success']="2";
-							echo json_encode($response);
-						}catch(\Stripe\Error\ApiConnection $e)
-						{
-							$e_json = $e->getJsonBody();
-							$error = $e_json['error'];
-							$response['error']=$error['message'];
-							// $response['message']="Network Error.Please make request again";
-							$response['success']="3";
-							echo json_encode($response);
-						}catch (\Stripe\Error\Base $e)
-						 {
-							$e_json = $e->getJsonBody();
-							$error = $e_json['error'];
-							$response['error']=$error['message'];
-							$response['message']="Something gone wrong.Please try later.And send us screenshot of this error.";
-							$response['success']="4";
-							echo json_encode($response);
-						 }
-						catch(Exception $e)
-						{
-							$e_json = $e->getJsonBody();
-							$error = $e_json['error'];
-							$response['error']=$error['message'];
-							$response['message']="Internal Server Error.";
-							$response['success']="5";
-							echo json_encode($response);
-						}
 
+				$transaction=new Transaction;
+				$transaction->user_id=$user_id;
+				$transaction->customer_id=$customer->id;
+				$transaction->amount='20$';
+				$transaction->transaction_id=$charge->id;
+				$transaction->description=$charge->description;
+				$transaction->add_date=new CDbExpression('Now()');
+				
+				if($transaction->save())
+				{
+					$user->update();
+					$response['message']="Card is Successfully saved.";
+					$response['success']="1";
+					$response['url'] = $this->createUrl('index');
+					echo json_encode($response);
+				}
+			}
+			else
+			{
+				$transaction=new Transaction;
+				$transaction->transaction_id=$charge->id;
+				$transaction->user_id=$user_id;
+				$transaction->amount='20$';
+				$transaction->failure_code=$charge->failure_code;
+				$transaction->description=$charge->failure_message;
+				$transaction->add_date=new CDbExpression('Now()');
+				if($transaction->save())
+				{
+					$response['message']="Transaction Failed.Please try later.";
+					$response['error']=$charge->failure_message;
+					$response['success']="0";
+					echo json_encode($response);
+				}
+			}
+		}
+		catch(\Stripe\Error\InvalidRequest $e)
+		{
+			$e_json = $e->getJsonBody();
+			$error = $e_json['error'];
+			$response['error']=$error['message'];
+			$response['success']="2";
+			echo json_encode($response);
+		}
+		catch(\Stripe\Error\ApiConnection $e)
+		{
+			$e_json = $e->getJsonBody();
+			$error = $e_json['error'];
+			$response['error']=$error['message'];
+			$response['success']="3";
+			echo json_encode($response);
+		}
+		catch (\Stripe\Error\Base $e)
+		{
+			$e_json = $e->getJsonBody();
+			$error = $e_json['error'];
+			$response['error']=$error['message'];
+			$response['message']="Something gone wrong.Please try later.And send us screenshot of this error.";
+			$response['success']="4";
+			echo json_encode($response);
+		}
+		catch(Exception $e)
+		{
+			$e_json = $e->getJsonBody();
+			$error = $e_json['error'];
+			$response['error']=$error['message'];
+			$response['message']="Internal Server Error.";
+			$response['success']="5";
+			echo json_encode($response);
+		}
 	}
 
 	public function actionViewInvoice($id) {
@@ -611,18 +628,16 @@ public function actionGetFeatures()
 		{
 			$user->is_premium = 0;
 
-			$products = $user->products;
+			$user->update();
 
+			$products = Product::model()->findAllByAttributes(array('user_id'=>$user->id));
+			
 			foreach($products as $product)
 			{
 				if($product->under_ppc)
 				{
 					$product->under_ppc = 0;
-
-					if($product->update())
-					{
-						$user->update;
-					}
+					$product->update();
 				}
 			}
 		}
