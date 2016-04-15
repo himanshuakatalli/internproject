@@ -8,7 +8,7 @@
  * @property string $first_name
  * @property string $last_name
  * @property string $username
- * @property integer $Customer_ID
+ * @property string $Customer_ID
  * @property string $password
  * @property string $phone_number
  * @property string $job_profile
@@ -35,6 +35,16 @@
 class Users extends CActiveRecord
 {
 	/**
+	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
+	 * @return Users the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+
+	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -51,15 +61,15 @@ class Users extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('first_name, username, password, role_id, add_date', 'required'),
-			array('Customer_ID, is_verified, is_premium, role_id, status', 'numerical', 'integerOnly'=>true),
+			array('is_verified, is_premium, role_id, status', 'numerical', 'integerOnly'=>true),
 			array('first_name, last_name', 'length', 'max'=>50),
-			array('username, password, job_profile, organization, oauth_uid', 'length', 'max'=>100),
+			array('username, Customer_ID, password, job_profile, organization, oauth_uid', 'length', 'max'=>100),
 			array('phone_number', 'length', 'max'=>25),
 			array('hash, image, profile_img', 'length', 'max'=>255),
 			array('in_profile_url', 'length', 'max'=>200),
 			array('admin_notes, modify_date', 'safe'),
 			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
+			// Please remove those attributes that should not be searched.
 			array('id, first_name, last_name, username, Customer_ID, password, phone_number, job_profile, organization, is_verified, is_premium, hash, role_id, oauth_uid, in_profile_url, image, profile_img, admin_notes, status, add_date, modify_date', 'safe', 'on'=>'search'),
 		);
 	}
@@ -111,19 +121,12 @@ class Users extends CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -131,7 +134,7 @@ class Users extends CActiveRecord
 		$criteria->compare('first_name',$this->first_name,true);
 		$criteria->compare('last_name',$this->last_name,true);
 		$criteria->compare('username',$this->username,true);
-		$criteria->compare('Customer_ID',$this->Customer_ID);
+		$criteria->compare('Customer_ID',$this->Customer_ID,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('phone_number',$this->phone_number,true);
 		$criteria->compare('job_profile',$this->job_profile,true);
@@ -152,16 +155,5 @@ class Users extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Users the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
 	}
 }

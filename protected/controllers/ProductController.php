@@ -85,6 +85,7 @@ public function actionSearch()
     $cus=$product->user->Customer_ID;
     $bid_amount=$product->bidding_amount;
     $ppc=$product->under_ppc;
+
     $pCookie = Yii::app()->request->cookies["P_".$id];
     if(isset($pCookie))
     {
@@ -128,7 +129,9 @@ public function actionSearch()
 			{
 				if($ppc)
 				{
+
 				$this->payperclick($cus,$bid_amount);
+
 				}
 			}
       CController:: redirect('http://'.$product->product_website);
