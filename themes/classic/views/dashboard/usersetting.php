@@ -303,6 +303,20 @@ document.getElementById("changeProfileImg").onclick = function(){
 			var image = document.getElementById("imgPlaceholder");
 			$('#profImg').val(Blob.url);
 			$('#pimg').attr('src',Blob.url);
+
+			var data = $("#update_user").serialize();
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo Yii::app()->createUrl("dashboard/UserUpdate"); ?>',
+					data: data,
+					success: function(data)
+					{
+					},
+					error: function(data)
+					{
+						alert("failed");
+					}
+				})
 		}
 	);
 };
