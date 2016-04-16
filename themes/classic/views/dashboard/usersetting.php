@@ -76,14 +76,21 @@
 					<label class="control-label col-sm-2" for="password">New Password:</label>
 					<div class="col-sm-10">
 						<i class="fa fa-key col-lg-1"></i>
-						<?php echo $form->passwordField($user,'password',array('placeholder'=>'Leave blank in case you dont want to update','class'=>"input-box col-lg-11"));?>
+						<?php echo $form->passwordField($user,'password',array('placeholder'=>'Leave blank in case you dont want to update','class'=>"input-box col-lg-11", 'id'=>'password'));?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="password">Confirm Password:</label>
+					<div class="col-sm-10">
+						<i class="fa fa-key col-lg-1"></i>
+						<input type="password" id="confirm_password" class="input-box col-lg-11" placeholder="Leave blank in case you dont want to update">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="job_profile">Job profile:</label>
 					<div class="col-sm-10">
 						<i class="fa fa-user-md col-lg-1"></i>
-						<?php echo $form->textField($user,'job_profile',array('placeholder'=>'Job Profile', 'class'=>"input-box col-lg-11",'value'=>$_user->job_profile,'data-parsley-required-message'=>'Job Profile is required','required'=>'required','data-parsley-trigger'=>"focusout"));?>
+						<?php echo $form->textField($user,'job_profile',array('placeholder'=>'Job Profile', 'class'=>"input-box col-lg-11",'value'=>$_user->job_profile,'data-parsley-trigger'=>"focusout"));?>
 					</div>
 				</div>
 				<div class="form-group">
@@ -257,21 +264,27 @@ function stripeResponseHandler(status, response) {
 		var validated = $("#update_user").parsley().validate();
 		if(validated)
 		{
-			var data = $("#update_user").serialize();
-			console.log(data);
-			$.ajax({
-				type: 'POST',
-				url: '<?php echo Yii::app()->createUrl("dashboard/UserUpdate"); ?>',
-				data: data,
-				success: function(data)
-				{
-					alert("Profile Updated");
-				},
-				error: function(data)
-				{
-					alert("failed");
-				}
-			})
+			if($("#password").val() == $("#confirm_password").val())
+			{
+				var data = $("#update_user").serialize();
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo Yii::app()->createUrl("dashboard/UserUpdate"); ?>',
+					data: data,
+					success: function(data)
+					{
+						alert("Profile Updated");
+					},
+					error: function(data)
+					{
+						alert("failed");
+					}
+				})
+			}
+			else
+			{
+				alert("Password and Confirm Password dosen't match");
+			}
 		}
 	}
 	var yourApiKey = 'A6TyxFZ2QSHOoQEcmsQA3z'

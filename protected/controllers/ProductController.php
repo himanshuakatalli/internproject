@@ -17,7 +17,7 @@ $criteria=new CDbCriteria;                             //for finding products re
 $criteria->with = array('categories');
 $criteria->addCondition('category_id= '.$categoryInfo->id );
 $criteria->addCondition('t.status=1');
-$criteria->order = 'bidding_amount DESC';
+$criteria->order = 'under_ppc DESC, bidding_amount DESC';
 $products = Product::model()->findAll($criteria);
 
 $criteria2=new CDbCriteria;                          // for finding features related to that category
@@ -40,6 +40,7 @@ $criteria=new CDbCriteria;                             //for finding products re
 $criteria->with = array('categories','features','deploymentFeatures');
 $criteria->addCondition('category_id= '.$id);
 $criteria->addCondition('t.status=1');
+$criteria->order = 'under_ppc DESC, bidding_amount DESC';
 // $criteria->addCondition('product.status=1');
 // $criteria->addInCondition('status',1);
 //adding conditions according to post request
