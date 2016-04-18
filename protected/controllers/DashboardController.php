@@ -472,17 +472,42 @@ public function actionGetFeatures()
 				}
 			}
 
-			if(isset($_POST['deployment_features']))
+			if(isset($_POST['DeploymentFeatures']))
 			{
-				foreach($_POST['deployment_features'] as $deploymentFeatureID)
+				foreach($_POST['DeploymentFeatures']['id'] as $deploymentFeatureID)
 				{
-
 					$productHasDeploymentFeatures = new ProductHasDeploymentFeatures;
 					$productHasDeploymentFeatures->product_id = $product->id;
 					$productHasDeploymentFeatures->deployment_feature_id = $deploymentFeatureID;
 					$productHasDeploymentFeatures->add_date = new CDbExpression('Now()');
 
 					$productHasDeploymentFeatures->save();
+				}
+			}
+
+			if(isset($_POST['SupportFeatures']))
+			{
+				foreach($_POST['SupportFeatures']['id'] as $supportFeatureID)
+				{
+					$productHasSupportFeatures = new ProductHasSupportFeatures;
+					$productHasSupportFeatures->product_id = $product->id;
+					$productHasSupportFeatures->support_feature_id = $supportFeatureID;
+					$productHasSupportFeatures->add_date = new CDbExpression('Now()');
+
+					$productHasSupportFeatures->save();
+				}
+			}
+
+			if(isset($_POST['TrainingFeatures']))
+			{
+				foreach($_POST['TrainingFeatures']['id'] as $trainingFeatureID)
+				{
+					$productHasTrainingFeatures = new ProductHasTrainingFeatures;
+					$productHasTrainingFeatures->product_id = $product->id;
+					$productHasTrainingFeatures->training_feature_id = $trainingFeatureID;
+					$productHasTrainingFeatures->add_date = new CDbExpression('Now()');
+
+					$productHasTrainingFeatures->save();
 				}
 			}
 

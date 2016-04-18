@@ -552,16 +552,16 @@
 							</span>
 							<input class="form-control" type="text" name="user_count" placeholder="Number of user counts" id="user_count"value="0" data-parsley-trigger="focusout" data-parsley-type="digits">
 						</div><br>
-						<div class="input-group">
-							<label>Trial Available</label>
+						<label>Trial Available</label>
+						<div class="input-group">							
 							<select name="trial" id="trial" class="form-control" required='required',data-parsley-trigger="focusout">
 								<option value="">Select</option>
 								<option value="trial">Yes</option>
 								<option value="no_trial">No</option>
 							</select>
 						</div><br>
+						<label>Free Version Available</label>
 						<div class="input-group">
-							<label>Free Version Available</label>
 							<select name="free_version" id="free" class="form-control" required='required',data-parsley-trigger="focusout">
 								<option value="">select</option>
 								<option value="free">Yes</option>
@@ -573,12 +573,37 @@
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicons-life-preserver"></i>
 							</span>
-							<select class="form-control" multiple="multiple" id="deployment" name="deployment_features[]" required='required',data-parsley-trigger="focusout">
-								<option value="1" name="web">Web Based</option>
-								<option value="2">Desktop</option>
-								<option value="3">Mobile</option>
-							</select>
+							<?php
+							$deploymentFeatures = DeploymentFeatures::model()->findAll();
+							$deployment = new DeploymentFeatures;
+							$deploymentNames = CHtml::listData($deploymentFeatures,'id','name');
+							echo $form->dropDownList($deployment,'id',$deploymentNames,array('id'=>'deployment','multiple'=>"multiple",'class'=>'form-control','required'=>'required','data-parsley-trigger'=>"focusout"));
+							?>
 						</div><br>
+						<label>Support Features</label>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="glyphicon glyphicons-life-preserver"></i>
+							</span>
+							<?php
+							$supportFeatures = SupportFeatures::model()->findAll();
+							$support = new SupportFeatures;
+							$supportNames = CHtml::listData($supportFeatures,'id','name');
+							echo $form->dropDownList($support,'id',$supportNames,array('id'=>'support','multiple'=>"multiple",'class'=>'form-control','required'=>'required','data-parsley-trigger'=>"focusout"));
+							?>
+						</div><br>
+						<label>Training Features</label>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="glyphicon glyphicons-life-preserver"></i>
+							</span>
+							<?php
+							$trainingFeatures = TrainingFeatures::model()->findAll();
+							$training = new TrainingFeatures;
+							$trainingNames = CHtml::listData($trainingFeatures,'id','name');
+							echo $form->dropDownList($training,'id',$trainingNames,array('id'=>'training','multiple'=>"multiple",'class'=>'form-control','required'=>'required','data-parsley-trigger'=>"focusout"));
+							?>
+						</div><br>						
 					</div>
 					<div class="modal-footer">
 						<?php echo CHtml::htmlButton('Add',array('onclick'=>'send();','class'=>'btn btn-primary')); ?>
@@ -618,6 +643,12 @@
 			enableFiltering: true
 		});
 		$('#deployment').multiselect({
+			enableFiltering: true
+		});
+		$('#support').multiselect({
+			enableFiltering: true
+		});
+		$('#training').multiselect({
 			enableFiltering: true
 		});
 	});
