@@ -340,14 +340,24 @@ public function actionProductProfile($id)
 			}
 		}
 
-		if(!(isset($_GET['no_increment'])) && !(Yii::app()->user->user_id == $product->user_id))
+		if(!(isset($_GET['no_increment'])))
 		{
-			$product->visit_count += 1;
+			if(isset(Yii::app()->user->user_id))
+			{
+				if(!(Yii::app()->user->user_id == $product->user_id))
+				{
+					$product->visit_count += 1;
+				}
+			}
+			else
+			{
+				$product->visit_count += 1;
+			}
 		}
 
 		$product->update();
 
-		$this->render('showReviews',array('reviews'=>$reviews, 'product'=>$product,
+		$this->render('productProfile',array('reviews'=>$reviews, 'product'=>$product,
 			'productFeatures'=>$productFeatures, 'productCategoryFeatures'=>$productCategoryFeatures));
 	}
 	else
@@ -393,53 +403,9 @@ public function actionProductReviewSave($id)
 	else
 		$email = $_POST['Users']['username'];
 
-	x:  $user = Users::model()->findByAttributes(array('username'=>$email));
-	if($user)
-	{
-		$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id,'product_id'=>$id));
-		if(empty($review))
-		{
-			$review = new Reviews;
-			$review->attributes = $_POST['Reviews'];
-			$review->user_id = $user->id;
-			$review->product_id = $id;
-			$review->add_date = new CDbExpression('NOW()');
-			if($review->save())
-			{
-				$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id));
-				$categories=RatingCategories::model()->findAll();
-				foreach ($categories as $category)
-				{
-					$rating = new Ratings;
-					$rating->review_id = $review->id;
-					$rating->rating_category_id = $category->id;
-					$rating->rating = $_POST[$category->id];
-					$rating->add_date = new CDbExpression('NOW()');
-					$rating->save();
-				}
-				$response['userSaved'] = 1;
-				$response['url'] = Yii::app()->createUrl('product/productprofile/',array('id'=>$id));
-			}
-		}
-		else
-		{
-			$review->attributes = $_POST['Reviews'];
-			$review->modify_date = new CDbExpression('NOW()');
-			if($review->update())
-			{
-				foreach ($review->ratings as $rating)
-				{
-					$rating->rating = $_POST[$rating->ratingCategory->id];
-					$rating->modify_date = new CDbExpression('NOW()');
-					$rating->update();
-				}
-				$response['userUpdate']=2;
-				$response['url'] = Yii::app()->createUrl('product/productprofile/',array('id'=>$id));
-			}
-		}
-		echo json_encode($response);
-	}
-	else
+	$user = Users::model()->findByAttributes(array('username'=>$email));
+
+	if(empty($user))
 	{
 		$user = new Users;
 		$user->attributes = $_POST['Users'];
@@ -447,11 +413,53 @@ public function actionProductReviewSave($id)
 		$user->role_id = 3;
 		$user->is_verified = 0;
 		$user->add_date = new CDbExpression('NOW()');
-		if($user->save())
+		$user->save();
+	}
+	
+	$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id,'product_id'=>$id));
+	
+	if(empty($review))
+	{
+		$review = new Reviews;
+		$review->attributes = $_POST['Reviews'];
+		$review->user_id = $user->id;
+		$review->product_id = $id;
+		$review->add_date = new CDbExpression('NOW()');
+		if($review->save())
 		{
-			goto x;
+			$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id,'product_id'=>$id));
+			$categories = RatingCategories::model()->findAll();
+			foreach ($categories as $category)
+			{
+				$rating = new Ratings;
+				$rating->review_id = $review->id;
+				$rating->rating_category_id = $category->id;
+				$rating->rating = $_POST[$category->id];
+				$rating->add_date = new CDbExpression('NOW()');
+				$rating->save();
+			}
+			$response['userSaved'] = 1;
+			$response['url'] = Yii::app()->createUrl('product/productprofile/',array('id'=>$id));
 		}
 	}
+	else
+	{
+		$review->attributes = $_POST['Reviews'];
+		$review->modify_date = new CDbExpression('NOW()');
+		
+		if($review->update())
+		{
+			foreach ($review->ratings as $rating)
+			{
+				$rating->rating = $_POST[$rating->ratingCategory->id];
+				$rating->modify_date = new CDbExpression('NOW()');
+				$rating->update();
+			}
+			$response['userUpdate']=2;
+			$response['url'] = Yii::app()->createUrl('product/productprofile/',array('id'=>$id));
+		}
+	}
+	echo json_encode($response);
 }
 
 public function sendVerificationEmail($user)

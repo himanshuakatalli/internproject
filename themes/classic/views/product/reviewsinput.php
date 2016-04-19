@@ -18,11 +18,11 @@
 		<div class="form-row">
 			<?php
 			$categories=RatingCategories::model()->findAll();
-			foreach ($categories as $categorie) {
+			foreach ($categories as $category) {
 				?>
 				<div class="star-rating">
-					<h4><?php echo $categorie->name; ?></h4>
-					<input id="input-<?php echo $categorie->name; ?>" name="<?php echo $categorie->id; ?>" value="0" type="number" class="rating" min=0 max=5 step=0.2 data-size="sm" >
+					<h4><?php echo $category->name; ?></h4>
+					<input id="input-<?php echo $category->name; ?>" name="<?php echo $category->id; ?>" value="0" type="number" class="rating" min=0 max=5 step=0.2 data-size="sm" >
 				</div>
 				<?php
 			}

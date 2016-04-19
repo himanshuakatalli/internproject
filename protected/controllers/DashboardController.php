@@ -1,6 +1,8 @@
 <?php
 Yii::import('application.vendors.*');
 require_once('stripe/init.php');
+//require_once('../vendors/stripe/init.php');
+
 class DashboardController extends Controller
 {
 
@@ -523,17 +525,26 @@ public function actionGetFeatures()
 
 		try{
 			$secretkey=Controller::getsecretkey();
+
 			\Stripe\Stripe::setApiKey($secretkey);
-			$customer = \Stripe\Customer::create(
-			array(
-				"source" => $token,
-				'description'=>"Amount paid for premium plan by vendor ".$user->first_name." ".$user->last_name.""
+
+			echo $secretkey."\n";
+			echo $token;
+			
+
+			$customer = \Stripe\Customer::create(array(
+  			"description" => "Customer for test@example.com",
+  			"source" => $token // obtained with Stripe.js
 				));
+			
+			die;
+			print_r($customer);
+			
 			$charge = \Stripe\Charge::create(
 			array(
 				'amount' => (2060),
 				'currency' => 'usd',
-				"customer" => $customer->id
+				"customer" => $customer->id 
 				));
 
 			if($charge->paid)
@@ -590,6 +601,7 @@ public function actionGetFeatures()
 		}
 		catch(\Stripe\Error\InvalidRequest $e)
 		{
+			echo "Hello1";
 			$e_json = $e->getJsonBody();
 			$error = $e_json['error'];
 			$response['error']=$error['message'];
@@ -598,6 +610,7 @@ public function actionGetFeatures()
 		}
 		catch(\Stripe\Error\ApiConnection $e)
 		{
+			echo "Hello2";
 			$e_json = $e->getJsonBody();
 			$error = $e_json['error'];
 			$response['error']=$error['message'];
@@ -606,6 +619,7 @@ public function actionGetFeatures()
 		}
 		catch (\Stripe\Error\Base $e)
 		{
+			echo "Hello3";
 			$e_json = $e->getJsonBody();
 			$error = $e_json['error'];
 			$response['error']=$error['message'];
@@ -615,6 +629,7 @@ public function actionGetFeatures()
 		}
 		catch(Exception $e)
 		{
+			echo "Hello4";
 			$e_json = $e->getJsonBody();
 			$error = $e_json['error'];
 			$response['error']=$error['message'];
@@ -662,6 +677,7 @@ public function actionGetFeatures()
 				if($product->under_ppc)
 				{
 					$product->under_ppc = 0;
+					$product->was_under_ppc = 1;
 					$product->update();
 				}
 			}

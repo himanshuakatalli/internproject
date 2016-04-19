@@ -199,10 +199,10 @@ function stripeResponseHandler(status, response) {
         // show the errors on the form
         $(".error").html(response.error.message);
         return false;
-    } else
+    } 
+    else
     {
         var token = response['id'];
-        var invoice_id=$("#invoice_id").val();
         $.ajax({
         			headers: {"Accept": "application/json"},
         			type: 'POST',
@@ -210,17 +210,20 @@ function stripeResponseHandler(status, response) {
 							data: {token : token},
 							success: function(data)
 							{
-								//alert("success");
-								var res = $.parseJSON(data);
+								alert("success");
+								/*var res = $.parseJSON(data);
 								$(".message").html(res.message);
 								$(".error").html(res.error);
 								if(res.success == 1) {
 									window.location.href = res.url;
-								}
+								}*/
 							},
 							error: function(data)
 							{
-								//alert("failed");
+								alert("failed");
+								/*var res = $.parseJSON(data);
+								$(".message").html(res.message);
+								$(".error").html(res.error);*/
 							}
         });
 
@@ -231,8 +234,8 @@ function stripeResponseHandler(status, response) {
 	$(document).ready(function(){
 
 		$("#payment-form").submit(function(event) {
-				$('.submit-button').val('Please wait...');
-        $('.submit-button').attr("disabled", "disabled");
+				//$('.submit-button').val('Please wait...');
+        //$('.submit-button').attr("disabled", "disabled");
         Stripe.createToken({
             number: $('.card-number').val(),
             cvc: $('.card-cvc').val(),
