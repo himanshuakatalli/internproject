@@ -160,7 +160,7 @@
 							</div>
 							<div class="col-xs-5 col-md-5 pull-right">
 								<div class="form-group">
-									<label for="cardCVC">CV CODE</label>
+									<label for="cardCVC">CVV CODE</label>
 									<input type="text" size="4" autocomplete="off" class="card-cvc form-control form-control" style="width: 80px;" placeholder="CVV"/>
 								</div>
 							</div>

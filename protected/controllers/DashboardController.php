@@ -532,12 +532,13 @@ public function actionGetFeatures()
 			echo $token;
 			
 
-			$customer = \Stripe\Customer::create(array(
-  			"description" => "Customer for test@example.com",
-  			"source" => $token // obtained with Stripe.js
-				));
+			$customer = \Stripe\Customer::create(
+				array(
+					"description"=>"Customer for test@example.com",
+					"source"=>$token
+					));
 			
-			die;
+			
 			print_r($customer);
 			
 			$charge = \Stripe\Charge::create(
