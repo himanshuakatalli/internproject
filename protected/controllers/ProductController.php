@@ -80,115 +80,142 @@ public function actionSearch()
 	}
 }
 
-	public function actionReferring($id)
-	{
-    $product = Product::model()->with('user')->findByPk($id);
-    $cus=$product->user->Customer_ID;
-    $bid_amount=$product->bidding_amount;
-    $ppc=$product->under_ppc;
+public function actionReferring($id)
+{
+	$flag = false;
 
-    $pCookie = Yii::app()->request->cookies["P_".$id];
-    if(isset($pCookie))
-    {
-      CController:: redirect('http://'.$product->product_website);
-    }
-    else
-    {
-      $pCookie = new CHttpCookie("P_".$id,'set' );
-			$pCookie->expire = time()+60*60*24;
-			Yii::app()->request->cookies["P_".$id] = $pCookie;
-			$tracking = new TrackingUser;
-			$tracking ->product_id = $id;
-			$tracking ->user_ip = $this->get_client_ip();
-			$tracking ->cookie = "P_".$id;
-			$tracking ->entry_time = date("Y-m-d H:i:s",time());
-			$tracking ->action_time = date("Y-m-d H:i:s",time());
-			$tracking ->add_date = date("Y-m-d H:i:s", time());
-			$queryGeoLoc = @unserialize(file_get_contents('http://ip-api.com/php/'.$tracking ->user_ip));
-      if($queryGeoLoc && $queryGeoLoc['status'] == 'success')
-      {
-      	$tracking ->country = $queryGeoLoc['country'];
-      	$tracking ->country_code = $queryGeoLoc['countryCode'];
-      	$tracking ->region = $queryGeoLoc['region'];
-      	$tracking ->region_name = $queryGeoLoc['regionName'];
-      	$tracking ->city = $queryGeoLoc['city'];
-      	$tracking ->zip = $queryGeoLoc['zip'];
-      	$tracking ->latitude = $queryGeoLoc['lat'];
-      	$tracking ->longitude = $queryGeoLoc['lon'];
-      	$tracking ->timezone = $queryGeoLoc['timezone'];
-      	$tracking ->isp = $queryGeoLoc['isp'];
-      	$tracking ->org = $queryGeoLoc['org'];
-      }
-      else
-      {
-        $tracking ->status_geo = 0;
-      }
-			$tracking ->save();
+	$product = Product::model()->with('user')->findByPk($id);
+	
+	$cus = $product->user->Customer_ID;
+	$bid_amount = $product->bidding_amount;
+	$ppc = $product->under_ppc;
+
+	$pCookie = Yii::app()->request->cookies["P_".$id];
+	
+	if(isset($pCookie))
+	{
+		CController:: redirect('http://'.$product->product_website);
+	}
+	elseif(isset(Yii::app()->user->user_id))
+	{
+		if((Yii::app()->user->user_id == $product->user_id))
+		{
+			CController:: redirect('http://'.$product->product_website);
+		}
+		else
+		{
+			$flag = true;
+		}
+	}
+	else
+	{
+		$flag = true;
+	}
+	
+	if($flag)
+	{
+		$pCookie = new CHttpCookie("P_".$id,'set' );
+		$pCookie->expire = time()+60*60*24;
+
+		Yii::app()->request->cookies["P_".$id] = $pCookie;
+
+		$tracking = new TrackingUser;
+		$tracking ->product_id = $id;
+		$tracking ->user_ip = $this->get_client_ip();
+		$tracking ->cookie = "P_".$id;
+		$tracking ->entry_time = date("Y-m-d H:i:s",time());
+		$tracking ->action_time = date("Y-m-d H:i:s",time());
+		$tracking ->add_date = date("Y-m-d H:i:s", time());
+
+		$queryGeoLoc = @unserialize(file_get_contents('http://ip-api.com/php/'.$tracking ->user_ip));
+
+		if($queryGeoLoc && $queryGeoLoc['status'] == 'success')
+		{
+			$tracking ->country = $queryGeoLoc['country'];
+			$tracking ->country_code = $queryGeoLoc['countryCode'];
+			$tracking ->region = $queryGeoLoc['region'];
+			$tracking ->region_name = $queryGeoLoc['regionName'];
+			$tracking ->city = $queryGeoLoc['city'];
+			$tracking ->zip = $queryGeoLoc['zip'];
+			$tracking ->latitude = $queryGeoLoc['lat'];
+			$tracking ->longitude = $queryGeoLoc['lon'];
+			$tracking ->timezone = $queryGeoLoc['timezone'];
+			$tracking ->isp = $queryGeoLoc['isp'];
+			$tracking ->org = $queryGeoLoc['org'];
+		}
+		else
+		{
+			$tracking ->status_geo = 0;
+		}
+
+		if($tracking->save())
+		{
 			$product->customer_count += 1;
 			$product->visit_count += 1;
+
 			if($product->update())
 			{
 				if($ppc)
 				{
-
-				$this->payperclick($cus,$bid_amount);
-
+					$this->payperclick($cus,$bid_amount);
 				}
 			}
-      CController:: redirect('http://'.$product->product_website);
-    }
-  }
+		}
+		
+		CController:: redirect('http://'.$product->product_website);
+	}
+}
 
 public function payperclick($cus,$bid_amount)
 {
 	try{
 		$secretkey=Controller::getsecretkey();
-							\Stripe\Stripe::setApiKey($secretkey);
+		\Stripe\Stripe::setApiKey($secretkey);
 		$charge = \Stripe\Charge::create(
-											array(
-														'amount' =>(($bid_amount*100)+60),
-														'currency' => 'usd',
-														"customer" => $cus
-														));
+			array(
+				'amount' =>(($bid_amount*100)+60),
+				'currency' => 'usd',
+				"customer" => $cus
+				));
 
-							if($charge->paid)
-							{
-								//success
-							}
-						}catch(\Stripe\Error\InvalidRequest $e)
-						{
-							$e_json = $e->getJsonBody();
-							$error = $e_json['error'];
-							$response['error']=$error['message'];
-							// $response['message']="Invalid Request.";
-							$response['success']="2";
-							echo json_encode($response);
-						}catch(\Stripe\Error\ApiConnection $e)
-						{
-							$e_json = $e->getJsonBody();
-							$error = $e_json['error'];
-							$response['error']=$error['message'];
-							// $response['message']="Network Error.Please make request again";
-							$response['success']="3";
-							echo json_encode($response);
-						}catch (\Stripe\Error\Base $e)
-						 {
-							$e_json = $e->getJsonBody();
-							$error = $e_json['error'];
-							$response['error']=$error['message'];
-							$response['message']="Something gone wrong.Please try later.And send us screenshot of this error.";
-							$response['success']="4";
-							echo json_encode($response);
-						 }
-						catch(Exception $e)
-						{
-							$e_json = $e->getJsonBody();
-							$error = $e_json['error'];
-							$response['error']=$error['message'];
-							$response['message']="Internal Server Error.";
-							$response['success']="5";
-							echo json_encode($response);
-						}
+		if($charge->paid)
+		{
+//success
+		}
+	}catch(\Stripe\Error\InvalidRequest $e)
+	{
+		$e_json = $e->getJsonBody();
+		$error = $e_json['error'];
+		$response['error']=$error['message'];
+// $response['message']="Invalid Request.";
+		$response['success']="2";
+		echo json_encode($response);
+	}catch(\Stripe\Error\ApiConnection $e)
+	{
+		$e_json = $e->getJsonBody();
+		$error = $e_json['error'];
+		$response['error']=$error['message'];
+// $response['message']="Network Error.Please make request again";
+		$response['success']="3";
+		echo json_encode($response);
+	}catch (\Stripe\Error\Base $e)
+	{
+		$e_json = $e->getJsonBody();
+		$error = $e_json['error'];
+		$response['error']=$error['message'];
+		$response['message']="Something gone wrong.Please try later.And send us screenshot of this error.";
+		$response['success']="4";
+		echo json_encode($response);
+	}
+	catch(Exception $e)
+	{
+		$e_json = $e->getJsonBody();
+		$error = $e_json['error'];
+		$response['error']=$error['message'];
+		$response['message']="Internal Server Error.";
+		$response['success']="5";
+		echo json_encode($response);
+	}
 
 
 }
@@ -415,9 +442,9 @@ public function actionProductReviewSave($id)
 		$user->add_date = new CDbExpression('NOW()');
 		$user->save();
 	}
-	
+
 	$review = Reviews::model()->findByAttributes(array('user_id'=>$user->id,'product_id'=>$id));
-	
+
 	if(empty($review))
 	{
 		$review = new Reviews;
@@ -446,7 +473,7 @@ public function actionProductReviewSave($id)
 	{
 		$review->attributes = $_POST['Reviews'];
 		$review->modify_date = new CDbExpression('NOW()');
-		
+
 		if($review->update())
 		{
 			foreach ($review->ratings as $rating)
