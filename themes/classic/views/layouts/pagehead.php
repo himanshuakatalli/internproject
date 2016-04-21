@@ -197,7 +197,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f6383', end
 								<span>Made in NY</span>
 						</div>
 						<div class="copyright">
-								© 2015 VenturePact. All rights reserved.
+								© 2016 VenturePact. All rights reserved.
 						</div>
 				</div>
 				<div class="col-md-7 col-sm-12 col-xs-12 rs-center mt30">

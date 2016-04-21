@@ -23,18 +23,24 @@
 		<?php $form = $this->beginWidget('CActiveForm',array('id'=>'update_user','enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),'htmlOptions'=>array('class'=>"form-horizontal",'data-parsley-validate'=>'data-parsley-validate')));?>
 		<figure><p class="centered"><a href="#" id="changeProfileImg"><img id="pimg" src="<?php echo (!empty($_user->profile_img))?$_user->profile_img:Yii::app()->theme->baseUrl."/style/newhome/images/pic.png";?>" class="img-circle" width="80px" height="80px"/></a></p></figure><br>
 		<?php
-			if(!$_user->is_premium){
+			if(!$_user->is_premium && $_user->is_verified){
 		?>
-			<div class="alert alert-danger" role="alert" style=" line-height:30px;">
+			<div class="alert alert-danger" role="alert" style=" line-height:30px; background: #FBA9A9; color: #000;">
 				Free Account
 				<a class="btn btn-success pull-right" href="javascript:void(0);" data-toggle="modal" data-target="#makePremiumPayment">
 					Get Premium <span class="badge">$20 / month</span>
 				</a>
 			</div>
 		<?php
+			}elseif(!$_user->is_verified){
+		?>
+			<div class="alert alert-danger" role="alert" style=" line-height:30px; background: #FBA9A9; color: #000;">
+				Account Not Verified. Check your E-Mail and verify the Account
+			</div>
+			<?php
 			}else{
 		?>
-			<div class="alert alert-success" role="alert" style=" line-height:30px;">
+		<div class="alert alert-success" role="alert" style=" line-height:30px; background: #A9EBAC; color: #000;">
 				Premium Account
 				<a class="btn btn-danger pull-right" href="javascript:void(0);" data-toggle="modal" data-target="#chngToFree">
 					Change to Free User
@@ -55,7 +61,7 @@
 					<label class="control-label col-sm-2" for="lastName">Last Name:</label>
 					<div class="col-sm-10">
 						<i class="fa fa-user col-lg-1"></i>
-						<?php echo $form->textField($user,'last_name',array('placeholder'=>'Last Name', 'class'=>"input-box col-lg-11",'data-parsley-required-message'=>'Name is required','required'=>'required','value'=>$_user->last_name,'data-parsley-trigger'=>"focusout",'data-parsley-pattern'=>"^[a-zA-Z ]+$",'data-parsley-minlength'=>"2"));?>
+						<?php echo $form->textField($user,'last_name',array('placeholder'=>'Last Name', 'class'=>"input-box col-lg-11",'value'=>$_user->last_name,'data-parsley-trigger'=>"focusout",'data-parsley-pattern'=>"^[a-zA-Z ]+$",'data-parsley-minlength'=>"2"));?>
 					</div>
 				</div>
 				<div class="form-group">
@@ -69,7 +75,7 @@
 					<label class="control-label col-sm-2" for="phone_number">Phone Number</label>
 					<div class="col-sm-10">
 						<i class="fa fa-phone col-lg-1"></i>
-						<?php echo $form->textField($user,'phone_number',array('placeholder'=>'Phone Number','class'=>"input-box col-lg-11",'value'=>$_user->phone_number,'required'=>'required','data-parsley-trigger'=>"focusout",'data-parsley-required-message'=>"Phone Number is required",'data-parsley-minlength'=>"10",'data-parsley-type'=>"digits"));?>
+						<?php echo $form->textField($user,'phone_number',array('placeholder'=>'Phone Number','class'=>"input-box col-lg-11",'value'=>$_user->phone_number,'data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"10",'data-parsley-type'=>"digits"));?>
 					</div>
 					</div>
 				<div class="form-group">
@@ -210,20 +216,15 @@ function stripeResponseHandler(status, response) {
 							data: {token : token},
 							success: function(data)
 							{
-								alert("success");
-								/*var res = $.parseJSON(data);
-								$(".message").html(res.message);
-								$(".error").html(res.error);
-								if(res.success == 1) {
-									window.location.href = res.url;
-								}*/
+								alert("Payment Successful");
+								window.location.href = "<?php echo Yii::app()->createUrl('dashboard/usersetting'); ?>";
 							},
 							error: function(data)
 							{
 								alert("failed");
-								/*var res = $.parseJSON(data);
+								var res = $.parseJSON(data);
 								$(".message").html(res.message);
-								$(".error").html(res.error);*/
+								$(".error").html(res.error);
 							}
         });
 
@@ -233,16 +234,18 @@ function stripeResponseHandler(status, response) {
 
 	$(document).ready(function(){
 
-		$("#payment-form").submit(function(event) {
-				//$('.submit-button').val('Please wait...');
-        //$('.submit-button').attr("disabled", "disabled");
-        Stripe.createToken({
-            number: $('.card-number').val(),
-            cvc: $('.card-cvc').val(),
-            exp_month: $('.card-expiry-month').val(),
-            exp_year: $('.card-expiry-year').val()
-        }, stripeResponseHandler);
-        return false; // submit from callback
+		$("#payment-form").submit(function(event) 
+		{
+			$('.submit-button').val('Please wait...');
+			$('.submit-button').attr("disabled", "disabled");
+        		
+        		Stripe.createToken({
+            		number: $('.card-number').val(),
+            		cvc: $('.card-cvc').val(),
+            		exp_month: $('.card-expiry-month').val(),
+            		exp_year: $('.card-expiry-year').val()
+        			}, stripeResponseHandler);
+        	return false; // submit from callback
     });
 
 
@@ -277,6 +280,7 @@ function stripeResponseHandler(status, response) {
 					success: function(data)
 					{
 						alert("Profile Updated");
+						window.location.href = "<?php echo Yii::app()->createUrl('dashboard/usersetting'); ?>";
 					},
 					error: function(data)
 					{
@@ -332,6 +336,7 @@ function remove_premium()
 		success: function(data)
 		{
 			alert("Profile Updated");
+			window.location.href = "<?php echo Yii::app()->createUrl('dashboard/usersetting'); ?>";
 		},
 		error: function(data)
 		{

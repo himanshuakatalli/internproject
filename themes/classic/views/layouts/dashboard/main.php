@@ -665,6 +665,7 @@
 		success: function(data)
 		{
 			alert("Product listed");
+			window.location.href = "<?php echo Yii::app()->createUrl('dashboard/index'); ?>";
 		},
 		error: function(data)
 		{

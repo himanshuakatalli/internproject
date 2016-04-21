@@ -174,7 +174,6 @@ public function actionProductsettingsave($id)
 		{
 			$product->was_under_ppc = 1;
 		}
-		print_r($product);
 
 		if($product->update())
 		{
@@ -521,6 +520,7 @@ public function actionGetFeatures()
 	{
 		$user_id = Yii::app()->user->user_id;
 		$user=Users::model()->findByPk($user_id);
+
 		$token = $_POST['token'];
 
 		try{
@@ -534,7 +534,7 @@ public function actionGetFeatures()
 
 			$customer = \Stripe\Customer::create(
 				array(
-					"description"=>"Customer for test@example.com",
+					"description"=>"Amount paid for premium plan by vendor ".$user->first_name." ".$user->last_name."",
 					"source"=>$token
 					));
 			
@@ -576,10 +576,6 @@ public function actionGetFeatures()
 				if($transaction->save())
 				{
 					$user->update();
-					$response['message']="Card is Successfully saved.";
-					$response['success']="1";
-					$response['url'] = $this->createUrl('index');
-					echo json_encode($response);
 				}
 			}
 			else

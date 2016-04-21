@@ -123,9 +123,9 @@ public function actionReferring($id)
 		$tracking ->product_id = $id;
 		$tracking ->user_ip = $this->get_client_ip();
 		$tracking ->cookie = "P_".$id;
-		$tracking ->entry_time = date("Y-m-d H:i:s",time());
-		$tracking ->action_time = date("Y-m-d H:i:s",time());
-		$tracking ->add_date = date("Y-m-d H:i:s", time());
+		$tracking ->entry_time = new CDbExpression('Now()');
+		$tracking ->action_time = new CDbExpression('Now()');
+		$tracking ->add_date = new CDbExpression('Now()');
 
 		$queryGeoLoc = @unserialize(file_get_contents('http://ip-api.com/php/'.$tracking ->user_ip));
 
@@ -502,7 +502,7 @@ public function sendVerificationEmail($user)
 	$message="Hey, ".$user->first_name." ".$user->last_name."!<br><br><br>";
 	$message.="Your Product is listed. Please Verify your account<br><br>";
 	$message .="<a href=".$url."><button style='background:#f07762;color:white;width:200px;height:30px'>Verify Your Email</button></a><br><br><br>";
-	$message.="Use this credential to login and make sure to change password at first login.<br>";
+	$message.="Use this credential to login and make sure to change your password at first login.<br>";
 	$message.="Username:- ".$user->username."<br>";
 	$message.="Password:- ".base64_decode($user->password)."<br><br><br>";
 	$message.="Regards,<br>";

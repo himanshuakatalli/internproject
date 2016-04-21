@@ -19,7 +19,7 @@ header('Access-Control-Allow-Origin:*');
 	<div class="row">
 		<aside class="full-height">
 			<ul>
-				<li><a class="trans" href="#product_information">Product Informationx</a></li>
+				<li><a class="trans" href="#product_information">Product Information</a></li>
 				<li><a class="trans" href="#company_information">Company Information</a></li>
 				<li><a class="trans" href="#social_media">Social Media Links</a></li>
 				<li><a class="transactions" href="#transactions">Transactions</a></li>
@@ -45,7 +45,7 @@ header('Access-Control-Allow-Origin:*');
 							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Description:</label>
 							<div class="input col-lg-10">
 								<i class="fa fa-bars fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-								<?php echo $form->textArea($product,'description',array('placeholder'=>"product_description",'required'=>'required','class'=>'col-lg-11 col-md-1 col-sm-1 col-xs-1','data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"50"));?>
+								<?php echo $form->textArea($product,'description',array('placeholder'=>"product_description",'required'=>'required','class'=>'col-lg-11 col-md-1 col-sm-1 col-xs-1','data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"20"));?>
 							</div>
 						</div>
 						<div class="row">
@@ -110,7 +110,7 @@ header('Access-Control-Allow-Origin:*');
 							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Bidding Amount:</label>
 							<div class="input col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<i class="fa fa-usd fa-1x col-lg-1 col-md-1 col-sm-1 col-xs-1"></i>
-								<?php echo $form->textField($product,'bidding_amount',array('placeholder'=>"Bidding Amount",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"number"));?>
+								<?php echo $form->textField($product,'bidding_amount',array('placeholder'=>"Bidding Amount",'required'=>'required','class'=>'col-lg-11 col-md-11 col-sm-11 col-xs-11','data-parsley-trigger'=>"focusout",'data-parsley-type'=>"number",'data-parsley-min'=>"0.5"));?>
 							</div>
 						</div>
 						<div class="row">
@@ -495,6 +495,7 @@ $(document).ready(function(){
 		{
 			alert("Product Updated");
 			$('#save_record').val('save');
+			window.location.href = "<?php echo Yii::app()->createUrl('dashboard/productsetting',array('id'=>$product->id)); ?>";
 		}
 	})
 	}
