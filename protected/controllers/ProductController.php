@@ -389,7 +389,6 @@ public function actionProductProfile($id)
 	}
 	else
 	{
-
 	}
 }
 
@@ -414,11 +413,11 @@ public function get_client_ip()
 }
 
 public function actionProductReview($id)
-{
-	$review = new Reviews;
-	$user = new Users;
-	$product = Product::model()->findByAttributes(array('id'=>$id));
-	$this->render('reviewsinput',array('review'=>$review,'user'=>$user,'product'=>$product));
+{	
+		$review = new Reviews;
+		$user = new Users;
+		$product = Product::model()->findByAttributes(array('id'=>$id));
+		$this->render('reviewsinput',array('review'=>$review,'user'=>$user,'product'=>$product));
 }
 
 public function actionProductReviewSave($id)

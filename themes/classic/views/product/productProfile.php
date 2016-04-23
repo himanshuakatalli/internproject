@@ -148,11 +148,27 @@ else
 									<a href="#review"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/style/newhome/images/chat-icon.png" width="28" height="28"/>
 										<?php echo $numberOfReviews, " ", $reviewNumber?></a>
 									</div>
+									<?php 
+									if(isset(Yii::app()->user->user_id))
+									{
+										if(!(Yii::app()->user->user_id == $product->user_id))
+										{?>
 									<div class="col-md-6 pd12">
 										<a href="<?php echo Yii::app()->createUrl('/product/ProductReview/',array('id'=>$product->id));?>">
 											Review This Product 
 										</a>
 									</div>
+									<?php }
+									}
+									else{ ?>
+									<div class="col-md-6 pd12">
+										<a href="<?php echo Yii::app()->createUrl('/product/ProductReview/',array('id'=>$product->id));?>">
+											Review This Product 
+										</a>
+									</div>
+									<?php
+									}
+									?>
 								</div>
 							</div> 
 						</div>
