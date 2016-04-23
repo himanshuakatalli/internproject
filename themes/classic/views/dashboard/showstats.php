@@ -1,6 +1,3 @@
-<?php
-	$product = Product::model()->findByPk($product_id);
-?>
 <section class="wrapper">
 	<section class="centered-wrapper">
 		<h4>Showing stats for</h4>
@@ -27,8 +24,8 @@
 				<thead>
 					<tr class="row">
 						<td class="col-lg-2">S.No.</td>
-						<td class="col-lg-3">Date</td>
-						<td class="col-lg-2">Day</td>
+						<td class="col-lg-3">Month</td>
+						<td class="col-lg-2">Year</td>
 						<td class="col-lg-1">Clicks</td>
 						<td class="col-lg-2">Bid Cost</td>
 						<td class="col-lg-2">Amount</td>
@@ -36,21 +33,18 @@
 				</thead>
 
 				<tbody>
-					<?php foreach ($ppcCountArray as $date=>$count): ?>
-						<?php
-							$index = 1;
-							$weekday = date('l', strtotime($date));
-							echo $weekday;
-						?>
-						<tr class="row">
-							<td class="col-lg-2"><?php echo $index; ?></td>
-							<td class="col-lg-3"><?php echo $date; ?></td>
-							<td class="col-lg-2"><?php echo $weekday; ?></td>
-							<td class="col-lg-1"><?php echo $count; ?></td>
-							<td class="col-lg-2"><?php echo "$".$product->bidding_amount; ?></td>
-							<td class="col-lg-2"><?php echo "$".$product->bidding_amount*$count;?></td>
-						</tr>
-					<?php endforeach; ?>
+					<?php 
+						$index = 1;
+						foreach ($stats as $stat): ?>
+							<tr class="row">
+								<td class="col-lg-2"><?php echo $index; ?></td>
+								<td class="col-lg-3"><?php echo $stat['month']; ?></td>
+								<td class="col-lg-2"><?php echo $stat['year']; ?></td>
+								<td class="col-lg-1"><?php echo $stat['click_count']; ?></td>
+								<td class="col-lg-2"><?php echo "$".$product->bidding_amount; ?></td>
+								<td class="col-lg-2"><?php echo "$".$product->bidding_amount*$stat['click_count']; ?></td>
+							</tr>
+					<?php  $index += 1; endforeach; ?>
 				</tbody>
 			</table>
 		</div>

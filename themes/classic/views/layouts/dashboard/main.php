@@ -186,7 +186,7 @@
 										<span>User Account Settings</span>
 									</a>
 									<ul class="sub">
-										<li><a  href="<?php echo $this->createUrl('viewprofile');?>">View Profile</a></li>
+										<li><a  href="<?php echo $this->createUrl('usersetting');?>">View Profile</a></li>
 										<li><a  href="<?php echo $this->createUrl('socialnetworks');?>">Social Networks</a></li>
 									</ul>
 								</li>

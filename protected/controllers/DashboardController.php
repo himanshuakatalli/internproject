@@ -269,14 +269,7 @@ public function actionUsersetting()
 	$this->render('usersetting',array('user'=>$user,'_user'=>$_user));
 
 }
-public function actionViewprofile()
-{
-	$user_id = Yii::app()->user->id;
-	$user = new Users;
-	$_user = Users::model()->findByAttributes(array('username'=>$user_id));
-	$this->render('viewprofile',array('user'=>$user,'_user'=>$_user));
 
-}
 public function actionSocialnetworks()
 {
 
@@ -296,15 +289,18 @@ public function actionUserUpdate()
 
 	$user->profile_img = $_POST['Users']['profile_img'];
 
-	if($user->password == "")
+	if(isset($_POST['Users']['password']))
 	{
-		$_user = Users::model()->findByAttributes(array('username'=>$user_id));
+		if($user->password == "")
+		{
+			$_user = Users::model()->findByAttributes(array('username'=>$user_id));
 
-		$user->password = $_user->password;
-	}
-	else
-	{
-		$user->password = base64_encode($_POST['Users']['password']);
+			$user->password = $_user->password;
+		}
+		else
+		{
+			$user->password = base64_encode($_POST['Users']['password']);
+		}
 	}
 
 	$user->modify_date = new CDbExpression('NOW()');
@@ -380,34 +376,28 @@ public function actionGetFeatures()
 
 		public function actionShowStats($id)
 		{
-			$productexist=Product::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->user_id,'id'=>$id,'status'=>'1'));
-			if($productexist)
+			$product = Product::model()->findByAttributes(array('id'=>$id, 'status'=>'1','user_id'=>Yii::app()->user->user_id));
+			
+			if($product)
 			{
-			$criteria = new CDbCriteria();
-			$criteria->order = 'entry_time ASC';
-			$criteria->condition = 'product_id=:id';
-			$criteria->params = array(':id'=>$id);
-			$tracking_user = TrackingUser::model()->findAll($criteria);
+				$sql = "select count(*) as click_count,entry_time as date,extract(month from entry_time) as month,extract(year from entry_time) as year from tracking_user where product_id='$product->id' group by extract(month from entry_time),extract(year from entry_time) order by year desc, month desc";
 
-			$currDate = "0000-00-00";
-			$ppcCountArray = array();
-			foreach ($tracking_user as $value) {
-					# code...
-				if(preg_match_all("/$currDate/", $value->entry_time, $matches) == 0) {
-						$tempDateArray = explode(" ",$value->entry_time);
-						$currDate = $tempDateArray[0];
-						$ppcCountArray[$currDate] = 1;
-				}
-				else {
-						$ppcCountArray[$currDate]++;
-				}
+				$command = Yii::app()->db->createCommand($sql);
+
+				$stats = $command->queryAll();
+
+				// foreach ($stats as $stat) 
+				// {
+				// 	print_r($stat);
+				// }
+
+				$this->render('showstats',array('stats'=>$stats,'product'=>$product));
 			}
-			$this->render('showstats',array('ppcCountArray'=>$ppcCountArray,'product_id'=>$id));
-		}else{
-
-			$this->render('indexAlt');
+			else
+			{
+				$this->render('indexAlt');
+			}
 		}
-}
 //dashboard add product page.
 	public function actionAddproduct()
 	{

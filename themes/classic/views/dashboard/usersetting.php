@@ -78,6 +78,8 @@
 						<?php echo $form->textField($user,'phone_number',array('placeholder'=>'Phone Number','class'=>"input-box col-lg-11",'value'=>$_user->phone_number,'data-parsley-trigger'=>"focusout",'data-parsley-minlength'=>"10",'data-parsley-type'=>"digits"));?>
 					</div>
 					</div>
+					<?php if(!$_user->oauth_uid)
+					{?>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="password">New Password:</label>
 					<div class="col-sm-10">
@@ -92,6 +94,7 @@
 						<input type="password" id="confirm_password" class="input-box col-lg-11" placeholder="Leave blank in case you dont want to update">
 					</div>
 				</div>
+				<?php } ?>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="job_profile">Job profile:</label>
 					<div class="col-sm-10">
@@ -99,6 +102,8 @@
 						<?php echo $form->textField($user,'job_profile',array('placeholder'=>'Job Profile', 'class'=>"input-box col-lg-11",'value'=>$_user->job_profile,'data-parsley-trigger'=>"focusout"));?>
 					</div>
 				</div>
+				<?php if(!$_user->oauth_uid)
+					{?>
 				<div class="form-group">
 					<div class="col-sm-10">
 						<?php
@@ -106,6 +111,7 @@
 						?>
 					</div>
 				</div>
+				<?php } ?>
 			<?php $this->endWidget(); ?>
 		</div>
 	</div>
