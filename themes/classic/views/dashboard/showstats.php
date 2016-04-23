@@ -35,10 +35,13 @@
 				<tbody>
 					<?php 
 						$index = 1;
-						foreach ($stats as $stat): ?>
+						foreach ($stats as $stat): 
+							$monthNum  = $stat['month'];
+							$dateObj   = DateTime::createFromFormat('!m', $monthNum);
+							$monthName = $dateObj->format('F'); ?>
 							<tr class="row">
 								<td class="col-lg-2"><?php echo $index; ?></td>
-								<td class="col-lg-3"><?php echo $stat['month']; ?></td>
+								<td class="col-lg-3"><?php echo $monthName; ?></td>
 								<td class="col-lg-2"><?php echo $stat['year']; ?></td>
 								<td class="col-lg-1"><?php echo $stat['click_count']; ?></td>
 								<td class="col-lg-2"><?php echo "$".$product->bidding_amount; ?></td>
