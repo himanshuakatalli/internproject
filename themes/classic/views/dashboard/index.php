@@ -70,7 +70,7 @@
         }
       ?>
       <div class="row mt">
-        <div class="col-md-4 col-sm-4 mb">
+        <div class="col-md-6 col-sm-4 mb">
           <div class="white-panel pn">
             <div class="white-header">
               <h5>TOP SELLING PRODUCT</h5>
@@ -108,7 +108,7 @@
 
           }
         ?>
-        <div class="col-md-4 col-sm-4 mb">
+        <div class="col-md-6 col-sm-4 mb">
           <div class="white-panel pn donut-chart">
             <div class="white-header">
               <h5>Ratings</h5>
